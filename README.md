@@ -4,8 +4,8 @@ Property listing site for buy, rent, and PG homes. Visitors search listings, sav
 
 The app is two projects:
 
-- `frontend` — React + Vite single-page app
-- `backend` — Express API on MongoDB
+- `frontend`: React + Vite single-page app
+- `backend`: Express API on MongoDB
 
 ## How it fits together
 

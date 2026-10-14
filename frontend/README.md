@@ -2,7 +2,7 @@
 
 React + Vite app for Broget Home Estate.
 
-The full project guide — folder layout, architecture diagram, routes, API, and setup — is in the repository [README](../README.md).
+The full project guide (folder layout, architecture diagram, routes, API, and setup) is in the repository [README](../README.md).
 
 ## Scripts
 
