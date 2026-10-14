@@ -1,0 +1,1923 @@
+/* =========================================================
+INTERACTIVE UI ENHANCEMENTS
+BLUE + GOLD REAL ESTATE THEME
+========================================================= */
+
+/* =========================================================
+
+1. GLOBAL SMOOTH SCROLL
+   ========================================================= */
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+overflow-x: hidden;
+}
+
+/* =========================================================
+2. GLOBAL TRANSITIONS
+========================================================= */
+
+a,
+button,
+input,
+select,
+textarea,
+.property-card,
+.project-card,
+.why-card,
+.home-why-card,
+.value-card,
+.city-grid button,
+.city-btn,
+.thumbnail,
+.project-thumbnail,
+.favorite-btn,
+.project-heart,
+.gallery-heart,
+.owner-card,
+.project-builder-card {
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease,
+background-color 0.25s ease,
+border-color 0.25s ease,
+color 0.25s ease,
+opacity 0.25s ease;
+}
+
+/* =========================================================
+3. NAVBAR INTERACTION
+========================================================= */
+
+.navbar {
+transition:
+box-shadow 0.3s ease,
+background-color 0.3s ease;
+}
+
+.navbar:hover {
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.logo {
+transition: transform 0.25s ease;
+}
+
+.logo:hover {
+transform: scale(1.03);
+}
+
+.logo span {
+color: var(--primary) !important;
+}
+
+/* NAV LINKS */
+
+.nav-links a {
+transition:
+color 0.25s ease,
+transform 0.25s ease;
+}
+
+.nav-links a:hover {
+color: var(--primary) !important;
+transform: translateY(-1px);
+}
+
+.nav-links a::after {
+background: var(--primary) !important;
+}
+
+/* LOGIN BUTTON */
+
+.login-btn {
+position: relative;
+overflow: hidden;
+}
+
+.login-btn:hover {
+background: var(--primary) !important;
+color: var(--white) !important;
+border-color: var(--primary) !important;
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(30, 90, 168, 0.18);
+}
+
+/* POST PROPERTY */
+
+.post-property-btn {
+position: relative;
+overflow: hidden;
+background: var(--primary) !important;
+color: white !important;
+}
+
+.post-property-btn:hover {
+background: var(--accent) !important;
+color: white !important;
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(212, 160, 23, 0.25);
+}
+
+.post-property-btn:active {
+transform: translateY(0) scale(0.97);
+}
+
+/* =========================================================
+4. BUTTON PRESS EFFECT
+========================================================= */
+
+button:active,
+a:active {
+transform: scale(0.97);
+}
+
+/* =========================================================
+5. HERO ANIMATION
+========================================================= */
+
+.hero-content,
+.projects-hero-content,
+.category-hero-content,
+.why-hero-content {
+animation: heroContentAppear 0.8s ease forwards;
+}
+
+@keyframes heroContentAppear {
+from {
+opacity: 0;
+transform: translateY(25px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* HERO IMAGE SUBTLE ZOOM */
+
+.hero,
+.projects-hero,
+.category-hero,
+.why-hero {
+animation: heroBackgroundZoom 8s ease-out forwards;
+}
+
+@keyframes heroBackgroundZoom {
+from {
+background-size: 105%;
+}
+
+to {
+background-size: 100%;
+}
+}
+
+.hero button:hover {
+background: var(--accent) !important;
+color: white !important;
+transform: translateY(-3px);
+}
+
+/* =========================================================
+6. SEARCH BOX
+========================================================= */
+
+.search-box,
+.project-search {
+transition:
+transform 0.3s ease,
+box-shadow 0.3s ease;
+}
+
+.search-box:hover,
+.project-search:hover {
+transform: translateY(-3px);
+box-shadow:
+0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.search-box:focus-within {
+border-color: var(--primary) !important;
+box-shadow:
+0 8px 25px rgba(30, 90, 168, 0.15);
+}
+
+/* SEARCH INPUT */
+
+.search-fields input,
+.search-fields select,
+.project-search input {
+transition:
+border-color 0.25s ease,
+box-shadow 0.25s ease,
+transform 0.25s ease;
+}
+
+.search-fields input:focus,
+.search-fields select:focus,
+.project-search input:focus {
+border-color: var(--primary) !important;
+box-shadow:
+0 0 0 3px rgba(30, 90, 168, 0.12);
+transform: translateY(-1px);
+outline: none;
+}
+
+/* SEARCH BUTTON */
+
+.search-btn,
+.project-search button {
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease,
+background-color 0.25s ease;
+}
+
+.search-btn:hover,
+.project-search button:hover {
+background: var(--accent) !important;
+transform: translateY(-2px);
+box-shadow:
+0 8px 20px rgba(212, 160, 23, 0.25);
+}
+
+.search-btn:active,
+.project-search button:active {
+transform: scale(0.96);
+}
+
+/* =========================================================
+7. SEARCH TABS
+========================================================= */
+
+.search-tabs button {
+position: relative;
+transition:
+color 0.25s ease,
+transform 0.25s ease;
+}
+
+.search-tabs button:hover {
+color: var(--primary);
+transform: translateY(-2px);
+}
+
+.search-tabs .active {
+position: relative;
+color: var(--primary) !important;
+}
+
+.search-tabs .active::after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: -1px;
+height: 3px;
+background: var(--accent);
+border-radius: 5px;
+animation: tabSlide 0.3s ease;
+}
+
+@keyframes tabSlide {
+from {
+width: 0;
+left: 50%;
+}
+
+to {
+width: 100%;
+left: 0;
+}
+}
+
+/* =========================================================
+8. PROPERTY CARDS
+========================================================= */
+
+.property-card,
+.project-card {
+position: relative;
+transition:
+transform 0.3s ease,
+box-shadow 0.3s ease,
+border-color 0.3s ease;
+}
+
+.property-card:hover,
+.project-card:hover {
+transform: translateY(-8px);
+border-color: var(--primary) !important;
+box-shadow:
+0 18px 40px rgba(30, 90, 168, 0.18);
+}
+
+/* CARD IMAGE */
+
+.property-image,
+.project-image {
+overflow: hidden;
+}
+
+.property-image img,
+.project-image img {
+transition: transform 0.5s ease;
+}
+
+.property-card:hover .property-image img,
+.project-card:hover .project-image img {
+transform: scale(1.06);
+}
+
+/* =========================================================
+9. FAVORITE HEART
+========================================================= */
+
+.favorite-btn,
+.project-heart,
+.gallery-heart,
+.favorite-nav {
+transition:
+transform 0.25s ease,
+background-color 0.25s ease,
+color 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.favorite-btn:hover,
+.project-heart:hover,
+.gallery-heart:hover,
+.favorite-nav:hover {
+transform: scale(1.12);
+background: var(--light-blue);
+color: #e63946;
+box-shadow:
+0 6px 18px rgba(30, 90, 168, 0.15);
+}
+
+.favorite-btn:active,
+.project-heart:active,
+.gallery-heart:active {
+transform: scale(0.9);
+}
+
+/* ACTIVE / LIKED */
+
+.favorite-btn.active,
+.favorite-btn.liked,
+.project-heart.active,
+.project-heart.liked,
+.gallery-heart.active,
+.gallery-heart.liked {
+background: #e63946;
+color: white;
+animation: heartPop 0.35s ease;
+}
+
+@keyframes heartPop {
+0% {
+transform: scale(0.8);
+}
+
+50% {
+transform: scale(1.2);
+}
+
+100% {
+transform: scale(1);
+}
+}
+
+/* =========================================================
+10. PROPERTY VIEW BUTTON
+========================================================= */
+
+.view-btn,
+.view-project-btn,
+.home-section-btn,
+.why-cta-btn {
+position: relative;
+overflow: hidden;
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease,
+background-color 0.25s ease;
+}
+
+.view-btn:hover,
+.view-project-btn:hover,
+.home-section-btn:hover,
+.why-cta-btn:hover {
+background: var(--primary-dark) !important;
+color: white !important;
+transform: translateY(-2px);
+box-shadow:
+0 8px 20px rgba(30, 90, 168, 0.2);
+}
+
+.view-btn:active,
+.view-project-btn:active,
+.home-section-btn:active,
+.why-cta-btn:active {
+transform: scale(0.97);
+}
+
+/* =========================================================
+11. CITY BUTTONS
+========================================================= */
+
+.city-grid button,
+.city-btn {
+position: relative;
+overflow: hidden;
+}
+
+.city-grid button:hover,
+.city-btn:hover {
+transform: translateY(-4px);
+background: var(--primary) !important;
+color: white !important;
+border-color: var(--primary) !important;
+box-shadow:
+0 8px 20px rgba(30, 90, 168, 0.15);
+}
+
+/* =========================================================
+12. WHY CHOOSE US CARDS
+========================================================= */
+
+.why-card,
+.home-why-card,
+.value-card {
+transition:
+transform 0.3s ease,
+box-shadow 0.3s ease,
+border-color 0.3s ease;
+}
+
+.why-card:hover,
+.home-why-card:hover,
+.value-card:hover {
+transform: translateY(-8px);
+border-color: rgba(30, 90, 168, 0.3);
+box-shadow:
+0 15px 35px rgba(30, 90, 168, 0.12);
+}
+
+/* ICON ANIMATION */
+
+.why-card:hover .why-icon,
+.home-why-card:hover .home-why-icon,
+.value-card:hover .value-icon {
+transform: scale(1.12);
+transition: transform 0.3s ease;
+color: var(--accent);
+}
+
+/* =========================================================
+13. PROPERTY DETAILS IMAGE
+========================================================= */
+
+.main-property-image,
+.project-main-image {
+overflow: hidden;
+}
+
+.main-property-image img,
+.project-main-image img {
+transition:
+transform 0.6s ease;
+}
+
+.main-property-image:hover img,
+.project-main-image:hover img {
+transform: scale(1.03);
+}
+
+/* =========================================================
+14. THUMBNAILS
+========================================================= */
+
+.thumbnail,
+.project-thumbnail {
+transition:
+transform 0.25s ease,
+border-color 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.thumbnail:hover,
+.project-thumbnail:hover {
+transform: translateY(-3px);
+border-color: var(--primary);
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.12);
+}
+
+.thumbnail.active-thumbnail,
+.project-thumbnail.active {
+transform: scale(1.03);
+border-color: var(--primary);
+box-shadow:
+0 0 0 2px rgba(30, 90, 168, 0.12);
+}
+
+/* =========================================================
+15. OWNER / BUILDER CARD
+========================================================= */
+
+.owner-card,
+.project-builder-card {
+transition:
+box-shadow 0.3s ease,
+transform 0.3s ease;
+}
+
+.owner-card:hover,
+.project-builder-card:hover {
+transform: translateY(-4px);
+box-shadow:
+0 15px 35px rgba(30, 90, 168, 0.12);
+}
+
+/* AVATAR */
+
+.owner-avatar,
+.builder-avatar {
+transition:
+transform 0.3s ease,
+background-color 0.3s ease;
+}
+
+.owner-card:hover .owner-avatar,
+.project-builder-card:hover .builder-avatar {
+transform: scale(1.08) rotate(3deg);
+background: var(--light-blue);
+}
+
+/* =========================================================
+16. CONTACT / ENQUIRY BUTTONS
+========================================================= */
+
+.contact-owner-btn,
+.enquiry-btn,
+.project-contact-btn,
+.project-enquiry-btn,
+.modal-submit {
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease,
+background-color 0.25s ease;
+}
+
+.contact-owner-btn:hover,
+.project-contact-btn:hover,
+.modal-submit:hover {
+background: var(--primary) !important;
+color: white !important;
+transform: translateY(-2px);
+box-shadow:
+0 8px 20px rgba(30, 90, 168, 0.2);
+}
+
+.enquiry-btn:hover,
+.project-enquiry-btn:hover {
+transform: translateY(-2px);
+box-shadow:
+0 8px 20px rgba(30, 90, 168, 0.12);
+}
+
+/* =========================================================
+17. FORM INPUTS
+========================================================= */
+
+.form-group input,
+.form-group select,
+.form-section textarea,
+.enquiry-form input,
+.enquiry-form textarea,
+.auth-box input,
+.auth-box select,
+.modal-input {
+transition:
+border-color 0.25s ease,
+box-shadow 0.25s ease,
+transform 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-section textarea:focus,
+.enquiry-form input:focus,
+.enquiry-form textarea:focus,
+.auth-box input:focus,
+.auth-box select:focus,
+.modal-input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+border-color: var(--primary) !important;
+box-shadow:
+0 0 0 3px rgba(30, 90, 168, 0.12);
+transform: translateY(-1px);
+outline: none;
+}
+
+/* =========================================================
+18. AMENITIES
+========================================================= */
+
+.amenity-option,
+.amenity {
+transition:
+transform 0.2s ease,
+background-color 0.2s ease,
+border-color 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.amenity-option:hover,
+.amenity:hover {
+transform: translateY(-2px);
+background: var(--light-blue) !important;
+color: var(--primary) !important;
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.08);
+}
+
+.amenity-option.selected {
+transform: translateY(-2px);
+border-color: var(--primary) !important;
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.12);
+}
+
+/* =========================================================
+19. PROJECT FILTERS
+========================================================= */
+
+.project-filters button {
+transition:
+transform 0.2s ease,
+background-color 0.25s ease,
+color 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.project-filters button:hover {
+transform: translateY(-2px);
+}
+
+.project-filters button.active {
+background: var(--primary) !important;
+color: white !important;
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.2);
+transform: translateY(-2px);
+}
+
+/* =========================================================
+20. PROJECT STATUS BADGE
+========================================================= */
+
+.project-status,
+.project-verified,
+.project-detail-status,
+.project-detail-verified,
+.gallery-verified,
+.verified-badge {
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.project-card:hover .project-status,
+.project-card:hover .project-verified {
+transform: translateY(-2px);
+box-shadow:
+0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+21. IMAGE ADD / REMOVE BUTTON
+========================================================= */
+
+.add-image-btn {
+transition:
+background-color 0.25s ease,
+transform 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.add-image-btn:hover {
+background: var(--light-blue);
+color: var(--primary);
+transform: translateY(-2px);
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.1);
+}
+
+.remove-image-btn {
+transition:
+transform 0.2s ease,
+background-color 0.2s ease;
+}
+
+.remove-image-btn:hover {
+transform: scale(1.08);
+background: #eef5ff;
+color: #e63946;
+}
+
+/* =========================================================
+22. SUCCESS / ERROR MESSAGE
+========================================================= */
+
+.success-message,
+.enquiry-success,
+.enquiry-error,
+.auth-error {
+animation: messageAppear 0.35s ease;
+}
+
+@keyframes messageAppear {
+from {
+opacity: 0;
+transform: translateY(-8px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* =========================================================
+23. LOGIN MODAL
+========================================================= */
+
+.modal-overlay {
+animation: overlayAppear 0.25s ease;
+}
+
+@keyframes overlayAppear {
+from {
+opacity: 0;
+}
+
+to {
+opacity: 1;
+}
+}
+
+.login-modal {
+animation:
+modalInteractiveOpen 0.35s
+cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes modalInteractiveOpen {
+from {
+opacity: 0;
+transform: translateY(-30px) scale(0.96);
+}
+
+to {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+}
+
+/* CLOSE BUTTON */
+
+.close-modal {
+transition:
+transform 0.25s ease,
+background-color 0.25s ease;
+}
+
+.close-modal:hover {
+transform: rotate(90deg);
+background: var(--light-blue);
+color: var(--primary);
+}
+
+/* =========================================================
+24. FOOTER
+========================================================= */
+
+.footer-column a {
+position: relative;
+width: fit-content;
+}
+
+.footer-column a::after {
+content: "";
+position: absolute;
+left: 0;
+bottom: -4px;
+width: 0;
+height: 1px;
+background: var(--accent);
+transition: width 0.25s ease;
+}
+
+.footer-column a:hover {
+color: var(--accent) !important;
+}
+
+.footer-column a:hover::after {
+width: 100%;
+}
+
+/* SOCIAL ICONS */
+
+.social-links a {
+transition:
+transform 0.25s ease,
+background-color 0.25s ease,
+border-color 0.25s ease;
+}
+
+.social-links a:hover {
+transform: translateY(-4px) rotate(5deg);
+background: var(--primary);
+border-color: var(--primary);
+box-shadow:
+0 6px 15px rgba(30, 90, 168, 0.25);
+}
+
+/* =========================================================
+25. ABOUT IMAGE
+========================================================= */
+
+.home-about-image {
+box-shadow:
+0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.home-about-image img {
+transition:
+transform 0.6s ease;
+}
+
+.home-about-image:hover img {
+transform: scale(1.05);
+}
+
+/* =========================================================
+26. LOADING ANIMATION
+========================================================= */
+
+.loading::after {
+content: "...";
+display: inline-block;
+width: 24px;
+overflow: hidden;
+vertical-align: bottom;
+animation: loadingDots 1.4s infinite;
+}
+
+@keyframes loadingDots {
+0% {
+width: 0;
+}
+
+33% {
+width: 8px;
+}
+
+66% {
+width: 16px;
+}
+
+100% {
+width: 24px;
+}
+}
+
+/* =========================================================
+27. SELECT / SORT CONTROLS
+========================================================= */
+
+.sorting select,
+.sorting button,
+.category-sort select,
+.category-sort button,
+.project-controls select,
+.project-reset-btn {
+transition:
+transform 0.2s ease,
+border-color 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.sorting select:hover,
+.category-sort select:hover,
+.project-controls select:hover {
+border-color: var(--primary);
+}
+
+.sorting button:hover,
+.category-sort button:hover,
+.project-reset-btn:hover {
+transform: translateY(-2px);
+box-shadow:
+0 5px 15px rgba(30, 90, 168, 0.08);
+}
+
+/* =========================================================
+28. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+html {
+scroll-behavior: auto;
+}
+
+*,
+*::before,
+*::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+}
+
+/* =========================================================
+29. MOBILE INTERACTION
+========================================================= */
+
+@media (max-width: 700px) {
+.property-card:hover,
+.project-card:hover,
+.why-card:hover,
+.home-why-card:hover,
+.value-card:hover {
+transform: translateY(-4px);
+}
+
+.property-card:hover .property-image img,
+.project-card:hover .project-image img {
+transform: scale(1.03);
+}
+
+.search-box:hover,
+.project-search:hover {
+transform: none;
+}
+
+.mobile-nav a:hover {
+color: var(--primary) !important;
+}
+
+.mobile-post {
+color: var(--primary) !important;
+}
+
+.mobile-login {
+color: var(--primary) !important;
+border-color: var(--primary) !important;
+}
+
+.mobile-login:hover {
+background: var(--light-blue) !important;
+}
+}
+
+/* =========================================================
+30. FOCUS ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+outline: 3px solid rgba(30, 90, 168, 0.25);
+outline-offset: 2px;
+}
+
+/* =========================================================
+31. CARD ENTRY ANIMATION
+========================================================= */
+
+.property-card,
+.project-card,
+.why-card,
+.home-why-card,
+.value-card {
+animation: cardAppear 0.5s ease both;
+}
+
+@keyframes cardAppear {
+from {
+opacity: 0;
+transform: translateY(15px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* =========================================================
+32. PROPERTY INFORMATION HOVER
+========================================================= */
+
+.property-info h3,
+.project-info h3 {
+transition: color 0.25s ease;
+}
+
+.property-card:hover .property-info h3,
+.project-card:hover .project-info h3 {
+color: var(--primary-dark);
+}
+
+.property-info h2,
+.project-info h2 {
+transition: color 0.25s ease;
+}
+
+.property-card:hover .property-info h2,
+.project-card:hover .project-info h2 {
+color: var(--primary-dark);
+}
+
+.property-card:hover .view-btn,
+.project-card:hover .view-project-btn {
+
+  background: var(--primary-dark) !important;
+  color: var(--white) !important;
+  border-color: var(--primary-dark) !important;
+
+}
+
+
+/* =========================================================
+33. PULSE FOR FEATURED BADGE
+========================================================= */
+
+.featured-badge {
+animation: featuredPulse 2.5s infinite;
+}
+
+@keyframes featuredPulse {
+0%,
+100% {
+box-shadow: 0 0 0 0 rgba(30, 90, 168, 0);
+}
+
+50% {
+box-shadow: 0 0 0 5px rgba(212, 160, 23, 0.12);
+}
+}
+
+/* =========================================================
+34. REAL ESTATE INTERACTIVE THEME
+========================================================= */
+
+:root {
+--primary: #1e5aa8;
+--primary-dark: #164477;
+--accent: #d4a017;
+--accent-hover: #b8860b;
+--light-blue: #eef5ff;
+--text-dark: #1f2937;
+--white: #ffffff;
+}
+
+/* =========================================================
+GENERAL BUTTONS
+========================================================= */
+
+button:hover {
+transition: all 0.3s ease;
+}
+
+button:active {
+transform: scale(0.97);
+}
+
+/* =========================================================
+GENERAL LINKS
+========================================================= */
+
+a {
+transition: color 0.3s ease;
+}
+
+/* =========================================================
+SMOOTH EFFECT
+========================================================= */
+
+button,
+a,
+input,
+select,
+textarea,
+.property-card,
+.project-card,
+.city-btn,
+.owner-card {
+transition-duration: 0.3s;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+.mobile-nav a:hover {
+color: var(--primary) !important;
+}
+
+.mobile-post {
+color: var(--primary) !important;
+}
+
+.mobile-login {
+color: var(--primary) !important;
+border-color: var(--primary) !important;
+}
+
+.mobile-login:hover {
+background: var(--light-blue) !important;
+}
+}
+
+/* =========================================================
+ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+}
+
+/* =========================================================
+35. PREMIUM BACKGROUND COLORS
+========================================================= */
+
+body {
+background: #f8fafc;
+color: var(--text-dark);
+}
+
+/* Main sections */
+
+section {
+position: relative;
+}
+
+.hero,
+.projects-hero,
+.category-hero,
+.why-hero {
+background-color: #eef5ff;
+}
+
+/* Alternate section backgrounds */
+
+.city-section,
+.why-section,
+.value-section {
+background: #f8fafc;
+}
+
+/* =========================================================
+36. SOFT BLUE BACKGROUND GLOW
+========================================================= */
+
+.hero,
+.projects-hero,
+.category-hero,
+.why-hero {
+position: relative;
+overflow: hidden;
+}
+
+.hero::before,
+.projects-hero::before,
+.category-hero::before,
+.why-hero::before {
+content: "";
+position: absolute;
+width: 350px;
+height: 350px;
+top: -120px;
+right: -100px;
+background: rgba(30, 90, 168, 0.08);
+border-radius: 50%;
+filter: blur(5px);
+animation: floatingGlow 6s ease-in-out infinite;
+}
+
+.hero::after,
+.projects-hero::after,
+.category-hero::after,
+.why-hero::after {
+content: "";
+position: absolute;
+width: 250px;
+height: 250px;
+bottom: -100px;
+left: -80px;
+background: rgba(212, 160, 23, 0.08);
+border-radius: 50%;
+animation: floatingGlow 8s ease-in-out infinite reverse;
+}
+
+@keyframes floatingGlow {
+0% {
+transform: translate(0, 0);
+}
+
+50% {
+transform: translate(20px, 25px);
+}
+
+100% {
+transform: translate(0, 0);
+}
+}
+
+/* =========================================================
+37. HERO CONTENT Z-INDEX
+========================================================= */
+
+.hero-content,
+.projects-hero-content,
+.category-hero-content,
+.why-hero-content {
+position: relative;
+z-index: 2;
+}
+
+/* =========================================================
+38. FADE UP ANIMATION
+========================================================= */
+
+.fade-up {
+opacity: 0;
+transform: translateY(30px);
+animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* =========================================================
+39. FADE IN ANIMATION
+========================================================= */
+
+.fade-in {
+opacity: 0;
+animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+
+to {
+opacity: 1;
+}
+}
+
+/* =========================================================
+40. SLIDE FROM LEFT
+========================================================= */
+
+.slide-left {
+opacity: 0;
+transform: translateX(-40px);
+animation: slideLeft 0.8s ease forwards;
+}
+
+@keyframes slideLeft {
+from {
+opacity: 0;
+transform: translateX(-40px);
+}
+
+to {
+opacity: 1;
+transform: translateX(0);
+}
+}
+
+/* =========================================================
+41. SLIDE FROM RIGHT
+========================================================= */
+
+.slide-right {
+opacity: 0;
+transform: translateX(40px);
+animation: slideRight 0.8s ease forwards;
+}
+
+@keyframes slideRight {
+from {
+opacity: 0;
+transform: translateX(40px);
+}
+
+to {
+opacity: 1;
+transform: translateX(0);
+}
+}
+
+/* =========================================================
+42. STAGGERED CARD ANIMATION
+========================================================= */
+
+.property-card:nth-child(1),
+.project-card:nth-child(1),
+.why-card:nth-child(1),
+.home-why-card:nth-child(1),
+.value-card:nth-child(1) {
+animation-delay: 0.1s;
+}
+
+.property-card:nth-child(2),
+.project-card:nth-child(2),
+.why-card:nth-child(2),
+.home-why-card:nth-child(2),
+.value-card:nth-child(2) {
+animation-delay: 0.2s;
+}
+
+.property-card:nth-child(3),
+.project-card:nth-child(3),
+.why-card:nth-child(3),
+.home-why-card:nth-child(3),
+.value-card:nth-child(3) {
+animation-delay: 0.3s;
+}
+
+.property-card:nth-child(4),
+.project-card:nth-child(4),
+.why-card:nth-child(4),
+.home-why-card:nth-child(4),
+.value-card:nth-child(4) {
+animation-delay: 0.4s;
+}
+
+.property-card:nth-child(5),
+.project-card:nth-child(5),
+.why-card:nth-child(5),
+.home-why-card:nth-child(5),
+.value-card:nth-child(5) {
+animation-delay: 0.5s;
+}
+
+/* =========================================================
+43. BUTTON SHINE EFFECT
+========================================================= */
+
+.login-btn,
+.post-property-btn,
+.search-btn,
+.view-btn,
+.view-project-btn,
+.home-section-btn,
+.why-cta-btn,
+.contact-owner-btn,
+.enquiry-btn,
+.project-contact-btn,
+.project-enquiry-btn,
+.modal-submit {
+position: relative;
+overflow: hidden;
+}
+
+/* Moving shine */
+
+.login-btn::before,
+.post-property-btn::before,
+.search-btn::before,
+.view-btn::before,
+.view-project-btn::before,
+.home-section-btn::before,
+.why-cta-btn::before,
+.contact-owner-btn::before,
+.enquiry-btn::before,
+.project-contact-btn::before,
+.project-enquiry-btn::before,
+.modal-submit::before {
+content: "";
+position: absolute;
+top: 0;
+left: -120%;
+width: 70%;
+height: 100%;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.35),
+transparent
+);
+transform: skewX(-20deg);
+}
+
+.login-btn:hover::before,
+.post-property-btn:hover::before,
+.search-btn:hover::before,
+.view-btn:hover::before,
+.view-project-btn:hover::before,
+.home-section-btn:hover::before,
+.why-cta-btn:hover::before,
+.contact-owner-btn:hover::before,
+.enquiry-btn:hover::before,
+.project-contact-btn:hover::before,
+.project-enquiry-btn:hover::before,
+.modal-submit:hover::before {
+animation: buttonShine 0.7s ease;
+}
+
+@keyframes buttonShine {
+from {
+left: -120%;
+}
+
+to {
+left: 130%;
+}
+}
+
+/* =========================================================
+44. FLOATING ICON EFFECT
+========================================================= */
+
+.why-icon,
+.home-why-icon,
+.value-icon,
+.owner-avatar,
+.builder-avatar {
+animation: iconFloat 4s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+0%,
+100% {
+transform: translateY(0);
+}
+
+50% {
+transform: translateY(-5px);
+}
+}
+
+/* Stop floating when hovering */
+
+.why-card:hover .why-icon,
+.home-why-card:hover .home-why-icon,
+.value-card:hover .value-icon {
+animation: none;
+}
+
+/* =========================================================
+45. GOLD ACCENT ANIMATION
+========================================================= */
+
+.logo span {
+position: relative;
+}
+
+.logo span::after {
+content: "";
+position: absolute;
+left: 0;
+bottom: -3px;
+width: 0;
+height: 2px;
+background: var(--accent);
+transition: width 0.3s ease;
+}
+
+.logo:hover span::after {
+width: 100%;
+}
+
+/* =========================================================
+46. SEARCH BOX GLOW
+========================================================= */
+
+.search-box,
+.project-search {
+border: 1px solid rgba(30, 90, 168, 0.08);
+box-shadow:
+0 10px 30px rgba(30, 90, 168, 0.08);
+}
+
+.search-box:hover,
+.project-search:hover {
+box-shadow:
+0 18px 45px rgba(30, 90, 168, 0.14);
+}
+
+/* =========================================================
+47. PROPERTY CARD GLOW
+========================================================= */
+
+.property-card:hover,
+.project-card:hover {
+box-shadow:
+0 18px 40px rgba(30, 90, 168, 0.16),
+0 0 0 1px rgba(30, 90, 168, 0.08);
+}
+
+/* =========================================================
+48. IMAGE OVERLAY EFFECT
+========================================================= */
+
+.property-image,
+.project-image,
+.main-property-image,
+.project-main-image,
+.home-about-image {
+position: relative;
+}
+
+.property-image::after,
+.project-image::after,
+.main-property-image::after,
+.project-main-image::after,
+.home-about-image::after {
+content: "";
+position: absolute;
+inset: 0;
+background: linear-gradient(
+to top,
+rgba(0, 0, 0, 0.12),
+transparent 45%
+);
+opacity: 0;
+transition: opacity 0.4s ease;
+pointer-events: none;
+}
+
+.property-card:hover .property-image::after,
+.project-card:hover .project-image::after,
+.main-property-image:hover::after,
+.project-main-image:hover::after,
+.home-about-image:hover::after {
+opacity: 1;
+}
+
+/* =========================================================
+49. GOLD LINE EFFECT
+========================================================= */
+
+.section-title {
+position: relative;
+}
+
+.section-title::after {
+content: "";
+display: block;
+width: 50px;
+height: 3px;
+margin: 10px auto 0;
+background: var(--accent);
+border-radius: 10px;
+transition:
+width 0.4s ease,
+background-color 0.3s ease;
+}
+
+.section-title:hover::after {
+width: 90px;
+}
+
+/* =========================================================
+50. CITY BUTTON GOLD EFFECT
+========================================================= */
+
+.city-grid button:hover,
+.city-btn:hover {
+box-shadow:
+0 8px 20px rgba(30, 90, 168, 0.15),
+0 0 0 2px rgba(212, 160, 23, 0.08);
+}
+
+/* =========================================================
+51. FAVORITE HEART ANIMATION
+========================================================= */
+
+.favorite-btn:hover,
+.project-heart:hover,
+.gallery-heart:hover {
+animation: heartShake 0.4s ease;
+}
+
+@keyframes heartShake {
+0% {
+transform: scale(1);
+}
+
+30% {
+transform: scale(1.15) rotate(-6deg);
+}
+
+60% {
+transform: scale(1.15) rotate(6deg);
+}
+
+100% {
+transform: scale(1.12) rotate(0);
+}
+}
+
+/* =========================================================
+52. LOADING SHIMMER
+========================================================= */
+
+.loading {
+position: relative;
+}
+
+.loading::before {
+content: "";
+display: inline-block;
+width: 80px;
+height: 4px;
+margin-right: 10px;
+border-radius: 10px;
+background: linear-gradient(
+90deg,
+#eef5ff,
+var(--primary),
+#eef5ff
+);
+background-size: 200% 100%;
+animation: loadingShimmer 1.4s infinite;
+}
+
+@keyframes loadingShimmer {
+from {
+background-position: 200% 0;
+}
+
+to {
+background-position: -200% 0;
+}
+}
+
+/* =========================================================
+53. MODAL BACKDROP BLUR
+========================================================= */
+
+.modal-overlay {
+backdrop-filter: blur(5px);
+background: rgba(15, 23, 42, 0.45);
+}
+
+/* =========================================================
+54. LOGIN INPUT GLOW
+========================================================= */
+
+.auth-box input:focus,
+.auth-box select:focus,
+.modal-input:focus {
+background: #fbfdff;
+box-shadow:
+0 0 0 3px rgba(30, 90, 168, 0.12),
+0 5px 15px rgba(30, 90, 168, 0.06);
+}
+
+/* =========================================================
+55. FOOTER BACKGROUND
+========================================================= */
+
+.footer {
+position: relative;
+background:
+linear-gradient(
+135deg,
+#102f55 0%,
+#164477 50%,
+#102f55 100%
+);
+}
+
+.footer::before {
+content: "";
+position: absolute;
+width: 250px;
+height: 250px;
+top: -120px;
+right: 10%;
+background: rgba(212, 160, 23, 0.08);
+border-radius: 50%;
+filter: blur(10px);
+}
+
+/* =========================================================
+56. SOCIAL ICON PULSE
+========================================================= */
+
+.social-links a:hover {
+animation: socialPulse 0.5s ease;
+}
+
+@keyframes socialPulse {
+0% {
+transform: translateY(0) rotate(0);
+}
+
+50% {
+transform: translateY(-5px) rotate(5deg);
+}
+
+100% {
+transform: translateY(-4px) rotate(5deg);
+}
+}
+
+/* =========================================================
+57. BADGE FLOAT
+========================================================= */
+
+.featured-badge,
+.project-status,
+.project-verified,
+.verified-badge {
+animation: badgeFloat 3s ease-in-out infinite;
+}
+
+@keyframes badgeFloat {
+0%,
+100% {
+transform: translateY(0);
+}
+
+50% {
+transform: translateY(-3px);
+}
+}
+
+/* =========================================================
+58. PROPERTY PRICE HIGHLIGHT
+========================================================= */
+
+.property-price,
+.project-price {
+transition:
+color 0.3s ease,
+transform 0.3s ease;
+}
+
+.property-card:hover .property-price,
+.project-card:hover .project-price {
+color: var(--primary-dark);
+transform: translateX(3px);
+}
+
+/* =========================================================
+59. NAVBAR SCROLL-LIKE SHADOW
+========================================================= */
+
+.navbar {
+background: rgba(255, 255, 255, 0.96);
+backdrop-filter: blur(10px);
+box-shadow:
+0 2px 15px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================================================
+60. PREMIUM PAGE BACKGROUND
+========================================================= */
+
+.properties-page,
+.projects-page,
+.category-page,
+.why-page {
+background:
+radial-gradient(
+circle at 10% 10%,
+rgba(30, 90, 168, 0.04),
+transparent 30%
+),
+radial-gradient(
+circle at 90% 80%,
+rgba(212, 160, 23, 0.04),
+transparent 30%
+),
+#f8fafc;
+}
+
+/* =========================================================
+61. MOBILE ANIMATION CONTROL
+========================================================= */
+
+@media (max-width: 700px) {
+.hero::before,
+.hero::after,
+.projects-hero::before,
+.projects-hero::after,
+.category-hero::before,
+.category-hero::after,
+.why-hero::before,
+.why-hero::after {
+width: 180px;
+height: 180px;
+}
+
+.property-card:hover,
+.project-card:hover {
+transform: translateY(-4px);
+}
+
+.property-card:hover .property-image img,
+.project-card:hover .project-image img {
+transform: scale(1.03);
+}
+
+.featured-badge,
+.project-status,
+.project-verified,
+.verified-badge {
+animation: none;
+}
+}
+
+/* =========================================================
+62. ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+animation: none !important;
+transition: none !important;
+}
+}
+
+.quick-grid div,
+.quick-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-grid div::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: rgba(30, 90, 168, 0.06);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.4s ease,
+    height 0.4s ease;
+}
+
+.quick-grid div:hover::before {
+  width: 250px;
+  height: 250px;
+}
+
+.quick-grid div:hover,
+.quick-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--primary) !important;
+  background: var(--light-blue) !important;
+  box-shadow:
+    0 12px 25px rgba(30, 90, 168, 0.12);
+}
+
+.quick-grid div > * {
+  position: relative;
+  z-index: 1;
+}
+
+

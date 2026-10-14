@@ -1,0 +1,1303 @@
+
+/* =========================================
+   HOMEESTATE OWNERS — PREMIUM WINE THEME
+========================================= */
+
+.owners-section {
+  --wine: #542536;
+  --wine-dark: #351522;
+  --terracotta: #a65d54;
+  --peach: #e7b8a5;
+  --cream: #fffaf7;
+  --muted: #85747a;
+  --border: #ead9dc;
+
+  position: relative;
+  overflow: hidden;
+  padding: 60px 5% 76px;
+  background:
+    radial-gradient(ellipse at 0% 0%, #f4e3df 0%, transparent 36%),
+    linear-gradient(180deg, #fffaf8 0%, #fff7f3 100%);
+}
+
+.owners-shell {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* HERO */
+
+.owners-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 55px;
+  min-height: 430px;
+  padding: 24px 0 45px;
+}
+
+.owners-hero-content {
+  position: relative;
+  z-index: 2;
+  animation: ownersReveal 0.7s ease both;
+}
+
+.owners-eyebrow,
+.owners-section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--terracotta);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.owners-live-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #73916d;
+  box-shadow: 0 0 0 4px #73916d20;
+  animation: ownersPulse 2s infinite;
+}
+
+.owners-title {
+  margin: 25px 0 20px;
+  color: var(--wine-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 500;
+  letter-spacing: -2.8px;
+  line-height: 1.08;
+}
+
+.owners-title span {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.owners-description {
+  max-width: 510px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.95;
+}
+
+.owners-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 28px;
+  padding: 15px 21px;
+  border: 1px solid var(--wine);
+  border-radius: 9px;
+  background: var(--wine);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.owners-explore-btn span {
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+
+.owners-explore-btn:hover {
+  transform: translateY(-3px);
+  background: var(--wine-dark);
+  box-shadow: 0 12px 25px #54253625;
+}
+
+.owners-explore-btn:hover span {
+  transform: translate(3px, 3px);
+}
+
+.owners-mini-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 23px;
+  color: #88757c;
+  font-size: 12px;
+}
+
+/* ARCHITECTURAL HERO ART */
+
+.owners-hero-visual {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 410px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.owners-hero-visual::before {
+  position: absolute;
+  z-index: -2;
+  width: min(90%, 390px);
+  aspect-ratio: 1;
+  border: 1px solid #d8b9b2;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f3dcd2, #f9e9e0 65%, #e9c4b8);
+  content: "";
+  animation: ownersFloat 7s ease-in-out infinite;
+}
+
+.owners-hero-visual::after {
+  position: absolute;
+  z-index: -3;
+  top: 15%;
+  right: 8%;
+  width: 85px;
+  height: 85px;
+  border: 1px solid #c58b7f;
+  border-radius: 50%;
+  content: "";
+  opacity: 0.6;
+}
+
+.owners-orbit {
+  position: absolute;
+  z-index: -1;
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  border: 1px dashed #b9857c75;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbit-one {
+  animation: ownersSpin 55s linear infinite;
+}
+
+.orbit-two {
+  width: min(80%, 350px);
+  border-style: solid;
+  border-color: #ffffff80;
+  animation: ownersSpin 38s linear infinite reverse;
+}
+
+.owners-house-art {
+  position: relative;
+  width: 245px;
+  margin-top: -10px;
+  animation: ownersFloat 5s ease-in-out infinite;
+}
+
+.house-roof {
+  position: relative;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  margin: 0 auto -2px;
+  border-right: 130px solid transparent;
+  border-bottom: 108px solid var(--wine);
+  border-left: 130px solid transparent;
+  filter: drop-shadow(0 8px 5px #54253612);
+}
+
+.house-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 218px;
+  height: 145px;
+  margin: 0 auto;
+  border: 5px solid var(--wine);
+  border-top: 0;
+  background: #fffaf3;
+}
+
+.house-window {
+  width: 43px;
+  height: 45px;
+  border: 5px solid var(--wine);
+  background:
+    linear-gradient(90deg, transparent 44%, var(--wine) 45%, var(--wine) 54%, transparent 55%),
+    linear-gradient(0deg, transparent 44%, var(--wine) 45%, var(--wine) 54%, transparent 55%),
+    #e9bda9;
+}
+
+.house-door {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 23px);
+  width: 46px;
+  height: 76px;
+  border: 4px solid var(--wine);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  background: var(--terracotta);
+}
+
+.house-ground {
+  width: 285px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--wine);
+  opacity: 0.35;
+}
+
+.owners-floating-tag {
+  position: absolute;
+  z-index: 2;
+  padding: 12px 15px;
+  border: 1px solid #ffffffc9;
+  border-radius: 8px;
+  background: #fffaf0eF;
+  color: var(--wine);
+  box-shadow: 0 8px 28px #5425360d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.tag-top {
+  top: 9%;
+  right: 0;
+  transform: rotate(4deg);
+}
+
+.tag-top span {
+  color: var(--terracotta);
+}
+
+.tag-bottom {
+  bottom: 13%;
+  left: 0;
+  transform: rotate(-4deg);
+}
+
+/* QUOTE CARD */
+
+.owners-quote-card {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  z-index: 3;
+  width: min(290px, 75%);
+  padding: 20px 21px 16px;
+  border: 1px solid #ffffff;
+  border-radius: 14px;
+  background: #fffdf9;
+  box-shadow: 0 18px 45px #54253616;
+}
+
+.owners-quote-mark {
+  display: block;
+  height: 33px;
+  color: var(--terracotta);
+  font-family: Georgia, serif;
+  font-size: 53px;
+  line-height: 1;
+}
+
+.owners-quote-text {
+  min-height: 67px;
+  margin: 8px 0 16px;
+  color: var(--wine);
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  animation: ownersQuoteIn 0.35s ease both;
+}
+
+.owners-quote-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.owners-quote-bottom > span {
+  color: var(--terracotta);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.owners-quote-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quote-dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #ddc9c7;
+  cursor: pointer;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.quote-dot.active {
+  width: 19px;
+  background: var(--terracotta);
+}
+
+/* STATISTICS */
+
+.owners-stats {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin: 10px 0 65px;
+  padding: 25px 30px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: #ffffffa8;
+}
+
+.owners-stat {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.owners-stat-icon {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 12px;
+  background: #f4e4e1;
+  color: var(--wine);
+  font-size: 25px;
+}
+
+.owners-stat > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.owners-stat strong {
+  color: var(--wine);
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.owners-stat > div span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.owners-stat-divider {
+  width: 1px;
+  height: 43px;
+  background: var(--border);
+}
+
+.owners-stat-note {
+  margin-left: auto;
+  text-align: right;
+}
+
+.owners-stat-note > span {
+  color: var(--terracotta);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.owners-stat-note p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* DIRECTORY HEADING */
+
+.owners-directory {
+  scroll-margin-top: 35px;
+}
+
+.owners-directory-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 27px;
+}
+
+.owners-section-kicker {
+  display: block;
+  font-size: 10px;
+}
+
+.owners-directory-heading h3 {
+  margin: 10px 0;
+  color: var(--wine-dark);
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 3.2vw, 43px);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+.owners-directory-heading h3 span {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.owners-directory-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.owners-result-count {
+  flex-shrink: 0;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--terracotta);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* SEARCH AND SORT */
+
+.owners-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.owners-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  min-width: 0;
+  padding: 0 15px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.owners-search:focus-within {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px #a65d5414;
+}
+
+.owners-search > span {
+  color: var(--terracotta);
+  font-size: 27px;
+}
+
+.owners-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 15px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--wine);
+  font: inherit;
+  font-size: 13px;
+}
+
+.owners-search input::placeholder {
+  color: #a89ba0;
+}
+
+.owners-search button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.owners-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+}
+
+.owners-sort > span {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.owners-sort select {
+  max-width: 175px;
+  padding: 15px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--wine);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* OWNER CARDS */
+
+.owners-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.owner-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 21px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: #fffdfb;
+  color: var(--wine);
+  text-decoration: none;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+  animation: ownersReveal 0.5s ease both;
+  animation-delay: calc(min(var(--card-index, 0), 8) * 45ms);
+}
+
+.owner-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--wine), var(--peach));
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.owner-card:hover {
+  transform: translateY(-6px);
+  border-color: #d6a8a0;
+  background: white;
+  box-shadow: 0 17px 36px #54253612;
+}
+
+.owner-card:hover::before {
+  transform: scaleX(1);
+}
+
+.owner-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.owner-index {
+  color: #b3a0a5;
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+
+.owner-card-arrow {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--terracotta);
+  font-size: 17px;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.owner-card:hover .owner-card-arrow {
+  transform: rotate(45deg);
+  border-color: var(--wine);
+  background: var(--wine);
+  color: white;
+}
+
+.owner-card-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  margin: 24px 0;
+}
+
+.owner-avatar,
+.owner-profile-avatar {
+  position: relative;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--wine), #81505e);
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  box-shadow: 0 0 0 5px #f5e8e5;
+  transition: transform 0.3s ease;
+}
+
+.owner-card:hover .owner-avatar {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.owner-avatar-sparkle {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: var(--terracotta);
+  color: white;
+  font-family: sans-serif;
+  font-size: 9px;
+}
+
+.owner-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.owner-info h3,
+.owner-info h4 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--wine);
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.owner-info p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.owner-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid #f0e5e5;
+}
+
+.owner-card-bottom > div {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.owner-card-bottom > div strong {
+  color: var(--terracotta);
+  font-family: Georgia, serif;
+  font-size: 23px;
+}
+
+.owner-card-bottom > div span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.owner-view-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--wine);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.owner-view-link span {
+  color: var(--terracotta);
+  transition: transform 0.25s ease;
+}
+
+.owner-card:hover .owner-view-link span {
+  transform: translateX(4px);
+}
+
+/* LOADING SKELETON */
+
+.owner-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 155px;
+  padding: 23px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: white;
+}
+
+.skeleton-avatar,
+.skeleton-lines span {
+  background: linear-gradient(
+    100deg,
+    #f1e5e3 20%,
+    #fff8f4 45%,
+    #f1e5e3 70%
+  );
+  background-size: 200% 100%;
+  animation: ownersShimmer 1.4s linear infinite;
+}
+
+.skeleton-avatar {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.skeleton-lines {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-lines span {
+  height: 11px;
+  border-radius: 5px;
+}
+
+.skeleton-lines span:first-child {
+  width: 75%;
+}
+
+.skeleton-lines span:last-child {
+  width: 48%;
+}
+
+/* EMPTY AND ERROR STATES */
+
+.owners-state,
+.owners-message {
+  padding: 48px 20px;
+  border: 1px dashed #ddc3c5;
+  border-radius: 14px;
+  background: #fffdfb;
+  text-align: center;
+}
+
+.owners-state-icon {
+  margin-bottom: 13px;
+  font-size: 38px;
+}
+
+.owners-state h3 {
+  margin: 0 0 10px;
+  color: var(--wine);
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.owners-state p,
+.owners-message p {
+  max-width: 470px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.owners-retry {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--wine);
+  color: white;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.owners-retry:hover {
+  transform: translateY(-2px);
+  background: var(--terracotta);
+}
+
+/* FOOTER QUOTE */
+
+.owners-bottom-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  color: #80505b;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.owners-bottom-note span {
+  color: var(--terracotta);
+  font-style: normal;
+}
+
+/* =========================================
+   OWNER PROPERTIES PAGE
+   Retains your existing page styling
+========================================= */
+
+.owner-properties-page {
+  min-height: 70vh;
+  padding: 30px 5% 60px;
+  background: var(--cream);
+}
+
+.back-home-link {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: var(--wine);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-home-link:hover {
+  color: var(--terracotta);
+}
+
+.owner-profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 30px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, var(--wine), #77434d);
+  color: white;
+  box-shadow: 0 12px 30px #54253624;
+}
+
+.owner-profile-avatar {
+  width: 76px;
+  height: 76px;
+  background: var(--terracotta);
+  font-size: 30px;
+}
+
+.owner-profile-label {
+  color: #f1c9bb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.owner-profile-banner h1 {
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.owner-profile-banner p {
+  margin-bottom: 0;
+  color: #f2e5e5;
+}
+
+.owner-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 15px 20px;
+  border: 1px solid #ffffff40;
+  border-radius: 14px;
+}
+
+.owner-total strong {
+  font-size: 28px;
+}
+
+.owner-total span {
+  font-size: 12px;
+}
+
+.owner-listings {
+  margin-top: 38px;
+}
+
+.owner-listings-heading {
+  margin-bottom: 22px;
+}
+
+.owner-listings-heading h2 {
+  margin: 10px 0;
+  color: var(--wine);
+}
+
+.owner-listings-heading p {
+  color: var(--muted);
+}
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px;
+}
+
+.owner-empty-state {
+  padding: 45px 20px;
+  border: 1px dashed #d8b8bd;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.empty-house {
+  color: var(--terracotta);
+  font-size: 45px;
+}
+
+.owner-empty-state h3 {
+  color: var(--wine);
+}
+
+.owner-empty-state p {
+  color: var(--muted);
+}
+
+.back-home-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: var(--wine);
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.back-home-button:hover {
+  background: var(--terracotta);
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes ownersReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ownersFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes ownersSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ownersPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px #73916d20;
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px #73916d10;
+  }
+}
+
+@keyframes ownersQuoteIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ownersShimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+  .owners-hero {
+    gap: 25px;
+  }
+
+  .owners-title {
+    font-size: clamp(42px, 6vw, 61px);
+  }
+
+  .owners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owners-stats {
+    gap: 22px;
+    padding: 22px;
+  }
+
+  .owners-stat-note p {
+    max-width: 170px;
+    line-height: 1.7;
+  }
+
+  .owners-hero-visual {
+    min-height: 360px;
+  }
+
+  .owners-house-art {
+    transform: scale(0.85);
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .owners-section {
+    padding: 38px 5% 48px;
+  }
+
+  .owners-hero {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .owners-title {
+    margin-top: 19px;
+    font-size: clamp(42px, 11vw, 60px);
+    letter-spacing: -1.8px;
+  }
+
+  .owners-description {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .owners-hero-visual {
+    min-height: 355px;
+    margin-top: 4px;
+  }
+
+  .owners-hero-visual::before {
+    width: min(78%, 310px);
+  }
+
+  .owners-orbit {
+    width: min(90%, 350px);
+  }
+
+  .owners-orbit.orbit-two {
+    width: min(72%, 280px);
+  }
+
+  .owners-house-art {
+    transform: scale(0.82);
+  }
+
+  .owners-quote-card {
+    right: 0;
+    bottom: 0;
+    width: min(280px, 84%);
+    padding: 15px;
+  }
+
+  .owners-quote-text {
+    min-height: 60px;
+    font-size: 13px;
+  }
+
+  .tag-top {
+    top: 6%;
+    right: 0;
+  }
+
+  .tag-bottom {
+    bottom: 9%;
+    left: 0;
+    font-size: 8px;
+  }
+
+  .owners-stats {
+    flex-wrap: wrap;
+    gap: 19px;
+    margin: 18px 0 45px;
+    padding: 20px;
+  }
+
+  .owners-stat {
+    flex: 1;
+    min-width: 125px;
+    gap: 10px;
+  }
+
+  .owners-stat-icon {
+    width: 37px;
+    height: 37px;
+    font-size: 21px;
+  }
+
+  .owners-stat strong {
+    font-size: 25px;
+  }
+
+  .owners-stat-divider {
+    display: none;
+  }
+
+  .owners-stat-note {
+    width: 100%;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .owners-stat-note p {
+    max-width: none;
+  }
+
+  .owners-directory-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .owners-directory-heading h3 {
+    font-size: 34px;
+  }
+
+  .owners-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .owners-search {
+    flex: initial;
+  }
+
+  .owners-sort {
+    justify-content: space-between;
+  }
+
+  .owners-sort select {
+    max-width: 65%;
+  }
+
+  .owners-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .owner-card {
+    padding: 18px;
+  }
+
+  .owner-card-main {
+    margin: 20px 0;
+  }
+
+  .owners-bottom-note {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .owner-profile-banner {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 22px;
+  }
+
+  .owner-total {
+    margin-left: 0;
+  }
+
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ACCESSIBILITY: REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .owners-section *,
+  .owners-section *::before,
+  .owners-section *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,269 @@
+
+/* =========================================
+   HOMEESTATE VASTU CHATBOT
+========================================= */
+
+.vastu-chatbot {
+  font-family: inherit;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Floating Button */
+
+.vastu-floating-btn {
+  position: fixed;
+  right: 26px;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #1e5aa8, #174a8b);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(30, 90, 168, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.vastu-floating-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(30, 90, 168, 0.4);
+}
+
+.vastu-floating-active {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  font-size: 26px;
+  background: #174a8b;
+}
+
+/* Chat Window */
+
+.vastu-chat-window {
+  position: fixed;
+  right: 26px;
+  bottom: 95px;
+  width: 370px;
+  max-width: calc(100vw - 30px);
+  height: min(600px, calc(100vh - 125px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e4eaf2;
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(20, 40, 70, 0.22);
+  animation: vastuChatOpen 0.25s ease;
+}
+
+@keyframes vastuChatOpen {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+
+.vastu-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px;
+  background: linear-gradient(135deg, #1e5aa8, #174a8b);
+  color: #fff;
+}
+
+.vastu-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 23px;
+}
+
+.vastu-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.vastu-header-info h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  color: #fff;
+}
+
+.vastu-header-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #e1edff;
+}
+
+.vastu-close-btn {
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 29px;
+  cursor: pointer;
+}
+
+/* Messages */
+
+.vastu-chat-messages {
+  flex: 1;
+  min-height: 100px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 17px 14px;
+  background: #f7f9fc;
+}
+
+.vastu-message {
+  max-width: 88%;
+  padding: 11px 13px;
+  border-radius: 13px;
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.vastu-bot-message {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  color: #344256;
+  border-bottom-left-radius: 4px;
+}
+
+.vastu-user-message {
+  align-self: flex-end;
+  background: #1e5aa8;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Quick Questions */
+
+.vastu-quick-questions {
+  padding: 12px 13px;
+  border-top: 1px solid #edf0f5;
+  background: #fff;
+}
+
+.vastu-quick-questions > p {
+  margin: 0 0 9px;
+  color: #7a8494;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.vastu-quick-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border: 1px solid #dbe6f5;
+  border-radius: 9px;
+  background: #f8fbff;
+  color: #244f84;
+  text-align: left;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.vastu-quick-btn:hover {
+  background: #eaf3ff;
+  border-color: #8bb6ec;
+}
+
+/* Chat Input */
+
+.vastu-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #edf0f5;
+  background: #fff;
+}
+
+.vastu-chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #dce3ed;
+  border-radius: 24px;
+  outline: none;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vastu-chat-input input:focus {
+  border-color: #1e5aa8;
+  box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.1);
+}
+
+.vastu-chat-input button {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1e5aa8;
+  color: #fff;
+  font-size: 19px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.vastu-chat-input button:hover {
+  background: #174a8b;
+  transform: scale(1.05);
+}
+
+.vastu-disclaimer {
+  margin: 0;
+  padding: 0 12px 10px;
+  background: #fff;
+  color: #7b8492;
+  text-align: center;
+  font-size: 10px;
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  .vastu-floating-btn {
+    right: 16px;
+    bottom: 17px;
+  }
+
+  .vastu-chat-window {
+    right: 12px;
+    bottom: 82px;
+    width: calc(100vw - 24px);
+    height: min(590px, calc(100vh - 100px));
+    max-width: none;
+  }
+}
