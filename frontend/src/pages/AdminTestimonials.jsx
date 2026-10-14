@@ -1,8 +1,9 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
-const API_URL = "http://localhost:5000/api/testimonials";
+const TESTIMONIALS_URL = `${API_URL}/testimonials`;
 
 function AdminTestimonials() {
   const [reviews, setReviews] = useState([]);
@@ -18,7 +19,7 @@ function AdminTestimonials() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `${API_URL}/admin/pending`,
+        `${TESTIMONIALS_URL}/admin/pending`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +50,7 @@ function AdminTestimonials() {
       const token = localStorage.getItem("token");
 
       const response = await axios.patch(
-        `${API_URL}/admin/${id}/review`,
+        `${TESTIMONIALS_URL}/admin/${id}/review`,
         { status },
         {
           headers: {

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function PropertyCard({ property }) {
 
@@ -34,7 +35,7 @@ function PropertyCard({ property }) {
       try {
 
         const response = await axios.get(
-          `http://localhost:5000/api/favourites/check/${property._id}`,
+          `${API_URL}/favourites/check/${property._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -86,7 +87,7 @@ function PropertyCard({ property }) {
         // REMOVE FAVOURITE
 
         await axios.delete(
-          `http://localhost:5000/api/favourites/${property._id}`,
+          `${API_URL}/favourites/${property._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -101,7 +102,7 @@ function PropertyCard({ property }) {
         // ADD FAVOURITE
 
         await axios.post(
-          `http://localhost:5000/api/favourites/${property._id}`,
+          `${API_URL}/favourites/${property._id}`,
           {},
           {
             headers: {

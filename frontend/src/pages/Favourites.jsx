@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 import PropertyCard from "../components/PropertyCard";
 
@@ -30,7 +31,7 @@ function Favourites() {
 
 
       const response = await axios.get(
-        "http://localhost:5000/api/favourites",
+        `${API_URL}/favourites`,
         {
           headers: {
             Authorization: `Bearer ${token}`

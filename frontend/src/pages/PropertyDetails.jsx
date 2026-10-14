@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 import PropertyCard from "../components/PropertyCard";
 import HomeLoanCalculator from "../components/HomeLoanCalculator";
@@ -49,7 +50,7 @@ const [aiCallOpen, setAiCallOpen] = useState(false);
       }
 
       await axios.post(
-        `http://localhost:5000/api/visits/${propertyId}`,
+        `${API_URL}/visits/${propertyId}`,
         {},
         {
           headers: {
@@ -78,7 +79,7 @@ const [aiCallOpen, setAiCallOpen] = useState(false);
         setSimilarProperties([]);
 
         const response = await axios.get(
-          `http://localhost:5000/api/properties/${id}`
+          `${API_URL}/properties/${id}`
         );
 
         if (!isActive) return;
@@ -99,7 +100,7 @@ const [aiCallOpen, setAiCallOpen] = useState(false);
 
         try {
           const similarResponse = await axios.get(
-            `http://localhost:5000/api/properties/similar/${id}`
+            `${API_URL}/properties/similar/${id}`
           );
 
           if (isActive) {
@@ -172,7 +173,7 @@ const [aiCallOpen, setAiCallOpen] = useState(false);
     try {
       // 1. Save enquiry in MongoDB.
       const enquiryResponse = await axios.post(
-        "http://localhost:5000/api/enquiries",
+        `${API_URL}/enquiries`,
         {
           property: property._id,
           name: formData.senderName.trim(),

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 import { Link } from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
@@ -20,7 +21,7 @@ function Home({ listingType }) {
       setLoading(true);
 
       const response = await axios.get(
-        "http://localhost:5000/api/properties",
+        `${API_URL}/properties`,
         {
           params: filters
         }

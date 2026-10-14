@@ -4,6 +4,7 @@ import {
   useParams
 } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function ProjectDetails() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ function ProjectDetails() {
 
         const response =
           await axios.get(
-            `http://localhost:5000/api/projects/${id}`
+            `${API_URL}/projects/${id}`
           );
 
         const projectData =

@@ -3,8 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./OwnerApplicationStatus.css";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+import { API_URL as API } from "../config";
 
 function OwnerApplicationStatus() {
   const navigate = useNavigate();

@@ -761,6 +761,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -791,7 +792,7 @@ function Navbar() {
 
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/auth/me",
+        `${API_URL}/auth/me`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -902,7 +903,7 @@ function Navbar() {
       // =================================
       if (isRegister) {
         response = await axios.post(
-          "http://localhost:5000/api/auth/register",
+          `${API_URL}/auth/register`,
           {
             name: cleanName,
             email: cleanEmail,
@@ -915,7 +916,7 @@ function Navbar() {
         // LOGIN
         // =================================
         response = await axios.post(
-          "http://localhost:5000/api/auth/login",
+          `${API_URL}/auth/login`,
           {
             email: cleanEmail,
             password,

@@ -321,8 +321,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SuperAdminPanel.css";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+import { API_URL as API } from "../config";
 
 function SuperAdminPanel() {
   const navigate = useNavigate();
