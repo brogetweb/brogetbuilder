@@ -1,0 +1,207 @@
+
+.application-page {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
+  background: linear-gradient(135deg, #fbf7f3, #f2e8e2);
+}
+
+.application-card {
+  width: 100%;
+  max-width: 650px;
+  padding: 38px;
+  border: 1px solid #eadbd7;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(72, 28, 39, 0.1);
+  text-align: center;
+  animation: applicationEnter 0.4s ease both;
+}
+
+.application-icon {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f7eee8;
+  color: #a65e49;
+  font-size: 42px;
+}
+
+.application-icon.rejected {
+  background: #fff0f0;
+  color: #a52b3d;
+}
+
+.application-eyebrow {
+  color: #a65e49;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.application-card h1 {
+  margin: 12px 0;
+  color: #672334;
+  font-size: clamp(25px, 4vw, 34px);
+  line-height: 1.25;
+}
+
+.application-description {
+  max-width: 480px;
+  margin: 0 auto 28px;
+  color: #81747a;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.application-timeline {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 20px 14px;
+  padding: 24px;
+  margin: 25px 0;
+  border-radius: 16px;
+  background: #fcf8f6;
+  text-align: left;
+}
+
+.timeline-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e4f3e8;
+  color: #31734b;
+  font-weight: 800;
+}
+
+.timeline-pending {
+  background: #f7e8df;
+  color: #a65e49;
+}
+
+.timeline-waiting {
+  background: #eee8eb;
+  color: #672334;
+}
+
+.application-timeline strong {
+  color: #4b2b34;
+  font-size: 14px;
+}
+
+.application-timeline p {
+  margin: 5px 0 0;
+  color: #887a7e;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.application-primary {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #672334;
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.application-primary:hover:not(:disabled) {
+  background: #873b50;
+}
+
+.application-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.application-home,
+.application-logout {
+  display: block;
+  margin: 18px auto 0;
+  color: #85394e;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.application-logout {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.application-reason {
+  margin: 22px 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff4f4;
+  color: #8f2b3a;
+  text-align: left;
+}
+
+.application-reason p {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.application-error {
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff0f0;
+  color: #9a2939;
+  font-size: 13px;
+}
+
+.application-spinner {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 15px;
+  border: 3px solid #eadbd7;
+  border-top-color: #672334;
+  border-radius: 50%;
+  animation: applicationSpin 0.8s linear infinite;
+}
+
+@keyframes applicationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes applicationEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .application-card {
+    padding: 25px 18px;
+  }
+
+  .application-timeline {
+    padding: 18px 12px;
+    gap: 16px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .application-card,
+  .application-spinner {
+    animation: none;
+  }
+}

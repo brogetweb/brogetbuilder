@@ -8,8 +8,7 @@ function Login() {
 
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-    role: "user"
+    password: ""
   });
 
   const [error, setError] = useState("");
@@ -103,15 +102,6 @@ function Login() {
             onChange={handleChange}
             required
           />
-
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-          >
-            <option value="user">User</option>
-            <option value="owner">Property Owner</option>
-          </select>
 
 
           <button type="submit">

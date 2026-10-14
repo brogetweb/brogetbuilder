@@ -82,6 +82,15 @@ import aiCallRoutes from "./routes/aiCallRoutes.js";
 import publicOwnerRoutes from "./routes/publicOwnerRoutes.js";
 
 
+import uploadRoutes from "./routes/uploadRoutes.js";
+
+import superAdminRoutes from "./routes/superAdminRoutes.js";
+
+import authMiddleware from "./middleware/authMiddleware.js";
+import requireApprovedOwner from "./middleware/requireApprovedOwner.js";
+
+
+import testimonialRoutes from "./routes/testimonialRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -100,7 +109,7 @@ app.use(express.json());
 // DATABASE
 // ==========================================
 
-await connectDB();
+connectDB();
 
 
 // ==========================================
@@ -126,8 +135,15 @@ app.use(
 app.use("/api/favourites", favouriteRoutes);
 
 app.use("/api/visits", visitRoutes);
-app.use("/api/owner", ownerRoutes);
+// app.use("/api/owner", ownerRoutes);
+app.use(
+  "/api/owner",
+  authMiddleware,
+  requireApprovedOwner,
+  ownerRoutes
+);
 
+app.use("/api/admin", superAdminRoutes)
 app.use("/api/loans", loanRoutes);
 
 
@@ -135,6 +151,13 @@ app.use("/api/ai-calls", aiCallRoutes);
 
 // app.use("/api/owners", publicOwnerRoutes);
 app.use("/api/public/owners", publicOwnerRoutes);
+
+
+
+app.use("/api/uploads", uploadRoutes);
+
+
+app.use("/api/testimonials", testimonialRoutes);
 // ==========================================
 // HOME
 // ==========================================

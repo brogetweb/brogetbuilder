@@ -28,6 +28,11 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 import OwnerProperties from "./pages/OwnerProperties";
 import ContactUs from "./pages/ContactUs";
 
+import SuperAdminPanel from "./pages/SuperAdminPanel";
+import OwnerApplicationStatus from "./pages/OwnerApplicationStatus";
+import PropertyNews from "./pages/PropertyNews";
+import PropertyNewsDetails from "./pages/PropertyNewsDetails";
+import AdminTestimonials from "./pages/AdminTestimonials";
 
 function App() {
   return (
@@ -72,8 +77,28 @@ function App() {
         />
 
         <Route
+          path="/property-news"
+          element={<PropertyNews />}
+        />
+
+        <Route
+  path="/property-news/:slug"
+  element={<PropertyNewsDetails />}
+/>
+
+        <Route
   path="/owner-dashboard"
   element={<OwnerDashboard />}
+/>
+
+<Route
+  path="/super-admin"
+  element={<SuperAdminPanel />}
+/>
+
+<Route
+  path="/owner-application-status"
+  element={<OwnerApplicationStatus />}
 />
 
         {/* PROPERTY CATEGORIES */}

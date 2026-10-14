@@ -8,6 +8,7 @@ import WhatsAppChatbot from "../components/WhatsAppChatbot";
 import brogetHeroImage from "../../Broget Home Estate Gold Logo.png";
 
 import OwnersSection from "../components/OwnersSection";
+import Testimonials from "./Testimonials";
 
 function Home({ listingType }) {
   const [properties, setProperties] = useState([]);
@@ -518,6 +519,7 @@ function Home({ listingType }) {
 
       </section>
        <WhatsAppChatbot />
+       <Testimonials/>
 
     </div>
   );
