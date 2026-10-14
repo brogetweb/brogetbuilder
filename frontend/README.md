@@ -1,16 +1,23 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite app for Broget Home Estate.
 
-Currently, two official plugins are available:
+The full project guide — folder layout, architecture diagram, routes, API, and setup — is in the repository [README](../README.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Scripts
 
-## React Compiler
+```bash
+npm install
+npm run dev
+npm run build
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Vercel
 
-## Expanding the ESLint configuration
+Root directory for this package is `frontend`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Build: `npm run build`
+- Output: `dist`
+- `vercel.json` sends all paths to `index.html`
+
+Copy `.env.example` to `.env` for local work. On Vercel, set `VITE_API_URL`, `VITE_GOOGLE_MAPS_API_KEY`, `VITE_VAPI_PUBLIC_KEY`, and `VITE_VAPI_ASSISTANT_ID`, then redeploy.
