@@ -762,7 +762,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
-import brogetLogo from "../../images/Broget Home Estate Gold Logo.png";
+import brogetLogo from "../../images/Glossy BuilderBroget 3D Logo.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -1014,7 +1014,7 @@ function Navbar() {
       <nav className="navbar">
         {/* LOGO */}
         <Link to="/" className="logo" aria-label="HomeEstate home">
-          <img src={brogetLogo} alt="" />
+          <img src={brogetLogo} alt="BuilderBroget, India's Smart Builder Platform" />
         </Link>
 
         {/* DESKTOP NAVIGATION */}

@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import PropertyCard from "../components/PropertyCard";
 import WhatsAppChatbot from "../components/WhatsAppChatbot";
 import starryHouseImage from "../../images/Futuristic House Under a Starry Sky.png";
+import homeVideo from "../../vidio/bookyourdreamhome.mp4";
 
 import OwnersSection from "../components/OwnersSection";
 import Testimonials from "./Testimonials";
@@ -15,6 +16,7 @@ function Home({ listingType }) {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("");
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
   const fetchProperties = async (filters = {}) => {
     try {
@@ -88,6 +90,17 @@ function Home({ listingType }) {
         className="hero"
         style={{ "--hero-image": `url("${starryHouseImage}")` }}
       >
+        <video
+          className="hero-background-video"
+          src={homeVideo}
+          poster={starryHouseImage}
+          autoPlay
+          loop
+          muted={isVideoMuted}
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
 
         <div className="hero-content">
 
@@ -96,13 +109,26 @@ function Home({ listingType }) {
           />
 
           <div className="hero-brand-copy">
-            <h1 className="hero-brand-title">BROGET HOME ESTATE</h1>
+            <h1 className="hero-brand-title">
+              <span className="hero-brand-builder">Builder</span><span className="hero-brand-broget">Broget</span>
+            </h1>
             <p className="hero-brand-tagline">
               — Where Your Dream Home Becomes Reality.
             </p>
           </div>
 
         </div>
+
+        <button
+          type="button"
+          className="hero-sound-toggle"
+          onClick={() => setIsVideoMuted((muted) => !muted)}
+          aria-label={isVideoMuted ? "Turn background video sound on" : "Mute background video"}
+          aria-pressed={!isVideoMuted}
+        >
+          <span aria-hidden="true">{isVideoMuted ? "♫" : "♪"}</span>
+          Sound {isVideoMuted ? "off" : "on"}
+        </button>
 
       </section>
 

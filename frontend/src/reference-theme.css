@@ -270,6 +270,56 @@ textarea:focus-visible {
   animation: light-sweep 18s linear infinite;
 }
 
+.hero-background-video {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.hero-sound-toggle {
+  position: absolute;
+  z-index: 2;
+  left: clamp(16px, 3vw, 38px);
+  bottom: clamp(16px, 3vw, 30px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: 4px;
+  color: #fff;
+  background: rgba(12, 12, 15, .78);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .42), 0 6px 12px rgba(0, 0, 0, .32);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.hero-sound-toggle > span {
+  color: #ffd76e;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.hero-sound-toggle:hover {
+  transform: translateY(-2px);
+  background: rgba(12, 12, 15, .94);
+}
+
+.hero-sound-toggle:focus-visible {
+  outline: 3px solid #ffd76e;
+  outline-offset: 3px;
+}
+
 .hero::after {
   right: clamp(22px, 5vw, 80px);
   bottom: 36px;
@@ -306,18 +356,49 @@ textarea:focus-visible {
 .hero .hero-brand-title {
   max-width: none;
   margin: 0;
-  background: linear-gradient(180deg, #fff9df 0%, #f6d67e 24%, #d29327 52%, #fff0b8 70%, #9c6413 100%);
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 0 rgba(65, 36, 5, .95)) drop-shadow(0 7px 18px rgba(0, 0, 0, .9));
-  font-size: clamp(36px, 5.2vw, 64px);
+  color: #fff;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, .88));
+  font-family: "Manrope", "DM Sans", sans-serif;
+  font-size: clamp(42px, 6.3vw, 78px);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1.08;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .42), 0 3px 0 rgba(85, 48, 8, .82), 0 10px 24px rgba(0, 0, 0, .9);
-  text-transform: uppercase;
+  text-wrap: balance;
+  text-transform: none;
+}
+
+.hero-brand-builder,
+.hero-brand-broget {
+  display: inline-block;
+  background-size: 100% 100%, 240% 100%;
+  background-position: center, 160% center;
+  background-repeat: no-repeat;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .65), 0 2px 0 currentColor, 0 4px 0 rgba(8, 25, 56, .95), 0 7px 0 rgba(3, 12, 31, .92), 0 12px 18px rgba(0, 0, 0, .9);
+  animation: brand-gloss-sweep 3.8s linear infinite, brand-float 3.2s ease-in-out infinite;
+}
+
+.hero-brand-builder {
+  background-image: linear-gradient(180deg, #e9fbff 0%, #72d7ff 16%, #138be8 38%, #0753b8 62%, #80cfff 78%, #07316d 100%), linear-gradient(112deg, transparent 35%, rgba(255, 255, 255, .14) 43%, rgba(255, 255, 255, .9) 49%, rgba(255, 255, 255, .24) 53%, transparent 61%);
+  color: #147dc9;
+}
+
+.hero-brand-broget {
+  background-image: linear-gradient(180deg, #fffde1 0%, #ffdc57 18%, #f4a81d 42%, #bf6805 63%, #ffe995 80%, #78400a 100%), linear-gradient(112deg, transparent 35%, rgba(255, 255, 255, .16) 43%, rgba(255, 255, 255, .94) 49%, rgba(255, 255, 255, .25) 53%, transparent 61%);
+  color: #d88a14;
+  animation-delay: .35s, .35s;
+}
+
+@keyframes brand-gloss-sweep {
+  from { background-position: center, 160% center; }
+  to { background-position: center, -160% center; }
+}
+
+@keyframes brand-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
 }
 
 .hero .hero-brand-tagline {
@@ -1303,9 +1384,9 @@ textarea:focus-visible {
 
 .navbar .logo {
   z-index: 1;
-  flex: 0 0 clamp(128px, 14vw, 180px);
-  width: clamp(128px, 14vw, 180px);
-  height: 50px;
+  flex: 0 0 clamp(160px, 18vw, 230px);
+  width: clamp(160px, 18vw, 230px);
+  height: clamp(64px, 6.2vw, 78px);
   filter: none;
   transform: none;
 }
@@ -1528,9 +1609,9 @@ textarea:focus-visible {
   }
 
   .navbar .logo {
-    flex-basis: 122px;
-    width: 122px;
-    height: 42px;
+    flex-basis: clamp(138px, 42vw, 176px);
+    width: clamp(138px, 42vw, 176px);
+    height: clamp(46px, 14vw, 58px);
   }
 
   .navbar .mobile-menu {
