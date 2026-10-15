@@ -1,0 +1,11 @@
+{
+  "name": "brogetbuilder",
+  "private": true,
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "npm ci --prefix backend",
+    "start": "npm start --prefix backend"
+  }
+}

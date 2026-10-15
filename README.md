@@ -269,7 +269,9 @@ Set the API `CORS_ORIGIN` to the Vercel domain before the live site calls the AP
 
 ## Deploy the API on Railway
 
-Create a Railway service from this repo and set **Root Directory** to `backend`. Railpack installs from `backend/package-lock.json` and runs `npm start`. The process listens on `0.0.0.0` and Railway's `PORT`, and it does not accept traffic until MongoDB is connected.
+Create one Railway service from this repo. Do not add the frontend. The repo root `package.json` installs `backend` during the build and starts it with `npm start`. The process listens on `0.0.0.0` and Railway's `PORT`, and it does not accept traffic until MongoDB is connected.
+
+Leave **Root Directory** empty. If it is already set, set it back to the repository root, not `frontend`.
 
 In the service settings, set **Healthcheck Path** to `/health`.
 
