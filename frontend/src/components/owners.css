@@ -16,8 +16,9 @@
   overflow: hidden;
   padding: 60px 5% 76px;
   background:
-    radial-gradient(ellipse at 0% 0%, #f4e3df 0%, transparent 36%),
-    linear-gradient(180deg, #fffaf8 0%, #fff7f3 100%);
+    radial-gradient(ellipse at 83% 12%, rgba(122, 35, 55, .24), transparent 34%),
+    radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, .035), transparent 38%),
+    linear-gradient(180deg, #101012 0%, #171316 58%, #111113 100%);
 }
 
 .owners-shell {
@@ -48,7 +49,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--terracotta);
+  color: #f0e8ea;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 2px;
@@ -60,32 +61,34 @@
   height: 8px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #73916d;
-  box-shadow: 0 0 0 4px #73916d20;
+  background: #ed4655;
+  box-shadow: 0 0 0 4px rgba(237, 70, 85, .2);
   animation: ownersPulse 2s infinite;
 }
 
 .owners-title {
-  margin: 25px 0 20px;
-  color: var(--wine-dark);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(42px, 5vw, 72px);
-  font-weight: 500;
-  letter-spacing: -2.8px;
-  line-height: 1.08;
+  margin: 18px 0 14px;
+  color: #f8f5f6;
+  font-family: "Manrope", "DM Sans", sans-serif;
+  font-size: clamp(32px, 3.6vw, 42px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
 }
 
 .owners-title span {
-  color: var(--terracotta);
-  font-style: italic;
+  color: #ff8791;
+  font-style: normal;
+  font-weight: 800;
 }
 
 .owners-description {
   max-width: 510px;
   margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.95;
+  color: #d4cdd0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
 }
 
 .owners-explore-btn {
@@ -128,8 +131,9 @@
   align-items: center;
   gap: 9px;
   margin-top: 23px;
-  color: #88757c;
+  color: #d4cdd0;
   font-size: 12px;
+  font-weight: 600;
 }
 
 /* ARCHITECTURAL HERO ART */
@@ -258,7 +262,7 @@
   border: 1px solid #ffffffc9;
   border-radius: 8px;
   background: #fffaf0eF;
-  color: var(--wine);
+  color: #252122;
   box-shadow: 0 8px 28px #5425360d;
   font-size: 9px;
   font-weight: 800;
@@ -308,11 +312,12 @@
 .owners-quote-text {
   min-height: 67px;
   margin: 8px 0 16px;
-  color: var(--wine);
-  font-family: Georgia, serif;
-  font-size: 15px;
-  font-style: italic;
-  line-height: 1.7;
+  color: #252122;
+  font-family: "Manrope", "DM Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.55;
   animation: ownersQuoteIn 0.35s ease both;
 }
 
@@ -324,7 +329,7 @@
 }
 
 .owners-quote-bottom > span {
-  color: var(--terracotta);
+  color: #343033;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 0.8px;
@@ -447,21 +452,21 @@
 
 .owners-directory-heading h3 {
   margin: 10px 0;
-  color: var(--wine-dark);
-  font-family: Georgia, serif;
-  font-size: clamp(30px, 3.2vw, 43px);
-  font-weight: 500;
-  letter-spacing: -1px;
+  color: #f8f5f6;
+  font-family: "Manrope", "DM Sans", sans-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .owners-directory-heading h3 span {
-  color: var(--terracotta);
-  font-style: italic;
+  color: #ff8791;
+  font-style: normal;
 }
 
 .owners-directory-heading p {
   margin: 0;
-  color: var(--muted);
+  color: #c8c0c3;
   font-size: 13px;
   line-height: 1.8;
 }
@@ -875,8 +880,8 @@
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 32px;
-  color: #80505b;
-  font-family: Georgia, serif;
+  color: #e3d8dc;
+  font-family: "Manrope", "DM Sans", sans-serif;
   font-size: 13px;
   font-style: italic;
   line-height: 1.8;
@@ -1094,7 +1099,7 @@
   }
 
   .owners-title {
-    font-size: clamp(42px, 6vw, 61px);
+    font-size: clamp(30px, 3.6vw, 36px);
   }
 
   .owners-grid {
@@ -1136,14 +1141,14 @@
   }
 
   .owners-title {
-    margin-top: 19px;
-    font-size: clamp(42px, 11vw, 60px);
-    letter-spacing: -1.8px;
+    margin-top: 14px;
+    font-size: clamp(30px, 8vw, 34px);
+    letter-spacing: 0;
   }
 
   .owners-description {
     font-size: 13px;
-    line-height: 1.9;
+    line-height: 1.7;
   }
 
   .owners-hero-visual {

@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./PropertyNews.css";
 const STORAGE_KEY = "homeestate_property_news";
 
 export const initialArticles = [
@@ -170,7 +171,7 @@ function PropertyNews() {
   });
 
   return (
-    <main className="content-page">
+    <main className="content-page property-news-page">
       <section className="content-hero news-hero">
         <span className="content-eyebrow">THE HOMEESTATE JOURNAL</span>
 
@@ -182,7 +183,7 @@ function PropertyNews() {
         </p>
       </section>
 
-      <section className="content-section">
+      <section className="content-section news-section">
         <div className="news-toolbar">
           <input
             type="search"

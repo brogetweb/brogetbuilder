@@ -761,7 +761,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../config";
+import brogetLogo from "../../images/Broget Home Estate Gold Logo.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -792,7 +792,7 @@ function Navbar() {
 
     try {
       const response = await axios.get(
-        `${API_URL}/auth/me`,
+        "http://localhost:5000/api/auth/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -903,7 +903,7 @@ function Navbar() {
       // =================================
       if (isRegister) {
         response = await axios.post(
-          `${API_URL}/auth/register`,
+          "http://localhost:5000/api/auth/register",
           {
             name: cleanName,
             email: cleanEmail,
@@ -916,7 +916,7 @@ function Navbar() {
         // LOGIN
         // =================================
         response = await axios.post(
-          `${API_URL}/auth/login`,
+          "http://localhost:5000/api/auth/login",
           {
             email: cleanEmail,
             password,
@@ -1012,8 +1012,8 @@ function Navbar() {
     <>
       <nav className="navbar">
         {/* LOGO */}
-        <Link to="/" className="logo">
-          🏠 Home<span>Estate</span>
+        <Link to="/" className="logo" aria-label="HomeEstate home">
+          <img src={brogetLogo} alt="" />
         </Link>
 
         {/* DESKTOP NAVIGATION */}
@@ -1120,26 +1120,26 @@ function Navbar() {
       {menuOpen && (
         <div className="mobile-nav">
           <Link to="/" onClick={() => setMenuOpen(false)}>
-            🏠 Home
+            Home
           </Link>
 
           <Link to="/buy" onClick={() => setMenuOpen(false)}>
-            🏠 Buy
+            Buy
           </Link>
 
           <Link to="/rent" onClick={() => setMenuOpen(false)}>
-            🔑 Rent
+            Rent
           </Link>
 
           <Link to="/pg" onClick={() => setMenuOpen(false)}>
-            🛏️ PG
+            PG
           </Link>
 
           <Link
             to="/new-projects"
             onClick={() => setMenuOpen(false)}
           >
-            🏗️ New Projects
+            New Projects
           </Link>
 
           <Link
@@ -1167,7 +1167,7 @@ function Navbar() {
             to="/favourites"
             onClick={() => setMenuOpen(false)}
           >
-            ❤️ Favourites
+            Favourites
           </Link>
 
           {isApprovedOwner && (
@@ -1184,7 +1184,7 @@ function Navbar() {
                 className="mobile-post"
                 onClick={() => setMenuOpen(false)}
               >
-                + Post Property
+                Post Property
               </Link>
             </>
           )}

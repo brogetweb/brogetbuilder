@@ -891,7 +891,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../config";
 
 function PostProperty() {
   const [formData, setFormData] = useState({
@@ -919,6 +918,7 @@ function PostProperty() {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
+  const API_URL = "http://localhost:5000/api";
 
   const availableAmenities = [
     "Parking",

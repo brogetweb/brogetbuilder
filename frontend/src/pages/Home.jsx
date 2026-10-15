@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config";
 import { Link } from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
 import PropertyCard from "../components/PropertyCard";
 import WhatsAppChatbot from "../components/WhatsAppChatbot";
-import brogetHeroImage from "../../Broget Home Estate Gold Logo.png";
+import starryHouseImage from "../../images/Futuristic House Under a Starry Sky.png";
 
 import OwnersSection from "../components/OwnersSection";
 import Testimonials from "./Testimonials";
@@ -21,7 +20,7 @@ function Home({ listingType }) {
       setLoading(true);
 
       const response = await axios.get(
-        `${API_URL}/properties`,
+        "http://localhost:5000/api/properties",
         {
           params: filters
         }
@@ -86,7 +85,7 @@ function Home({ listingType }) {
 
       <section
         className="hero"
-        style={{ "--hero-logo": `url("${brogetHeroImage}")` }}
+        style={{ "--hero-image": `url("${starryHouseImage}")` }}
       >
 
         <div className="hero-content">
@@ -94,6 +93,13 @@ function Home({ listingType }) {
           <SearchBar
             onSearch={handleSearch}
           />
+
+          <div className="hero-brand-copy">
+            <h1 className="hero-brand-title">BROGET HOME ESTATE</h1>
+            <p className="hero-brand-tagline">
+              — Where Your Dream Home Becomes Reality.
+            </p>
+          </div>
 
         </div>
 
@@ -103,7 +109,7 @@ function Home({ listingType }) {
       {/* ================= QUICK SECTION ================= */}
 
       {!listingType && (
-        <section className="quick-section">
+        <section className="quick-section home-quick-section">
 
           <h2>
             Explore Properties

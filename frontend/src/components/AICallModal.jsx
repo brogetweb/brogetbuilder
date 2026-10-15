@@ -232,7 +232,7 @@ function AICallModal({ property, onClose }) {
   const vapiRef = useRef(null);
 
   useEffect(() => {
-    const publicKey = import.meta.env.VITE_VAPI_PUBLIC_KEY || "22e49363-f12f-4650-8d30-43064fd0a407";
+    const publicKey = '22e49363-f12f-4650-8d30-43064fd0a407';
 
     if (!publicKey) {
       setMessage("Vapi Public API Key is missing. Check your frontend .env file.");
@@ -407,7 +407,7 @@ vapi.on("error", (error) => {
     }
 
     const vapi = vapiRef.current;
-    const assistantId = import.meta.env.VITE_VAPI_ASSISTANT_ID || "a68af9a6-0fd3-4cdc-b4b6-559eb96131ef";
+    const assistantId = 'a68af9a6-0fd3-4cdc-b4b6-559eb96131ef';
 
     if (!vapi || !assistantId) {
       setMessage(

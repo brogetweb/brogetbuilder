@@ -552,7 +552,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../config";
 import "./owners.css";
 
 const quotes = [
@@ -589,7 +588,7 @@ function OwnersSection() {
       setError("");
 
       const response = await axios.get(
-        `${API_URL}/public/owners`
+        "http://localhost:5000/api/public/owners"
       );
 
       const data = response.data;

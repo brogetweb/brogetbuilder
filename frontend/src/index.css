@@ -5854,7 +5854,7 @@ input[type=submit]:active {
 
   background:
     linear-gradient(rgba(0, 0, 0, .18), rgba(0, 0, 0, .18)),
-    var(--hero-logo) center / min(100%, 1200px) auto no-repeat,
+    var(--hero-image) center / cover no-repeat,
     #080808;
 
   display: flex;
@@ -7655,7 +7655,7 @@ textarea:focus-visible {
   perspective: 1400px;
   background:
     linear-gradient(100deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .08) 53%, rgba(0, 0, 0, .2)),
-    var(--hero-logo) center / min(100%, 1200px) auto no-repeat,
+    var(--hero-image) center / cover no-repeat,
     #080808;
 }
 
