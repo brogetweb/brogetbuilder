@@ -265,7 +265,44 @@ Set the same `VITE_*` variables in Vercel, with `VITE_API_URL` pointing at the d
 
 `frontend/vercel.json` rewrites every path to `index.html`, so routes such as `/property/:id` keep working on refresh.
 
-Allow the Vercel domain in the API CORS config before the live site calls the API. The API currently uses `cors()` with no origin lock.
+Set the API `CORS_ORIGIN` to the Vercel domain before the live site calls the API. Leave `CORS_ORIGIN` empty only for local development, where every origin is allowed.
+
+## Deploy the API on Railway
+
+Create a Railway service from this repo and set **Root Directory** to `backend`. Railpack installs from `backend/package-lock.json` and runs `npm start`. The process listens on `0.0.0.0` and Railway's `PORT`, and it does not accept traffic until MongoDB is connected.
+
+In the service settings, set **Healthcheck Path** to `/health`.
+
+Set these variables on the service. Do not commit them.
+
+| Variable | Required | Used for |
+|---|---|---|
+| `MONGO_URI` | Yes | Atlas connection string |
+| `JWT_SECRET` | Yes | Signing login tokens |
+| `CORS_ORIGIN` | Yes in production | Comma-separated frontend origins, no trailing slash |
+| `CLOUDINARY_CLOUD_NAME` | For photo upload | Cloudinary |
+| `CLOUDINARY_API_KEY` | For photo upload | Cloudinary |
+| `CLOUDINARY_API_SECRET` | For photo upload | Cloudinary |
+| `VAPI_PRIVATE_KEY` | For voice calls | Vapi |
+| `VAPI_ASSISTANT_ID` | For voice calls | Vapi |
+| `VAPI_PHONE_NUMBER_ID` | For voice calls | Vapi |
+
+Example:
+
+```env
+CORS_ORIGIN=https://your-app.vercel.app,http://localhost:5173
+```
+
+In Atlas **Network Access**, allow Railway to reach the cluster. A fixed IP is not available on every Railway plan, so `0.0.0.0/0` is the setting that keeps the deployed API connected. The database user still needs its own password.
+
+`.railway/railway.ts` describes this service (`rootDirectory: backend`, start `npm start`, healthcheck `/health`). Apply it with the Railway CLI after `railway login` and `railway link`:
+
+```bash
+railway config plan
+railway config apply
+```
+
+Railway still injects `MONGO_URI`, `JWT_SECRET`, and the other secrets in the dashboard. Those values stay out of git.
 
 ## Scripts
 
