@@ -132,7 +132,7 @@ function VastuChatbot() {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Namaste! 🙏 Welcome to the HomeEstate Vastu Assistant. Ask me about traditional Vastu guidance for different areas of a home."
+      text: "Namaste! 🙏 Welcome to the BuilderBroget Vastu Assistant. Ask me about traditional Vastu guidance for different areas of a home."
     }
   ]);
 

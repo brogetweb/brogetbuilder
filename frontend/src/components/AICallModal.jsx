@@ -254,7 +254,7 @@ const vapi = new VapiConstructor(publicKey);
     const handleCallStart = () => {
       setCallStatus("connected");
       setLoading(false);
-      setMessage("You are connected to the HomeEstate AI assistant.");
+      setMessage("You are connected to the BuilderBroget AI assistant.");
     };
 
     const handleCallEnd = () => {
@@ -496,7 +496,7 @@ vapi.on("error", (error) => {
         <div className="ai-call-icon">📞</div>
 
         <span className="ai-call-eyebrow">
-          HOMEESTATE AI ASSISTANT
+          BUILDERBROGET AI ASSISTANT
         </span>
 
         <h2 id="ai-call-title">Talk About This Property</h2>
@@ -640,7 +640,7 @@ vapi.on("error", (error) => {
         )}
 
         <div className="ai-call-footer">
-          HomeEstate Property Assistance
+           BuilderBroget Property Assistance
         </div>
       </div>
     </div>

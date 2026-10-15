@@ -251,7 +251,7 @@ function OwnerDashboard() {
             <p className="section-label">WEBSITE ACTIVITY</p>
             <h2>Registered Users</h2>
             <p>
-              Customers who have registered on HomeEstate.
+              Customers who have registered on BuilderBroget.
             </p>
           </div>
 

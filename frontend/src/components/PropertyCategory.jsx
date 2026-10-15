@@ -53,7 +53,7 @@ function PropertyCategory({ title, propertyType }) {
         <div className="category-hero-content">
 
           <span className="section-label">
-            HOMEESTATE
+            BUILDERBROGET
           </span>
 
           <h1>
@@ -62,7 +62,7 @@ function PropertyCategory({ title, propertyType }) {
 
           <p>
             Explore the best {title.toLowerCase()}
-            available on HomeEstate.
+            available on BuilderBroget.
           </p>
 
         </div>

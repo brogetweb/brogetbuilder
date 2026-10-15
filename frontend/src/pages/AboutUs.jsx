@@ -9,7 +9,7 @@ function AboutUs() {
         <div className="about-hero-content">
 
           <span className="section-label">
-            ABOUT HOMEESTATE
+            ABOUT BUILDERBROGET
           </span>
 
           <h1>
@@ -49,7 +49,7 @@ function AboutUs() {
             </h2>
 
             <p>
-              HomeEstate is a modern real-estate
+              BuilderBroget is a modern real-estate
               platform built to help people discover
               properties that match their needs,
               preferences and budget.
@@ -57,7 +57,7 @@ function AboutUs() {
 
             <p>
               Whether you are looking to buy,
-              rent or find a PG, HomeEstate makes
+              rent or find a PG, BuilderBroget makes
               it easier to explore different types
               of properties.
             </p>

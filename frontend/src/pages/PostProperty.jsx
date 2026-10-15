@@ -892,6 +892,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PostProperty() {
   const [formData, setFormData] = useState({
@@ -1152,18 +1154,26 @@ function PostProperty() {
       );
 
       // SUCCESS
-      setMessage("Property posted successfully!");
-      setMessageType("success");
+      toast.success("🎉 Property posted successfully!", {
+   position: "top-right",
+   autoClose: 3000,
+   theme: "colored",
+ });
 
       resetForm();
     } catch (error) {
       console.error("Post property error:", error);
 
-      setMessage(
-        error.response?.data?.message ||
-          error.message ||
-          "Something went wrong while posting your property."
-      );
+       toast.error(
+    error.response?.data?.message ||
+      error.message ||
+      "Something went wrong while posting your property.",
+    {
+      position: "top-right",
+      autoClose: 4000,
+      theme: "colored",
+    }
+  );
 
       setMessageType("error");
     } finally {
@@ -1174,6 +1184,15 @@ function PostProperty() {
 
   return (
     <div className="post-property-page">
+      <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      newestOnTop
+      closeOnClick
+      pauseOnHover
+      draggable
+      theme="colored"
+    />
       <div className="post-property-container">
         <div className="post-header">
           <h1>Post Your Property</h1>

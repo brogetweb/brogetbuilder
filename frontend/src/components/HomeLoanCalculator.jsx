@@ -70,7 +70,7 @@ function HomeLoanCalculator({ propertyPrice = 0 }) {
     setResult(null);
   }, [propertyPrice]);
 
-  // Fetch lender rates through the HomeEstate backend.
+  // Fetch lender rates through the BuilderBroget backend.
   useEffect(() => {
     const controller = new AbortController();
 
@@ -295,7 +295,7 @@ function HomeLoanCalculator({ propertyPrice = 0 }) {
         <div className="loan-banner-topline">
           <span className="loan-banner-brand">
             <span className="loan-brand-icon">⌂</span>
-            HOMEESTATE FINANCE
+            BUILDERBROGET FINANCE
           </span>
 
           <span className="loan-banner-tag">

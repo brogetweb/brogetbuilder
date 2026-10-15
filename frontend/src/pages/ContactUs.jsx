@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +22,15 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    alert(
-      `Thank you ${formData.name || "there"}! Our team will contact you shortly.`
+    toast.success(
+      `Thank you ${formData.name.trim() || "there"}! Our team will contact you shortly.`,
+      {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "colored",
+        closeOnClick: true,
+        pauseOnHover: true
+      }
     );
 
     setFormData({
@@ -34,13 +43,25 @@ const ContactUs = () => {
 
   return (
     <div className="contact-page">
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
+
       <div className="contact-shell">
         <div className="contact-header">
-          <span className="contact-badge">HOME ESTATE</span>
+          <span className="contact-badge">BUILDER BROGET</span>
+
           <h1>Contact Us</h1>
+
           <p>
-            We’d love to hear about your dream property requirement and help you find
-            the perfect match.
+            We’d love to hear about your dream property requirement
+            and help you find the perfect match.
           </p>
         </div>
 
@@ -68,6 +89,8 @@ const ContactUs = () => {
               onChange={handleChange}
               placeholder="Enter your contact number"
               inputMode="numeric"
+              pattern="[0-9]{10}"
+              title="Please enter a 10-digit contact number"
               required
             />
           </div>

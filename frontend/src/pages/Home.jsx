@@ -397,7 +397,7 @@ function Home({ listingType }) {
         <div className="home-about-content">
 
           <span className="section-label">
-            ABOUT HOMEESTATE
+            ABOUT BUILDERBROGET
           </span>
 
           <h2>
@@ -408,7 +408,7 @@ function Home({ listingType }) {
           </h2>
 
           <p>
-            HomeEstate is a modern real-estate
+            BuilderBroget is a modern real-estate
             platform designed to make finding
             your perfect property simple and
             convenient.
@@ -455,7 +455,7 @@ function Home({ listingType }) {
           </span>
 
           <h2>
-            Why Choose HomeEstate?
+            Why Choose BuilderBroget?
           </h2>
 
           <p>

@@ -91,7 +91,7 @@ function OwnerApplicationStatus() {
           {isRejected ? "!" : "◷"}
         </div>
 
-        <p className="application-eyebrow">HOMEESTATE OWNER REGISTRATION</p>
+        <p className="application-eyebrow">BUILDERBROGET OWNER REGISTRATION</p>
 
         <h1>
           {isRejected
@@ -101,7 +101,7 @@ function OwnerApplicationStatus() {
 
         <p className="application-description">
           {isRejected
-            ? "Thank you for your interest in HomeEstate. Unfortunately, your owner application has not been approved."
+            ? "Thank you for your interest in BuilderBroget. Unfortunately, your owner application has not been approved."
             : "Thank you for registering as a property owner. Our Super Admin is reviewing your application."}
         </p>
 

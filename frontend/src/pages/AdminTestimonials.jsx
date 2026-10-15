@@ -77,7 +77,7 @@ function AdminTestimonials() {
     <main className="content-page admin-testimonials">
       <section className="content-hero testimonial-hero">
         <span className="content-eyebrow">
-          HOMEESTATE ADMINISTRATION
+          BUILDERBROGET ADMINISTRATION
         </span>
 
         <h1>Testimonial Approval</h1>

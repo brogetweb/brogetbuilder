@@ -157,7 +157,7 @@ function Testimonials() {
 
         <p>
           Every home search has a story. Explore experiences
-          from our community and share yours with HomeEstate.
+          from our community and share yours with BuilderBroget.
         </p>
       </section>
 
@@ -171,7 +171,7 @@ function Testimonials() {
           <h2>What Our Customers Say</h2>
 
           <p>
-            Experiences shared by our HomeEstate community.
+            Experiences shared by our BuilderBroget community.
           </p>
         </div>
 
@@ -266,7 +266,7 @@ function Testimonials() {
           <h2>Share Your Experience</h2>
 
           <p>
-            Have a HomeEstate story? We would love to hear
+            Have a BuilderBroget story? We would love to hear
             your feedback.
           </p>
         </div>

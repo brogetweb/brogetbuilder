@@ -21,7 +21,7 @@ Before committing, review the ownership documents and property approvals with a 
 Take your time, compare your options and make a decision that fits your circumstances.`,
     image:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-09-20",
   },
   {
@@ -40,7 +40,7 @@ Make sure the agreement accurately describes the property and the people involve
 Rules and registration requirements can vary by location, so consult a qualified local professional when needed.`,
     image:
       "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-09-23",
   },
   {
@@ -59,7 +59,7 @@ Estimate a monthly repayment that fits your income and existing expenses. Rememb
 Loan eligibility and terms depend on the lender and your financial circumstances. Review the current terms directly with the lender before deciding.`,
     image:
       "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-09-26",
   },
   {
@@ -78,7 +78,7 @@ Natural light, mirrors and a consistent colour palette can help a room feel more
 The best design is one that suits your everyday routines and makes the space comfortable for you.`,
     image:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-09-29",
   },
   {
@@ -97,7 +97,7 @@ Visit the neighbourhood at different times of day if possible. Check noise level
 Research local development plans through reliable sources, and remember that planned developments are not guarantees of future property appreciation.`,
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-10-02",
   },
   {
@@ -116,7 +116,7 @@ Review the payment schedule, cancellation conditions, maintenance charges and an
 Where applicable, check the project details on the official RERA website for the relevant state. Consider obtaining independent legal advice before signing.`,
     image:
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
-    author: "HomeEstate Editorial Team",
+    author: "BuilderBroget Editorial Team",
     publishedAt: "2026-10-05",
   },
 ];
@@ -173,7 +173,7 @@ function PropertyNews() {
   return (
     <main className="content-page property-news-page">
       <section className="content-hero news-hero">
-        <span className="content-eyebrow">THE HOMEESTATE JOURNAL</span>
+        <span className="content-eyebrow">THE BUILDERBROGET JOURNAL</span>
 
         <h1>Property News & Insights</h1>
 

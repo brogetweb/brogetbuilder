@@ -558,7 +558,7 @@ import "./owners.css";
 const quotes = [
   {
     text: "Finding a home is easy. Finding one that doesn't empty your wallet? That's the real plot twist.",
-    tag: "HOMEESTATE REALITY CHECK",
+    tag: "BUILDERBROGET REALITY CHECK",
   },
   {
     text: "Behind every dream home is someone asking for a security deposit.",
@@ -828,7 +828,7 @@ function OwnersSection() {
                     The owner <span>directory.</span>
                   </h3>
                   <p>
-                    Browse registered owners on HomeEstate.
+                    Browse registered owners on BuilderBroget.
                     No crystal ball required.
                   </p>
                 </div>

@@ -1024,9 +1024,10 @@ function Navbar() {
           <Link to="/rent">Rent</Link>
           <Link to="/pg">PG</Link>
           <Link to="/new-projects">New Projects</Link>
+           <Link to="/property-news">Property News</Link>
+           <Link to="/about-us">About Us</Link>
           <Link to="/contact-us">Contact US</Link>
-          <Link to="/about-us">About Us</Link>
-          <Link to="/property-news">Property News</Link>
+         
         </div>
 
         {/* RIGHT SIDE */}
@@ -1144,13 +1145,13 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/contact-us"
+            to="/property-news"
             onClick={() => setMenuOpen(false)}
           >
-            Contact Us
+            Property News
           </Link>
 
-          <Link
+           <Link
             to="/about-us"
             onClick={() => setMenuOpen(false)}
           >
@@ -1158,10 +1159,10 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/property-news"
+            to="/contact-us"
             onClick={() => setMenuOpen(false)}
           >
-            Property News
+            Contact Us
           </Link>
 
           <Link

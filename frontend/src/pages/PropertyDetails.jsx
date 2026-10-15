@@ -224,7 +224,7 @@ const [aiCallOpen, setAiCallOpen] = useState(false);
       // 3. Create the WhatsApp message.
       const whatsappMessage = `Hello ${property.ownerName},
 
-I am interested in your property listed on HomeEstate.
+I am interested in your property listed on BuilderBroget.
 
 Property: ${property.title}
 Location: ${property.location}, ${property.city}
@@ -242,7 +242,7 @@ ${formData.message}
 Please contact me regarding this property.
 
 Thank you.
-HomeEstate`;
+BuilderBroget`;
 
       // 4. Open WhatsApp.
       const whatsappUrl =

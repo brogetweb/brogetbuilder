@@ -73,12 +73,12 @@ function Footer() {
         <div className="footer-about">
 
           <h2 className="footer-logo">
-            Home<span>Estate</span>
+            Builder<span>Broget</span>
           </h2>
 
           <p>
             Find your dream property with
-            HomeEstate. Explore properties for
+            BuilderBroget. Explore properties for
             buying, renting and PG across
             different locations.
           </p>
@@ -177,7 +177,7 @@ function Footer() {
 
         <div className="footer-column">
 
-          <h3>HomeEstate</h3>
+          <h3>BuilderBroget</h3>
 
           <Link to="/about">
             About Us
@@ -213,11 +213,11 @@ function Footer() {
           </p>
 
           <p>
-            📧 support@homeestate.com
+            📧 support@builderbroget.com
           </p>
 
           <p>
-            📞 +91 XXXXX XXXXX
+            📞 +91 9503303333
           </p>
 
         </div>
@@ -229,7 +229,7 @@ function Footer() {
       <div className="footer-bottom">
 
         <p>
-          © 2026 HomeEstate.
+          © 2026 BuilderBroget.
           All rights reserved.
         </p>
 

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./WhatsAppChatbot.css";
 
-const WHATSAPP_NUMBER = "919876543210";
+const WHATSAPP_NUMBER = "919503303333";
 // Replace with your WhatsApp number:
 // India country code + 10-digit mobile number.
 // Do not include +, spaces, or dashes.
@@ -12,25 +12,25 @@ const quickQuestions = [
     icon: "🏠",
     title: "Buy a Property",
     message:
-      "Hello HomeEstate! I'm interested in buying a property. Can you help me find suitable options?"
+      "Hello BuilderBroget! I'm interested in buying a property. Can you help me find suitable options?"
   },
   {
     icon: "🔑",
     title: "Rent a Property",
     message:
-      "Hello HomeEstate! I'm looking for a property to rent. Please share available options."
+      "Hello BuilderBroget! I'm looking for a property to rent. Please share available options."
   },
   {
     icon: "📅",
     title: "Schedule a Visit",
     message:
-      "Hello HomeEstate! I'd like to schedule a property visit. Please let me know the available options."
+      "Hello BuilderBroget! I'd like to schedule a property visit. Please let me know the available options."
   },
   {
     icon: "💬",
     title: "Talk to an Agent",
     message:
-      "Hello HomeEstate! I'd like to speak with a property consultant."
+      "Hello BuilderBroget! I'd like to speak with a property consultant."
   }
 ];
 
@@ -76,7 +76,7 @@ function WhatsAppChatbot() {
             <div className="he-whatsapp-avatar">🏠</div>
 
             <div className="he-whatsapp-header-info">
-              <h3>HomeEstate Assistant</h3>
+              <h3>BuilderBroget Assistant</h3>
 
               <p>
                 <span className="he-online-dot" />
@@ -97,7 +97,7 @@ function WhatsAppChatbot() {
           <div className="he-whatsapp-body">
             <div className="he-whatsapp-welcome">
               <span className="he-welcome-label">
-                WELCOME TO HOMEESTATE
+                WELCOME TO BuilderBroget
               </span>
 
               <h4>Let's find your happy place! 🏡</h4>
@@ -174,7 +174,7 @@ function WhatsAppChatbot() {
 
           <div className="he-whatsapp-footer">
             <span>Powered by WhatsApp</span>
-            <span>HomeEstate 🏡</span>
+            <span>BuilderBroget 🏡</span>
           </div>
         </section>
       )}
@@ -188,7 +188,7 @@ function WhatsAppChatbot() {
         aria-label={
           isOpen
             ? "Close WhatsApp assistant"
-            : "Chat with HomeEstate on WhatsApp"
+            : "Chat with BuilderBroget on WhatsApp"
         }
         aria-expanded={isOpen}
       >
