@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 import PropertyCard from "../components/PropertyCard";
 
 function OwnerProperties() {
@@ -19,7 +20,7 @@ function OwnerProperties() {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/public/owners/${ownerId}/properties`
+          `${API_URL}/public/owners/${ownerId}/properties`
         );
 
         setOwner(response.data.owner);

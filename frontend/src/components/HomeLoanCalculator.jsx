@@ -1,8 +1,6 @@
 
 import { useEffect, useState } from "react";
-
-
-const API_URL = "http://localhost:5000/api/loans/banks";
+import { API_URL } from "../config";
 
 function HomeLoanCalculator({ propertyPrice = 0 }) {
   const [price, setPrice] = useState(Number(propertyPrice) || 0);
@@ -81,7 +79,7 @@ function HomeLoanCalculator({ propertyPrice = 0 }) {
         setLendersLoading(true);
         setLenderError("");
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${API_URL}/loans/banks`, {
           signal: controller.signal
         });
 

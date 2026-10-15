@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 import "./Testimonials.css";
-
-const API_URL = "http://localhost:5000/api/testimonials";
 
 function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
@@ -26,7 +25,7 @@ function Testimonials() {
       setLoading(true);
       setError("");
 
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}/testimonials`);
 
       // Support either a direct array or { testimonials: [...] }
       const data = response.data;
@@ -95,7 +94,7 @@ function Testimonials() {
     try {
       setSubmitting(true);
 
-      await axios.post(API_URL, {
+      await axios.post(`${API_URL}/testimonials`, {
         name,
         rating,
         message,

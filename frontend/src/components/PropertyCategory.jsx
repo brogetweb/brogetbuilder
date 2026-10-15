@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 import PropertyCard from "./PropertyCard";
 
@@ -13,7 +14,7 @@ function PropertyCategory({ title, propertyType }) {
       setLoading(true);
 
       const response = await axios.get(
-        "http://localhost:5000/api/properties",
+        `${API_URL}/properties`,
         {
           params: {
             propertyType,

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
+import { API_URL } from "../config";
 
 function Footer() {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ function Footer() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/auth/me",
+          `${API_URL}/auth/me`,
           {
             headers: {
               Authorization:
