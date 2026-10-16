@@ -763,6 +763,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
 import brogetLogo from "../../images/Glossy BuilderBroget 3D Logo.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -855,18 +857,37 @@ function Navbar() {
   // =====================================
   // LOGOUT
   // =====================================
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
 
-    setUser(null);
-    setLoginOpen(false);
-    setMenuOpen(false);
+  //   setUser(null);
+  //   setLoginOpen(false);
+  //   setMenuOpen(false);
 
-    window.dispatchEvent(new Event("authChange"));
+  //   window.dispatchEvent(new Event("authChange"));
 
-    navigate("/", { replace: true });
-  };
+  //   navigate("/", { replace: true });
+  // };
+  
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  setUser(null);
+  setLoginOpen(false);
+  setMenuOpen(false);
+
+  window.dispatchEvent(new Event("authChange"));
+
+  toast.success("You have been logged out successfully!", {
+    position: "top-right",
+    autoClose: 2500,
+  });
+
+  navigate("/", { replace: true });
+};
+
 
   // =====================================
   // LOGIN / REGISTER
@@ -949,6 +970,15 @@ function Navbar() {
 
       // Notify other components
       window.dispatchEvent(new Event("authChange"));
+      toast.success(
+  isRegister
+    ? "Account created successfully!"
+    : `Login successful! Welcome back, ${authUser.name || "to HomeEstate"}!`,
+  {
+    position: "top-right",
+    autoClose: 2500,
+  }
+);
 
       // =================================
       // REDIRECT BY ROLE AND APPROVAL
@@ -1374,6 +1404,16 @@ function Navbar() {
           </div>
         </div>
       )}
+       <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
     </>
   );
 }
