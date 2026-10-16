@@ -1,7 +1,7 @@
-
 import express from "express";
 
 import Property from "../models/Property.js";
+import Project from "../models/Project.js";
 import PropertyVisit from "../models/PropertyVisit.js";
 import Enquiry from "../models/Enquiry.js";
 import User from "../models/User.js";
@@ -31,9 +31,9 @@ router.get("/dashboard", async (req, res) => {
     ===================================================== */
 
     const properties = await Property.find({
-      ownerId
+      ownerId,
     }).sort({
-      createdAt: -1
+      createdAt: -1,
     });
 
     const propertyIds = properties.map(
@@ -41,45 +41,64 @@ router.get("/dashboard", async (req, res) => {
     );
 
     /* =====================================================
-       REGISTERED USERS ONLY
-       Exclude owners from the users list.
+       OWNER PROJECTS
+
+       IMPORTANT:
+       This assumes Project uses an ownerId field.
+    ===================================================== */
+
+    const projects = await Project.find({
+      ownerId,
+    }).sort({
+      createdAt: -1,
+    });
+
+    /* =====================================================
+       REGISTERED USERS
     ===================================================== */
 
     const registeredUsers = await User.find({
-      role: { $ne: "owner" }
+      role: {
+        $nin: ["owner", "superadmin"],
+      },
     })
       .select("name email role createdAt")
       .sort({
-        createdAt: -1
+        createdAt: -1,
       });
 
     /* =====================================================
        PROPERTY VISITS
-       Actual property page views for this owner.
+
+       Actual property visits for this owner.
     ===================================================== */
 
     const visits = await PropertyVisit.find({
-      owner: ownerId
+      owner: ownerId,
     })
       .populate("visitor", "name email")
       .populate("property", "title city location")
       .sort({
-        visitedAt: -1
+        visitedAt: -1,
       });
 
     /* =====================================================
-       WHATSAPP ENQUIRIES
+       PROPERTY ENQUIRIES
+
        Only enquiries for this owner's properties.
     ===================================================== */
 
     const enquiries = await Enquiry.find({
       property: {
-        $in: propertyIds
-      }
+        $in: propertyIds,
+      },
     })
-      .populate("property", "title city location price")
+      .populate(
+        "property",
+        "title city location price"
+      )
       .sort({
-        createdAt: -1
+        createdAt: -1,
       });
 
     /* =====================================================
@@ -104,18 +123,18 @@ router.get("/dashboard", async (req, res) => {
       properties.map(async (property) => {
         const propertyVisits =
           await PropertyVisit.countDocuments({
-            property: property._id
+            property: property._id,
           });
 
         const propertyEnquiries =
           await Enquiry.countDocuments({
-            property: property._id
+            property: property._id,
           });
 
         return {
           ...property.toObject(),
           views: propertyVisits,
-          enquiries: propertyEnquiries
+          enquiries: propertyEnquiries,
         };
       })
     );
@@ -124,45 +143,53 @@ router.get("/dashboard", async (req, res) => {
        DASHBOARD RESPONSE
     ===================================================== */
 
-    res.json({
+    return res.json({
       owner: {
         id: req.user._id,
+        _id: req.user._id,
         name: req.user.name,
         email: req.user.email,
-        role: req.user.role
+        role: req.user.role,
       },
 
       statistics: {
-        // Owner's properties
         totalProperties: properties.length,
 
-        // Registered users only; excludes role "owner"
+        totalProjects: projects.length,
+
+        registeredUsers: registeredUsers.length,
+
         totalRegisteredUsers: registeredUsers.length,
 
-        // Actual views on this owner's properties
         totalPropertyVisits: visits.length,
 
-        // Unique users who viewed this owner's properties
         uniquePropertyVisitors: uniqueVisitorIds.size,
 
-        // Enquiries for this owner's properties
-        totalCustomers: enquiries.length
+        totalCustomers: enquiries.length,
+
+        // Keep the existing favourite count compatible
+        // with the frontend. Add a real calculation if
+        // your application stores owner-specific favourites.
+        totalFavourites: 0,
       },
 
-      // Owner's properties with view and enquiry counts
+      // Owner's properties with visit and enquiry counts
       properties: propertyStatistics,
 
-      // Only registered users, not owners
+      // Only projects belonging to this owner
+      projects,
+
+      // Registered customer accounts
       recentVisitors: registeredUsers,
 
       // Latest enquiries for this owner's properties
-      recentCustomers: enquiries.slice(0, 10)
+      recentCustomers: enquiries.slice(0, 10),
     });
   } catch (error) {
     console.error("Owner dashboard error:", error);
 
-    res.status(500).json({
-      message: "Failed to load owner dashboard"
+    return res.status(500).json({
+      message: "Failed to load owner dashboard",
     });
   }
 });
@@ -174,72 +201,96 @@ router.get("/dashboard", async (req, res) => {
 router.get("/properties", async (req, res) => {
   try {
     const properties = await Property.find({
-      ownerId: req.user._id
+      ownerId: req.user._id,
     }).sort({
-      createdAt: -1
+      createdAt: -1,
     });
 
     const propertyData = await Promise.all(
       properties.map(async (property) => {
         const views = await PropertyVisit.countDocuments({
-          property: property._id
+          property: property._id,
         });
 
         const enquiries = await Enquiry.countDocuments({
-          property: property._id
+          property: property._id,
         });
 
         return {
           ...property.toObject(),
           views,
-          enquiries
+          enquiries,
         };
       })
     );
 
-    res.json(propertyData);
+    return res.json(propertyData);
   } catch (error) {
     console.error("Fetch owner properties error:", error);
 
-    res.status(500).json({
-      message: "Failed to fetch owner properties"
+    return res.status(500).json({
+      message: "Failed to fetch owner properties",
     });
   }
 });
 
 /* =========================================================
-   REGISTERED USERS ONLY
-   Owners are excluded from this endpoint too.
+   OWNER PROJECTS
+========================================================= */
+
+router.get("/projects", async (req, res) => {
+  try {
+    const projects = await Project.find({
+      ownerId: req.user._id,
+    }).sort({
+      createdAt: -1,
+    });
+
+    return res.json(projects);
+  } catch (error) {
+    console.error("Fetch owner projects error:", error);
+
+    return res.status(500).json({
+      message: "Failed to fetch owner projects",
+    });
+  }
+});
+
+/* =========================================================
+   REGISTERED USERS
+   Exclude owners and superadmins.
 ========================================================= */
 
 router.get("/visitors", async (req, res) => {
   try {
     const users = await User.find({
-      role: { $ne: "owner" }
+      role: {
+        $nin: ["owner", "superadmin"],
+      },
     })
       .select("name email role createdAt")
       .sort({
-        createdAt: -1
+        createdAt: -1,
       });
 
-    res.json(users);
+    return res.json(users);
   } catch (error) {
     console.error("Fetch registered users error:", error);
 
-    res.status(500).json({
-      message: "Failed to fetch registered users"
+    return res.status(500).json({
+      message: "Failed to fetch registered users",
     });
   }
 });
 
 /* =========================================================
-   WHATSAPP CUSTOMERS / ENQUIRIES
+   WHATSAPP CUSTOMERS / PROPERTY ENQUIRIES
 ========================================================= */
 
 router.get("/customers", async (req, res) => {
   try {
     const properties = await Property.find({
-      ownerId: req.user._id
+      ownerId: req.user._id,
     }).select("_id");
 
     const propertyIds = properties.map(
@@ -248,20 +299,23 @@ router.get("/customers", async (req, res) => {
 
     const customers = await Enquiry.find({
       property: {
-        $in: propertyIds
-      }
+        $in: propertyIds,
+      },
     })
-      .populate("property", "title city location price")
+      .populate(
+        "property",
+        "title city location price"
+      )
       .sort({
-        createdAt: -1
+        createdAt: -1,
       });
 
-    res.json(customers);
+    return res.json(customers);
   } catch (error) {
     console.error("Fetch customers error:", error);
 
-    res.status(500).json({
-      message: "Failed to fetch customers"
+    return res.status(500).json({
+      message: "Failed to fetch customers",
     });
   }
 });

@@ -15,7 +15,7 @@ function WhyChooseUs() {
           <h1>
             Why Choose
             <span>
-              {" "}HomeEstate?
+              {" "}BuilderBroget?
             </span>
           </h1>
 
@@ -47,7 +47,7 @@ function WhyChooseUs() {
             </h2>
 
             <p>
-              HomeEstate brings useful property
+              BuilderBroget brings useful property
               search features together in one
               simple platform.
             </p>
@@ -184,7 +184,7 @@ function WhyChooseUs() {
         </h2>
 
         <p>
-          Start exploring properties on HomeEstate.
+          Start exploring properties on BuilderBroget.
         </p>
 
         <a

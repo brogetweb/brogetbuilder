@@ -973,7 +973,7 @@ const handleLogout = () => {
       toast.success(
   isRegister
     ? "Account created successfully!"
-    : `Login successful! Welcome back, ${authUser.name || "to HomeEstate"}!`,
+    : `Login successful! Welcome back, ${authUser.name || "to BuilderBroget"}!`,
   {
     position: "top-right",
     autoClose: 2500,

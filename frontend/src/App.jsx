@@ -33,6 +33,7 @@ import OwnerApplicationStatus from "./pages/OwnerApplicationStatus";
 import PropertyNews from "./pages/PropertyNews";
 import PropertyNewsDetails from "./pages/PropertyNewsDetails";
 import AdminTestimonials from "./pages/AdminTestimonials";
+import PostNewProject from "./pages/PostNewProject";
 
 function App() {
   return (
@@ -155,6 +156,11 @@ function App() {
           path="/property/:id"
           element={<PropertyDetails />}
         />
+
+        <Route
+  path="/post-new-project"
+  element={<PostNewProject />}
+/>
 
         {/* POST PROPERTY */}
         <Route

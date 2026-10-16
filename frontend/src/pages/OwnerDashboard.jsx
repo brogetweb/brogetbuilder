@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -10,63 +8,83 @@ function OwnerDashboard() {
   const [owner, setOwner] = useState(null);
   const [statistics, setStatistics] = useState({});
   const [properties, setProperties] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [recentVisitors, setRecentVisitors] = useState([]);
   const [recentCustomers, setRecentCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchDashboard = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  const fetchDashboard = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-        const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-        const response = await axios.get(
-          `${API_URL}/owner/dashboard`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = response.data;
-
-        setOwner(data.owner || null);
-        setStatistics(data.statistics || {});
-        setProperties(
-          Array.isArray(data.properties) ? data.properties : []
-        );
-        setRecentVisitors(
-          Array.isArray(data.recentVisitors) ? data.recentVisitors : []
-        );
-        setRecentCustomers(
-          Array.isArray(data.recentCustomers) ? data.recentCustomers : []
-        );
-      } catch (err) {
-        console.error("Error fetching owner dashboard:", err);
-
-        setError(
-          err.response?.data?.message ||
-            "Unable to load the dashboard. Please try again."
-        );
-      } finally {
-        setLoading(false);
+      if (!token) {
+        setError("Please log in to access your owner dashboard.");
+        return;
       }
-    };
 
+      const response = await axios.get(
+        `${API_URL}/owner/dashboard`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data;
+
+      setOwner(data.owner || null);
+      setStatistics(data.statistics || {});
+
+      setProperties(
+        Array.isArray(data.properties) ? data.properties : []
+      );
+
+      setProjects(
+        Array.isArray(data.projects) ? data.projects : []
+      );
+
+      setRecentVisitors(
+        Array.isArray(data.recentVisitors)
+          ? data.recentVisitors
+          : []
+      );
+
+      setRecentCustomers(
+        Array.isArray(data.recentCustomers)
+          ? data.recentCustomers
+          : []
+      );
+    } catch (err) {
+      console.error("Error fetching owner dashboard:", err);
+
+      setError(
+        err.response?.data?.message ||
+          "Unable to load your dashboard. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchDashboard();
   }, []);
 
-  // Show registered customers only.
-  // Exclude owners and superadmins.
   const registeredUsers = recentVisitors.filter(
     (user) =>
       user.role !== "owner" &&
       user.role !== "superadmin"
   );
+
+  const formatPrice = (price) =>
+    price != null && price !== ""
+      ? `₹${Number(price).toLocaleString("en-IN")}`
+      : "Price on request";
 
   if (loading) {
     return (
@@ -84,10 +102,7 @@ function OwnerDashboard() {
         <div className="dashboard-error">
           <p>{error}</p>
 
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-          >
+          <button type="button" onClick={fetchDashboard}>
             Try Again
           </button>
         </div>
@@ -100,20 +115,34 @@ function OwnerDashboard() {
       {/* Dashboard Header */}
       <div className="dashboard-header">
         <div>
-          <p className="dashboard-eyebrow">OWNER CONTROL CENTER</p>
+          <p className="dashboard-eyebrow">
+            OWNER CONTROL CENTER
+          </p>
 
           <h1>
             Welcome, {owner?.name || "Property Owner"}!
           </h1>
 
           <p>
-            Manage your properties and keep track of your customers.
+            Manage your properties, projects, and customer activity.
           </p>
         </div>
 
-        <Link to="/post-property" className="dashboard-add-btn">
-          + Add Property
-        </Link>
+        <div className="dashboard-header-actions">
+          <Link
+            to="/post-property"
+            className="dashboard-add-btn"
+          >
+            + Add Property
+          </Link>
+
+          <Link
+            to="/post-new-project"
+            className="dashboard-add-btn"
+          >
+            + Add Project
+          </Link>
+        </div>
       </div>
 
       {/* Dashboard Statistics */}
@@ -122,7 +151,19 @@ function OwnerDashboard() {
           <span className="stat-icon">🏠</span>
           <div>
             <h3>Total Properties</h3>
-            <p>{statistics.totalProperties ?? properties.length}</p>
+            <p>
+              {statistics.totalProperties ?? properties.length}
+            </p>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <span className="stat-icon">🏗️</span>
+          <div>
+            <h3>Total Projects</h3>
+            <p>
+              {statistics.totalProjects ?? projects.length}
+            </p>
           </div>
         </div>
 
@@ -176,7 +217,10 @@ function OwnerDashboard() {
               Your next great listing could start right here.
             </p>
 
-            <Link to="/post-property" className="dashboard-add-btn">
+            <Link
+              to="/post-property"
+              className="dashboard-add-btn"
+            >
               Post Your First Property
             </Link>
           </div>
@@ -214,10 +258,7 @@ function OwnerDashboard() {
                     </p>
 
                     <p className="property-price">
-                      ₹
-                      {Number(property.price || 0).toLocaleString(
-                        "en-IN"
-                      )}
+                      {formatPrice(property.price)}
                     </p>
 
                     <div className="property-features">
@@ -244,7 +285,106 @@ function OwnerDashboard() {
         )}
       </section>
 
-      {/* Registered Users — only one section */}
+      {/* My Projects */}
+      <section className="dashboard-section">
+        <div className="section-heading">
+          <div>
+            <p className="section-label">YOUR DEVELOPMENTS</p>
+            <h2>My Projects</h2>
+            <p>
+              Projects published by your owner account.
+            </p>
+          </div>
+
+          <Link
+            to="/post-new-project"
+            className="section-link"
+          >
+            + Add New Project
+          </Link>
+        </div>
+
+        {projects.length === 0 ? (
+          <div className="dashboard-empty">
+            <span>🏗️</span>
+            <h3>No projects listed yet</h3>
+            <p>
+              Your published real estate projects will appear here.
+            </p>
+
+            <Link
+              to="/post-new-project"
+              className="dashboard-add-btn"
+            >
+              Post Your First Project
+            </Link>
+          </div>
+        ) : (
+          <div className="dashboard-property-grid">
+            {projects.map((project) => {
+              const image =
+                Array.isArray(project.images) &&
+                project.images.length > 0
+                  ? project.images[0]
+                  : "https://placehold.co/600x400?text=Project";
+
+              return (
+                <div
+                  className="dashboard-property-card"
+                  key={project._id}
+                >
+                  <img
+                    src={image}
+                    alt={project.name || "Real Estate Project"}
+                    className="dashboard-property-image"
+                  />
+
+                  <div className="dashboard-property-info">
+                    <span className="property-type-badge">
+                      {project.status || "Project"}
+                    </span>
+
+                    <h3>
+                      {project.name || "Untitled Project"}
+                    </h3>
+
+                    <p className="property-location">
+                      📍{" "}
+                      {[project.location, project.city]
+                        .filter(Boolean)
+                        .join(", ") || "Location not specified"}
+                    </p>
+
+                    <p className="property-price">
+                      {formatPrice(project.minPrice)}
+
+                      {project.maxPrice != null &&
+                        Number(project.maxPrice) !==
+                          Number(project.minPrice) &&
+                        ` - ${formatPrice(project.maxPrice)}`}
+                    </p>
+
+                    {project.possession && (
+                      <p>
+                        Possession: {project.possession}
+                      </p>
+                    )}
+
+                    <Link
+                      to={`/project/${project._id}`}
+                      className="dashboard-view-btn"
+                    >
+                      View Project
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
+      {/* Registered Users */}
       <section className="dashboard-section">
         <div className="section-heading">
           <div>
@@ -309,9 +449,9 @@ function OwnerDashboard() {
                             "en-IN"
                           )
                         : user.lastVisited
-                        ? new Date(
-                            user.lastVisited
-                          ).toLocaleDateString("en-IN")
+                        ? new Date(user.lastVisited).toLocaleDateString(
+                            "en-IN"
+                          )
                         : "Not available"}
                     </td>
                   </tr>
@@ -329,7 +469,7 @@ function OwnerDashboard() {
             <p className="section-label">CUSTOMER ENQUIRIES</p>
             <h2>Recent Customers / WhatsApp Leads</h2>
             <p>
-              People who have contacted you about your properties.
+              People who have contacted you about your listings.
             </p>
           </div>
 
@@ -402,3 +542,4 @@ function OwnerDashboard() {
 }
 
 export default OwnerDashboard;
+

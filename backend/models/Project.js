@@ -5,31 +5,31 @@ const projectSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     builder: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     description: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     location: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     city: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     propertyType: {
@@ -38,29 +38,29 @@ const projectSchema = new mongoose.Schema(
         "Apartment",
         "Villa",
         "Plot",
-        "Independent House"
+        "Independent House",
       ],
-      required: true
+      required: true,
     },
 
     configurations: {
       type: [String],
-      default: []
+      default: [],
     },
 
     minPrice: {
       type: Number,
-      required: true
+      required: true,
     },
 
     maxPrice: {
       type: Number,
-      required: true
+      required: true,
     },
 
     area: {
       type: String,
-      required: true
+      required: true,
     },
 
     status: {
@@ -68,54 +68,59 @@ const projectSchema = new mongoose.Schema(
       enum: [
         "New Launch",
         "Under Construction",
-        "Ready to Move"
+        "Ready to Move",
       ],
-      required: true
+      required: true,
     },
 
     possession: {
       type: String,
-      required: true
+      required: true,
     },
 
     amenities: {
       type: [String],
-      default: []
+      default: [],
     },
 
     images: {
       type: [String],
-      default: []
+      default: [],
+    },
+
+    // Owner who published this project
+    ownerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
     },
 
     featured: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     verified: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     contactName: {
       type: String,
-      required: true
+      required: true,
     },
 
     contactNumber: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-const Project = mongoose.model(
-  "Project",
-  projectSchema
-);
+const Project = mongoose.model("Project", projectSchema);
 
 export default Project;
