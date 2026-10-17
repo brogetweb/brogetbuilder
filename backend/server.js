@@ -90,7 +90,7 @@ import superAdminRoutes from "./routes/superAdminRoutes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
 import requireApprovedOwner from "./middleware/requireApprovedOwner.js";
 
-
+import contactRoutes from "./routes/contactRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
 dotenv.config();
 
@@ -170,7 +170,7 @@ app.use("/api/ai-calls", aiCallRoutes);
 // app.use("/api/owners", publicOwnerRoutes);
 app.use("/api/public/owners", publicOwnerRoutes);
 
-
+app.use("/api/contact", contactRoutes);
 
 app.use("/api/uploads", uploadRoutes);
 

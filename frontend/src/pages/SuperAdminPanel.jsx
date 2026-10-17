@@ -322,6 +322,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL as API } from "../config";
 import "./SuperAdminPanel.css";
+import AdminContactMessages from "../components/AdminContactMessages";
 
 function SuperAdminPanel() {
   const navigate = useNavigate();
@@ -982,6 +983,10 @@ function SuperAdminPanel() {
             </table>
           </div>
         )}
+      </section>
+
+      <section className="admin-contact-messages-section">
+        <AdminContactMessages/>
       </section>
     </main>
   );
