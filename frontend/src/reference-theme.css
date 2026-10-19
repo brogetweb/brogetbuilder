@@ -937,8 +937,21 @@ textarea:focus-visible {
 .category-properties,
 .details-main,
 .owner-listings,
+.project-details-page,
 .owner-dashboard-content {
   background: transparent !important;
+}
+
+.card-amenities span,
+.property-top .listing-type {
+  color: black !important;
+}
+
+.project-info .project-type {
+  color: black !important;
+}
+.project-info .project-price {
+  color: white !important;
 }
 
 .about-content h2,
@@ -1736,6 +1749,13 @@ textarea:focus-visible {
   transform: translateY(0) scale(0.98);
 }
 
+.owner-info h4{
+  color: #ffffff !important;
+}
+
+.owner-card-bottom .owner-view-link{
+  color: var(--terracotta);
+}
 /* Mobile layout */
 @media (max-width: 650px) {
   .project-search-actions {
@@ -1752,6 +1772,94 @@ textarea:focus-visible {
     margin-left: auto;
   }
 }
+
+
+.owner-listing-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 28px 0 36px;
+}
+
+.owner-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  background: #222225 !important;
+  color: #ffffff;
+  border: 1px solid #222222;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.owner-summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.owner-summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 15px;
+  background: #262626;
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.owner-summary-card:nth-child(2) .owner-summary-icon {
+  background: #262626;
+  color: #ffffff;
+}
+
+.owner-summary-card strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.owner-summary-card p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .owner-listing-summary {
+    gap: 12px;
+  }
+
+  .owner-summary-card {
+    gap: 12px;
+    padding: 16px 12px;
+    border-radius: 14px;
+  }
+
+  .owner-summary-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 23px;
+    border-radius: 11px;
+  }
+
+  .owner-summary-card strong {
+    font-size: 24px;
+  }
+
+  .owner-summary-card p {
+    font-size: 12px;
+  }
+}
+
 
 /* ==========================================
    SUPER ADMIN — CONTACT ENQUIRIES

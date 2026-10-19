@@ -1,7 +1,6 @@
-
 /* =========================================
    BUILDERBROGET OWNER DASHBOARD
-   Dark charcoal + red theme
+   Charcoal Black + Crimson Red
 ========================================= */
 
 .owner-dashboard-layout {
@@ -34,21 +33,23 @@
   font: inherit;
 }
 
-/* Sidebar */
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .owner-sidebar {
-  width: 255px;
-  min-width: 255px;
-  min-height: 100vh;
-  height: 100vh;
   position: sticky;
   top: 0;
+  z-index: 100;
   display: flex;
   flex-direction: column;
+  width: 255px;
+  min-width: 255px;
+  height: 100vh;
+  min-height: 100vh;
   padding: 24px 15px 16px;
   background: #1c191b;
   border-right: 1px solid var(--owner-border);
-  z-index: 100;
 }
 
 .owner-sidebar-brand {
@@ -78,15 +79,15 @@
 }
 
 .owner-sidebar-brand strong {
-  font-size: 15px;
   color: #fff;
+  font-size: 15px;
 }
 
 .owner-sidebar-brand span {
   margin-top: 4px;
+  color: var(--owner-muted);
   font-size: 9px;
   letter-spacing: 2px;
-  color: var(--owner-muted);
 }
 
 .owner-sidebar-close {
@@ -178,14 +179,14 @@
   height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #40252b;
   color: #ff9ca5;
+  background: #40252b;
   font-weight: 800;
 }
 
 .owner-sidebar-user {
-  min-width: 0;
   flex: 1;
+  min-width: 0;
 }
 
 .owner-sidebar-user strong,
@@ -216,7 +217,9 @@
   display: none;
 }
 
-/* Main workspace */
+/* =========================================
+   MAIN WORKSPACE
+========================================= */
 
 .owner-dashboard-main {
   flex: 1;
@@ -278,7 +281,9 @@
   padding: 28px 30px 18px;
 }
 
-/* Welcome banner */
+/* =========================================
+   WELCOME BANNER
+========================================= */
 
 .owner-welcome-banner {
   position: relative;
@@ -291,7 +296,11 @@
   border: 1px solid #603039;
   border-radius: 17px;
   background:
-    radial-gradient(ellipse at 82% 20%, rgba(240, 68, 82, 0.22), transparent 40%),
+    radial-gradient(
+      ellipse at 82% 20%,
+      rgba(240, 68, 82, 0.22),
+      transparent 40%
+    ),
     linear-gradient(115deg, #302025, #21191d 72%);
 }
 
@@ -369,8 +378,8 @@
 
 .owner-banner-art > span {
   position: absolute;
-  right: 62px;
   top: -40px;
+  right: 62px;
   color: rgba(255, 150, 161, 0.15);
   font-size: 180px;
   font-weight: 900;
@@ -413,7 +422,9 @@
   height: 70px;
 }
 
-/* Statistic cards */
+/* =========================================
+   STATISTICS
+========================================= */
 
 .owner-dashboard-layout .dashboard-stats {
   display: grid;
@@ -494,11 +505,13 @@
   background: #3d2632;
 }
 
-/* Section headings */
+/* =========================================
+   SECTION HEADINGS
+========================================= */
 
 .owner-dashboard-layout .dashboard-section {
-  background-color: #151315;
   margin-top: 32px;
+  background-color: #151315;
   scroll-margin-top: 85px;
 }
 
@@ -547,7 +560,9 @@
   white-space: nowrap;
 }
 
-/* Analytics charts */
+/* =========================================
+   ANALYTICS CHARTS
+========================================= */
 
 .owner-charts-grid {
   display: grid;
@@ -622,16 +637,18 @@
   font-size: 50px;
 }
 
-.owner-chart-empty p {
+.owner-chart-empty p,
+.owner-chart-empty a {
   font-size: 12px;
 }
 
 .owner-chart-empty a {
   color: #ff7b87;
-  font-size: 12px;
 }
 
-/* Property search */
+/* =========================================
+   PROPERTY SEARCH
+========================================= */
 
 .owner-listing-toolbar {
   display: flex;
@@ -680,7 +697,9 @@
   color: white;
 }
 
-/* Listing cards */
+/* =========================================
+   PROPERTY AND PROJECT CARDS
+========================================= */
 
 .owner-dashboard-layout .dashboard-property-grid {
   display: grid;
@@ -716,7 +735,8 @@
   transition: transform 0.3s ease;
 }
 
-.owner-dashboard-layout .dashboard-property-card:hover .dashboard-property-image {
+.owner-dashboard-layout .dashboard-property-card:hover
+.dashboard-property-image {
   transform: scale(1.035);
 }
 
@@ -738,39 +758,114 @@
 }
 
 .owner-dashboard-layout .dashboard-property-info h3 {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: white;
   font-size: 15px;
   line-height: 1.5;
 }
 
-.owner-dashboard-layout .property-location {
-  margin: 0 0 10px;
+/* Location left and property type right */
+
+.owner-dashboard-layout .owner-card-location-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 12px;
+}
+
+.owner-dashboard-layout .owner-card-location-row .property-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
   color: var(--owner-muted);
   font-size: 11px;
+  line-height: 1.5;
 }
+
+.owner-dashboard-layout .owner-card-location-row
+.property-location > span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Villa, Apartment, Plot badge */
+
+.owner-dashboard-layout .owner-card-type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  max-width: 46%;
+  padding: 5px 9px;
+  overflow: hidden;
+  border: 1px solid rgba(240, 68, 82, 0.3);
+  border-radius: 6px;
+  color: #ff9ca5;
+  background: rgba(240, 68, 82, 0.09);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Property price */
 
 .owner-dashboard-layout .property-price {
   margin: 0 0 12px;
   color: #ff7e89;
   font-size: 17px;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
+
+/* Beds, baths and square footage */
 
 .owner-dashboard-layout .property-features {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
   margin-bottom: 16px;
 }
 
-.owner-dashboard-layout .property-features span {
-  padding: 6px 8px;
+.owner-dashboard-layout .property-features > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 9px;
+  border: 1px solid #40363b;
   border-radius: 6px;
-  color: #c4b7bd;
+  color: #d4c8ce;
   background: #30292d;
   font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
 }
+
+/* Project possession */
+
+.owner-dashboard-layout .owner-project-possession {
+  margin: 0 0 14px;
+  color: #c4b7bd;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.owner-dashboard-layout .owner-project-possession span {
+  color: #ff9ca5;
+  font-weight: 700;
+}
+
+/* View details button */
 
 .owner-dashboard-layout .dashboard-view-btn {
   display: flex;
@@ -794,7 +889,9 @@
   background: var(--owner-red);
 }
 
-/* Tables */
+/* =========================================
+   TABLES
+========================================= */
 
 .owner-dashboard-layout .dashboard-table-wrapper {
   width: 100%;
@@ -870,7 +967,9 @@
   color: #a3f4cd;
 }
 
-/* Empty states and errors */
+/* =========================================
+   EMPTY STATES AND ERRORS
+========================================= */
 
 .owner-dashboard-layout .dashboard-empty {
   display: flex;
@@ -907,7 +1006,7 @@
   min-height: 70vh;
   padding: 24px;
   color: #f5f1f2;
-  background: var(--owner-bg, #151315);
+  background: #151315;
 }
 
 .owner-dashboard-state .dashboard-loading,
@@ -934,13 +1033,17 @@
   border: 0;
   border-radius: 7px;
   color: white;
-  background: var(--owner-red, #f04452);
+  background: #f04452;
   cursor: pointer;
 }
 
 .owner-dashboard-state .dashboard-error a {
   margin: 8px;
 }
+
+/* =========================================
+   FOOTER
+========================================= */
 
 .owner-dashboard-footer {
   display: flex;
@@ -957,8 +1060,235 @@
   color: #ff8d97;
 }
 
+/* =========================================
+   OWNER PROPERTIES & PROJECTS TABLES
+   Charcoal Black + Crimson Red
+========================================= */
 
-/* Responsive */
+.owner-dashboard-layout .owner-listing-table-wrapper {
+  margin-top: 4px;
+  border: 1px solid var(--owner-border);
+  border-radius: 12px;
+  background: var(--owner-panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.owner-dashboard-layout .owner-listing-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.owner-dashboard-layout .owner-listing-table thead th {
+  padding: 16px 14px;
+  border-bottom: 1px solid #49353a;
+  color: #e7b4ba;
+  background: #292125;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.owner-dashboard-layout .owner-listing-table tbody td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #342c31;
+  color: #d2c9ce;
+  background: transparent;
+  font-size: 11px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.owner-dashboard-layout .owner-listing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.owner-dashboard-layout .owner-listing-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.owner-dashboard-layout .owner-listing-table tbody tr:hover {
+  background: rgba(240, 68, 82, 0.055);
+}
+
+.owner-dashboard-layout .owner-listing-table tbody tr:hover td {
+  background: rgba(240, 68, 82, 0.035);
+}
+
+/* Property and project image + title */
+
+.owner-dashboard-layout .owner-listing-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
+  max-width: 270px;
+}
+
+.owner-dashboard-layout .owner-listing-item img {
+  display: block;
+  width: 66px;
+  height: 54px;
+  flex-shrink: 0;
+  border: 1px solid #49353a;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #30292d;
+}
+
+.owner-dashboard-layout .owner-listing-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.owner-dashboard-layout .owner-listing-item-info strong {
+  display: block;
+  max-width: 175px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owner-dashboard-layout .owner-listing-item-info span {
+  display: block;
+  max-width: 175px;
+  overflow: hidden;
+  color: #8f838a;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Listing type and project status */
+
+.owner-dashboard-layout .owner-table-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 160px;
+  padding: 6px 9px;
+  overflow: hidden;
+  border: 1px solid rgba(240, 68, 82, 0.25);
+  border-radius: 6px;
+  color: #ff9ca5;
+  background: rgba(240, 68, 82, 0.09);
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Price */
+
+.owner-dashboard-layout .owner-listing-table .owner-table-price {
+  color: #ff818c;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* View property / view project action */
+
+.owner-dashboard-layout .owner-table-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 8px 11px;
+  border: 1px solid rgba(240, 68, 82, 0.4);
+  border-radius: 6px;
+  color: #ff9ca5;
+  background: rgba(240, 68, 82, 0.08);
+  font-size: 10px;
+  font-weight: 750;
+  transition: 0.2s ease;
+}
+
+.owner-dashboard-layout .owner-table-action:hover {
+  border-color: var(--owner-red);
+  color: #fff;
+  background: var(--owner-red);
+  box-shadow: 0 4px 12px rgba(240, 68, 82, 0.16);
+}
+
+/* Search toolbar */
+
+.owner-dashboard-layout .owner-listing-toolbar {
+  min-width: 0;
+}
+
+.owner-dashboard-layout .owner-listing-toolbar > span {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+/* Responsive table scrolling */
+
+@media (max-width: 900px) {
+  .owner-dashboard-layout .owner-listing-table {
+    min-width: 1050px;
+  }
+
+  .owner-dashboard-layout .owner-listing-table thead th,
+  .owner-dashboard-layout .owner-listing-table tbody td {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 650px) {
+  .owner-dashboard-layout .owner-listing-table-wrapper {
+    border-radius: 9px;
+  }
+
+  .owner-dashboard-layout .owner-listing-table {
+    min-width: 1050px;
+  }
+
+  .owner-dashboard-layout .owner-listing-table thead th {
+    padding: 13px 11px;
+    font-size: 9px;
+  }
+
+  .owner-dashboard-layout .owner-listing-table tbody td {
+    padding: 11px;
+    font-size: 10px;
+  }
+
+  .owner-dashboard-layout .owner-listing-item {
+    gap: 9px;
+    min-width: 190px;
+  }
+
+  .owner-dashboard-layout .owner-listing-item img {
+    width: 55px;
+    height: 46px;
+  }
+
+  .owner-dashboard-layout .owner-listing-item-info strong {
+    max-width: 140px;
+    font-size: 11px;
+  }
+
+  .owner-dashboard-layout .owner-listing-item-info span {
+    max-width: 140px;
+  }
+
+  .owner-dashboard-layout .owner-table-action {
+    padding: 8px 9px;
+    font-size: 9px;
+  }
+}
+
+/* =========================================
+   RESPONSIVE: TABLETS
+========================================= */
 
 @media (max-width: 1250px) {
   .owner-dashboard-layout .dashboard-stats {
@@ -995,10 +1325,10 @@
   }
 
   .owner-sidebar-overlay {
-    display: block;
     position: fixed;
     inset: 0;
     z-index: 90;
+    display: block;
     border: 0;
     background: rgba(0, 0, 0, 0.65);
   }
@@ -1037,6 +1367,10 @@
     opacity: 0.6;
   }
 }
+
+/* =========================================
+   RESPONSIVE: MOBILE
+========================================= */
 
 @media (max-width: 650px) {
   .owner-dashboard-content {
@@ -1127,6 +1461,25 @@
 
   .owner-dashboard-layout .dashboard-property-image {
     height: 210px;
+  }
+
+  .owner-dashboard-layout .owner-card-location-row {
+    gap: 8px;
+  }
+
+  .owner-dashboard-layout .owner-card-type {
+    max-width: 44%;
+    padding: 5px 7px;
+    font-size: 9px;
+  }
+
+  .owner-dashboard-layout .property-features {
+    gap: 6px;
+  }
+
+  .owner-dashboard-layout .property-features > span {
+    padding: 7px 8px;
+    font-size: 10px;
   }
 
   .owner-dashboard-layout .dashboard-table {
