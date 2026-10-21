@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
 import { Link } from "react-router-dom";
+import ProjectCard from "../components/ProjectCard";
 
 function NewProjects() {
   const [projects, setProjects] = useState([]);
@@ -285,91 +286,18 @@ function NewProjects() {
         )}
 
         {/* PROJECT CARDS */}
-        <div className="projects-grid">
-
-          {!loading &&
-            projects.map((project) => (
-              <div
-                className="project-card"
-                key={project._id}
-              >
-
-                {/* IMAGE */}
-                <div className="project-image">
-
-                  <img
-                    src={
-                      project.images?.[0] ||
-                      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000"
-                    }
-                    alt={project.name || "Residential project"}
-                  />
-
-                  <span className="project-status">
-                    {project.status}
-                  </span>
-
-                  {project.verified && (
-                    <span className="project-verified">
-                      ✓ Verified
-                    </span>
-                  )}
-
+        <div className="property-grid">
+        
+                  {projects.map((project) => (
+        
+                    <ProjectCard
+                      key={project._id}
+                      project={project}
+                    />
+        
+                  ))}
+        
                 </div>
-
-                {/* INFORMATION */}
-                <div className="project-info">
-
-                  <p className="project-builder">
-                    {project.builder}
-                  </p>
-
-                  <h3>{project.name}</h3>
-
-                  <p className="project-location">
-                    📍 {project.location}, {project.city}
-                  </p>
-
-                  <div className="project-type">
-                    🏠{" "}
-                    {project.configurations?.length
-                      ? project.configurations.join(" • ")
-                      : project.propertyType}
-                  </div>
-
-                  <div className="project-price">
-                    ₹{formatPrice(project.minPrice)}
-                    {" - "}
-                    ₹{formatPrice(project.maxPrice)}
-                  </div>
-
-                  <div className="project-possession">
-                    <span>Possession</span>
-                    <strong>{project.possession}</strong>
-                  </div>
-
-                  <div className="project-amenities">
-                    {project.amenities?.slice(0, 3).map(
-                      (amenity) => (
-                        <span key={amenity}>
-                          {amenity}
-                        </span>
-                      )
-                    )}
-                  </div>
-
-                  <Link
-                    to={`/project/${project._id}`}
-                    className="view-project-btn"
-                  >
-                    View Project
-                  </Link>
-
-                </div>
-              </div>
-            ))}
-
-        </div>
       </section>
 
       {/* WHY PROJECTS */}

@@ -1,19 +1,30 @@
+/* =========================================================
+   NEARBY ESSENTIALS — CHARCOAL BLACK + DARK CRIMSON
+   Matching BuilderBroget PropertyCard Theme
+========================================================= */
 
 .nearby-widget {
-  --nearby-navy: #172b49;
-  --nearby-navy-dark: #102039;
-  --nearby-gold: #d6ae63;
-  --nearby-cream: #fffaf1;
-  --nearby-text: #26364a;
+  --nearby-navy: #171719;
+  --nearby-navy-dark: #101012;
+  --nearby-gold: #e74753;
+  --nearby-cream: #211a1d;
+  --nearby-text: #fffaf7;
+  --nearby-muted: #b9afb2;
+  --nearby-primary: #e74753;
+  --nearby-primary-dark: #a91e2c;
+  --nearby-border: #3b2b2e;
 
   position: fixed;
   bottom: 28px;
   left: 24px;
   z-index: 9999;
   font-family: inherit;
+  color: var(--nearby-text);
 }
 
-/* Floating discovery button */
+/* =========================================================
+   FLOATING DISCOVERY BUTTON
+========================================================= */
 
 .nearby-launcher {
   position: relative;
@@ -22,20 +33,32 @@
   gap: 10px;
   min-height: 56px;
   padding: 10px 20px 10px 12px;
-  border: 1px solid rgba(214, 174, 99, 0.7);
+  border: 1px solid rgba(231, 71, 83, 0.65);
   border-radius: 40px;
-  background: linear-gradient(135deg, var(--nearby-navy), #263f61);
-  color: white;
-  box-shadow: 0 8px 28px rgba(16, 32, 57, 0.25);
+  background: linear-gradient(
+    135deg,
+    var(--nearby-primary-dark),
+    var(--nearby-navy)
+  );
+  color: #fffaf7;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .nearby-launcher:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 34px rgba(16, 32, 57, 0.32);
-  background: linear-gradient(135deg, #243e61, #102039);
+  border-color: var(--nearby-primary);
+  background: linear-gradient(
+    135deg,
+    var(--nearby-primary-dark),
+    var(--nearby-navy)
+  );
+  color: #fffaf7;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
 }
 
 .nearby-launcher-icon {
@@ -43,15 +66,17 @@
   place-items: center;
   width: 36px;
   height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  background: var(--nearby-gold);
-  color: var(--nearby-navy-dark);
+  background: var(--nearby-primary);
+  color: #ffffff;
   font-size: 25px;
   font-weight: 700;
   line-height: 1;
 }
 
 .nearby-launcher-label {
+  color: #fffaf7;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.2px;
@@ -63,16 +88,19 @@
   right: 5px;
   width: 9px;
   height: 9px;
-  border: 2px solid white;
+  border: 2px solid #fffaf7;
   border-radius: 50%;
-  background: #69c69b;
+  background: #e74753;
 }
 
 .nearby-launcher-active {
   background: var(--nearby-navy-dark);
+  border-color: var(--nearby-primary);
 }
 
-/* Soft backdrop */
+/* =========================================================
+   SOFT BACKDROP
+========================================================= */
 
 .nearby-backdrop {
   position: fixed;
@@ -81,12 +109,14 @@
   width: 100%;
   height: 100%;
   border: 0;
-  background: rgba(11, 24, 41, 0.24);
-  backdrop-filter: blur(2px);
+  background: rgba(10, 8, 10, 0.62);
+  backdrop-filter: blur(3px);
   animation: nearbyFadeIn 0.2s ease;
 }
 
-/* Popup panel */
+/* =========================================================
+   POPUP PANEL
+========================================================= */
 
 .nearby-popup {
   position: absolute;
@@ -97,13 +127,35 @@
   max-height: min(76vh, 680px);
   overflow-y: auto;
   padding: 23px;
-  border: 1px solid rgba(214, 174, 99, 0.45);
+  border: 1px solid rgba(231, 71, 83, 0.42);
   border-radius: 22px;
-  background: linear-gradient(155deg, #ffffff, var(--nearby-cream));
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(231, 71, 83, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(155deg, #211a1d, #171719);
   color: var(--nearby-text);
-  box-shadow: 0 20px 65px rgba(16, 32, 57, 0.23);
+  box-shadow: 0 20px 65px rgba(0, 0, 0, 0.55);
   transform-origin: bottom left;
   animation: nearbyPopIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  scrollbar-width: thin;
+  scrollbar-color: #a91e2c #171719;
+}
+
+.nearby-popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nearby-popup::-webkit-scrollbar-track {
+  background: #171719;
+  border-radius: 10px;
+}
+
+.nearby-popup::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #a91e2c;
 }
 
 .nearby-popup-header {
@@ -114,7 +166,7 @@
 }
 
 .nearby-eyebrow {
-  color: #a47b36;
+  color: #ff929b;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1.7px;
@@ -122,14 +174,14 @@
 
 .nearby-popup-header h3 {
   margin: 8px 0 6px;
-  color: var(--nearby-navy);
+  color: #fffaf7;
   font-size: 23px;
   line-height: 1.2;
 }
 
 .nearby-popup-header p {
   margin: 0;
-  color: #6c7786;
+  color: #b9afb2;
   font-size: 12px;
   line-height: 1.6;
 }
@@ -140,19 +192,28 @@
   place-items: center;
   width: 32px;
   height: 32px;
-  border: 1px solid #e7e2d8;
+  border: 1px solid #493035;
   border-radius: 50%;
-  background: white;
-  color: var(--nearby-navy);
+  background: #211a1d;
+  color: #fffaf7;
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .nearby-close:hover {
   transform: rotate(90deg);
-  background: #f2e5c9;
+  border-color: var(--nearby-primary);
+  background: #351b20;
+  color: #fffaf7;
 }
+
+/* =========================================================
+   LOCATION DISPLAY
+========================================================= */
 
 .nearby-location {
   display: flex;
@@ -160,15 +221,17 @@
   gap: 8px;
   margin: 17px 0;
   padding: 10px 12px;
-  border: 1px solid #eee4d0;
+  border: 1px solid #493035;
   border-radius: 10px;
-  background: #fffdf8;
-  color: #596779;
+  background: rgba(231, 71, 83, 0.07);
+  color: #d6c9cb;
   font-size: 11px;
   overflow-wrap: anywhere;
 }
 
-/* Essentials grid */
+/* =========================================================
+   ESSENTIALS GRID
+========================================================= */
 
 .nearby-grid {
   display: grid;
@@ -184,20 +247,25 @@
   align-items: flex-start;
   gap: 5px;
   padding: 13px 11px;
-  border: 1px solid #eee9df;
+  border: 1px solid #3b2b2e;
   border-radius: 14px;
-  background: white;
+  background: #171719;
+  color: #fffaf7;
   text-align: left;
   cursor: pointer;
-  transition: transform 0.22s ease, border-color 0.22s ease,
-    box-shadow 0.22s ease, background 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
 }
 
 .nearby-item:hover {
   transform: translateY(-3px);
-  border-color: var(--nearby-gold);
-  background: #fffdf7;
-  box-shadow: 0 8px 18px rgba(23, 43, 73, 0.09);
+  border-color: var(--nearby-primary);
+  background: #211a1d;
+  color: #fffaf7;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nearby-item-icon {
@@ -206,25 +274,29 @@
   width: 35px;
   height: 35px;
   margin-bottom: 3px;
+  border: 1px solid rgba(231, 71, 83, 0.2);
   border-radius: 11px;
-  background: #f6efdf;
+  background: rgba(231, 71, 83, 0.12);
   font-size: 19px;
-  transition: transform 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease;
 }
 
 .nearby-item:hover .nearby-item-icon {
   transform: scale(1.1) rotate(-5deg);
+  background: rgba(231, 71, 83, 0.2);
 }
 
 .nearby-item-name {
   padding-right: 10px;
-  color: var(--nearby-navy);
+  color: #fffaf7;
   font-size: 12px;
   font-weight: 800;
 }
 
 .nearby-item-joke {
-  color: #818895;
+  color: #b9afb2;
   font-size: 10px;
   line-height: 1.45;
 }
@@ -233,69 +305,103 @@
   position: absolute;
   top: 12px;
   right: 11px;
-  color: #b38a42;
+  color: var(--nearby-primary);
   font-size: 15px;
   transition: transform 0.2s ease;
 }
 
 .nearby-item:hover .nearby-item-arrow {
   transform: translate(2px, -2px);
+  color: #ff929b;
 }
+
+/* =========================================================
+   SHOW MORE BUTTON
+========================================================= */
 
 .nearby-show-more {
   width: 100%;
   margin-top: 13px;
   padding: 10px;
-  border: 1px dashed #d8c49e;
+  border: 1px dashed rgba(231, 71, 83, 0.55);
   border-radius: 10px;
   background: transparent;
-  color: var(--nearby-navy);
+  color: #ffb5bb;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .nearby-show-more:hover {
-  background: #f7efdF;
+  border-color: var(--nearby-primary);
+  background: rgba(231, 71, 83, 0.1);
+  color: #fffaf7;
 }
+
+/* =========================================================
+   GOOGLE MAPS BUTTON
+========================================================= */
 
 .nearby-maps-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   width: 100%;
   margin-top: 12px;
   padding: 14px 16px;
-  border: 0;
+  border: 1px solid var(--nearby-primary-dark);
   border-radius: 12px;
-  background: linear-gradient(120deg, var(--nearby-navy), #29476b);
-  color: white;
+  background: linear-gradient(
+    120deg,
+    var(--nearby-primary-dark),
+    #551d27
+  );
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .nearby-maps-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(23, 43, 73, 0.2);
+  border-color: var(--nearby-primary);
+  background: linear-gradient(
+    120deg,
+    var(--nearby-primary-dark),
+    #551d27
+  );
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .nearby-maps-button span {
-  color: var(--nearby-gold);
+  color: #ffffff;
   font-size: 18px;
 }
 
+/* =========================================================
+   DISCLAIMER
+========================================================= */
+
 .nearby-disclaimer {
   margin: 12px 0 0;
-  color: #8b929b;
+  color: #9d9296;
   font-size: 10px;
   line-height: 1.5;
   text-align: center;
 }
 
-/* Animations */
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
 @keyframes nearbyPopIn {
   from {
@@ -319,7 +425,9 @@
   }
 }
 
-/* Responsive */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 480px) {
   .nearby-widget {
@@ -345,11 +453,219 @@
   }
 }
 
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
   .nearby-widget *,
   .nearby-widget *::before,
   .nearby-widget *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   NEARBY ESSENTIALS — CHARCOAL BLACK + DARK CRIMSON
+========================================================= */
+
+.nearby-widget {
+  --nearby-navy: #151517;
+  --nearby-navy-dark: #101012;
+  --nearby-gold: #a51827;
+  --nearby-cream: #191719;
+  --nearby-text: #fffaf7;
+  --nearby-muted: #b9afb2;
+  --nearby-primary: #a51827;
+  --nearby-primary-dark: #76121e;
+  --nearby-border: #382126;
+
+  position: fixed;
+  bottom: 28px;
+  left: 24px;
+  z-index: 9999;
+  font-family: inherit;
+  color: var(--nearby-text);
+}
+
+/* Main popup background */
+
+.nearby-popup {
+  background:
+    radial-gradient(
+      ellipse at 82% 0%,
+      rgba(165, 24, 39, 0.14),
+      transparent 32%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.012) 0 1px,
+      transparent 1px 38px
+    ),
+    #151517;
+
+  color: var(--nearby-text);
+  border: 1px solid #382126;
+  box-shadow: 0 20px 65px rgba(0, 0, 0, 0.55);
+}
+
+/* Floating launcher */
+
+.nearby-launcher {
+  background: linear-gradient(
+    135deg,
+    #76121e,
+    #151517
+  );
+  border: 1px solid #76121e;
+  color: #fffaf7;
+}
+
+.nearby-launcher:hover,
+.nearby-launcher-active {
+  background: linear-gradient(
+    135deg,
+    #76121e,
+    #151517
+  );
+  border-color: #a51827;
+  color: #fffaf7;
+}
+
+.nearby-launcher-icon {
+  background: #a51827;
+  color: #ffffff;
+}
+
+/* Popup headings */
+
+.nearby-eyebrow,
+.nearby-item-arrow,
+.nearby-show-more,
+.emi-preview-arrow {
+  color: #a51827;
+}
+
+.nearby-popup-header h3,
+.nearby-item-name {
+  color: #fffaf7;
+}
+
+.nearby-popup-header p,
+.nearby-item-joke,
+.nearby-disclaimer {
+  color: #b9afb2;
+}
+
+/* Location */
+
+.nearby-location {
+  background: #191719;
+  border: 1px solid #382126;
+  color: #d0c5c7;
+}
+
+/* Essential cards */
+
+.nearby-item {
+  background: #191719;
+  border: 1px solid #382126;
+  color: #fffaf7;
+}
+
+.nearby-item:hover {
+  background: #201619;
+  border-color: #a51827;
+  color: #fffaf7;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nearby-item-icon {
+  background: #29171b;
+  border: 1px solid #492129;
+}
+
+.nearby-item:hover .nearby-item-icon {
+  background: #35171d;
+}
+
+/* Close button */
+
+.nearby-close {
+  background: #191719;
+  border-color: #382126;
+  color: #fffaf7;
+}
+
+.nearby-close:hover {
+  background: #29171b;
+  border-color: #a51827;
+  color: #fffaf7;
+}
+
+/* Show more */
+
+.nearby-show-more {
+  background: #191719;
+  border: 1px dashed #76121e;
+}
+
+.nearby-show-more:hover {
+  background: #29171b;
+  border-color: #a51827;
+  color: #fffaf7;
+}
+
+/* Maps button */
+
+.nearby-maps-button {
+  background: linear-gradient(
+    120deg,
+    #76121e,
+    #151517
+  );
+  border: 1px solid #76121e;
+  color: #ffffff;
+}
+
+.nearby-maps-button:hover {
+  background: linear-gradient(
+    120deg,
+    #76121e,
+    #151517
+  );
+  border-color: #a51827;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.nearby-maps-button span {
+  color: #ffffff;
+}
+
+/* Backdrop */
+
+.nearby-backdrop {
+  background: rgba(10, 8, 10, 0.68);
+  backdrop-filter: blur(3px);
+}
+
+/* Mobile popup */
+
+@media (max-width: 480px) {
+  .nearby-popup {
+    background:
+      radial-gradient(
+        ellipse at 82% 0%,
+        rgba(165, 24, 39, 0.14),
+        transparent 32%
+      ),
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.012) 0 1px,
+        transparent 1px 38px
+      ),
+      #151517;
   }
 }

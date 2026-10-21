@@ -55,6 +55,9 @@ textarea:focus-visible {
   outline-color: rgba(237, 52, 70, .8);
 }
 
+
+
+
 .navbar {
   position: sticky;
   z-index: 1000;
@@ -483,7 +486,8 @@ textarea:focus-visible {
   border-color: #e83445;
   box-shadow: 0 0 0 3px rgba(232, 52, 69, .2);
 }
-
+.owners-explore-btn,
+.loan-banner-cta,
 .search-btn,
 .home-section-btn,
 .contact-btn,
@@ -520,6 +524,7 @@ textarea:focus-visible {
 }
 
 .search-btn:hover,
+.loan-banner-cta:hover,
 .home-section-btn:hover,
 .contact-btn:hover,
 .post-submit:hover,

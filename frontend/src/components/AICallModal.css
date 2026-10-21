@@ -1,544 +1,657 @@
+/* =========================================================
+   BUILDERBROGET AI CALL MODAL
+   Theme: Charcoal Black + Crimson Red Glassmorphism
+========================================================= */
 
-/* =========================================
-   HOMEESTATE AI CALL MODAL
-   Premium Blue + Gold Theme
-========================================= */
-
-.ai-call-overlay,
-.ai-call-overlay * {
-  box-sizing: border-box;
+:root {
+  --ai-primary: #e42e3e;
+  --ai-primary-dark: #a91526;
+  --ai-accent: #ff4657;
+  --ai-charcoal: #0d0d10;
+  --ai-surface: #151519;
+  --ai-surface-light: #1e1e24;
+  --ai-text: #f5f5f7;
+  --ai-muted: #a5a5af;
+  --ai-border: rgba(255, 255, 255, 0.09);
+  --ai-red-glow: rgba(228, 46, 62, 0.2);
 }
+
+/* =========================
+   BACKDROP
+========================= */
 
 .ai-call-overlay {
   position: fixed;
   inset: 0;
-  z-index: 10000;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
   overflow-y: auto;
-  padding: 22px;
-  background: rgba(10, 24, 45, 0.76);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-  animation: aiCallOverlayIn 0.25s ease both;
+
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(228, 46, 62, 0.16),
+      transparent 40%
+    ),
+    rgba(3, 3, 6, 0.86);
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  animation: aiOverlayEnter 0.25s ease-out;
 }
+
+/* =========================
+   MAIN MODAL
+========================= */
 
 .ai-call-modal {
   position: relative;
   width: 100%;
-  max-width: 475px;
-  max-height: calc(100vh - 44px);
+  max-width: 490px;
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
-  padding: 32px;
-  border: 1px solid rgba(212, 167, 74, 0.45);
-  border-radius: 25px;
+
+  padding: 34px;
+  border: 1px solid rgba(228, 46, 62, 0.25);
+  border-radius: 28px;
+
+  color: var(--ai-text);
+
   background:
     radial-gradient(
-      circle at 100% 0%,
-      rgba(212, 167, 74, 0.12),
-      transparent 30%
+      ellipse at top right,
+      rgba(228, 46, 62, 0.12),
+      transparent 42%
     ),
-    linear-gradient(145deg, #ffffff, #f4f8ff);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
-  animation: aiCallModalIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    linear-gradient(145deg, #18181d 0%, #0d0d10 70%);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.65),
+    0 0 45px rgba(228, 46, 62, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  animation: aiModalEnter 0.35s ease-out;
+  scrollbar-width: thin;
+  scrollbar-color: #7d1b28 #111114;
 }
 
-/* Close button */
+.ai-call-modal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ai-call-modal::-webkit-scrollbar-track {
+  background: #111114;
+  border-radius: 10px;
+}
+
+.ai-call-modal::-webkit-scrollbar-thumb {
+  background: #7d1b28;
+  border-radius: 10px;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
 
 .ai-call-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid #dce6f2;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #174a8b;
-  font-size: 27px;
+  top: 17px;
+  right: 17px;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  border: 1px solid var(--ai-border);
+  border-radius: 12px;
+
+  color: #dedee4;
+  background: rgba(255, 255, 255, 0.045);
+
+  font-size: 25px;
   line-height: 1;
+
   cursor: pointer;
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .ai-call-close:hover:not(:disabled) {
+  color: #fff;
+  background: var(--ai-primary-dark);
+  border-color: var(--ai-primary);
   transform: rotate(90deg);
-  border-color: #1e5aa8;
-  background: #1e5aa8;
-  color: #ffffff;
 }
 
 .ai-call-close:disabled {
+  opacity: 0.45;
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
-/* AI icon */
+/* =========================
+   HEADER
+========================= */
 
 .ai-call-icon {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 66px;
-  height: 66px;
-  margin-bottom: 19px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+
+  border: 1px solid rgba(228, 46, 62, 0.4);
   border-radius: 21px;
-  background: linear-gradient(135deg, #1e5aa8, #143968);
-  box-shadow: 0 10px 25px rgba(30, 90, 168, 0.25);
-  color: #ffffff;
-  font-size: 31px;
-  animation: aiCallIconFloat 3s ease-in-out infinite;
-}
 
-.ai-call-icon-dot {
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  width: 16px;
-  height: 16px;
-  border: 3px solid #f4f8ff;
-  border-radius: 50%;
-  background: #35b87b;
-}
+  background:
+    linear-gradient(
+      145deg,
+      rgba(228, 46, 62, 0.22),
+      rgba(169, 21, 38, 0.07)
+    );
 
-/* Heading */
+  box-shadow:
+    0 8px 30px rgba(228, 46, 62, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  font-size: 29px;
+}
 
 .ai-call-eyebrow {
   display: inline-block;
-  color: #a77b27;
+  margin-bottom: 10px;
+
+  color: #ff6572;
+
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 1.8px;
+  letter-spacing: 2.4px;
   line-height: 1.6;
 }
 
 .ai-call-modal h2 {
-  margin: 10px 0 12px;
-  color: #17365f;
-  font-size: clamp(23px, 5vw, 29px);
+  margin: 0 35px 12px 0;
+
+  color: #fff;
+  font-size: clamp(23px, 4vw, 29px);
   font-weight: 800;
-  letter-spacing: -0.6px;
-  line-height: 1.25;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
 }
 
 .ai-call-description {
-  margin: 0 0 21px;
-  color: #65768c;
+  margin: 0 0 24px;
+
+  color: var(--ai-muted);
   font-size: 13px;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
-/* Property preview */
+/* =========================
+   PROPERTY PREVIEW
+========================= */
 
 .ai-call-property {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 22px;
-  padding: 15px;
-  border: 1px solid #dbe7f5;
-  border-radius: 15px;
-  background: linear-gradient(125deg, #edf5ff, #ffffff);
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin-bottom: 25px;
+  padding: 19px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(228, 46, 62, 0.2);
+  border-radius: 19px;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(228, 46, 62, 0.105),
+      rgba(255, 255, 255, 0.025) 65%
+    );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
 }
 
-.ai-call-property:hover {
-  transform: translateY(-2px);
-  border-color: #a9c5e9;
-  box-shadow: 0 8px 22px rgba(30, 90, 168, 0.08);
+.ai-call-property::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 3px;
+  height: 100%;
+
+  background: linear-gradient(
+    to bottom,
+    var(--ai-accent),
+    var(--ai-primary-dark)
+  );
 }
 
 .ai-call-property-icon {
-  display: grid;
-  flex: 0 0 49px;
-  place-items: center;
-  width: 49px;
-  height: 49px;
-  border-radius: 13px;
-  background: #ffffff;
-  box-shadow: 0 3px 12px rgba(23, 54, 95, 0.08);
-  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+
+  border: 1px solid rgba(228, 46, 62, 0.25);
+  border-radius: 14px;
+
+  background: rgba(228, 46, 62, 0.12);
+  font-size: 23px;
 }
 
 .ai-call-property-info {
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 8px;
   min-width: 0;
-  gap: 5px;
 }
 
 .ai-call-property-info > strong:first-child {
-  overflow-wrap: anywhere;
-  color: #17365f;
+  color: #fff;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 750;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .ai-call-property-info > span {
+  color: var(--ai-muted);
+  font-size: 11px;
+  line-height: 1.6;
   overflow-wrap: anywhere;
-  color: #66778d;
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .ai-call-property-info .ai-call-price {
-  color: #1e5aa8;
-  font-size: 16px;
-  font-weight: 800;
+  color: #ff5263;
+  font-size: 21px;
+  font-weight: 850;
+  letter-spacing: -0.4px;
 }
 
-/* Form */
+/* =========================
+   FORM
+========================= */
 
 .ai-call-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
-.ai-call-form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  min-width: 0;
-}
+.ai-call-form > label:not(.ai-call-consent) {
+  margin-top: 7px;
 
-.ai-call-form-field label {
-  color: #263e5d;
+  color: #e8e8ed;
   font-size: 12px;
-  font-weight: 750;
+  font-weight: 700;
+  letter-spacing: 0.15px;
 }
 
-.ai-call-form-field input {
-  display: block;
+.ai-call-form > input:not([type="checkbox"]) {
+  box-sizing: border-box;
   width: 100%;
-  min-width: 0;
-  min-height: 46px;
-  padding: 12px 14px;
-  border: 1px solid #d7e1ed;
-  border-radius: 11px;
+  height: 49px;
+  padding: 0 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   outline: none;
-  background: #ffffff;
-  color: #17365f;
+
+  color: #fff;
+  background: rgba(255, 255, 255, 0.045);
+
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
+
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.ai-call-form-field input::placeholder {
-  color: #a2afbf;
+.ai-call-form > input:not([type="checkbox"])::placeholder {
+  color: #777782;
 }
 
-.ai-call-form-field input:hover:not(:disabled) {
-  border-color: #a9bfdc;
+.ai-call-form > input:not([type="checkbox"]):hover:not(:disabled) {
+  border-color: rgba(228, 46, 62, 0.35);
 }
 
-.ai-call-form-field input:focus {
-  border-color: #1e5aa8;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.11);
+.ai-call-form > input:not([type="checkbox"]):focus {
+  border-color: var(--ai-primary);
+  background: rgba(228, 46, 62, 0.045);
+  box-shadow: 0 0 0 3px rgba(228, 46, 62, 0.11);
 }
 
-.ai-call-form-field input:disabled {
+.ai-call-form > input:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
-  background: #f1f4f8;
 }
 
-.ai-call-form-field small {
-  color: #78879a;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-/* Consent */
+/* =========================
+   CONSENT CHECKBOX
+========================= */
 
 .ai-call-consent {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin: 1px 0;
-  color: #5d6d81;
-  font-size: 11px;
-  line-height: 1.7;
+  gap: 11px;
+
+  margin: 10px 0 4px;
+  padding: 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.025);
+
   cursor: pointer;
 }
 
-.ai-call-consent input {
-  flex: 0 0 17px;
-  width: 17px;
-  height: 17px;
+.ai-call-consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
   margin: 2px 0 0;
-  accent-color: #1e5aa8;
+
+  accent-color: var(--ai-primary);
   cursor: pointer;
 }
 
 .ai-call-consent span {
-  flex: 1;
+  color: #b9b9c3;
+  font-size: 11px;
+  line-height: 1.8;
 }
 
-/* Submit button */
+.ai-call-consent input:disabled {
+  cursor: not-allowed;
+}
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+
+.ai-call-error {
+  margin: 4px 0;
+  padding: 12px 13px;
+
+  border: 1px solid rgba(255, 76, 92, 0.3);
+  border-radius: 11px;
+
+  color: #ff929d;
+  background: rgba(228, 46, 62, 0.09);
+
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
 
 .ai-call-submit {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 9px;
+
+  box-sizing: border-box;
   width: 100%;
   min-height: 49px;
-  margin-top: 2px;
-  padding: 13px 17px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  background: linear-gradient(120deg, #1e5aa8, #174a8b);
-  color: #ffffff;
+  margin-top: 10px;
+  padding: 13px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+
+  color: #fff;
+
+  background: linear-gradient(
+    115deg,
+    #f04452 0%,
+    #d92337 48%,
+    #a91526 100%
+  );
+
+  box-shadow:
+    0 8px 22px rgba(228, 46, 62, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
   font-family: inherit;
   font-size: 13px;
   font-weight: 800;
+  letter-spacing: 0.2px;
+
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(30, 90, 168, 0.2);
+
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .ai-call-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  background: linear-gradient(120deg, #174a8b, #103765);
-  box-shadow: 0 12px 26px rgba(30, 90, 168, 0.28);
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 12px 30px rgba(228, 46, 62, 0.33),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .ai-call-submit:active:not(:disabled) {
   transform: translateY(0);
 }
 
+.ai-call-submit:focus-visible,
+.ai-call-close:focus-visible {
+  outline: 2px solid #ff6572;
+  outline-offset: 3px;
+}
+
 .ai-call-submit:disabled {
-  cursor: not-allowed;
   opacity: 0.55;
+  cursor: not-allowed;
   box-shadow: none;
 }
 
-.ai-call-submit-arrow {
-  margin-left: auto;
-  font-size: 19px;
-  transition: transform 0.2s ease;
-}
-
-.ai-call-submit:hover:not(:disabled) .ai-call-submit-arrow {
-  transform: translateX(4px);
-}
-
-/* Loading spinner */
-
-.ai-call-spinner {
-  width: 17px;
-  height: 17px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: aiCallSpin 0.7s linear infinite;
-}
-
-/* Error message */
-
-.ai-call-status {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  padding: 11px 12px;
-  border-radius: 10px;
-  font-size: 12px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.ai-call-status-error {
-  border: 1px solid #f2d0d0;
-  background: #fff1f1;
-  color: #9f3030;
-}
-
-.ai-call-status-error > span {
-  display: grid;
-  flex: 0 0 18px;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #f7dada;
-  font-weight: 800;
-}
-
-/* Success state */
+/* =========================
+   SUCCESS / CALL STATUS
+========================= */
 
 .ai-call-success {
-  padding: 13px 0 5px;
+  padding: 23px 17px;
+
+  border: 1px solid rgba(228, 46, 62, 0.2);
+  border-radius: 19px;
+
   text-align: center;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(228, 46, 62, 0.11),
+      transparent 70%
+    ),
+    rgba(255, 255, 255, 0.018);
 }
 
 .ai-call-success-icon {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 59px;
+  height: 59px;
+  margin: 0 auto 17px;
+
+  border: 1px solid rgba(228, 46, 62, 0.35);
   border-radius: 50%;
-  background: #e3f7ed;
-  color: #198754;
-  font-size: 28px;
+
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--ai-primary),
+    var(--ai-primary-dark)
+  );
+
+  box-shadow: 0 0 28px rgba(228, 46, 62, 0.22);
+
+  font-size: 25px;
   font-weight: 800;
-  animation: aiCallSuccessPop 0.4s ease both;
 }
 
 .ai-call-success h3 {
-  margin: 0 0 9px;
-  color: #17365f;
-  font-size: 20px;
+  margin: 0 0 10px;
+
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
 }
 
 .ai-call-success p {
-  margin: 0 0 20px;
-  color: #63748a;
+  margin: 0 0 15px;
+
+  color: var(--ai-muted);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.8;
   overflow-wrap: anywhere;
 }
 
-/* Footer */
-
-.ai-call-footnote {
-  margin: 0;
-  color: #8290a1;
-  font-size: 10px;
-  line-height: 1.7;
-  text-align: center;
-}
+/* =========================
+   FOOTER
+========================= */
 
 .ai-call-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #e4ebf3;
-  color: #8390a0;
+  margin-top: 24px;
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  color: #777782;
+  text-align: center;
+
   font-size: 10px;
-  letter-spacing: 0.2px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
 }
 
-/* Animations */
+/* =========================
+   ANIMATIONS
+========================= */
 
-@keyframes aiCallOverlayIn {
+@keyframes aiOverlayEnter {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
-@keyframes aiCallModalIn {
+@keyframes aiModalEnter {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.97);
+    transform: translateY(18px) scale(0.975);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
 
-@keyframes aiCallIconFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
-@keyframes aiCallSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes aiCallSuccessPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  70% {
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Responsive */
-
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .ai-call-overlay {
     align-items: center;
-    padding: 12px;
+    padding: 14px;
   }
 
   .ai-call-modal {
-    max-height: calc(100vh - 24px);
-    padding: 25px 19px;
-    border-radius: 20px;
+    max-width: 100%;
+    max-height: calc(100dvh - 28px);
+    padding: 25px 20px;
+    border-radius: 23px;
+  }
+
+  .ai-call-close {
+    top: 12px;
+    right: 12px;
+    width: 33px;
+    height: 33px;
   }
 
   .ai-call-icon {
-    width: 57px;
-    height: 57px;
-    border-radius: 18px;
-    font-size: 27px;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 17px;
+    border-radius: 17px;
+    font-size: 25px;
+  }
+
+  .ai-call-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+  }
+
+  .ai-call-modal h2 {
+    font-size: 24px;
   }
 
   .ai-call-property {
-    padding: 12px;
-    gap: 10px;
+    gap: 12px;
+    padding: 15px;
   }
 
   .ai-call-property-icon {
-    flex-basis: 42px;
-    width: 42px;
-    height: 42px;
-    font-size: 22px;
+    width: 39px;
+    height: 39px;
+    font-size: 20px;
+  }
+
+  .ai-call-property-info .ai-call-price {
+    font-size: 19px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ai-call-overlay,
-  .ai-call-modal,
-  .ai-call-icon,
-  .ai-call-success-icon,
-  .ai-call-spinner {
-    animation: none !important;
+  .ai-call-modal {
+    animation: none;
   }
 
   .ai-call-close,
-  .ai-call-property,
-  .ai-call-submit,
-  .ai-call-submit-arrow {
-    transition: none !important;
+  .ai-call-submit {
+    transition: none;
   }
 }

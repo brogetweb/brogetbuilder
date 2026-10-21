@@ -1,894 +1,3 @@
-// import { useState } from "react";
-// import axios from "axios";
-
-// function PostProperty() {
-
-//   const [formData, setFormData] = useState({
-//     title: "",
-//     description: "",
-//     propertyType: "Apartment",
-//     listingType: "Buy",
-//     price: "",
-//     location: "",
-//     city: "",
-//     bedrooms: "",
-//     bathrooms: "",
-//     area: "",
-//     furnishing: "Unfurnished",
-//     ownerName: "",
-//     contactNumber: ""
-//   });
-
-//   const [amenities, setAmenities] = useState([]);
-
-//   const [images, setImages] = useState([
-//     ""
-//   ]);
-
-//   const [loading, setLoading] = useState(false);
-
-//   const [message, setMessage] = useState("");
-
-//   const availableAmenities = [
-//     "Parking",
-//     "Lift",
-//     "Security",
-//     "Power Backup",
-//     "Swimming Pool",
-//     "Gym",
-//     "Garden",
-//     "Terrace",
-//     "Club House",
-//     "Road Access",
-//     "Water Connection",
-//     "Electricity"
-//   ];
-
-
-//   // =====================================
-//   // INPUT CHANGE
-//   // =====================================
-
-//   const handleChange = (e) => {
-
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-
-//   };
-
-
-//   // =====================================
-//   // AMENITY
-//   // =====================================
-
-//   const handleAmenity = (amenity) => {
-
-//     if (amenities.includes(amenity)) {
-
-//       setAmenities(
-//         amenities.filter(
-//           item => item !== amenity
-//         )
-//       );
-
-//     } else {
-
-//       setAmenities([
-//         ...amenities,
-//         amenity
-//       ]);
-
-//     }
-
-//   };
-
-
-//   // =====================================
-//   // IMAGE CHANGE
-//   // =====================================
-
-//   const handleImageChange = (index, value) => {
-
-//     const updatedImages = [...images];
-
-//     updatedImages[index] = value;
-
-//     setImages(updatedImages);
-
-//   };
-
-
-//   // =====================================
-//   // ADD IMAGE FIELD
-//   // =====================================
-
-//   const addImageField = () => {
-
-//     setImages([
-//       ...images,
-//       ""
-//     ]);
-
-//   };
-
-
-//   // =====================================
-//   // REMOVE IMAGE
-//   // =====================================
-
-//   const removeImageField = (index) => {
-
-//     const updatedImages =
-//       images.filter(
-//         (_, imageIndex) =>
-//           imageIndex !== index
-//       );
-
-//     setImages(updatedImages);
-
-//   };
-
-
-//   // =====================================
-//   // SUBMIT
-//   // =====================================
-
-//   // const handleSubmit = async (e) => {
-
-//   //   e.preventDefault();
-
-//   //   setLoading(true);
-//   //   setMessage("");
-
-//   //   try {
-
-//   //     const cleanImages =
-//   //       images.filter(
-//   //         image => image.trim() !== ""
-//   //       );
-
-//   //     const propertyData = {
-
-//   //       ...formData,
-
-//   //       price: Number(formData.price),
-
-//   //       bedrooms:
-//   //         Number(formData.bedrooms) || 0,
-
-//   //       bathrooms:
-//   //         Number(formData.bathrooms) || 0,
-
-//   //       area:
-//   //         Number(formData.area),
-
-//   //       amenities,
-
-//   //       images: cleanImages
-
-//   //     };
-
-//   //     await axios.post(
-//   //       "http://localhost:5000/api/properties",
-//   //       propertyData
-//   //     );
-
-//   //     setMessage(
-//   //       "Property posted successfully!"
-//   //     );
-
-//   //     // RESET FORM
-
-//   //     setFormData({
-//   //       title: "",
-//   //       description: "",
-//   //       propertyType: "Apartment",
-//   //       listingType: "Buy",
-//   //       price: "",
-//   //       location: "",
-//   //       city: "",
-//   //       bedrooms: "",
-//   //       bathrooms: "",
-//   //       area: "",
-//   //       furnishing: "Unfurnished",
-//   //       ownerName: "",
-//   //       contactNumber: ""
-//   //     });
-
-//   //     setAmenities([]);
-
-//   //     setImages([""]);
-
-//   //   } catch (error) {
-
-//   //     console.log(error);
-
-//   //     setMessage(
-//   //       error.response?.data?.message ||
-//   //       "Something went wrong"
-//   //     );
-
-//   //   } finally {
-
-//   //     setLoading(false);
-
-//   //   }
-
-//   // };
-
-// const handleSubmit = async (e) => {
-
-//   e.preventDefault();
-
-//   setLoading(true);
-//   setMessage("");
-
-//   try {
-
-//     // =====================================
-//     // CHECK LOGIN
-//     // =====================================
-
-//     const token = localStorage.getItem("token");
-//     const savedUser = localStorage.getItem("user");
-
-//     if (!token || !savedUser) {
-
-//       setMessage("Please login first to post a property.");
-
-//       setLoading(false);
-
-//       return;
-//     }
-
-//     const user = JSON.parse(savedUser);
-
-//     // =====================================
-//     // CHECK OWNER
-//     // =====================================
-
-//     if (user.role !== "owner") {
-
-//       setMessage(
-//         "Only property owners can post a property."
-//       );
-
-//       setLoading(false);
-
-//       return;
-//     }
-
-//     // =====================================
-//     // CLEAN IMAGES
-//     // =====================================
-
-//     const cleanImages =
-//       images.filter(
-//         image => image.trim() !== ""
-//       );
-
-//     // =====================================
-//     // PROPERTY DATA
-//     // =====================================
-
-//     const propertyData = {
-
-//       ...formData,
-
-//       price:
-//         Number(formData.price),
-
-//       bedrooms:
-//         Number(formData.bedrooms) || 0,
-
-//       bathrooms:
-//         Number(formData.bathrooms) || 0,
-
-//       area:
-//         Number(formData.area),
-
-//       amenities,
-
-//       images: cleanImages
-
-//     };
-
-//     // =====================================
-//     // POST PROPERTY
-//     // =====================================
-
-//     await axios.post(
-//       "http://localhost:5000/api/properties",
-//       propertyData,
-//       {
-//         headers: {
-//           Authorization:
-//             `Bearer ${token}`
-//         }
-//       }
-//     );
-
-//     setMessage(
-//       "Property posted successfully!"
-//     );
-
-//     // =====================================
-//     // RESET FORM
-//     // =====================================
-
-//     setFormData({
-
-//       title: "",
-//       description: "",
-//       propertyType: "Apartment",
-//       listingType: "Buy",
-//       price: "",
-//       location: "",
-//       city: "",
-//       bedrooms: "",
-//       bathrooms: "",
-//       area: "",
-//       furnishing: "Unfurnished",
-//       ownerName: "",
-//       contactNumber: ""
-
-//     });
-
-//     setAmenities([]);
-
-//     setImages([""]);
-
-//   } catch (error) {
-
-//     console.log(error);
-
-//     setMessage(
-//       error.response?.data?.message ||
-//       "Something went wrong"
-//     );
-
-//   } finally {
-
-//     setLoading(false);
-
-//   }
-
-// };
-//   return (
-
-//     <div className="post-property-page">
-
-//       <div className="post-property-container">
-
-//         <div className="post-header">
-
-//           <h1>
-//             Post Your Property
-//           </h1>
-
-//           <p>
-//             List your property and reach
-//             potential buyers or tenants.
-//           </p>
-
-//         </div>
-
-
-//         {message && (
-//           <div className="success-message">
-//             {message}
-//           </div>
-//         )}
-
-
-//         <form
-//           className="property-form"
-//           onSubmit={handleSubmit}
-//         >
-
-//           {/* BASIC INFORMATION */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               🏠 Property Information
-//             </h2>
-
-//             <div className="form-grid">
-
-//               <div className="form-group full">
-
-//                 <label>
-//                   Property Title
-//                 </label>
-
-//                 <input
-//                   type="text"
-//                   name="title"
-//                   placeholder="Example: 2 BHK Apartment in CIDCO"
-//                   value={formData.title}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Listing Type
-//                 </label>
-
-//                 <select
-//                   name="listingType"
-//                   value={formData.listingType}
-//                   onChange={handleChange}
-//                 >
-
-//                   <option value="Buy">
-//                     Sell
-//                   </option>
-
-//                   <option value="Rent">
-//                     Rent
-//                   </option>
-
-//                   <option value="PG">
-//                     PG
-//                   </option>
-
-//                 </select>
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Property Type
-//                 </label>
-
-//                 <select
-//                   name="propertyType"
-//                   value={formData.propertyType}
-//                   onChange={handleChange}
-//                 >
-
-//                   <option value="Apartment">
-//                     Apartment
-//                   </option>
-
-//                   <option value="Villa">
-//                     Villa
-//                   </option>
-
-//                   <option value="Plot">
-//                     Plot
-//                   </option>
-
-//                   <option value="Independent House">
-//                     Independent House
-//                   </option>
-
-//                   <option value="Builder Floor">
-//                     Builder Floor
-//                   </option>
-
-//                 </select>
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Price
-//                 </label>
-
-//                 <input
-//                   type="number"
-//                   name="price"
-//                   placeholder="Enter price"
-//                   value={formData.price}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Area (Sq.ft)
-//                 </label>
-
-//                 <input
-//                   type="number"
-//                   name="area"
-//                   placeholder="Example: 1200"
-//                   value={formData.area}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-//             </div>
-
-//           </div>
-
-
-//           {/* LOCATION */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               📍 Location
-//             </h2>
-
-//             <div className="form-grid">
-
-//               <div className="form-group">
-
-//                 <label>
-//                   City
-//                 </label>
-
-//                 <input
-//                   type="text"
-//                   name="city"
-//                   placeholder="Example: Aurangabad"
-//                   value={formData.city}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Locality
-//                 </label>
-
-//                 <input
-//                   type="text"
-//                   name="location"
-//                   placeholder="Example: CIDCO"
-//                   value={formData.location}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-//             </div>
-
-//           </div>
-
-
-//           {/* PROPERTY DETAILS */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               📐 Property Details
-//             </h2>
-
-//             <div className="form-grid">
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Bedrooms
-//                 </label>
-
-//                 <select
-//                   name="bedrooms"
-//                   value={formData.bedrooms}
-//                   onChange={handleChange}
-//                 >
-
-//                   <option value="">
-//                     Select BHK
-//                   </option>
-
-//                   <option value="1">
-//                     1 BHK
-//                   </option>
-
-//                   <option value="2">
-//                     2 BHK
-//                   </option>
-
-//                   <option value="3">
-//                     3 BHK
-//                   </option>
-
-//                   <option value="4">
-//                     4 BHK
-//                   </option>
-
-//                   <option value="5">
-//                     5 BHK
-//                   </option>
-
-//                 </select>
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Bathrooms
-//                 </label>
-
-//                 <select
-//                   name="bathrooms"
-//                   value={formData.bathrooms}
-//                   onChange={handleChange}
-//                 >
-
-//                   <option value="">
-//                     Select
-//                   </option>
-
-//                   <option value="1">
-//                     1
-//                   </option>
-
-//                   <option value="2">
-//                     2
-//                   </option>
-
-//                   <option value="3">
-//                     3
-//                   </option>
-
-//                   <option value="4">
-//                     4
-//                   </option>
-
-//                 </select>
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Furnishing
-//                 </label>
-
-//                 <select
-//                   name="furnishing"
-//                   value={formData.furnishing}
-//                   onChange={handleChange}
-//                 >
-
-//                   <option value="Furnished">
-//                     Furnished
-//                   </option>
-
-//                   <option value="Semi-Furnished">
-//                     Semi-Furnished
-//                   </option>
-
-//                   <option value="Unfurnished">
-//                     Unfurnished
-//                   </option>
-
-//                 </select>
-
-//               </div>
-
-//             </div>
-
-//           </div>
-
-
-//           {/* AMENITIES */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               ⭐ Amenities
-//             </h2>
-
-//             <div className="amenities-selection">
-
-//               {availableAmenities.map(
-//                 (amenity) => (
-
-//                   <button
-//                     type="button"
-//                     key={amenity}
-//                     className={
-//                       amenities.includes(amenity)
-//                         ? "amenity-option selected"
-//                         : "amenity-option"
-//                     }
-//                     onClick={() =>
-//                       handleAmenity(amenity)
-//                     }
-//                   >
-
-//                     {amenity}
-
-//                   </button>
-
-//                 )
-//               )}
-
-//             </div>
-
-//           </div>
-
-
-//           {/* IMAGES */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               🖼️ Property Images
-//             </h2>
-
-//             <p className="form-help">
-//               Add image URLs for your property.
-//             </p>
-
-//             {images.map(
-//               (image, index) => (
-
-//                 <div
-//                   className="image-input-row"
-//                   key={index}
-//                 >
-
-//                   <input
-//                     type="url"
-//                     placeholder="https://example.com/property-image.jpg"
-//                     value={image}
-//                     onChange={(e) =>
-//                       handleImageChange(
-//                         index,
-//                         e.target.value
-//                       )
-//                     }
-//                   />
-
-//                   {images.length > 1 && (
-
-//                     <button
-//                       type="button"
-//                       className="remove-image-btn"
-//                       onClick={() =>
-//                         removeImageField(index)
-//                       }
-//                     >
-//                       ✕
-//                     </button>
-
-//                   )}
-
-//                 </div>
-
-//               )
-//             )}
-
-//             <button
-//               type="button"
-//               className="add-image-btn"
-//               onClick={addImageField}
-//             >
-//               + Add Another Image
-//             </button>
-
-//           </div>
-
-
-//           {/* DESCRIPTION */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               📝 Description
-//             </h2>
-
-//             <textarea
-//               name="description"
-//               placeholder="Describe your property..."
-//               value={formData.description}
-//               onChange={handleChange}
-//               rows="6"
-//               required
-//             />
-
-//           </div>
-
-
-//           {/* OWNER */}
-
-//           <div className="form-section">
-
-//             <h2>
-//               👤 Owner Information
-//             </h2>
-
-//             <div className="form-grid">
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Owner Name
-//                 </label>
-
-//                 <input
-//                   type="text"
-//                   name="ownerName"
-//                   placeholder="Full name"
-//                   value={formData.ownerName}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-
-//               <div className="form-group">
-
-//                 <label>
-//                   Contact Number
-//                 </label>
-
-//                 <input
-//                   type="tel"
-//                   name="contactNumber"
-//                   placeholder="10 digit number"
-//                   value={formData.contactNumber}
-//                   onChange={handleChange}
-//                   required
-//                 />
-
-//               </div>
-
-//             </div>
-
-//           </div>
-
-
-//           {/* SUBMIT */}
-
-//           <button
-//             type="submit"
-//             className="submit-property-btn"
-//             disabled={loading}
-//           >
-
-//             {loading
-//               ? "Posting Property..."
-//               : "🚀 Post Property"}
-
-//           </button>
-
-//         </form>
-
-//       </div>
-
-//     </div>
-
-//   );
-// }
-
-// export default PostProperty;
-
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
@@ -908,6 +17,10 @@ function PostProperty() {
     bathrooms: "",
     area: "",
     furnishing: "Unfurnished",
+    facing: "",
+    balconies: "0",
+    floor: "",
+    totalFloors: "",
     ownerName: "",
     contactNumber: "",
   });
@@ -915,7 +28,6 @@ function PostProperty() {
   const [amenities, setAmenities] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
   const [message, setMessage] = useState("");
@@ -936,7 +48,17 @@ function PostProperty() {
     "Electricity",
   ];
 
-  // Release preview URLs when the component unmounts.
+  const facingOptions = [
+    "North",
+    "South",
+    "East",
+    "West",
+    "North-East",
+    "North-West",
+    "South-East",
+    "South-West",
+  ];
+
   useEffect(() => {
     return () => {
       imagePreviews.forEach((url) => {
@@ -949,10 +71,23 @@ function PostProperty() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
+    setFormData((previous) => {
+      const updated = {
+        ...previous,
+        [name]: value,
+      };
+
+      // Floor details are only applicable to Apartments.
+      if (
+        name === "propertyType" &&
+        value !== "Apartment"
+      ) {
+        updated.floor = "";
+        updated.totalFloors = "";
+      }
+
+      return updated;
+    });
   };
 
   // AMENITY SELECTION
@@ -969,28 +104,26 @@ function PostProperty() {
     const files = Array.from(e.target.files || []);
 
     if (selectedImages.length + files.length > 10) {
-      setMessage("You can upload a maximum of 10 images.");
-      setMessageType("error");
+      toast.error("You can upload a maximum of 10 images.");
       e.target.value = "";
       return;
     }
 
     const validFiles = files.filter(
       (file) =>
-        ["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
-          file.type
-        ) &&
+        [
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "image/gif",
+        ].includes(file.type) &&
         file.size <= 5 * 1024 * 1024
     );
 
     if (validFiles.length !== files.length) {
-      setMessage(
+      toast.error(
         "Only JPG, PNG, WEBP, or GIF images up to 5 MB each are allowed."
       );
-      setMessageType("error");
-    } else {
-      setMessage("");
-      setMessageType("");
     }
 
     if (validFiles.length > 0) {
@@ -1009,17 +142,14 @@ function PostProperty() {
       ]);
     }
 
-    // Allow selecting the same file again later.
     e.target.value = "";
   };
 
   // REMOVE SELECTED IMAGE
   const removeSelectedImage = (index) => {
-    setImagePreviews((previous) => {
-      URL.revokeObjectURL(previous[index]);
-
-      return previous.filter((_, i) => i !== index);
-    });
+    setImagePreviews((previous) =>
+      previous.filter((_, i) => i !== index)
+    );
 
     setSelectedImages((previous) =>
       previous.filter((_, i) => i !== index)
@@ -1040,6 +170,10 @@ function PostProperty() {
       bathrooms: "",
       area: "",
       furnishing: "Unfurnished",
+      facing: "",
+      balconies: "0",
+      floor: "",
+      totalFloors: "",
       ownerName: "",
       contactNumber: "",
     });
@@ -1063,8 +197,7 @@ function PostProperty() {
       const savedUser = localStorage.getItem("user");
 
       if (!token || !savedUser) {
-        setMessage("Please login first to post a property.");
-        setMessageType("error");
+        toast.error("Please login first to post a property.");
         return;
       }
 
@@ -1073,26 +206,52 @@ function PostProperty() {
       try {
         user = JSON.parse(savedUser);
       } catch {
-        setMessage("Invalid saved user information. Please login again.");
-        setMessageType("error");
+        toast.error(
+          "Invalid saved user information. Please login again."
+        );
         return;
       }
 
       // CHECK OWNER ROLE
       if (user?.role !== "owner") {
-        setMessage("Only property owners can post a property.");
-        setMessageType("error");
+        toast.error("Only property owners can post a property.");
         return;
       }
 
       // VALIDATE IMAGES
       if (selectedImages.length === 0) {
-        setMessage("Please select at least one property image.");
-        setMessageType("error");
+        toast.error("Please select at least one property image.");
         return;
       }
 
-      // UPLOAD IMAGES TO CLOUDINARY THROUGH BACKEND
+      // VALIDATE APARTMENT FLOOR DETAILS
+      if (formData.propertyType === "Apartment") {
+        if (
+          formData.floor === "" ||
+          formData.totalFloors === ""
+        ) {
+          toast.error(
+            "Please enter the floor number and total floors for the apartment."
+          );
+          return;
+        }
+
+        const floor = Number(formData.floor);
+        const totalFloors = Number(formData.totalFloors);
+
+        if (
+          floor < 0 ||
+          totalFloors < 1 ||
+          floor > totalFloors
+        ) {
+          toast.error(
+            "Please enter a valid floor number and total floors."
+          );
+          return;
+        }
+      }
+
+      // UPLOAD IMAGES
       setUploadingImages(true);
 
       let uploadedImages;
@@ -1125,25 +284,39 @@ function PostProperty() {
               !image.url.startsWith("https://")
           )
         ) {
-          throw new Error("Invalid image upload response from server.");
+          throw new Error(
+            "Invalid image upload response from server."
+          );
         }
       } finally {
         setUploadingImages(false);
       }
 
       // PREPARE PROPERTY DATA
+      const isApartment =
+        formData.propertyType === "Apartment";
+
       const propertyData = {
         ...formData,
         price: Number(formData.price),
         bedrooms: Number(formData.bedrooms) || 0,
         bathrooms: Number(formData.bathrooms) || 0,
         area: Number(formData.area),
+
+        // NEW FIELDS
+        facing: formData.facing,
+        balconies: Number(formData.balconies) || 0,
+        floor: isApartment ? Number(formData.floor) : null,
+        totalFloors: isApartment
+          ? Number(formData.totalFloors)
+          : null,
+
         amenities,
         images: uploadedImages.map((image) => image.url),
       };
 
-      // SAVE PROPERTY TO MONGODB THROUGH EXISTING API
-      await axios.post(
+      // SAVE PROPERTY
+      const response = await axios.post(
         `${API_URL}/properties`,
         propertyData,
         {
@@ -1153,27 +326,28 @@ function PostProperty() {
         }
       );
 
-      // SUCCESS
+      console.log("Property created:", response.data);
+
       toast.success("🎉 Property posted successfully!", {
-   position: "top-right",
-   autoClose: 3000,
-   theme: "colored",
- });
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
 
       resetForm();
     } catch (error) {
       console.error("Post property error:", error);
 
-       toast.error(
-    error.response?.data?.message ||
-      error.message ||
-      "Something went wrong while posting your property.",
-    {
-      position: "top-right",
-      autoClose: 4000,
-      theme: "colored",
-    }
-  );
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Something went wrong while posting your property.",
+        {
+          position: "top-right",
+          autoClose: 4000,
+          theme: "colored",
+        }
+      );
 
       setMessageType("error");
     } finally {
@@ -1185,14 +359,15 @@ function PostProperty() {
   return (
     <div className="post-property-page">
       <ToastContainer
-      position="top-right"
-      autoClose={3000}
-      newestOnTop
-      closeOnClick
-      pauseOnHover
-      draggable
-      theme="colored"
-    />
+        position="top-right"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
+
       <div className="post-property-container">
         <div className="post-header">
           <h1>Post Your Property</h1>
@@ -1212,7 +387,10 @@ function PostProperty() {
           </div>
         )}
 
-        <form className="property-form" onSubmit={handleSubmit}>
+        <form
+          className="property-form"
+          onSubmit={handleSubmit}
+        >
           {/* PROPERTY INFORMATION */}
           <div className="form-section">
             <h2>🏠 Property Information</h2>
@@ -1375,10 +553,83 @@ function PostProperty() {
                   onChange={handleChange}
                 >
                   <option value="Furnished">Furnished</option>
-                  <option value="Semi-Furnished">Semi-Furnished</option>
+                  <option value="Semi-Furnished">
+                    Semi-Furnished
+                  </option>
                   <option value="Unfurnished">Unfurnished</option>
                 </select>
               </div>
+
+              {/* NEW: FACING */}
+              <div className="form-group">
+                <label htmlFor="facing">Facing Direction</label>
+                <select
+                  id="facing"
+                  name="facing"
+                  value={formData.facing}
+                  onChange={handleChange}
+                >
+                  <option value="">Select facing</option>
+                  {facingOptions.map((direction) => (
+                    <option key={direction} value={direction}>
+                      {direction}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* NEW: BALCONIES */}
+              <div className="form-group">
+                <label htmlFor="balconies">Number of Balconies</label>
+                <select
+                  id="balconies"
+                  name="balconies"
+                  value={formData.balconies}
+                  onChange={handleChange}
+                >
+                  <option value="0">0 Balconies</option>
+                  <option value="1">1 Balcony</option>
+                  <option value="2">2 Balconies</option>
+                  <option value="3">3 Balconies</option>
+                  <option value="4">4 Balconies</option>
+                  <option value="5">5 Balconies</option>
+                </select>
+              </div>
+
+              {/* APARTMENT-ONLY FIELDS */}
+              {formData.propertyType === "Apartment" && (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="floor">Floor Number</label>
+                    <input
+                      id="floor"
+                      type="number"
+                      name="floor"
+                      placeholder="Example: 3"
+                      min="0"
+                      value={formData.floor}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="totalFloors">
+                      Total Floors in Building
+                    </label>
+                    <input
+                      id="totalFloors"
+                      type="number"
+                      name="totalFloors"
+                      placeholder="Example: 10"
+                      min="1"
+                      value={formData.totalFloors}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

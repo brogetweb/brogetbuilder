@@ -5,13 +5,13 @@ const propertySchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     description: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     propertyType: {
@@ -21,47 +21,47 @@ const propertySchema = new mongoose.Schema(
         "Villa",
         "Plot",
         "Independent House",
-        "Builder Floor"
+        "Builder Floor",
       ],
-      required: true
+      required: true,
     },
 
     listingType: {
       type: String,
       enum: ["Buy", "Rent", "PG"],
-      required: true
+      required: true,
     },
 
     price: {
       type: Number,
-      required: true
+      required: true,
     },
 
     location: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     city: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     bedrooms: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     bathrooms: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     area: {
       type: Number,
-      required: true
+      required: true,
     },
 
     furnishing: {
@@ -69,58 +69,78 @@ const propertySchema = new mongoose.Schema(
       enum: [
         "Furnished",
         "Semi-Furnished",
-        "Unfurnished"
+        "Unfurnished",
       ],
-      default: "Unfurnished"
+      default: "Unfurnished",
+    },
+
+    // NEW PROPERTY DETAILS
+    facing: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    balconies: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    // Used for Apartments only
+    floor: {
+      type: Number,
+      default: null,
+      min: 0,
+    },
+
+    totalFloors: {
+      type: Number,
+      default: null,
+      min: 0,
     },
 
     amenities: {
       type: [String],
-      default: []
+      default: [],
     },
 
     images: {
       type: [String],
-      default: []
+      default: [],
     },
 
     ownerName: {
       type: String,
-      required: true
+      required: true,
     },
 
     contactNumber: {
       type: String,
-      required: true
+      required: true,
     },
 
-    // IMPORTANT
-    // This connects the property
-    // with the registered owner account.
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      default: null
+      default: null,
     },
 
     featured: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     verified: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-const Property = mongoose.model(
-  "Property",
-  propertySchema
-);
+const Property = mongoose.model("Property", propertySchema);
 
 export default Property;

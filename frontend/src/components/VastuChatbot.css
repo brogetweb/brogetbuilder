@@ -1,15 +1,27 @@
 
 /* =========================================
-   HOMEESTATE VASTU CHATBOT
+   BUILDERBROGET VASTU CHATBOT
+   Theme: Charcoal Black + Dark Crimson
 ========================================= */
 
 .vastu-chatbot {
+  --vastu-bg: #151517;
+  --vastu-bg-dark: #101012;
+  --vastu-surface: #191719;
+  --vastu-crimson: #a51827;
+  --vastu-crimson-dark: #76121e;
+  --vastu-text: #fffaf7;
+  --vastu-muted: #b9afb2;
+  --vastu-border: #382126;
+
   font-family: inherit;
   position: relative;
   z-index: 1000;
 }
 
-/* Floating Button */
+/* =========================================
+   FLOATING BUTTON
+========================================= */
 
 .vastu-floating-btn {
   position: fixed;
@@ -20,20 +32,38 @@
   justify-content: center;
   gap: 9px;
   padding: 15px 20px;
-  border: 0;
+  border: 1px solid var(--vastu-crimson-dark);
   border-radius: 50px;
-  background: linear-gradient(135deg, #1e5aa8, #174a8b);
-  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--vastu-crimson-dark),
+    var(--vastu-bg)
+  );
+  color: var(--vastu-text);
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(30, 90, 168, 0.28);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 .vastu-floating-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(30, 90, 168, 0.4);
+  border-color: var(--vastu-crimson);
+  background: linear-gradient(
+    135deg,
+    var(--vastu-crimson),
+    var(--vastu-bg)
+  );
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.vastu-floating-btn:active {
+  transform: translateY(0);
 }
 
 .vastu-floating-active {
@@ -41,10 +71,13 @@
   height: 52px;
   padding: 0;
   font-size: 26px;
-  background: #174a8b;
+  background: var(--vastu-crimson-dark);
+  border-color: var(--vastu-crimson);
 }
 
-/* Chat Window */
+/* =========================================
+   CHAT WINDOW
+========================================= */
 
 .vastu-chat-window {
   position: fixed;
@@ -56,12 +89,29 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid #e4eaf2;
+
+  background:
+    radial-gradient(
+      ellipse at 82% 0%,
+      rgba(165, 24, 39, 0.14),
+      transparent 32%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.012) 0 1px,
+      transparent 1px 38px
+    ),
+    #151517;
+
+  border: 1px solid var(--vastu-border);
   border-radius: 18px;
-  box-shadow: 0 18px 55px rgba(20, 40, 70, 0.22);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
   animation: vastuChatOpen 0.25s ease;
 }
+
+/* =========================================
+   CHAT OPEN ANIMATION
+========================================= */
 
 @keyframes vastuChatOpen {
   from {
@@ -75,15 +125,22 @@
   }
 }
 
-/* Header */
+/* =========================================
+   HEADER
+========================================= */
 
 .vastu-chat-header {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 17px;
-  background: linear-gradient(135deg, #1e5aa8, #174a8b);
-  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--vastu-crimson-dark),
+    var(--vastu-bg-dark)
+  );
+  border-bottom: 1px solid var(--vastu-border);
+  color: var(--vastu-text);
 }
 
 .vastu-header-icon {
@@ -93,8 +150,10 @@
   flex-shrink: 0;
   width: 43px;
   height: 43px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(165, 24, 39, 0.25);
+  color: var(--vastu-text);
   font-size: 23px;
 }
 
@@ -105,25 +164,46 @@
 
 .vastu-header-info h3 {
   margin: 0 0 4px;
+  color: var(--vastu-text);
   font-size: 17px;
-  color: #fff;
+  font-weight: 800;
 }
 
 .vastu-header-info p {
   margin: 0;
+  color: #d1bfc2;
   font-size: 12px;
-  color: #e1edff;
 }
 
 .vastu-close-btn {
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 9px;
   background: transparent;
-  color: #fff;
+  color: var(--vastu-text);
   font-size: 29px;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Messages */
+.vastu-close-btn:hover {
+  background: rgba(165, 24, 39, 0.25);
+  border-color: var(--vastu-crimson);
+  transform: rotate(90deg);
+}
+
+/* =========================================
+   CHAT MESSAGES
+========================================= */
 
 .vastu-chat-messages {
   flex: 1;
@@ -133,8 +213,29 @@
   flex-direction: column;
   gap: 12px;
   padding: 17px 14px;
-  background: #f7f9fc;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vastu-crimson-dark) var(--vastu-bg-dark);
 }
+
+.vastu-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.vastu-chat-messages::-webkit-scrollbar-track {
+  background: var(--vastu-bg-dark);
+}
+
+.vastu-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--vastu-crimson-dark);
+  border-radius: 10px;
+}
+
+.vastu-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--vastu-crimson);
+}
+
+/* Shared message style */
 
 .vastu-message {
   max-width: 88%;
@@ -143,115 +244,172 @@
   font-size: 13px;
   line-height: 1.65;
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
+
+/* Bot message */
 
 .vastu-bot-message {
   align-self: flex-start;
-  background: #fff;
-  border: 1px solid #e5eaf2;
-  color: #344256;
+  background: var(--vastu-surface);
+  border: 1px solid var(--vastu-border);
+  color: var(--vastu-text);
   border-bottom-left-radius: 4px;
 }
 
+/* User message */
+
 .vastu-user-message {
   align-self: flex-end;
-  background: #1e5aa8;
-  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--vastu-crimson),
+    var(--vastu-crimson-dark)
+  );
+  border: 1px solid var(--vastu-crimson-dark);
+  color: #ffffff;
   border-bottom-right-radius: 4px;
 }
 
-/* Quick Questions */
+/* =========================================
+   QUICK QUESTIONS
+========================================= */
 
 .vastu-quick-questions {
   padding: 12px 13px;
-  border-top: 1px solid #edf0f5;
-  background: #fff;
+  border-top: 1px solid var(--vastu-border);
+  background: var(--vastu-bg-dark);
 }
 
 .vastu-quick-questions > p {
   margin: 0 0 9px;
-  color: #7a8494;
+  color: var(--vastu-muted);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.7px;
 }
 
+/* Quick question buttons */
+
 .vastu-quick-btn {
   display: block;
   width: 100%;
   padding: 8px 10px;
   margin-bottom: 6px;
-  border: 1px solid #dbe6f5;
+  border: 1px solid var(--vastu-border);
   border-radius: 9px;
-  background: #f8fbff;
-  color: #244f84;
+  background: var(--vastu-surface);
+  color: var(--vastu-text);
   text-align: left;
   font-size: 12px;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.vastu-quick-btn:last-child {
+  margin-bottom: 0;
 }
 
 .vastu-quick-btn:hover {
-  background: #eaf3ff;
-  border-color: #8bb6ec;
+  background: #29171b;
+  border-color: var(--vastu-crimson);
+  transform: translateX(2px);
 }
 
-/* Chat Input */
+.vastu-quick-btn:focus-visible {
+  outline: 2px solid var(--vastu-crimson);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   CHAT INPUT
+========================================= */
 
 .vastu-chat-input {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px;
-  border-top: 1px solid #edf0f5;
-  background: #fff;
+  border-top: 1px solid var(--vastu-border);
+  background: var(--vastu-bg-dark);
 }
 
 .vastu-chat-input input {
   flex: 1;
   min-width: 0;
   padding: 12px;
-  border: 1px solid #dce3ed;
+  border: 1px solid var(--vastu-border);
   border-radius: 24px;
   outline: none;
+  background: var(--vastu-surface);
+  color: var(--vastu-text);
+  font-family: inherit;
   font-size: 13px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.vastu-chat-input input::placeholder {
+  color: var(--vastu-muted);
+  opacity: 0.85;
 }
 
 .vastu-chat-input input:focus {
-  border-color: #1e5aa8;
-  box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.1);
+  border-color: var(--vastu-crimson);
+  box-shadow: 0 0 0 3px rgba(165, 24, 39, 0.16);
 }
 
 .vastu-chat-input button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 42px;
   height: 42px;
   flex-shrink: 0;
-  border: none;
+  border: 1px solid var(--vastu-crimson-dark);
   border-radius: 50%;
-  background: #1e5aa8;
-  color: #fff;
+  background: var(--vastu-crimson-dark);
+  color: #ffffff;
   font-size: 19px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .vastu-chat-input button:hover {
-  background: #174a8b;
+  background: var(--vastu-crimson);
+  border-color: var(--vastu-crimson);
   transform: scale(1.05);
 }
+
+.vastu-chat-input button:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   DISCLAIMER
+========================================= */
 
 .vastu-disclaimer {
   margin: 0;
   padding: 0 12px 10px;
-  background: #fff;
-  color: #7b8492;
+  background: var(--vastu-bg-dark);
+  color: var(--vastu-muted);
   text-align: center;
   font-size: 10px;
+  line-height: 1.5;
 }
 
-/* Responsive */
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
 
 @media (max-width: 480px) {
   .vastu-floating-btn {
@@ -265,5 +423,70 @@
     width: calc(100vw - 24px);
     height: min(590px, calc(100vh - 100px));
     max-width: none;
+  }
+
+  .vastu-chat-header {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .vastu-header-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 21px;
+  }
+
+  .vastu-header-info h3 {
+    font-size: 15px;
+  }
+
+  .vastu-header-info p {
+    font-size: 11px;
+  }
+
+  .vastu-chat-messages {
+    padding: 14px 11px;
+  }
+
+  .vastu-message {
+    max-width: 92%;
+    font-size: 12px;
+  }
+
+  .vastu-quick-questions {
+    padding: 10px;
+  }
+
+  .vastu-quick-btn {
+    font-size: 11px;
+  }
+
+  .vastu-chat-input {
+    padding: 10px;
+  }
+
+  .vastu-chat-input input {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .vastu-chat-input button {
+    width: 39px;
+    height: 39px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY: REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .vastu-chatbot *,
+  .vastu-chatbot *::before,
+  .vastu-chatbot *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
