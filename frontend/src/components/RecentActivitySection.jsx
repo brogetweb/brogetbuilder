@@ -297,7 +297,6 @@ onActivityChange?.(activity.length > 0);
         </div>
       )}
 
-      {/* PANEL FOOTER */}
       {items.length > 0 && (
         <div className="recent-activity-footer">
           <span>

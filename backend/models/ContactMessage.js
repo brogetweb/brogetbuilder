@@ -8,6 +8,7 @@ const contactMessageSchema = new mongoose.Schema(
       required: true,
       trim: true,
       maxlength: 100,
+      // models
     },
 
     phone: {
