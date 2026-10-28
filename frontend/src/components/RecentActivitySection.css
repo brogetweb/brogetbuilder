@@ -1,0 +1,302 @@
+
+/* =========================================
+   BUILDERBROGET - RECENT ACTIVITY
+   Taller, informative and interactive panel
+========================================= */
+
+.recent-activity-section {
+  width: 100%;
+  max-width: 360px;
+  min-height: 500px;
+  box-sizing: border-box;
+  margin-top: 40px;
+  padding: 24px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border: 1px solid #E5E8EF;
+  border-top: 3px solid #E6C594;
+  border-radius: 12px;
+  color: #17243B;
+
+  box-shadow: 0 5px 20px rgba(18, 24, 36, 0.06);
+
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.recent-activity-section:hover {
+  box-shadow: 0 10px 28px rgba(18, 24, 36, 0.11);
+}
+
+/* User profile */
+
+.recent-activity-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding: 4px 0;
+}
+
+.recent-activity-user-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  color: #E6C594;
+  background: #17243B;
+  border: 1px solid #E6C594;
+  border-radius: 50%;
+
+  transition: transform 0.25s ease;
+}
+
+.recent-activity-section:hover .recent-activity-user-icon {
+  transform: translateY(-2px);
+}
+
+.recent-activity-user-info {
+  min-width: 0;
+}
+
+.recent-activity-user-label {
+  display: none;
+}
+
+.recent-activity-user-info h3 {
+  margin: 0;
+  color: #E6C594;
+  font-size: 15px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* Hide old heading */
+
+.recent-activity-header {
+  display: none;
+}
+
+/* Activity summary */
+
+.recent-activity-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top:10px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.recent-activity-summary > span:first-child {
+  color: #ffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Viewed count card */
+
+.recent-activity-count {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  min-height: 100px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 17px;
+  color: #17243B;
+  background: linear-gradient(135deg, #FFF4E3, #F7E8D3);
+
+  border: 1px solid rgba(230, 197, 148, 0.7);
+  border-radius: 9px;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.recent-activity-count:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #F7E8D3, #F1D9B3);
+  box-shadow: 0 7px 17px rgba(23, 36, 59, 0.12);
+}
+
+.recent-activity-count > span:first-child {
+  color: #17243B;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.recent-activity-count-label {
+  color: #455574;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.recent-activity-count-arrow {
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  color: #8B6734;
+  font-size: 19px;
+  transition: transform 0.25s ease;
+}
+
+.recent-activity-count:hover .recent-activity-count-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Additional informational content */
+
+.recent-activity-section::after {
+  content: "Your next property could be just a click away. Explore properties and projects, compare your options, and return to the places that interest you.";
+  display: block;
+  margin-top: 0;
+  padding: 15px 0 18px;
+
+  color: #455574;
+  font-size: 12px;
+  line-height: 1.8;
+
+  border-bottom: 1px solid #E5E8EF;
+}
+
+/* Guest login section */
+
+.recent-activity-auth {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 20px;
+  border: none;
+  text-align: center;
+}
+
+.recent-activity-auth-label,
+.recent-activity-auth h3,
+.recent-activity-auth p {
+  display: none;
+}
+
+.recent-activity-auth-actions {
+  display: flex;
+  width: 100%;
+  margin-top: auto;
+}
+
+.recent-activity-login,
+.recent-activity-register {
+  display: none;
+}
+
+.recent-activity-auth-actions .recent-activity-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 43px;
+  box-sizing: border-box;
+  padding: 11px 12px;
+
+  color: #17243B;
+  background: #E6C594;
+  border: 1px solid #E6C594;
+  border-radius: 6px;
+
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.recent-activity-auth-actions .recent-activity-login:hover {
+  color: #FFFFFF;
+  background: #17243B;
+  border-color: #17243B;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(18, 24, 36, 0.16);
+}
+
+.recent-activity-device-note {
+  margin: 4px 0 0;
+  color: #ffff;
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* Hide individual listings in the compact widget */
+
+.recent-activity-list,
+.recent-activity-empty,
+.recent-activity-footer {
+  display: none;
+}
+
+/* Responsive */
+
+@media (max-width: 760px) {
+  .recent-activity-section {
+    max-width: 100%;
+    min-height: 0;
+    margin-top: 16px;
+    padding: 18px;
+  }
+}
+
+/* Keyboard accessibility */
+
+.recent-activity-count:focus-visible,
+.recent-activity-auth-actions .recent-activity-login:focus-visible {
+  outline: 3px solid #E6C594;
+  outline-offset: 3px;
+}
+
+/* Hide Recent Activity on mobile homepage */
+
+@media screen and (max-width: 760px) {
+  .home-recent-activity {
+    display: none !important;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .recent-activity-section,
+  .recent-activity-user-icon,
+  .recent-activity-count,
+  .recent-activity-count-arrow,
+  .recent-activity-login {
+    transition: none;
+  }
+}

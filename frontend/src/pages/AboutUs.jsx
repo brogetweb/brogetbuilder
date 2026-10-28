@@ -2,8 +2,6 @@ function AboutUs() {
   return (
     <div className="about-page">
 
-      {/* HERO */}
-
       <section className="about-hero">
 
         <div className="about-hero-content">
@@ -84,9 +82,6 @@ function AboutUs() {
         </div>
 
       </section>
-
-
-      {/* OUR VALUES */}
 
       <section className="about-values">
 

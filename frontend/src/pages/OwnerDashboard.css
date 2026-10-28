@@ -4,7 +4,7 @@
 ========================================= */
 
 .owner-dashboard-layout {
-  --owner-bg: #151315;
+  --owner-bg: #f7e8d3;
   --owner-panel: #201c1f;
   --owner-panel-hover: #292226;
   --owner-border: #393136;
@@ -48,7 +48,7 @@
   height: 100vh;
   min-height: 100vh;
   padding: 24px 15px 16px;
-  background: #1c191b;
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   border-right: 1px solid var(--owner-border);
 }
 
@@ -66,10 +66,10 @@
   width: 42px;
   height: 42px;
   border-radius: 13px;
-  color: #fff;
+  color: #041e42;
   font-size: 25px;
   font-weight: 900;
-  background: linear-gradient(135deg, #f04452, #a91526);
+  background: #E6C594;
   box-shadow: 0 7px 22px rgba(240, 68, 82, 0.2);
 }
 
@@ -131,17 +131,15 @@
 .owner-sidebar-nav a:hover,
 .owner-sidebar-actions a:hover {
   color: white;
-  background: var(--owner-panel-hover);
+   background: linear-gradient(145deg, #334158, #222E42) !important;
 }
 
 .owner-sidebar-nav a.active {
   color: white;
-  background: rgba(240, 68, 82, 0.12);
-  border-color: rgba(240, 68, 82, 0.22);
 }
 
 .owner-sidebar-nav a.active .owner-nav-icon {
-  color: var(--owner-red);
+  color: #E6C594;
 }
 
 .owner-nav-icon {
@@ -157,8 +155,8 @@
   width: 22px;
   height: 22px;
   border-radius: 6px;
-  color: var(--owner-red);
-  background: rgba(240, 68, 82, 0.12);
+  color: #041e42;
+  background: #E6C594;
   font-size: 18px;
 }
 
@@ -236,7 +234,7 @@
   gap: 16px;
   min-height: 68px;
   padding: 12px 30px;
-  background: rgba(24, 21, 23, 0.95);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   border-bottom: 1px solid var(--owner-border);
   backdrop-filter: blur(14px);
 }
@@ -258,14 +256,14 @@
 }
 
 .owner-topbar-right {
-  color: var(--owner-muted);
+  color: #E6C594;
 }
 
 .owner-live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #42c89a;
+  background: #E6C594;
   box-shadow: 0 0 10px rgba(66, 200, 154, 0.4);
 }
 
@@ -295,19 +293,13 @@
   padding: 32px;
   border: 1px solid #603039;
   border-radius: 17px;
-  background:
-    radial-gradient(
-      ellipse at 82% 20%,
-      rgba(240, 68, 82, 0.22),
-      transparent 40%
-    ),
-    linear-gradient(115deg, #302025, #21191d 72%);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 }
 
 .dashboard-eyebrow,
 .owner-dashboard-layout .section-label {
   margin: 0 0 9px;
-  color: var(--owner-red);
+  color: #E6C594;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1.7px;
@@ -348,23 +340,23 @@
 }
 
 .owner-dashboard-layout .dashboard-add-btn {
-  color: white;
-  background: var(--owner-red);
+  color: #041e42;
+  background: #E6C594;
 }
 
 .owner-dashboard-layout .dashboard-add-btn:hover {
-  background: var(--owner-red-dark);
+  background:#e6b977;;
   transform: translateY(-2px);
 }
 
 .owner-dashboard-layout .dashboard-outline-btn {
-  color: #f7e8eb;
-  border-color: #69414a;
-  background: rgba(255, 255, 255, 0.03);
+   color: #041e42;
+  background: #E6C594;
 }
 
 .owner-dashboard-layout .dashboard-outline-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background:#e6b977;;
+  transform: translateY(-2px);
 }
 
 .owner-banner-art {
@@ -388,8 +380,8 @@
 .owner-banner-building {
   position: absolute;
   bottom: 0;
-  border: 1px solid #8b4753;
-  background: linear-gradient(145deg, #743340, #321e25);
+  border: 1px solid #041e42;
+  background: linear-gradient(145deg, #334158, #222E42) !important;
 }
 
 .owner-banner-building::after {
@@ -442,7 +434,7 @@
   padding: 18px;
   border: 1px solid var(--owner-border);
   border-radius: 13px;
-  background: var(--owner-panel);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -469,7 +461,7 @@
 }
 
 .owner-stat-indicator {
-  color: #60c9a0;
+  color: #e9ad54;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.8px;
@@ -484,7 +476,7 @@
 
 .owner-dashboard-layout .stat-card p {
   margin: 0;
-  color: white;
+  color: #E6C594;
   font-size: 27px;
   font-weight: 800;
 }
@@ -511,7 +503,7 @@
 
 .owner-dashboard-layout .dashboard-section {
   margin-top: 32px;
-  background-color: #151315;
+  background-color:#f7e8d3;
   scroll-margin-top: 85px;
 }
 
@@ -529,19 +521,19 @@
 
 .owner-dashboard-layout .section-heading h2 {
   margin: 0;
-  color: white;
+  color: #041e42;
   font-size: 22px;
 }
 
 .owner-dashboard-layout .section-heading p:not(.section-label) {
   margin: 7px 0 0;
-  color: var(--owner-muted);
+  color: #151E3D;
   font-size: 12px;
 }
 
 .owner-dashboard-layout .section-link {
   flex-shrink: 0;
-  color: #ff7b87;
+  color: #151E3D;
   font-size: 12px;
   font-weight: 700;
 }
@@ -554,8 +546,8 @@
   padding: 8px 12px;
   border: 1px solid var(--owner-border);
   border-radius: 8px;
-  color: #f5b4bb;
-  background: var(--owner-panel);
+  color:#E6C594;
+  background:linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   font-size: 11px;
   white-space: nowrap;
 }
@@ -575,7 +567,7 @@
   padding: 22px;
   border: 1px solid var(--owner-border);
   border-radius: 14px;
-  background: var(--owner-panel);
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 }
 
 .owner-chart-heading {
@@ -668,7 +660,7 @@
   border-radius: 8px;
   outline: none;
   color: white;
-  background: var(--owner-panel);
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   font-size: 12px;
 }
 
@@ -685,16 +677,16 @@
   padding: 10px 13px;
   border: 1px solid var(--owner-border);
   border-radius: 8px;
-  color: #f5b4bb;
-  background: var(--owner-panel);
+  color: #E6C594;
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .owner-refresh-btn:hover {
-  border-color: var(--owner-red);
-  color: white;
+  border-color: rgba(230, 197, 148, .14);
+  color: #e6b976;
 }
 
 /* =========================================
@@ -712,7 +704,7 @@
   overflow: hidden;
   border: 1px solid var(--owner-border);
   border-radius: 13px;
-  background: var(--owner-panel);
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   transition: transform 0.22s ease, border-color 0.22s ease;
 }
 
@@ -898,7 +890,7 @@
   overflow-x: auto;
   border: 1px solid var(--owner-border);
   border-radius: 12px;
-  background: var(--owner-panel);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 }
 
 .owner-dashboard-layout .dashboard-table {
@@ -941,8 +933,8 @@
   height: 32px;
   flex-shrink: 0;
   border-radius: 50%;
-  color: #ffadb5;
-  background: #45272e;
+  color:#041e42 ;
+  background:#E6C594;
   font-size: 12px;
   font-weight: 800;
 }
@@ -952,8 +944,8 @@
   padding: 5px 8px;
   border: 1px solid #4e393f;
   border-radius: 5px;
-  color: #f4b3bb;
-  background: #302126;
+  color: #041e42;
+  background:#E6C594;
   font-size: 10px;
 }
 
@@ -1020,7 +1012,7 @@
 }
 
 .owner-dashboard-state .dashboard-error h2 {
-  color: white;
+  color: #041e42;
 }
 
 .owner-dashboard-state .dashboard-error p {
@@ -1069,7 +1061,7 @@
   margin-top: 4px;
   border: 1px solid var(--owner-border);
   border-radius: 12px;
-  background: var(--owner-panel);
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -1084,8 +1076,8 @@
 .owner-dashboard-layout .owner-listing-table thead th {
   padding: 16px 14px;
   border-bottom: 1px solid #49353a;
-  color: #e7b4ba;
-  background: #292125;
+  color: #E6C594;
+   background: #292125;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -1112,11 +1104,11 @@
 }
 
 .owner-dashboard-layout .owner-listing-table tbody tr:hover {
-  background: rgba(240, 68, 82, 0.055);
+  background: rgba(233, 236, 185, 0.055);
 }
 
 .owner-dashboard-layout .owner-listing-table tbody tr:hover td {
-  background: rgba(240, 68, 82, 0.035);
+  background: rgba(233, 236, 185, 0.055);
 }
 
 /* Property and project image + title */
@@ -1176,10 +1168,10 @@
   max-width: 160px;
   padding: 6px 9px;
   overflow: hidden;
-  border: 1px solid rgba(240, 68, 82, 0.25);
+  border: 1px solid black;
   border-radius: 6px;
-  color: #ff9ca5;
-  background: rgba(240, 68, 82, 0.09);
+  color: #041e42;
+  background:#E6C594;
   font-size: 10px;
   font-weight: 700;
   text-overflow: ellipsis;
@@ -1189,7 +1181,7 @@
 /* Price */
 
 .owner-dashboard-layout .owner-listing-table .owner-table-price {
-  color: #ff818c;
+  color: #E6C594;
   font-size: 11px;
   font-weight: 800;
 }
@@ -1202,10 +1194,10 @@
   justify-content: center;
   min-height: 32px;
   padding: 8px 11px;
-  border: 1px solid rgba(240, 68, 82, 0.4);
+  border: 1px solid black;
   border-radius: 6px;
-  color: #ff9ca5;
-  background: rgba(240, 68, 82, 0.08);
+  color: #041e42;
+  background: #E6C594;
   font-size: 10px;
   font-weight: 750;
   transition: 0.2s ease;
@@ -1341,7 +1333,7 @@
     border: 1px solid var(--owner-border);
     border-radius: 8px;
     color: white;
-    background: var(--owner-panel);
+   background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
     font-size: 20px;
     cursor: pointer;
   }
@@ -1490,3 +1482,4 @@
     flex-direction: column;
   }
 }
+

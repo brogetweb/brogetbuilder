@@ -1055,8 +1055,8 @@ import { API_URL } from "../config";
 import VastuChatbot from "../components/VastuChatbot";
 import NearbyEssentials from "../components/NearbyEssentials";
 import AICallModal from "../components/AICallModal";
-// Generate a stable anonymous visitor ID for guests.
-// Uses the SAME storage key as PropertyDetails.jsx.
+import { recordRecentActivity } from "../utils/recentActivity";
+
 const getAnonymousVisitorId = () => {
   const storageKey = "builderbroget_visitor_id";
 
@@ -1148,6 +1148,10 @@ function ProjectDetails() {
         const projectData = response.data;
 
         setProject(projectData);
+        recordRecentActivity({
+  ...projectData,
+  type: "project",
+});
 
         if (projectData.images?.length > 0) {
           setSelectedImage(projectData.images[0]);

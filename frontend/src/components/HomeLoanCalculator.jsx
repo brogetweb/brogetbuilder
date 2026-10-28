@@ -287,7 +287,6 @@ function HomeLoanCalculator({ propertyPrice = 0 }) {
 
   return (
     <section className="home-loan-section">
-      {/* Interactive premium banner */}
       <div className="home-loan-banner">
         <div className="loan-banner-glow loan-banner-glow-one" />
         <div className="loan-banner-glow loan-banner-glow-two" />

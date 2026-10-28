@@ -34,10 +34,14 @@ import PropertyNews from "./pages/PropertyNews";
 import PropertyNewsDetails from "./pages/PropertyNewsDetails";
 import AdminTestimonials from "./pages/AdminTestimonials";
 import PostNewProject from "./pages/PostNewProject";
+import ScrollToTop from "./components/ScrollToTop";
+import AllProperties from "./pages/AllPropertiesProjects";
+import AllPropertiesProjects from "./pages/AllPropertiesProjects";
 
 function App() {
   return (
     <>
+     <ScrollToTop />
       <Navbar />
 
       <Routes>
@@ -167,7 +171,7 @@ function App() {
           path="/post-property"
           element={<PostProperty />}
         />
-
+<Route path="/properties" element={<AllPropertiesProjects />} />
         {/* FAVOURITES */}
         <Route
           path="/favourites"

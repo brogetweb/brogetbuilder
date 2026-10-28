@@ -1,0 +1,471 @@
+
+
+/* ==============================
+   CONSTRUCTION HERO SLIDER
+================================= */
+
+.builder-hero {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  min-height: 480px;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #171717;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Background slides */
+
+.builder-slide {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1s ease-in-out,
+    transform 5.8s ease-out;
+  pointer-events: none;
+}
+
+.builder-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dark overlay for readable text */
+
+.builder-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.48) 48%,
+      rgba(0, 0, 0, 0.45) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+}
+
+/* Main content */
+
+.builder-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(760px, 78%);
+  text-align: center;
+  transform: translate(-50%, -50%);
+  animation: builderFadeUp 0.7s ease both;
+}
+
+.builder-subtitle {
+  margin: 0 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.builder-title {
+  max-width: 760px;
+  margin: 0 auto 22px;
+  color: #ffffff;
+  font-size: clamp(36px, 5vw, 54px);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  text-wrap: balance;
+}
+
+.builder-description {
+  max-width: 650px;
+  margin: 0 auto 27px;
+  color: rgba(255, 255, 255, 0.93);
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+/* CTA buttons */
+
+.builder-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.builder-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.builder-btn:hover {
+  transform: translateY(-2px);
+}
+
+.builder-btn-primary {
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border-color: rgba(230, 197, 148, .18);
+  color: #ffffff;
+}
+
+.builder-btn-primary:hover {
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border-color: rgba(230, 197, 148, .18);
+}
+
+.builder-btn-secondary {
+  background: #E6C594;
+  border-color: #ffffff;
+  color: #041e42;
+}
+
+.builder-btn-secondary:hover {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Previous and next arrows */
+
+.builder-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  background: rgba(35, 35, 35, 0.65);
+  color: #ffffff;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.builder-arrow:hover {
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border-color: rgba(230, 197, 148, .18);
+}
+
+.builder-arrow svg,
+.builder-scroll-top svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.builder-arrow-left {
+  left: 4.7%;
+}
+
+.builder-arrow-right {
+  right: 4.7%;
+}
+
+/* Bottom slide indicators */
+
+.builder-indicators {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.builder-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  opacity: 0.75;
+  cursor: pointer;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    opacity 0.25s ease,
+    outline-color 0.25s ease;
+}
+
+.builder-dot.active {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+  outline: 1px solid rgba(230, 197, 148, .18);
+  outline-offset: 5px;
+}
+
+/* Scroll to top icon */
+
+.builder-scroll-top {
+  position: absolute;
+  right: 22px;
+  bottom: 24px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  color: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.builder-scroll-top:hover {
+  transform: translateY(-4px);
+}
+
+/* Content entrance animation */
+
+@keyframes builderFadeUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 18px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ==============================
+   LARGE TABLETS AND SMALL LAPTOPS
+================================= */
+
+@media (max-width: 1024px) {
+  .builder-hero {
+    height: 560px;
+    min-height: 460px;
+  }
+
+  .builder-content {
+    width: 76%;
+  }
+
+  .builder-title {
+    font-size: clamp(36px, 5.2vw, 48px);
+  }
+
+  .builder-arrow-left {
+    left: 22px;
+  }
+
+  .builder-arrow-right {
+    right: 22px;
+  }
+}
+
+/* ==============================
+   TABLETS AND MOBILE LANDSCAPE
+================================= */
+
+@media (max-width: 768px) {
+  .builder-hero {
+    height: 540px;
+    min-height: 440px;
+  }
+
+  .builder-slide {
+    background-position: center;
+  }
+
+  .builder-content {
+    width: calc(100% - 100px);
+    max-width: 560px;
+  }
+
+  .builder-subtitle {
+    margin-bottom: 13px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .builder-title {
+    margin-bottom: 18px;
+    font-size: clamp(32px, 5.8vw, 43px);
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+  }
+
+  .builder-description {
+    margin-bottom: 23px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .builder-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .builder-arrow-left {
+    left: 12px;
+  }
+
+  .builder-arrow-right {
+    right: 12px;
+  }
+
+  .builder-indicators {
+    bottom: 24px;
+  }
+
+  .builder-scroll-top {
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+/* ==============================
+   SMALL MOBILE DEVICES
+================================= */
+
+@media (max-width: 480px) {
+  .builder-hero {
+    height: 510px;
+    min-height: 470px;
+  }
+
+  .builder-slide {
+    background-position: center;
+  }
+
+  .builder-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.72),
+        rgba(0, 0, 0, 0.53)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.4),
+        transparent 80%
+      );
+  }
+
+  .builder-content {
+    width: calc(100% - 68px);
+  }
+
+  .builder-subtitle {
+    margin-bottom: 12px;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+
+  .builder-title {
+    margin-bottom: 17px;
+    font-size: clamp(29px, 8vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.7px;
+  }
+
+  .builder-description {
+    margin-bottom: 22px;
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .builder-buttons {
+    gap: 10px;
+  }
+
+  .builder-btn {
+    min-height: 42px;
+    padding: 0 13px;
+    font-size: 11px;
+  }
+
+  .builder-arrow {
+    width: 30px;
+    height: 34px;
+    border-radius: 5px;
+  }
+
+  .builder-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .builder-arrow-left {
+    left: 7px;
+  }
+
+  .builder-arrow-right {
+    right: 7px;
+  }
+
+  .builder-indicators {
+    bottom: 23px;
+    gap: 8px;
+  }
+
+  .builder-scroll-top {
+    right: 8px;
+    bottom: 8px;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .builder-slide,
+  .builder-content,
+  .builder-btn,
+  .builder-arrow,
+  .builder-dot {
+    animation: none;
+    transition: none;
+  }
+}

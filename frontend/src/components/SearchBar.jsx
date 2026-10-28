@@ -175,17 +175,15 @@ function SearchBar({ onSearch }) {
 
 
   const handleSearch = () => {
-
-    onSearch({
-      city,
-      listingType,
-      propertyType,
-      bedrooms,
-      minPrice,
-      maxPrice
-    });
-
-  };
+  onSearch({
+    city: city.trim(),
+    listingType,
+    propertyType,
+    bedrooms,
+    minPrice,
+    maxPrice,
+  });
+};
 
 
   return (

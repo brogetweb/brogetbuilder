@@ -8,8 +8,8 @@ import HomeLoanCalculator from "../components/HomeLoanCalculator";
 import AICallModal from "../components/AICallModal";
 import VastuChatbot from "../components/VastuChatbot";
 import NearbyEssentials from "../components/NearbyEssentials";
+import { recordRecentActivity } from "../utils/recentActivity";
 
-// Generate a stable anonymous visitor ID for guests.
 const getAnonymousVisitorId = () => {
   const storageKey = "builderbroget_visitor_id";
 
@@ -43,7 +43,6 @@ function PropertyDetails() {
   const [enquiryMessage, setEnquiryMessage] = useState("");
   const [aiCallOpen, setAiCallOpen] = useState(false);
 
-  // Prevent duplicate visit requests for the same property.
   const lastRecordedVisitId = useRef(null);
 
   const [formData, setFormData] = useState({
@@ -53,11 +52,9 @@ function PropertyDetails() {
     message: "",
   });
 
-  // Record visits for both logged-in users and guests.
   const recordVisit = async (propertyId) => {
     if (!propertyId) return;
 
-    // Avoid duplicate requests for the same property.
     if (lastRecordedVisitId.current === propertyId) return;
 
     lastRecordedVisitId.current = propertyId;
@@ -86,7 +83,6 @@ function PropertyDetails() {
         response.data?.message || "Visit recorded"
       );
     } catch (error) {
-      // Allow another attempt if tracking fails.
       if (lastRecordedVisitId.current === propertyId) {
         lastRecordedVisitId.current = null;
       }
@@ -98,7 +94,6 @@ function PropertyDetails() {
     }
   };
 
-  // Fetch property details and similar properties.
   useEffect(() => {
     let isActive = true;
 
@@ -118,17 +113,19 @@ function PropertyDetails() {
         const propertyData = response.data;
 
         setProperty(propertyData);
+        recordRecentActivity({
+  ...propertyData,
+  type: "property",
+});
 
         if (propertyData.images?.length > 0) {
           setSelectedImage(propertyData.images[0]);
         }
 
-        // Track the visit after fetching the property.
         if (propertyData._id) {
           recordVisit(propertyData._id);
         }
 
-        // Fetch similar properties.
         try {
           const similarResponse = await axios.get(
             `${API_URL}/properties/similar/${id}`
@@ -184,7 +181,6 @@ function PropertyDetails() {
     }));
   };
 
-  // Save the enquiry and then open WhatsApp.
   const sendToWhatsApp = async (event) => {
     event.preventDefault();
 
@@ -732,7 +728,7 @@ BuilderBroget`;
             </section>
 
             {/* Location details */}
-            <section className="editorial-section location-section">
+            {/* <section className="editorial-section location-section">
               <div className="section-heading-row compact-heading">
                 <div>
                   <span className="section-number">04 / LOCATION</span>
@@ -755,7 +751,72 @@ BuilderBroget`;
                   <p>{property.city || "City not specified"}</p>
                 </div>
               </div>
-            </section>
+            </section> */}
+            {/* Location details with Google Maps */}
+<section className="editorial-section location-section">
+  <div className="section-heading-row compact-heading">
+    <div>
+      <span className="section-number">04 / LOCATION</span>
+      <h2>Find your place.</h2>
+    </div>
+  </div>
+
+  <div className="location-information">
+    <div className="location-icon">↗</div>
+
+    <div>
+      <span className="location-overline">
+        PROPERTY ADDRESS
+      </span>
+
+      <h3>
+        {property.location || "Location not specified"}
+      </h3>
+
+      <p>{property.city || "City not specified"}</p>
+    </div>
+  </div>
+
+  {/* Google Maps */}
+  {([property.location, property.city].some(
+    (value) => String(value || "").trim()
+  )) && (
+    <div className="property-google-map">
+      <div className="property-map-header">
+        <div>
+          <span className="section-number">EXPLORE THE AREA</span>
+          <h3>Property location on Google Maps</h3>
+        </div>
+
+       
+      </div>
+
+      <div className="property-map-frame">
+        <iframe
+          title={`Google Maps location for ${property.title}`}
+          src={`https://www.google.com/maps?q=${encodeURIComponent(
+            [property.location, property.city]
+              .filter(Boolean)
+              .join(", ")
+          )}&output=embed`}
+          width="100%"
+          height="400"
+          style={{ border: 0 }}
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+
+      <div className="property-map-footer">
+        <span>⌖</span>
+        <p>
+          Map location based on the listed locality and city.
+        </p>
+      </div>
+    </div>
+  )}
+</section>
           </main>
 
           {/* Owner and enquiry sidebar */}

@@ -32,13 +32,9 @@
   justify-content: center;
   gap: 9px;
   padding: 15px 20px;
-  border: 1px solid var(--vastu-crimson-dark);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 50px;
-  background: linear-gradient(
-    135deg,
-    var(--vastu-crimson-dark),
-    var(--vastu-bg)
-  );
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   color: var(--vastu-text);
   font-size: 16px;
   font-weight: 700;
@@ -53,12 +49,8 @@
 
 .vastu-floating-btn:hover {
   transform: translateY(-4px);
-  border-color: var(--vastu-crimson);
-  background: linear-gradient(
-    135deg,
-    var(--vastu-crimson),
-    var(--vastu-bg)
-  );
+  border-color: rgba(229, 231, 82, 0.08);
+  background: linear-gradient(145deg, #334158, #222E42) !important;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
@@ -71,8 +63,8 @@
   height: 52px;
   padding: 0;
   font-size: 26px;
-  background: var(--vastu-crimson-dark);
-  border-color: var(--vastu-crimson);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border-color: rgba(229, 231, 82, 0.08);
 }
 
 /* =========================================
@@ -90,20 +82,9 @@
   flex-direction: column;
   overflow: hidden;
 
-  background:
-    radial-gradient(
-      ellipse at 82% 0%,
-      rgba(165, 24, 39, 0.14),
-      transparent 32%
-    ),
-    repeating-linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.012) 0 1px,
-      transparent 1px 38px
-    ),
-    #151517;
+  background: #f7e8d3;
 
-  border: 1px solid var(--vastu-border);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 18px;
   box-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
   animation: vastuChatOpen 0.25s ease;
@@ -134,13 +115,9 @@
   align-items: center;
   gap: 12px;
   padding: 17px;
-  background: linear-gradient(
-    135deg,
-    var(--vastu-crimson-dark),
-    var(--vastu-bg-dark)
-  );
-  border-bottom: 1px solid var(--vastu-border);
-  color: var(--vastu-text);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border-bottom: 1px solid rgba(229, 231, 82, 0.08);
+  color: #E6C594;
 }
 
 .vastu-header-icon {
@@ -150,9 +127,9 @@
   flex-shrink: 0;
   width: 43px;
   height: 43px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 50%;
-  background: rgba(165, 24, 39, 0.25);
+  background:linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   color: var(--vastu-text);
   font-size: 23px;
 }
@@ -164,7 +141,7 @@
 
 .vastu-header-info h3 {
   margin: 0 0 4px;
-  color: var(--vastu-text);
+  color: #E6C594;
   font-size: 17px;
   font-weight: 800;
 }
@@ -183,7 +160,7 @@
   width: 32px;
   height: 32px;
   padding: 0;
-  border: 1px solid transparent;
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 9px;
   background: transparent;
   color: var(--vastu-text);
@@ -197,7 +174,7 @@
 
 .vastu-close-btn:hover {
   background: rgba(165, 24, 39, 0.25);
-  border-color: var(--vastu-crimson);
+  border-color:rgba(229, 231, 82, 0.08);
   transform: rotate(90deg);
 }
 
@@ -251,7 +228,7 @@
 
 .vastu-bot-message {
   align-self: flex-start;
-  background: var(--vastu-surface);
+  background:linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   border: 1px solid var(--vastu-border);
   color: var(--vastu-text);
   border-bottom-left-radius: 4px;
@@ -261,12 +238,8 @@
 
 .vastu-user-message {
   align-self: flex-end;
-  background: linear-gradient(
-    135deg,
-    var(--vastu-crimson),
-    var(--vastu-crimson-dark)
-  );
-  border: 1px solid var(--vastu-crimson-dark);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   color: #ffffff;
   border-bottom-right-radius: 4px;
 }
@@ -278,12 +251,12 @@
 .vastu-quick-questions {
   padding: 12px 13px;
   border-top: 1px solid var(--vastu-border);
-  background: var(--vastu-bg-dark);
+  background:  #f7e8d3;
 }
 
 .vastu-quick-questions > p {
   margin: 0 0 9px;
-  color: var(--vastu-muted);
+  color:  #041e42;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -297,9 +270,9 @@
   width: 100%;
   padding: 8px 10px;
   margin-bottom: 6px;
-  border: 1px solid var(--vastu-border);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 9px;
-  background: var(--vastu-surface);
+  background:linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   color: var(--vastu-text);
   text-align: left;
   font-size: 12px;
@@ -315,13 +288,13 @@
 }
 
 .vastu-quick-btn:hover {
-  background: #29171b;
-  border-color: var(--vastu-crimson);
+   background: linear-gradient(145deg, #334158, #222E42) !important;
+  border-color: rgba(229, 231, 82, 0.08);
   transform: translateX(2px);
 }
 
 .vastu-quick-btn:focus-visible {
-  outline: 2px solid var(--vastu-crimson);
+  outline: 2px solid rgba(229, 231, 82, 0.08);
   outline-offset: 2px;
 }
 
@@ -335,7 +308,7 @@
   gap: 8px;
   padding: 12px;
   border-top: 1px solid var(--vastu-border);
-  background: var(--vastu-bg-dark);
+  background: #f7e8d3;
 }
 
 .vastu-chat-input input {
@@ -371,9 +344,9 @@
   width: 42px;
   height: 42px;
   flex-shrink: 0;
-  border: 1px solid var(--vastu-crimson-dark);
+  border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 50%;
-  background: var(--vastu-crimson-dark);
+  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   color: #ffffff;
   font-size: 19px;
   cursor: pointer;
@@ -384,8 +357,8 @@
 }
 
 .vastu-chat-input button:hover {
-  background: var(--vastu-crimson);
-  border-color: var(--vastu-crimson);
+  background: linear-gradient(145deg, #334158, #222E42) !important;
+  border-color: rgba(229, 231, 82, 0.08);
   transform: scale(1.05);
 }
 
@@ -400,8 +373,8 @@
 .vastu-disclaimer {
   margin: 0;
   padding: 0 12px 10px;
-  background: var(--vastu-bg-dark);
-  color: var(--vastu-muted);
+  background:#f7e8d3;
+  color:black;
   text-align: center;
   font-size: 10px;
   line-height: 1.5;

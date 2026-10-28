@@ -1,8 +1,108 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ProjectCard from "../components/ProjectCard";
+
+const parsePossessionDate = (value) => {
+  if (!value || typeof value !== "string") return null;
+
+  const text = value.trim();
+
+  // Example: "Dec 2027" or "December 2027"
+  const monthYearMatch = text.match(
+    /^([A-Za-z]+)[\s,/-]+(\d{4})$/
+  );
+
+  if (monthYearMatch) {
+    const months = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ];
+
+    const monthIndex = months.findIndex(
+      (month) =>
+        month === monthYearMatch[1].toLowerCase() ||
+        month.startsWith(monthYearMatch[1].toLowerCase())
+    );
+
+    if (monthIndex !== -1) {
+      const year = Number(monthYearMatch[2]);
+
+      // Treat the stated month as the full possession month.
+      return new Date(year, monthIndex + 1, 0, 23, 59, 59);
+    }
+
+    return null;
+  }
+
+  // Example: "2028"
+  if (/^\d{4}$/.test(text)) {
+    return new Date(Number(text), 11, 31, 23, 59, 59);
+  }
+
+  // Example: "2027-12-01"
+  const parsed = new Date(text);
+
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const matchesPossessionFilter = (project, category) => {
+  if (!category) return true;
+
+  const projectStatus = String(project.status || "")
+    .trim()
+    .toLowerCase();
+
+  const isReadyToMove = [
+    "ready to move",
+    "ready-to-move",
+    "ready to move in",
+  ].includes(projectStatus);
+
+  if (category === "now") {
+    return isReadyToMove;
+  }
+
+  const possessionDate = parsePossessionDate(
+    project.possession
+  );
+
+  if (!possessionDate) return false;
+
+  const now = new Date();
+
+  const today = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  );
+
+  if (possessionDate < today) return false;
+
+  const oneYearLater = new Date(today);
+  oneYearLater.setFullYear(today.getFullYear() + 1);
+
+  if (category === "next-year") {
+    return possessionDate <= oneYearLater;
+  }
+
+  if (category === "later") {
+    return possessionDate > oneYearLater;
+  }
+
+  return true;
+};
 
 function NewProjects() {
   const [projects, setProjects] = useState([]);
@@ -14,6 +114,10 @@ function NewProjects() {
   // Authenticated user loaded from the backend
   const [currentUser, setCurrentUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+const possessionFilter = searchParams.get("possession") || "";
 
   // Get the current user from MongoDB through /auth/me
   const fetchCurrentUser = useCallback(async () => {
@@ -102,28 +206,27 @@ function NewProjects() {
     }
   };
 
-  // Refresh projects when status or sorting changes
+
   useEffect(() => {
     fetchProjects(search, status, sort);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [status, sort]);
 
-  // Search projects
+
   const handleSearch = (e) => {
     e.preventDefault();
     fetchProjects(search, status, sort);
   };
 
-  // Reset filters
   const resetFilters = () => {
     setSearch("");
     setStatus("");
     setSort("");
+    setSearchParams({});
     fetchProjects("", "", "");
   };
 
-  // Format price using Indian number formatting
   const formatPrice = (price) => {
     const amount = Number(price);
 
@@ -131,6 +234,10 @@ function NewProjects() {
       ? amount.toLocaleString("en-IN")
       : "Price unavailable";
   };
+
+  const filteredProjects = projects.filter((project) =>
+  matchesPossessionFilter(project, possessionFilter)
+);
 
   return (
     <div className="new-projects-page">
@@ -288,7 +395,7 @@ function NewProjects() {
         {/* PROJECT CARDS */}
         <div className="property-grid">
         
-                  {projects.map((project) => (
+                  {(possessionFilter ? filteredProjects : projects).map((project) => (
         
                     <ProjectCard
                       key={project._id}
