@@ -3973,7 +3973,7 @@ input[type=submit]:active {
 }
 
 .enquiry-submit-button:hover:not(:disabled) {
-  background: var(--pd-crimson-dark);
+  background:#e6b977 ;
 }
 
 .enquiry-submit-button:disabled {
