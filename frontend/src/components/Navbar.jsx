@@ -782,9 +782,6 @@ function Navbar() {
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
 
-  // =====================================
-  // GET CURRENT USER FROM DATABASE
-  // =====================================
   const fetchCurrentUser = useCallback(async () => {
     const token = localStorage.getItem("token");
 
@@ -815,8 +812,6 @@ function Navbar() {
         error.response?.data || error.message
       );
 
-      // Clear the session only if the token is invalid/expired.
-      // Do not log the user out because of a temporary network error.
       if (error.response?.status === 401) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -827,9 +822,6 @@ function Navbar() {
     }
   }, []);
 
-  // =====================================
-  // CHECK AUTH WHEN NAVBAR LOADS
-  // =====================================
   useEffect(() => {
     fetchCurrentUser();
 
@@ -844,9 +836,6 @@ function Navbar() {
     };
   }, [fetchCurrentUser]);
 
-  // =====================================
-  // OPEN LOGIN MODAL
-  // =====================================
   const openLogin = () => {
     setLoginOpen(true);
     setIsRegister(false);
@@ -888,10 +877,6 @@ const handleLogout = () => {
   navigate("/", { replace: true });
 };
 
-
-  // =====================================
-  // LOGIN / REGISTER
-  // =====================================
   const handleAuth = async (e) => {
     if (e) e.preventDefault();
 
@@ -919,10 +904,6 @@ const handleLogout = () => {
       setAuthLoading(true);
 
       let response;
-
-      // =================================
-      // REGISTER
-      // =================================
       if (isRegister) {
         response = await axios.post(
           `${API_URL}/auth/register`,
@@ -934,9 +915,6 @@ const handleLogout = () => {
           }
         );
       } else {
-        // =================================
-        // LOGIN
-        // =================================
         response = await axios.post(
           `${API_URL}/auth/login`,
           {
@@ -954,13 +932,10 @@ const handleLogout = () => {
         throw new Error("The server returned an incomplete authentication response.");
       }
 
-      // Save the session
       localStorage.setItem("token", authToken);
       localStorage.setItem("user", JSON.stringify(authUser));
 
       setUser(authUser);
-
-      // Close and reset the modal
       setLoginOpen(false);
       setName("");
       setEmail("");
@@ -968,7 +943,6 @@ const handleLogout = () => {
       setRole("user");
       setAuthError("");
 
-      // Notify other components
       window.dispatchEvent(new Event("authChange"));
       toast.success(
   isRegister
@@ -980,17 +954,12 @@ const handleLogout = () => {
   }
 );
 
-      // =================================
-      // REDIRECT BY ROLE AND APPROVAL
-      // =================================
       if (authUser.role === "superadmin") {
         navigate("/super-admin", { replace: true });
         return;
       }
 
       if (authUser.role === "owner") {
-        // Read the latest approval status from MongoDB.
-        // This also handles accounts approved while the user was away.
         const latestUser = await fetchCurrentUser();
 
         if (latestUser) {
@@ -1000,8 +969,6 @@ const handleLogout = () => {
         if (authUser.approvalStatus === "approved") {
           navigate("/owner-dashboard", { replace: true });
         } else {
-          // Pending, rejected, or legacy owner accounts
-          // must not go straight to the owner dashboard.
           navigate("/owner-application-status", {
             replace: true,
           });
@@ -1012,25 +979,52 @@ const handleLogout = () => {
 
       // Customer registration/login
       navigate("/", { replace: true });
-    } catch (error) {
-      console.error(
-        "Authentication error:",
-        error.response?.data || error.message
-      );
+    // } catch (error) {
+    //   // console.error(
+    //   //   "Authentication error:",
+    //   //   error.response?.data || error.message
+    //   // );
 
-      setAuthError(
-        error.response?.data?.message ||
-          error.message ||
-          "Something went wrong. Please try again."
-      );
-    } finally {
-      setAuthLoading(false);
-    }
+    //   // setAuthError(
+    //   //   error.response?.data?.message ||
+    //   //     error.message ||
+    //   //     "Something went wrong. Please try again."
+    //   // );
+    // } finally {
+    //   setAuthLoading(false);
+    // }
+    
+} catch (error) {
+  console.error(
+    "Authentication error:",
+    error.response?.data || error.message
+  );
+
+  const errorMessage =
+    error.response?.data?.message ||
+    error.response?.data?.error ||
+    error.message ||
+    "Something went wrong. Please try again.";
+
+  setAuthError(errorMessage);
+
+  if (!isRegister && error.response?.status === 401) {
+    toast.error("Invalid email or password. Please try again.", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+  } else {
+    toast.error(errorMessage, {
+      position: "top-right",
+      autoClose: 3000,
+    });
+  }
+} finally {
+  setAuthLoading(false);
+}
+
   };
 
-  // =====================================
-  // OWNER APPROVAL CHECK
-  // =====================================
   const isApprovedOwner =
     user?.role === "owner" &&
     user?.approvalStatus === "approved";
@@ -1042,12 +1036,10 @@ const handleLogout = () => {
   return (
     <>
       <nav className="navbar">
-        {/* LOGO */}
         <Link to="/" className="logo" aria-label="HomeEstate home">
           <img src={brogetLogo} alt="BuilderBroget, India's Smart Builder Platform" />
         </Link>
 
-        {/* DESKTOP NAVIGATION */}
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/buy">Buy</Link>
@@ -1060,9 +1052,7 @@ const handleLogout = () => {
          
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="nav-actions">
-          {/* FAVOURITES */}
           <Link
             to="/favourites"
             className="favorite-nav"
@@ -1071,7 +1061,6 @@ const handleLogout = () => {
             ♡
           </Link>
 
-          {/* APPROVED OWNER DASHBOARD */}
           {isApprovedOwner && (
             <Link
               to="/owner-dashboard"
@@ -1081,7 +1070,6 @@ const handleLogout = () => {
             </Link>
           )}
 
-          {/* POST PROPERTY ONLY FOR APPROVED OWNERS */}
           {isApprovedOwner && (
             <Link
               to="/post-property"
@@ -1091,7 +1079,6 @@ const handleLogout = () => {
             </Link>
           )}
 
-          {/* OWNER APPLICATION STATUS */}
           {needsOwnerReview && (
             <Link
               to="/owner-application-status"
@@ -1101,7 +1088,6 @@ const handleLogout = () => {
             </Link>
           )}
 
-          {/* SUPER ADMIN PANEL */}
           {user?.role === "superadmin" && (
             <Link
               to="/super-admin"
@@ -1111,7 +1097,6 @@ const handleLogout = () => {
             </Link>
           )}
 
-          {/* LOGIN / LOGOUT */}
           {user ? (
             <>
               <span className="nav-user-name">
@@ -1137,7 +1122,6 @@ const handleLogout = () => {
           )}
         </div>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           className="mobile-menu"
@@ -1148,7 +1132,6 @@ const handleLogout = () => {
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-nav">
           <Link to="/" onClick={() => setMenuOpen(false)}>
@@ -1262,7 +1245,6 @@ const handleLogout = () => {
         </div>
       )}
 
-      {/* LOGIN / REGISTER MODAL */}
       {loginOpen && (
         <div
           className="modal-overlay"
@@ -1272,7 +1254,6 @@ const handleLogout = () => {
             className="login-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* CLOSE */}
             <button
               type="button"
               className="close-modal"
@@ -1282,26 +1263,17 @@ const handleLogout = () => {
               ✕
             </button>
 
-            {/* TITLE */}
             <h2>
               {isRegister ? "Create Account" : "Welcome Back"}
             </h2>
 
             <p className="modal-subtitle">
               {isRegister
-                ? "Create your HomeEstate account"
+                ? "Create your BuilderBroget account"
                 : "Login to continue"}
             </p>
 
-            {/* ERROR */}
-            {authError && (
-              <p className="auth-error" role="alert">
-                {authError}
-              </p>
-            )}
-
             <form onSubmit={handleAuth}>
-              {/* NAME */}
               {isRegister && (
                 <input
                   type="text"
@@ -1314,7 +1286,6 @@ const handleLogout = () => {
                 />
               )}
 
-              {/* EMAIL */}
               <input
                 type="email"
                 placeholder="Email Address"
@@ -1325,7 +1296,6 @@ const handleLogout = () => {
                 required
               />
 
-              {/* PASSWORD */}
               <input
                 type="password"
                 placeholder="Password"
@@ -1339,7 +1309,6 @@ const handleLogout = () => {
                 required
               />
 
-              {/* ROLE */}
               <select
                 className="modal-input"
                 value={role}
@@ -1370,7 +1339,6 @@ const handleLogout = () => {
                 </p>
               )}
 
-              {/* SUBMIT */}
               <button
                 type="submit"
                 className="modal-submit"
@@ -1384,7 +1352,6 @@ const handleLogout = () => {
               </button>
             </form>
 
-            {/* SWITCH LOGIN / REGISTER */}
             <p className="switch-auth">
               {isRegister
                 ? "Already have an account?"

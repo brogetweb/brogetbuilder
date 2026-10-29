@@ -1525,8 +1525,6 @@ input[type=submit]:active {
   border: 1px solid #ddd;
 
   border-radius: 6px;
-
-  background: white;
 }
 
 .project-reset-btn {
@@ -8931,8 +8929,9 @@ input[type=submit]:active {
   gap: 10px;
 }
 
-.sorting select,
-.sorting button {
+.sorting select 
+/* .sorting button */
+ {
   height: 42px;
 
   padding: 0 14px;
@@ -10401,7 +10400,7 @@ textarea:focus-visible {
 .search-fields input,
 .search-fields select,
 .sorting select,
-.sorting button,
+/* .sorting button, */
 .category-sort select,
 .category-sort button {
   min-width: 0;
@@ -10543,10 +10542,10 @@ textarea:focus-visible {
   align-items: center;
 }
 
-.sorting button {
+/* .sorting button {
   color: var(--primary);
   font-weight: 700;
-}
+} */
 
 .property-grid,
 .projects-grid,

@@ -509,6 +509,20 @@ textarea:focus-visible {
   font-size: 14px;
 }
 
+.project-filters {
+  background: #f7e8d3;
+}
+.project-filters button {
+  text-wrap: wrap;
+}
+.project-reset-btn {
+  background-color: #041e42;
+  margin-bottom: 16px;
+}
+.project-controls select {
+  background: #041e42 !important;
+}
+
 .search-fields input::placeholder,
 .project-search input::placeholder {
   color: #687386;
@@ -1011,6 +1025,11 @@ textarea:focus-visible {
   transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
+.sorting button {
+  margin-bottom: 16px;
+  width: 100px;
+}
+
 .city-grid button:hover,
 .sorting button:hover,
 .category-sort button:hover {
@@ -1229,6 +1248,11 @@ textarea:focus-visible {
   color: #F4F5F7;
   background: #1D2636 !important;
 }
+
+.login-modal .close-modal {
+  color:#041e42;
+}
+
 
 .form-section h2,
 .form-section h3,
@@ -3334,7 +3358,7 @@ textarea:focus-visible {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.15;
-  white-space: nowrap;
+  white-space: wrap;
 }
 
 /* Navy circular arrow */
