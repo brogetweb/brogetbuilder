@@ -1,6 +1,14 @@
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
-import { useEffect, useState } from "react";
+import gsap from "gsap";
+
 import "./ImageSlider.css";
+
 import img1 from "../assets/img1.jpeg";
 import img2 from "../assets/img2.jpeg";
 import img3 from "../assets/img3.jpeg";
@@ -75,6 +83,15 @@ const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  const heroRef = useRef(null);
+  const slideRefs = useRef([]);
+
+  const subtitleRef = useRef(null);
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+
+  const previousSlideRef = useRef(null);
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
@@ -86,11 +103,10 @@ const ImageSlider = () => {
   };
 
   const goToSlide = (index) => {
+    if (index === currentSlide) return;
     setCurrentSlide(index);
   };
 
-  // Automatically change slides every 5 seconds.
-  // Pause the slider when the user hovers over it.
   useEffect(() => {
     if (isPaused) return;
 
@@ -101,35 +117,184 @@ const ImageSlider = () => {
     return () => clearInterval(timer);
   }, [isPaused]);
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const activeSlide = slideRefs.current[currentSlide];
+
+      if (!activeSlide) return;
+
+      const previousIndex = previousSlideRef.current;
+      const previousSlide =
+        previousIndex !== null
+          ? slideRefs.current[previousIndex]
+          : null;
+
+      slideRefs.current.forEach((slide, index) => {
+        if (!slide) return;
+
+        if (
+          index !== currentSlide &&
+          index !== previousIndex
+        ) {
+          gsap.set(slide, {
+            opacity: 0,
+            scale: 1.12,
+          });
+        }
+      });
+
+      const timeline = gsap.timeline();
+
+      if (previousSlide && previousSlide !== activeSlide) {
+        timeline.to(
+          previousSlide,
+          {
+            opacity: 0,
+            scale: 1.08,
+            duration: 1.3,
+            ease: "power2.inOut",
+          },
+          0
+        );
+      }
+
+      timeline.fromTo(
+        activeSlide,
+        {
+          opacity: 0,
+          scale: 1.14,
+        },
+        {
+          opacity: 1,
+          scale: 1.035,
+          duration: 1.6,
+          ease: "power2.out",
+        },
+        0
+      );
+
+      timeline.to(
+        activeSlide,
+        {
+          scale: 1.09,
+          duration: 4.8,
+          ease: "none",
+        },
+        1.2
+      );
+
+      previousSlideRef.current = currentSlide;
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, [currentSlide]);
+
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const subtitle = subtitleRef.current;
+      const title = titleRef.current;
+      const description = descriptionRef.current;
+
+      if (!subtitle || !title || !description) return;
+
+      const words = title.querySelectorAll(".builder-word");
+
+      const timeline = gsap.timeline({
+        defaults: {
+          ease: "power3.out",
+        },
+      });
+
+      timeline.fromTo(
+        subtitle,
+        {
+          x: -45,
+          opacity: 0,
+          filter: "blur(8px)",
+        },
+        {
+          x: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.9,
+        }
+      );
+
+      timeline.fromTo(
+        words,
+        {
+          yPercent: 115,
+          opacity: 0,
+          filter: "blur(10px)",
+        },
+        {
+          yPercent: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 1,
+          stagger: 0.12,
+        },
+        "-=0.45"
+      );
+
+      timeline.fromTo(
+        description,
+        {
+          y: 35,
+          opacity: 0,
+          filter: "blur(6px)",
+        },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.9,
+        },
+        "-=0.45"
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, [currentSlide]);
+
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsPaused(false);
+    }
+  };
+
   return (
     <section
+      ref={heroRef}
       className="builder-hero"
       aria-label="Construction company featured projects"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
-          setIsPaused(false);
-        }
-      }}
+      onBlurCapture={handleBlur}
     >
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`builder-slide ${
-            index === currentSlide ? "active" : ""
-          }`}
-          style={{
-            backgroundImage: `url("${slide.image}")`,
-          }}
-          aria-hidden={index !== currentSlide}
-        />
-      ))}
+
+      <div className="builder-backgrounds">
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            ref={(element) => {
+              slideRefs.current[index] = element;
+            }}
+            className="builder-slide"
+            style={{
+              backgroundImage: `url("${slide.image}")`,
+            }}
+            aria-hidden={index !== currentSlide}
+          />
+        ))}
+      </div>
 
       <div className="builder-overlay" />
 
-      {/* Previous Slide Button */}
+      <div className="builder-vignette" />
+
       <button
         type="button"
         className="builder-arrow builder-arrow-left"
@@ -141,20 +306,38 @@ const ImageSlider = () => {
         </svg>
       </button>
 
-      {/* Slide Content */}
-      <div className="builder-content" key={slides[currentSlide].id}>
-        <p className="builder-subtitle">
-          {slides[currentSlide].subtitle}
-        </p>
+      <div
+        className="builder-content"
+        key={slides[currentSlide].id}
+      >
+        <div className="builder-content-inner">
+          <p
+            className="builder-subtitle"
+            ref={subtitleRef}
+          >
+            <span className="builder-subtitle-line" />
+            {slides[currentSlide].subtitle}
+          </p>
 
-        <h1 className="builder-title">
-          {slides[currentSlide].title}
-        </h1>
+          
 
-        <p className="builder-description">
-          {slides[currentSlide].description}
-        </p>
-
+<h1 className="builder-title" ref={titleRef}>
+  {slides[currentSlide].title.split(" ").map((word, index) => (
+    <span key={`${slides[currentSlide].id}-${index}`}>
+      <span className="builder-word-mask">
+        <span className="builder-word">{word}</span>
+      </span>
+      {" "}
+    </span>
+  ))}
+</h1>
+          <p
+            className="builder-description"
+            ref={descriptionRef}
+          >
+            {slides[currentSlide].description}
+          </p>
+        </div>
       </div>
       <button
         type="button"
@@ -167,8 +350,10 @@ const ImageSlider = () => {
         </svg>
       </button>
 
-      {/* Slide Indicators */}
-      <div className="builder-indicators" aria-label="Choose a slide">
+      <div
+        className="builder-indicators"
+        aria-label="Choose a slide"
+      >
         {slides.map((slide, index) => (
           <button
             type="button"
@@ -181,20 +366,11 @@ const ImageSlider = () => {
             aria-current={
               index === currentSlide ? "true" : undefined
             }
-          />
+          >
+            <span className="builder-dot-inner" />
+          </button>
         ))}
       </div>
-
-      {/* Back to Top Button */}
-      <a
-        className="builder-scroll-top"
-        href="#top"
-        aria-label="Back to top"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 15l6-6 6 6" />
-        </svg>
-      </a>
     </section>
   );
 };

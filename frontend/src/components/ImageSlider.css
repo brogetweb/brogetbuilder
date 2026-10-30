@@ -1,194 +1,200 @@
-
-
-/* ==============================
-   CONSTRUCTION HERO SLIDER
-================================= */
-
 .builder-hero {
   position: relative;
   width: 100%;
-  height: 620px;
-  min-height: 480px;
+  min-height: 680px;
+  height: 90vh;
+  max-height: 900px;
   overflow: hidden;
   isolation: isolate;
-  background-color: #171717;
-  color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  background: #111;
+  color: #fff;
 }
 
-/* Background slides */
-
-.builder-slide {
+.builder-backgrounds {
   position: absolute;
   inset: 0;
   z-index: -3;
-  background-position: center;
+  overflow: hidden;
+}
+
+.builder-slide {
+  position: absolute;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+
   background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
+
   opacity: 0;
-  transform: scale(1.04);
-  transition:
-    opacity 1s ease-in-out,
-    transform 5.8s ease-out;
-  pointer-events: none;
+  transform: scale(1.12);
+  will-change: transform, opacity;
 }
-
-.builder-slide.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Dark overlay for readable text */
 
 .builder-overlay {
   position: absolute;
   inset: 0;
   z-index: -2;
+
+  background: linear-gradient(
+    90deg,
+    rgba(8, 12, 15, 0.88) 0%,
+    rgba(8, 12, 15, 0.72) 38%,
+    rgba(8, 12, 15, 0.36) 72%,
+    rgba(8, 12, 15, 0.22) 100%
+  );
+}
+
+.builder-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
+
   background:
     linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.78) 0%,
-      rgba(0, 0, 0, 0.48) 48%,
-      rgba(0, 0, 0, 0.45) 100%
-    ),
-    linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.45) 0%,
-      transparent 60%,
-      rgba(0, 0, 0, 0.15) 100%
+      rgba(0, 0, 0, 0.38),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(0, 0, 0, 0.24) 100%
     );
 }
 
-/* Main content */
 
 .builder-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(760px, 78%);
-  text-align: center;
-  transform: translate(-50%, -50%);
-  animation: builderFadeUp 0.7s ease both;
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+  padding: 100px 110px;
+
+  pointer-events: none;
+}
+
+.builder-content-inner {
+  max-width: 850px;
 }
 
 .builder-subtitle {
-  margin: 0 0 16px;
-  font-size: 12px;
-  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 0 0 25px;
+
+  color: #d4ae78;
+
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1.2px;
-  color: #ffffff;
-  text-transform: uppercase;
+  letter-spacing: 4px;
+  line-height: 1.6;
+}
+
+.builder-subtitle-line {
+  display: inline-block;
+  width: 48px;
+  height: 2px;
+  flex-shrink: 0;
+
+  background: #d4ae78;
 }
 
 .builder-title {
-  max-width: 760px;
-  margin: 0 auto 22px;
-  color: #ffffff;
-  font-size: clamp(36px, 5vw, 54px);
+  max-width: 850px;
+
+  margin: 0 0 25px;
+
+  color: #fff;
+
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 700;
   line-height: 1.12;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  text-wrap: balance;
+
+  letter-spacing: -2px;
+  text-transform: none;
+}
+
+
+
+.builder-title {
+  max-width: 850px;
+  margin: 0 0 25px;
+  color: #fff;
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+.builder-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  white-space: nowrap;
+}
+
+.builder-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
 }
 
 .builder-description {
-  max-width: 650px;
-  margin: 0 auto 27px;
-  color: rgba(255, 255, 255, 0.93);
-  font-size: 14px;
-  line-height: 1.8;
+  max-width: 610px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.3px;
 }
-
-/* CTA buttons */
-
-.builder-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.builder-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 22px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease;
-}
-
-.builder-btn:hover {
-  transform: translateY(-2px);
-}
-
-.builder-btn-primary {
-  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  border-color: rgba(230, 197, 148, .18);
-  color: #ffffff;
-}
-
-.builder-btn-primary:hover {
- background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  border-color: rgba(230, 197, 148, .18);
-}
-
-.builder-btn-secondary {
-  background: #E6C594;
-  border-color: #ffffff;
-  color: #041e42;
-}
-
-.builder-btn-secondary:hover {
-  background: transparent;
-  color: #ffffff;
-  border-color: #ffffff;
-}
-
-/* Previous and next arrows */
 
 .builder-arrow {
   position: absolute;
+  z-index: 5;
+
   top: 50%;
-  z-index: 3;
+  transform: translateY(-50%);
+
+  width: 54px;
+  height: 54px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 7px;
-  background: rgba(35, 35, 35, 0.65);
-  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  color: #fff;
   cursor: pointer;
-  transform: translateY(-50%);
+
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease;
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
 }
 
-.builder-arrow:hover {
- background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  border-color: rgba(230, 197, 148, .18);
-}
+.builder-arrow svg {
+  width: 23px;
+  height: 23px;
 
-.builder-arrow svg,
-.builder-scroll-top svg {
-  width: 19px;
-  height: 19px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
@@ -196,184 +202,199 @@
   stroke-linejoin: round;
 }
 
+.builder-arrow:hover {
+  background: #c49a68;
+  border-color: #c49a68;
+}
+
 .builder-arrow-left {
-  left: 4.7%;
+  left: 30px;
 }
 
 .builder-arrow-right {
-  right: 4.7%;
+  right: 30px;
 }
 
-/* Bottom slide indicators */
+.builder-arrow-left:hover {
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.builder-arrow-right:hover {
+  transform: translateY(-50%) translateX(4px);
+}
+
+/* =============================================
+   SLIDE INDICATORS
+============================================= */
 
 .builder-indicators {
   position: absolute;
-  bottom: 28px;
+  z-index: 5;
+
   left: 50%;
-  z-index: 3;
+  bottom: 45px;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 10px;
+
   transform: translateX(-50%);
 }
 
 .builder-dot {
-  display: block;
-  width: 8px;
-  height: 8px;
+  width: 28px;
+  height: 4px;
+
   padding: 0;
-  border: 0;
-  border-radius: 50%;
- background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  opacity: 0.75;
+  overflow: hidden;
+
+  border: none;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.38);
+
   cursor: pointer;
   transition:
-    width 0.25s ease,
-    height 0.25s ease,
-    opacity 0.25s ease,
-    outline-color 0.25s ease;
+    width 0.4s ease,
+    background 0.4s ease;
+}
+
+.builder-dot-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  background: #c49a68;
+
+  transform: scaleX(0);
+  transform-origin: left center;
+
+  transition: transform 0.4s ease;
 }
 
 .builder-dot.active {
-  width: 10px;
-  height: 10px;
-  opacity: 1;
-  outline: 1px solid rgba(230, 197, 148, .18);
-  outline-offset: 5px;
+  width: 52px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-/* Scroll to top icon */
+.builder-dot.active .builder-dot-inner {
+  transform: scaleX(1);
+}
+
+/* =============================================
+   SLIDE COUNTER
+============================================= */
+
+.builder-slide-counter {
+  position: absolute;
+  right: 45px;
+  bottom: 39px;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.builder-slide-counter span:first-child {
+  color: #d4ae78;
+  font-size: 19px;
+}
+
+.builder-counter-divider {
+  width: 32px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* =============================================
+   BACK TO TOP
+============================================= */
 
 .builder-scroll-top {
   position: absolute;
-  right: 22px;
-  bottom: 24px;
-  z-index: 3;
+  right: 45px;
+  bottom: 105px;
+  z-index: 5;
+
+  width: 43px;
+  height: 43px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
-  color: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  text-decoration: none;
-  transition: transform 0.25s ease;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+}
+
+.builder-scroll-top svg {
+  width: 20px;
+  height: 20px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .builder-scroll-top:hover {
-  transform: translateY(-4px);
+  background: #c49a68;
+  border-color: #c49a68;
+  transform: translateY(-5px);
 }
 
-/* Content entrance animation */
+/* =============================================
+   TABLET RESPONSIVE
+============================================= */
 
-@keyframes builderFadeUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, calc(-50% + 18px));
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* ==============================
-   LARGE TABLETS AND SMALL LAPTOPS
-================================= */
-
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
   .builder-hero {
-    height: 560px;
-    min-height: 460px;
+    min-height: 620px;
+    height: 80vh;
   }
 
   .builder-content {
-    width: 76%;
+    padding: 80px 90px;
   }
 
   .builder-title {
-    font-size: clamp(36px, 5.2vw, 48px);
+    font-size: clamp(42px, 7vw, 65px);
   }
 
   .builder-arrow-left {
-    left: 22px;
+    left: 18px;
   }
 
   .builder-arrow-right {
-    right: 22px;
+    right: 18px;
   }
 }
 
-/* ==============================
-   TABLETS AND MOBILE LANDSCAPE
-================================= */
+/* =============================================
+   MOBILE RESPONSIVE
+============================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .builder-hero {
-    height: 540px;
-    min-height: 440px;
-  }
-
-  .builder-slide {
-    background-position: center;
-  }
-
-  .builder-content {
-    width: calc(100% - 100px);
-    max-width: 560px;
-  }
-
-  .builder-subtitle {
-    margin-bottom: 13px;
-    font-size: 11px;
-    letter-spacing: 1px;
-  }
-
-  .builder-title {
-    margin-bottom: 18px;
-    font-size: clamp(32px, 5.8vw, 43px);
-    line-height: 1.15;
-    letter-spacing: -0.8px;
-  }
-
-  .builder-description {
-    margin-bottom: 23px;
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .builder-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .builder-arrow-left {
-    left: 12px;
-  }
-
-  .builder-arrow-right {
-    right: 12px;
-  }
-
-  .builder-indicators {
-    bottom: 24px;
-  }
-
-  .builder-scroll-top {
-    right: 12px;
-    bottom: 12px;
-  }
-}
-
-/* ==============================
-   SMALL MOBILE DEVICES
-================================= */
-
-@media (max-width: 480px) {
-  .builder-hero {
-    height: 510px;
-    min-height: 470px;
+    min-height: 620px;
+    height: 78vh;
+    max-height: 760px;
   }
 
   .builder-slide {
@@ -381,91 +402,113 @@
   }
 
   .builder-overlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.72),
-        rgba(0, 0, 0, 0.53)
-      ),
-      linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.4),
-        transparent 80%
-      );
+    background: linear-gradient(
+      90deg,
+      rgba(8, 12, 15, 0.82),
+      rgba(8, 12, 15, 0.55)
+    );
   }
 
   .builder-content {
-    width: calc(100% - 68px);
+    padding: 65px 30px 100px;
+  }
+
+  .builder-content-inner {
+    max-width: 100%;
   }
 
   .builder-subtitle {
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 20px;
+
     font-size: 10px;
-    letter-spacing: 0.8px;
+    letter-spacing: 2.5px;
+  }
+
+  .builder-subtitle-line {
+    width: 30px;
   }
 
   .builder-title {
-    margin-bottom: 17px;
-    font-size: clamp(29px, 8vw, 36px);
+    margin-bottom: 20px;
+
+    font-size: clamp(37px, 10vw, 51px);
     line-height: 1.15;
-    letter-spacing: -0.7px;
+    letter-spacing: -1.3px;
   }
 
   .builder-description {
-    margin-bottom: 22px;
-    font-size: 12px;
-    line-height: 1.75;
-  }
-
-  .builder-buttons {
-    gap: 10px;
-  }
-
-  .builder-btn {
-    min-height: 42px;
-    padding: 0 13px;
-    font-size: 11px;
+    font-size: 14px;
+    line-height: 1.8;
   }
 
   .builder-arrow {
-    width: 30px;
-    height: 34px;
-    border-radius: 5px;
-  }
+    top: auto;
+    bottom: 28px;
 
-  .builder-arrow svg {
-    width: 16px;
-    height: 16px;
+    width: 40px;
+    height: 40px;
   }
 
   .builder-arrow-left {
-    left: 7px;
+    left: 25px;
   }
 
   .builder-arrow-right {
-    right: 7px;
+    right: 25px;
+  }
+
+  .builder-arrow svg {
+    width: 19px;
+    height: 19px;
   }
 
   .builder-indicators {
-    bottom: 23px;
-    gap: 8px;
+    bottom: 45px;
+    gap: 6px;
+  }
+
+  .builder-dot {
+    width: 13px;
+    height: 4px;
+  }
+
+  .builder-dot.active {
+    width: 28px;
+  }
+
+  .builder-slide-counter {
+    right: 25px;
+    bottom: 85px;
+    font-size: 10px;
+  }
+
+  .builder-slide-counter span:first-child {
+    font-size: 15px;
   }
 
   .builder-scroll-top {
-    right: 8px;
-    bottom: 8px;
+    right: 25px;
+    bottom: 130px;
+
+    width: 36px;
+    height: 36px;
   }
 }
 
-/* Reduced motion accessibility */
+/* =============================================
+   REDUCED MOTION ACCESSIBILITY
+============================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .builder-slide,
-  .builder-content,
-  .builder-btn,
   .builder-arrow,
-  .builder-dot {
-    animation: none;
+  .builder-scroll-top,
+  .builder-dot,
+  .builder-dot-inner {
     transition: none;
+  }
+
+  .builder-slide {
+    will-change: auto;
   }
 }

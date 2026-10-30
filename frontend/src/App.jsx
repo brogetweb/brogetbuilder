@@ -37,10 +37,11 @@ import PostNewProject from "./pages/PostNewProject";
 import ScrollToTop from "./components/ScrollToTop";
 import AllProperties from "./pages/AllPropertiesProjects";
 import AllPropertiesProjects from "./pages/AllPropertiesProjects";
-
+import ScrollAnimations from "./components/ScrollAnimations";
 function App() {
   return (
     <>
+    <ScrollAnimations/>
      <ScrollToTop />
       <Navbar />
 

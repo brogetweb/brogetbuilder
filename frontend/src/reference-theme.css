@@ -37,9 +37,8 @@ html {
 body {
   color: #F4F5F7;
   font-family: "Manrope", "DM Sans", "Segoe UI", sans-serif;
-  /* background: #ffebce; */
-   background: #f7e8d3;
-  /* background: #f4f7f9; */
+   /* background: #f7e8d3; */
+   background: #F7F5EE;
  
 }
 
@@ -994,13 +993,13 @@ textarea:focus-visible {
   transform: scale(1.065) translateZ(12px);
 }
 
-.property-grid > *,
+/* .property-grid > *,
 .projects-grid > *,
 .quick-grid > *,
 .home-why-grid > *,
 .why-grid > * {
   animation: tile-rise .55s cubic-bezier(.2, .75, .2, 1) both;
-}
+} */
 
 
 .cities-section {
@@ -6306,5 +6305,91 @@ textarea:focus-visible {
 
   .contact-address-content p {
     font-size: 10px;
+  }
+}
+
+
+
+/* =========================================
+   BUILDER BROGET - SMOOTH SCROLL ANIMATIONS
+========================================= */
+
+/* Prevent horizontal overflow from animated elements */
+body {
+  overflow-x: hidden;
+}
+
+/* Smooth image reveal */
+.property-grid img,
+.projects-grid img {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Optimize animated cards */
+.property-grid > *,
+.projects-grid > *,
+.city-grid > *,
+.quick-grid > *,
+.why-grid > * {
+  will-change: transform, opacity;
+}
+
+/* Avoid unwanted transitions fighting GSAP */
+.property-grid > *,
+.projects-grid > * {
+  transition: none;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .property-grid img,
+  .projects-grid img,
+  .property-grid > *,
+  .projects-grid > *,
+  .city-grid > *,
+  .quick-grid > *,
+  .why-grid > * {
+    will-change: auto;
+  }
+}
+
+
+
+/* Heading animation optimization */
+
+.section-header h2,
+.category-header h2,
+.explore-heading h2,
+.cities-section > h2,
+.selected-city-banner h3,
+.possession-heading h2,
+.bhk-choice-heading h2,
+.localities-heading-copy h2  {
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-header h2,
+  .category-header h2,
+  .explore-heading h2,
+  .cities-section > h2,
+  .selected-city-banner h3,
+.possession-heading h2,
+.bhk-choice-heading h2,
+.localities-heading-copy h2  {
+    will-change: auto;
+  }
+}
+
+.pc-card {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-card {
+    opacity: 1;
+    will-change: auto;
   }
 }
