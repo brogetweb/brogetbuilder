@@ -86,7 +86,7 @@
 
 .bb-accordion-item {
   width: 100%;
-   background: #f7e8d3;
+   /* background: #f7e8d3; */
   border: 1px solid transparent;
   border-radius: 7px;
   overflow: hidden;
