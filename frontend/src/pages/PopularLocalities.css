@@ -32,6 +32,9 @@
   justify-content: space-between;
   gap: 28px;
   margin-bottom: 28px;
+  width: 100%;
+  max-width: 1440px;
+  margin : 0 auto ;
 }
 
 .localities-heading-copy {
@@ -125,6 +128,8 @@
 .localities-carousel-wrapper {
   position: relative;
   width: 100%;
+  max-width: 1440px;
+  margin : 0 auto ;
 }
 
 .popular-localities-grid {
@@ -518,5 +523,94 @@
 
   .all-properties-grid {
     gap: 16px;
+  }
+}
+
+/* POPULAR LOCALITIES - MOBILE */
+@media (max-width: 768px) {
+
+  .popular-localities-heading {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 26px;
+  }
+
+  /* LEFT: EYEBROW + HEADING */
+  .localities-heading-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .localities-heading-copy .explore-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .localities-heading-copy .eyebrow-line {
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  .localities-heading-copy h2 {
+    margin: 0;
+    font-size: clamp(25px, 5.5vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.7px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  /* RIGHT: DESCRIPTION */
+  .popular-localities-heading .popular-localities-subtitle {
+    flex: 0 0 125px;
+    width: 125px;
+    max-width: 125px;
+    margin: 0;
+    padding-left: 10px;
+    border-left: 1px solid #c5a16e;
+    font-size: 10px;
+    line-height: 1.7;
+    text-align: left;
+    box-sizing: border-box;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .popular-localities-heading {
+    gap: 8px;
+  }
+
+  .localities-heading-copy .explore-eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+
+  .localities-heading-copy .eyebrow-line {
+    width: 16px;
+  }
+
+  .localities-heading-copy h2 {
+    font-size: 25px;
+    line-height: 1.18;
+  }
+
+  .popular-localities-heading .popular-localities-subtitle {
+    flex-basis: 105px;
+    width: 105px;
+    font-size: 9px;
+    padding-left: 8px;
   }
 }

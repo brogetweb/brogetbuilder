@@ -127,20 +127,26 @@ if (activeCity) {
   return (
     <section className="bhk-choice-section">
       <div className="bhk-choice-inner">
-        <div className="bhk-choice-heading">
-          <span className="bhk-choice-eyebrow">
-            FIND YOUR SPACE
-          </span>
+        <div className="bhk-choice-header">
+ <div className="bhk-choice-heading">
+           <div className="explore-eyebrow">
+          <span>FIND YOUR PERFECT FIT</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
 
         <h2>
   Find Your <span>Perfect Space</span>
 </h2>
 
-          <p>
-            Start with the home size that fits your lifestyle.
-            Explore properties that match your preference.
+        </div>
+        <p className="bhk-choice-subtitle">
+            From cosy spaces to spacious family homes
+            <br/>
+             find your perfect match.
           </p>
         </div>
+       
 
         <div className="bhk-choice-grid">
           {bhkOptions.map((bhk) => (

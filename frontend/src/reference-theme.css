@@ -735,7 +735,7 @@ textarea:focus-visible {
 }
 
 .quick-section,
-.cities-section,
+/* .cities-section, */
 .category-properties,
 .projects-container {
   width: min(100% - 48px, 1380px);
@@ -761,6 +761,7 @@ textarea:focus-visible {
   box-sizing: border-box;
   
 }
+
 
 .quick-section h2,
 .cities-section h2,
@@ -874,7 +875,7 @@ color: #b99360;
 
 .owners-section,
 .properties-section,
-.cities-section,
+/* .cities-section, */
 .home-about-preview,
 .home-why-preview,
 .projects-container,
@@ -1025,6 +1026,7 @@ color: #b99360;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+
 }
 
 .city-grid button,
@@ -1054,6 +1056,7 @@ color: #b99360;
   background: #E6C594;
   transform: translateY(-2px) rotateX(3deg);
 }
+
 
 .project-filters button:hover,
 .project-filters button.active {
@@ -1502,7 +1505,7 @@ color: #b99360;
 
 .quick-section,
 .properties-section,
-.cities-section,
+/* .cities-section, */
 .category-properties,
 .projects-container {
   width: calc(100% - 36px);
@@ -2868,6 +2871,110 @@ color: #b99360;
   }
 }
 
+/* =========================================
+   POPULAR CITIES - MOBILE HEADER
+========================================= */
+
+@media (max-width: 768px) {
+
+  .cities-header {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 26px;
+  }
+
+  /* LEFT: EYEBROW + HEADING */
+  .cities-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .cities-heading .explore-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .cities-heading .eyebrow-line {
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  /* HEADING */
+  .cities-heading h2 {
+    margin: 0;
+    font-size: clamp(25px, 5.5vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.7px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .cities-heading h2 span {
+    color: #b99360;
+  }
+
+  /* RIGHT: DESCRIPTION */
+  .cities-header .cities-subtitle {
+    flex: 0 0 125px;
+    width: 125px;
+    max-width: 125px;
+    margin: 0;
+    padding-left: 10px;
+    border-left: 1px solid #c5a16e;
+    font-size: 10px;
+    line-height: 1.7;
+    letter-spacing: 0;
+    text-align: left;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .cities-header {
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .cities-heading .explore-eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    gap: 5px;
+  }
+
+  .cities-heading .eyebrow-line {
+    width: 16px;
+  }
+
+  .cities-heading h2 {
+    font-size: 25px;
+    line-height: 1.18;
+  }
+
+  .cities-header .cities-subtitle {
+    flex-basis: 105px;
+    width: 105px;
+    max-width: 105px;
+    font-size: 9px;
+    padding-left: 8px;
+  }
+}
 
 /* =========================================
    HOMEPAGE: MAIN CONTENT + RECENT ACTIVITY
@@ -3196,7 +3303,11 @@ color: #b99360;
 
 /* Header */
 
-.explore-properties-header {
+.explore-properties-header,
+.bhk-choice-header,
+.possession-header,
+.popular-localities-heading,
+.cities-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3242,7 +3353,11 @@ font-family: 'Playfair Display', serif;
   color: #b99360;
 }
 
-.explore-subtitle {
+.explore-subtitle,
+.bhk-choice-subtitle,
+.possession-subtitle,
+.popular-localities-subtitle,
+.cities-subtitle {
   flex-shrink: 0;
   margin: 0;
   padding-left: 22px;
@@ -3493,6 +3608,33 @@ font-family: 'Playfair Display', serif;
 
 
 @media (max-width: 600px) {
+
+   .explore-properties-header{
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .explore-eyebrow {
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    gap: 7px;
+  }
+
+  .eyebrow-line {
+    width: 35px;
+  }
+
+  .explore-heading h2 {
+    font-size: clamp(29px, 8vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.7px;
+  }
+
+  .explore-subtitle {
+    font-size: 11px;
+    line-height: 1.65;
+    padding-left: 10px;
+  }
   .explore-categories {
     display: flex;
     flex-wrap: nowrap;
@@ -3533,6 +3675,19 @@ font-family: 'Playfair Display', serif;
 }
 
 @media (max-width: 360px) {
+
+  .explore-heading h2 {
+    font-size: 28px;
+  }
+
+  .explore-eyebrow {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .eyebrow-line {
+    width: 28px;
+  }
   .explore-categories {
     gap: 14px;
   }
@@ -6409,3 +6564,5 @@ body {
     will-change: auto;
   }
 }
+
+

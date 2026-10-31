@@ -1456,11 +1456,13 @@ useEffect(() => {
           : "localities-full-page"
       }`}
     >
-      <div className="popular-localities-heading">
+ <div className="popular-localities-heading">
         <div className="localities-heading-copy">
-          <span className="localities-eyebrow">
-            POPULAR LOCALITIES
-          </span>
+          <div className="explore-eyebrow">
+          <span>EXPLORE YOUR NEIGHBOURHOOD</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
 
          <h2>
   {embedded ? (
@@ -1468,60 +1470,19 @@ useEffect(() => {
   ) : (
     <>Discover Your <span>Neighbourhood</span></>
   )}
-</h2>
-
-          <p>
-            Discover properties and new projects in your
-            preferred neighbourhoods.
+</h2>   
+        </div>
+  <p className="popular-localities-subtitle">
+            Find the neighbourhood that
+            <br/>
+             feels like home.
           </p>
-        </div>
-
-        <div className="localities-heading-actions">
-          {/* City dropdown is available in both page modes. */}
-          <select
-            className="localities-city-select"
-            value={selectedCity}
-            onChange={(event) => {
-              setSelectedCity(event.target.value);
-
-              if (scrollContainerRef.current) {
-                scrollContainerRef.current.scrollTo({
-                  left: 0,
-                  behavior: "smooth",
-                });
-              }
-            }}
-            aria-label="Select a city"
-          >
-            {cities.map((city) => (
-              <option key={city} value={city}>
-                {city === "All Cities"
-                  ? "Select City: All Cities"
-                  : city}
-              </option>
-            ))}
-          </select>
-
-          {!embedded && (
-            <input
-              className="localities-search"
-              type="search"
-              placeholder="Search localities..."
-              value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
-              aria-label="Search localities"
-            />
-          )}
-
-         
-        </div>
       </div>
+     
 
       {!loading && (
         <div className="localities-results-summary">
-          <span>
+          {/* <span>
             {filteredLocalities.length}{" "}
             {filteredLocalities.length === 1
               ? "locality"
@@ -1530,7 +1491,7 @@ useEffect(() => {
             {selectedCity !== "All Cities"
               ? ` in ${selectedCity}`
               : ""}
-          </span>
+          </span> */}
         </div>
       )}
 

@@ -237,20 +237,25 @@ const response = await axios.get(
   return (
     <section className="possession-section">
       <div className="possession-section-inner">
-        <div className="possession-heading">
-          <span className="possession-eyebrow">
-            <span className="possession-eyebrow-line" />
-            POSSESSION PREFERENCE
-          </span>
+        <div className="possession-header">
+<div className="possession-heading">
+           <div className="explore-eyebrow">
+          <span>PLAN YOUR NEXT MOVE</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
 
          <h2>
   Move In <span>Now or Later</span>
 </h2>
-
-          <p>
-            Projects based on your preferred possession date.
+        </div>
+        <p className="possession-subtitle">
+           Choose a home that fits your 
+           <br/>
+           timeline and future plans.
           </p>
         </div>
+        
 
         {loading && (
           <div className="possession-message">

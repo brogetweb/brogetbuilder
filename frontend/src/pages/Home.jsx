@@ -3239,7 +3239,11 @@ const handleSearch = async (filters) => {
 )}
             <div className="section-header">
               <div>
-                
+               <div className="explore-eyebrow">
+          <span>HANDPICKED FOR YOU</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
 <h2>
   {listingType ? (
     `${listingType} Properties`
@@ -3248,9 +3252,8 @@ const handleSearch = async (filters) => {
       Featured <span>Properties</span>
     </>
   )}
-</h2>
-
-                <p>{properties.length} properties found</p>
+</h2>  
+                {/* <p>{properties.length} properties found</p> */}
               </div>
 
               <div className="sorting">
@@ -3300,8 +3303,13 @@ const handleSearch = async (filters) => {
           <section className="properties-section">
             <div className="section-header">
               <div>
+                 <div className="explore-eyebrow">
+          <span>EXCLUSIVE DEVELOPMENTS</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
                 <h2>Featured <span>New Projects</span></h2>
-                <p>{projects.length} projects found</p>
+                {/* <p>{projects.length} projects found</p> */}
               </div>
 
               <Link
@@ -3359,7 +3367,23 @@ const handleSearch = async (filters) => {
 
 
           <section className="cities-section">
-            <h2>Popular <span>Cities</span></h2>
+            <div className="cities-header">
+      <div className="cities-heading">
+        <div className="explore-eyebrow">
+          <span>EXPLORE OUR CITIES</span>
+          <span className="eyebrow-line"></span>
+        </div>
+
+        <h2>Popular <span>Cities</span></h2>
+      </div>
+
+      <p className="cities-subtitle">
+        Explore vibrant cities and 
+        <br/>
+        find the perfect location to call home.
+      </p>
+    </div>
+
 
             <div className="city-grid">
               {popularCities.map((city, index) => {
@@ -3429,117 +3453,7 @@ const handleSearch = async (filters) => {
     />
   </aside> */}
       
-
-      {/* <section className="home-about-preview">
-        <div className="home-about-content">
-          <span className="section-label">
-            ABOUT BUILDERBROGET
-          </span>
-
-          <h2>
-            Making Property Search
-            <span>{" "}Simple & Convenient</span>
-          </h2>
-
-          <p>
-            BuilderBroget is a modern real-estate
-            platform designed to make finding
-            your perfect property simple and
-            convenient.
-          </p>
-
-          <p>
-            Explore apartments, villas, plots,
-            independent houses and more in your
-            preferred location.
-          </p>
-
-          <Link
-            to="/about"
-            className="home-section-btn"
-          >
-            Learn More
-          </Link>
-        </div>
-
-        <div className="home-about-image">
-          <img
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900"
-            alt="Modern Home"
-          />
-        </div>
-      </section> */}
       <AboutUsSection/>
-
-      {/* <section className="home-why-preview">
-        <div className="home-why-heading">
-          <span className="section-label">
-            WHY CHOOSE US
-          </span>
-
-          <h2>Why Choose BuilderBroget?</h2>
-
-          <p>
-            We make your property search
-            easier, faster and more convenient.
-          </p>
-        </div>
-
-        <div className="home-why-grid">
-          <div className="home-why-card">
-            <div className="home-why-icon">✓</div>
-
-            <h3>Verified Properties</h3>
-
-            <p>
-              Discover verified property
-              listings and search with
-              greater confidence.
-            </p>
-          </div>
-
-          <div className="home-why-card">
-            <div className="home-why-icon">🔍</div>
-
-            <h3>Smart Search</h3>
-
-            <p>
-              Find properties using location,
-              price, property type and other
-              useful filters.
-            </p>
-          </div>
-
-          <div className="home-why-card">
-            <div className="home-why-icon">🏠</div>
-
-            <h3>Wide Range</h3>
-
-            <p>
-              Explore apartments, villas,
-              plots, houses and more.
-            </p>
-          </div>
-
-          <div className="home-why-card">
-            <div className="home-why-icon">🤝</div>
-
-            <h3>Easy to Connect</h3>
-
-            <p>
-              Discover properties that
-              match your requirements.
-            </p>
-          </div>
-        </div>
-
-        <Link
-          to="/why-choose-us"
-          className="home-section-btn"
-        >
-          Explore More
-        </Link>
-      </section> */}
 
       <WhyChooseUsSection/>
 
