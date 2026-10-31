@@ -401,7 +401,6 @@
 // export default ProjectCard;
 
 
-
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -414,34 +413,24 @@ function ProjectCard({ project }) {
   const [favorite, setFavorite] = useState(false);
   const [loadingFavorite, setLoadingFavorite] = useState(false);
 
-  // Prevent errors if no project object is passed.
-  if (!project || typeof project !== "object") {
-    return null;
-  }
-
-  const projectId = project._id;
+  const projectId = project?._id;
 
   const image =
-    project.images?.[0] ||
+    project?.images?.[0] ||
     "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85";
 
   const projectName =
-    project.name || project.title || "Untitled Project";
+    project?.name || project?.title || "Untitled Project";
 
   const propertyType =
-    project.propertyType || "Residential Project";
+    project?.propertyType || "Residential Project";
 
-  const status = project.status || "Project";
+  const status = project?.status || "Project";
 
-  const configurations = Array.isArray(project.configurations)
+  const configurations = Array.isArray(project?.configurations)
     ? project.configurations
     : [];
 
-  const amenities = Array.isArray(project.amenities)
-    ? project.amenities
-    : [];
-
-  // Format project prices.
   const formatPrice = (price) => {
     if (price === undefined || price === null || price === "") {
       return null;
@@ -468,8 +457,8 @@ function ProjectCard({ project }) {
     return `₹${amount.toLocaleString("en-IN")}`;
   };
 
-  const minPrice = formatPrice(project.minPrice);
-  const maxPrice = formatPrice(project.maxPrice);
+  const minPrice = formatPrice(project?.minPrice);
+  const maxPrice = formatPrice(project?.maxPrice);
 
   const priceRange =
     minPrice && maxPrice
@@ -482,7 +471,6 @@ function ProjectCard({ project }) {
       ? `Up to ${maxPrice}`
       : "Price on request";
 
-  // Check whether the project is already a favourite.
   useEffect(() => {
     let cancelled = false;
 
@@ -508,7 +496,7 @@ function ProjectCard({ project }) {
           setFavorite(Boolean(response.data.favourite));
         }
       } catch (error) {
-        console.error("Error checking favourite:", error);
+        console.error("Error checking project favourite:", error);
       }
     };
 
@@ -519,7 +507,6 @@ function ProjectCard({ project }) {
     };
   }, [projectId]);
 
-  // Add or remove the project from favourites.
   const toggleFavorite = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -532,7 +519,7 @@ function ProjectCard({ project }) {
       return;
     }
 
-    if (loadingFavorite) return;
+    if (loadingFavorite || !projectId) return;
 
     setLoadingFavorite(true);
 
@@ -562,7 +549,7 @@ function ProjectCard({ project }) {
         setFavorite(true);
       }
     } catch (error) {
-      console.error("Error updating favourite:", error);
+      console.error("Error updating project favourite:", error);
 
       alert(
         error.response?.data?.message ||
@@ -573,9 +560,13 @@ function ProjectCard({ project }) {
     }
   };
 
+  if (!project || typeof project !== "object") {
+    return null;
+  }
+
   return (
     <article className="pc-card">
-      {/* Project image */}
+
       <div className="pc-image-section">
         <Link
           to={`/project/${projectId}`}
@@ -590,30 +581,19 @@ function ProjectCard({ project }) {
           />
         </Link>
 
-        {/* Project status */}
         <span className="pc-sale-bookmark">
-          {status.toUpperCase()}
+          {String(status).toUpperCase()}
         </span>
 
-        {/* Featured badge */}
         {project.featured && (
           <span className="pc-featured-label">
             FEATURED
           </span>
         )}
-
-        {/* Verified badge */}
-        {project.verified && (
-          <span className="pc-verified-label">
-            ✓ VERIFIED
-          </span>
-        )}
       </div>
 
-      {/* Main project information */}
       <div className="pc-body">
-        {/* Category and favourite */}
-        <div className="pc-top-row">
+         <div className="pc-top-row">
           <span className="pc-category">
             {propertyType}
           </span>
@@ -621,7 +601,7 @@ function ProjectCard({ project }) {
           <button
             type="button"
             className={`pc-favorite ${
-              favorite ? "pc-favorite-active" : ""
+              favorite ? "active" : ""
             }`}
             onClick={toggleFavorite}
             disabled={loadingFavorite}
@@ -656,7 +636,6 @@ function ProjectCard({ project }) {
           </button>
         </div>
 
-        {/* Project name */}
         <Link
           to={`/project/${projectId}`}
           className="pc-title-link"
@@ -666,7 +645,6 @@ function ProjectCard({ project }) {
           </h3>
         </Link>
 
-        {/* Location */}
         <div className="pc-location">
           <svg
             viewBox="0 0 24 24"
@@ -695,18 +673,6 @@ function ProjectCard({ project }) {
           </span>
         </div>
 
-        {/* Project price range */}
-        <div className="pc-price-section">
-          <span className="pc-price-caption">
-            PRICE RANGE
-          </span>
-
-          <strong className="pc-price-value">
-            {priceRange}
-          </strong>
-        </div>
-
-        {/* Configurations and possession */}
         <div className="pc-specifications">
           {configurations.length > 0 ? (
             <span className="pc-spec">
@@ -728,39 +694,42 @@ function ProjectCard({ project }) {
           )}
         </div>
 
-        {/* Project amenities */}
-        {/* {amenities.length > 0 && (
-          <div className="pc-amenities">
-            {amenities.slice(0, 3).map((amenity, index) => (
-              <span
-                className="pc-amenity"
-                key={`${amenity}-${index}`}
-              >
-                {amenity}
-              </span>
-            ))}
+        <div className="pc-price-section">
+          <div className="pc-price-info">
+            <span className="pc-price-caption">
+              PRICE RANGE
+            </span>
 
-            {amenities.length > 3 && (
-              <span className="pc-amenity-more">
-                +{amenities.length - 3}
-              </span>
-            )}
+            <strong className="pc-price-value">
+              {priceRange}
+            </strong>
           </div>
-        )} */}
 
-        {/* View project details */}
-        <div className="pc-footer">
           <Link
             to={`/project/${projectId}`}
             className="pc-view-details"
+            aria-label={`View ${projectName} details`}
           >
-            View Details
-            <span aria-hidden="true">→</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
         </div>
+
       </div>
     </article>
   );
 }
 
 export default ProjectCard;
+

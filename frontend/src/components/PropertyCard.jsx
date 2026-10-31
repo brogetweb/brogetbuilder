@@ -373,6 +373,7 @@
 
 
 
+
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -384,46 +385,6 @@ function PropertyCard({ property }) {
 
   const [favorite, setFavorite] = useState(false);
   const [loadingFavorite, setLoadingFavorite] = useState(false);
-
-  const image =
-    property.images && property.images.length > 0
-      ? property.images[0]
-      : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85";
-
-  const listingType = property.listingType || "Buy";
-
-  const listingLabel =
-    listingType.toLowerCase() === "buy"
-      ? "FOR SALE"
-      : listingType.toLowerCase() === "rent"
-      ? "FOR RENT"
-      : listingType.toUpperCase();
-
-  const formattedPrice = (price) => {
-    if (price === undefined || price === null || price === "") {
-      return "Price on request";
-    }
-
-    const amount = Number(price);
-
-    if (Number.isNaN(amount)) {
-      return price;
-    }
-
-    if (amount >= 10000000) {
-      return `₹${(amount / 10000000)
-        .toFixed(2)
-        .replace(/\.?0+$/, "")} Cr`;
-    }
-
-    if (amount >= 100000) {
-      return `₹${(amount / 100000)
-        .toFixed(2)
-        .replace(/\.?0+$/, "")} Lac`;
-    }
-
-    return `₹${amount.toLocaleString("en-IN")}`;
-  };
 
   useEffect(() => {
     let cancelled = false;
@@ -473,7 +434,7 @@ function PropertyCard({ property }) {
       return;
     }
 
-    if (loadingFavorite) return;
+    if (loadingFavorite || !property?._id) return;
 
     setLoadingFavorite(true);
 
@@ -507,19 +468,62 @@ function PropertyCard({ property }) {
 
       alert(
         error.response?.data?.message ||
-          "Unable to update favourites. Please try again."
+        "Unable to update favourites. Please try again."
       );
     } finally {
       setLoadingFavorite(false);
     }
   };
 
+  if (!property) return null;
+
+  const image =
+    property.images && property.images.length > 0
+      ? property.images[0]
+      : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85";
+
+  const listingType = property.listingType || "Buy";
+
+  const listingLabel =
+    listingType.toLowerCase() === "buy"
+      ? "FOR SALE"
+      : listingType.toLowerCase() === "rent"
+      ? "FOR RENT"
+      : listingType.toUpperCase();
+
+  const formattedPrice = (price) => {
+    if (price === undefined || price === null || price === "") {
+      return "Price on request";
+    }
+
+    const amount = Number(price);
+
+    if (Number.isNaN(amount)) return price;
+
+    if (amount >= 10000000) {
+      return `₹${(amount / 10000000)
+        .toFixed(2)
+        .replace(/\.?0+$/, "")} Cr`;
+    }
+
+    if (amount >= 100000) {
+      return `₹${(amount / 100000)
+        .toFixed(2)
+        .replace(/\.?0+$/, "")} Lac`;
+    }
+
+    return `₹${amount.toLocaleString("en-IN")}`;
+  };
+
+  const propertyLink = `/property/${property._id}`;
+
   return (
     <article className="pc-card">
-      {/* Property image */}
+
       <div className="pc-image-section">
+
         <Link
-          to={`/property/${property._id}`}
+          to={propertyLink}
           className="pc-image-link"
           aria-label={`View ${property.title || "property"} details`}
         >
@@ -531,29 +535,29 @@ function PropertyCard({ property }) {
           />
         </Link>
 
-        <span className="pc-sale-bookmark">
-          {listingLabel}
-        </span>
-
         {property.featured && (
           <span className="pc-featured-label">
             FEATURED
           </span>
         )}
+
+        <span className="pc-sale-bookmark">
+          {listingLabel}
+        </span>
+
       </div>
 
-      {/* Main property information */}
       <div className="pc-body">
+
         <div className="pc-top-row">
+
           <span className="pc-category">
             {property.propertyType || "Residential Property"}
           </span>
 
           <button
             type="button"
-            className={`pc-favorite ${
-              favorite ? "pc-favorite-active" : ""
-            }`}
+            className={`pc-favorite ${favorite ? "active" : ""}`}
             onClick={toggleFavorite}
             disabled={loadingFavorite}
             aria-label={
@@ -585,10 +589,11 @@ function PropertyCard({ property }) {
               </svg>
             )}
           </button>
+
         </div>
 
         <Link
-          to={`/property/${property._id}`}
+          to={propertyLink}
           className="pc-title-link"
         >
           <h3 className="pc-title">
@@ -597,6 +602,7 @@ function PropertyCard({ property }) {
         </Link>
 
         <div className="pc-location">
+
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -608,6 +614,7 @@ function PropertyCard({ property }) {
               strokeWidth="1.6"
               strokeLinejoin="round"
             />
+
             <circle
               cx="12"
               cy="10"
@@ -622,24 +629,42 @@ function PropertyCard({ property }) {
               .filter(Boolean)
               .join(", ") || "Location not specified"}
           </span>
-        </div>
 
-        {/* Price and essential specifications */}
-        <div className="pc-price-section">
-          <span className="pc-price-caption">PRICE</span>
-
-          <strong className="pc-price-value">
-            {formattedPrice(property.price)}
-          </strong>
         </div>
 
         <div className="pc-specifications">
+
           {property.bedrooms !== undefined &&
             property.bedrooms !== null &&
             property.bedrooms !== "" && (
               <span className="pc-spec">
-                <strong>{property.bedrooms}</strong>
-                <span>BHK</span>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 11V5h18v6M3 19v-8h18v8M3 15h18M5 19v2M19 19v2"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {property.bedrooms} BHK
+              </span>
+            )}
+
+          {property.bathrooms !== undefined &&
+            property.bathrooms !== null &&
+            property.bathrooms !== "" && (
+              <span className="pc-spec">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-4ZM6 12V6a3 3 0 0 1 6 0"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {property.bathrooms} Baths
               </span>
             )}
 
@@ -647,25 +672,58 @@ function PropertyCard({ property }) {
             property.area !== null &&
             property.area !== "" && (
               <span className="pc-spec">
-                <strong>{property.area}</strong>
-                <span>sq ft</span>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 4h16v16H4zM4 10h6M10 4v6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {property.area} sq.ft.
               </span>
             )}
+
         </div>
 
-        {/* Property details link */}
-        <div className="pc-footer">
+        <div className="pc-price-section">
+
+          <div className="pc-price-info">
+
+            <span className="pc-price-caption">
+              PRICE
+            </span>
+
+            <strong className="pc-price-value">
+              {formattedPrice(property.price)}
+            </strong>
+
+          </div>
+
           <Link
-            to={`/property/${property._id}`}
+            to={propertyLink}
             className="pc-view-details"
+            aria-label="View property details"
           >
-            View Details
-            <span aria-hidden="true">→</span>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14M13 5l7 7-7 7"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
+
         </div>
+
       </div>
+
     </article>
   );
 }
 
 export default PropertyCard;
+

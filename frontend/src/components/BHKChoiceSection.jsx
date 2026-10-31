@@ -132,7 +132,9 @@ if (activeCity) {
             FIND YOUR SPACE
           </span>
 
-          <h2>BHK choice in mind?</h2>
+        <h2>
+  Find Your <span>Perfect Space</span>
+</h2>
 
           <p>
             Start with the home size that fits your lifestyle.

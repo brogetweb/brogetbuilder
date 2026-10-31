@@ -243,7 +243,9 @@ const response = await axios.get(
             POSSESSION PREFERENCE
           </span>
 
-          <h2>Move in now, next year or later</h2>
+         <h2>
+  Move In <span>Now or Later</span>
+</h2>
 
           <p>
             Projects based on your preferred possession date.

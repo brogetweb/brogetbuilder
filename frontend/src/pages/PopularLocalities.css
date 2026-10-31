@@ -50,10 +50,16 @@
 .localities-heading-copy h2 {
   margin: 0 0 12px;
   color: #23324C;
-  font-size: clamp(27px, 3vw, 39px);
-  line-height: 1.2;
-  font-weight: 750;
-  letter-spacing: -0.8px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -2.5px;
+   white-space: nowrap;
+}
+
+.localities-heading-copy h2 span {
+  color: #b99360;
 }
 
 .localities-heading-copy p {
@@ -150,8 +156,8 @@
   overflow: hidden;
   text-align: left;
   color: var(--locality-blue);
-  background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
-  border: 1px solid #E8ECF2;
+  background: #F1EEE8;
+  border: 1px solid #AAB7C8;
   border-radius: 12px;
   box-shadow: 0 3px 12px rgba(35, 50, 76, 0.035);
   font-family: inherit;
@@ -162,6 +168,7 @@
 
 .locality-card:hover {
   transform: translateY(-3px);
+   border-color: #23324C;
   box-shadow: 0 9px 24px rgba(35, 50, 76, 0.11);
 }
 
@@ -198,7 +205,7 @@
   min-width: 31px;
   height: 31px;
   padding: 0 8px;
-  color: #FFFFFF;
+  color: 	#FFFFFF;
   background: rgba(169, 135, 79, 0.94);
   border-radius: 6px;
   font-size: 13px;
@@ -208,12 +215,7 @@
 .locality-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(16, 28, 44, 0.05),
-    transparent 50%,
-    rgba(16, 28, 44, 0.12)
-  );
+  background: rgba(35, 50, 76, 0.65);
   pointer-events: none;
 }
 
@@ -234,7 +236,7 @@
   gap: 8px;
   width: 100%;
   margin: 0 0 8px;
-  color: #E6C594;
+  color:	#23324C;
   font-size: 16px;
   font-weight: 750;
   line-height: 1.4;
@@ -243,7 +245,7 @@
 
 .locality-location-icon {
   flex-shrink: 0;
-  color: var(--locality-gold);
+  color: #23324C;
   font-size: 22px;
   line-height: 1;
 }
@@ -253,7 +255,7 @@
   align-items: center;
   gap: 8px;
   margin: 0 0 11px;
-  color: #758198;
+  color: 	#777777;
   font-size: 12px;
   line-height: 1.5;
 }
@@ -262,7 +264,7 @@
   width: 8px;
   height: 8px;
   flex-shrink: 0;
-  background: #E6C594;
+  background: #777777;
   border-radius: 50%;
 }
 
@@ -271,7 +273,7 @@
   align-items: center;
   gap: 8px;
   margin: 0 0 15px;
-  color: #FFFFFF;
+  color: #23324C;
   font-size: 13px;
 }
 

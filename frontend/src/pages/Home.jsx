@@ -3056,7 +3056,7 @@ const handleSearch = async (filters) => {
         </div>
 
         <h2>
-          Explore <span>Properties</span>
+          Explore <span> by Category</span>
         </h2>
       </div>
 
@@ -3239,11 +3239,16 @@ const handleSearch = async (filters) => {
 )}
             <div className="section-header">
               <div>
-                <h2>
-                  {listingType
-                    ? `${listingType} Properties`
-                    : "Recommended Properties"}
-                </h2>
+                
+<h2>
+  {listingType ? (
+    `${listingType} Properties`
+  ) : (
+    <>
+      Featured <span>Properties</span>
+    </>
+  )}
+</h2>
 
                 <p>{properties.length} properties found</p>
               </div>
@@ -3295,7 +3300,7 @@ const handleSearch = async (filters) => {
           <section className="properties-section">
             <div className="section-header">
               <div>
-                <h2>Featured New Projects</h2>
+                <h2>Featured <span>New Projects</span></h2>
                 <p>{projects.length} projects found</p>
               </div>
 
@@ -3354,7 +3359,7 @@ const handleSearch = async (filters) => {
 
 
           <section className="cities-section">
-            <h2>Popular Cities</h2>
+            <h2>Popular <span>Cities</span></h2>
 
             <div className="city-grid">
               {popularCities.map((city, index) => {

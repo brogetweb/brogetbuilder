@@ -1462,11 +1462,13 @@ useEffect(() => {
             POPULAR LOCALITIES
           </span>
 
-          <h2>
-            {embedded
-              ? "Explore Top Localities"
-              : "Discover Your Neighbourhood"}
-          </h2>
+         <h2>
+  {embedded ? (
+    <>Explore <span>Top Localities</span></>
+  ) : (
+    <>Discover Your <span>Neighbourhood</span></>
+  )}
+</h2>
 
           <p>
             Discover properties and new projects in your
