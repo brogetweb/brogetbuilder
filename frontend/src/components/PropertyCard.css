@@ -23,7 +23,7 @@
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: stretch;
- background: #F8F6F0;
+ background: #F4F0E8;
   width: 100%;
   max-width: 100%;
 
@@ -89,7 +89,7 @@
 
   border-radius: 65px 17px 17px 17px;
 
-  background: #FFFFFF;
+  background:#FDFAF6;
   box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.2);
   border: 1 px solid rgba(0, 0, 0, 0.05);
 
@@ -296,7 +296,7 @@
 
   border: none !important;
   border-radius: 0 !important;
-background: #FFFFFF;
+background:#FDFAF6;
 
   box-shadow: none !important;
 

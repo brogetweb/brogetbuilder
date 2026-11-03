@@ -17,7 +17,7 @@
   overflow: hidden;
   box-sizing: border-box;
   color: var(--locality-blue);
-  background: #F8F6F0;
+  background: #F4F0E8;
 }
 
 .popular-localities-section *,
@@ -322,7 +322,7 @@
 
   padding: 15px 18px;
 
-  background: #FFFFFF;
+  background:#FDFAF6;
   box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.8);
   border: 1 px solid rgba(0, 0, 0, 0.05);
   border-radius: 12px;

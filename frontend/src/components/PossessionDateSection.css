@@ -19,7 +19,7 @@
   overflow: hidden;
   padding: 76px 5%;
   color: var(--possession-text);
-  background: #F8F6F0;
+  background: #F4F0E8;
 }
 
 .possession-section-inner {
@@ -319,7 +319,7 @@
   padding: 19px 20px 18px;
   border-radius: 10px;
 
- background: #FFFFFF;
+ background: #FDFAF6;
   box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.8);
   border: 1 px solid rgba(0, 0, 0, 0.05);
 }
