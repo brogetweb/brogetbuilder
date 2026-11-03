@@ -172,7 +172,8 @@ if (activeCity) {
               </div>
 
               <div className="bhk-choice-content">
-                <h3>{bhk.title}</h3>
+                 <span className="bhk-tab-label">{bhk.title}</span>
+                {/* <h3>{bhk.title}</h3> */}
 
                 <p>{bhk.description}</p>
 

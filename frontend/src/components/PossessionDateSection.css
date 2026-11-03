@@ -1,18 +1,25 @@
+
+/* =========================================
+   POSSESSION SECTION
+   PREMIUM IVORY + CHAMPAGNE STYLE
+========================================= */
+
 .possession-section {
-  --possession-bg: #172337;
-  --possession-bg-deep: #111b2b;
-  --possession-card: #17263a;
-  --possession-gold: #e6c594;
-  --possession-gold-light: #f7e8d3;
-  --possession-text: #f8f4ed;
-  --possession-muted: #bdc8d8;
-  --possession-border: rgba(230, 197, 148, 0.25);
+  --possession-bg: #F5F2E9;
+  --possession-card: #F8F5ED;
+  --possession-gold: #B9975B;
+  --possession-gold-light: #E6C594;
+  --possession-navy: #23324C;
+  --possession-text: #263247;
+  --possession-muted: #777777;
+  --possession-border: rgba(185, 151, 91, 0.55);
 
   position: relative;
   isolation: isolate;
   overflow: hidden;
   padding: 76px 5%;
   color: var(--possession-text);
+  background: #F8F6F0;
 }
 
 .possession-section-inner {
@@ -21,8 +28,12 @@
   margin: 0 auto;
 }
 
+/* =========================================
+   SECTION HEADING
+========================================= */
+
 .possession-heading {
-  margin-bottom: 34px;
+  margin-bottom: 40px;
 }
 
 .possession-eyebrow {
@@ -30,10 +41,11 @@
   align-items: center;
   gap: 14px;
   margin-bottom: 15px;
-  color: #1D2636;
-  font-size: 13px;
+
+  color: var(--possession-gold);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
 }
 
 .possession-eyebrow-line {
@@ -46,58 +58,82 @@
 
 .possession-heading h2 {
   margin: 0 0 12px;
-  color: #23324C;
-   font-family: 'Playfair Display', serif;
+  color: var(--possession-navy);
+
+  font-family: 'Playfair Display', serif;
   font-size: clamp(42px, 5vw, 76px);
   font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -2.5px;
-   white-space: nowrap;
+  line-height: 1.08;
+  letter-spacing: -2px;
+  white-space: nowrap;
 }
 
 .possession-heading h2 span {
-  color: #b99360;
+  color: var(--possession-gold);
 }
 
 .possession-heading > p {
   margin: 13px 0 0;
-  color: black;
+  color: #686868;
   font-size: clamp(15px, 1.7vw, 19px);
   line-height: 1.7;
 }
 
+/* =========================================
+   POSSESSION GRID
+========================================= */
+
 .possession-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 32px;
   align-items: stretch;
 }
 
+/* =========================================
+   LOCATION CARD
+========================================= */
+
 .possession-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+
   min-width: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid ;
-   border-color: #AAB7C8;
-  border-radius: 16px;
-  color: inherit;
+  min-height: 350px;
+  padding: 12px;
+
+  overflow: visible;
+  border: 1px solid transparent;
+  border-radius: 15px;
+
+  color: var(--possession-text);
   text-align: left;
-  background: #F1EEE8;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+
+  background: transparent !important;
+  
+
+   box-shadow:
+    0 12px 30px rgba(185, 151, 91, 0.14);
+
   cursor: pointer;
+
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+    
 }
 
 .possession-card:hover {
-  transform: translateY(-6px);
-  border-color: #23324C;
-  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.25);
+  transform: translateY(-7px);
+
+  border-color: transparent;
+
+  box-shadow:
+    0 18px 35px rgba(35, 50, 76, 0.15),
+    0 5px 12px rgba(185, 151, 91, 0.12);
 }
 
 .possession-card:focus-visible {
@@ -106,228 +142,403 @@
 }
 
 .possession-card-featured {
-  border: 2px solid #AAB7C8;
-  box-shadow: 0 12px 36px rgba(230, 197, 148, 0.08);
+  border: 1px solid transparent;
+
+  box-shadow:
+    0 12px 30px rgba(185, 151, 91, 0.14);
 }
+
+/* =========================================
+   IMAGE AREA
+========================================= */
 
 .possession-image-wrap {
   position: relative;
-  height: 230px;
+
+  width: 100%;
+  height: 270px;
+
+  flex-shrink: 0;
   overflow: hidden;
+
+  border-radius: 10px;
+
   background: #273348;
 }
 
 .possession-image {
   display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  transition: transform 0.5s ease;
+
+  transition: transform 0.6s ease;
 }
+
 .possession-card:hover .possession-image {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .possession-image-shade {
   position: absolute;
   inset: 0;
+
   background: linear-gradient(
     180deg,
-    rgba(8, 17, 30, 0.24),
-    transparent 40%,
-    rgba(8, 17, 30, 0.55)
+    rgba(15, 26, 43, 0.05),
+    rgba(15, 26, 43, 0.10) 50%,
+    rgba(15, 26, 43, 0.25)
   );
+
   pointer-events: none;
 }
 
+/* =========================================
+   GOLD CORNER DECORATION
+========================================= */
+
+.possession-card::before {
+  content: "";
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  width: 58px;
+  height: 85px;
+
+  border-top: 3px solid var(--possession-gold);
+  border-right: 3px solid var(--possession-gold);
+
+  border-radius: 0 5px 0 0;
+
+  z-index: 2;
+  pointer-events: none;
+
+  transition: all 0.3s ease;
+}
+
+.possession-card::after {
+  content: "";
+
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+
+  width: 58px;
+  height: 85px;
+
+  border-bottom: 3px solid var(--possession-gold);
+  border-left: 3px solid var(--possession-gold);
+
+  border-radius: 0 0 0 5px;
+
+  z-index: 2;
+  pointer-events: none;
+
+  transition: all 0.3s ease;
+}
+
+.possession-card:hover::before,
+.possession-card:hover::after {
+  width: 75px;
+  height: 100px;
+}
+
+/* =========================================
+   STATUS PILL
+========================================= */
+
 .possession-status-pill {
   position: absolute;
-  top: 17px;
-  left: 17px;
+  top: 14px;
+  left: 14px;
+
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  max-width: calc(100% - 34px);
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 30px;
+  gap: 7px;
+
+  max-width: calc(100% - 28px);
+  padding: 8px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+
   color: #fff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  background: rgba(23, 38, 58, 0.86);
-  backdrop-filter: blur(12px);
+
+  background: rgba(35, 50, 76, 0.82);
+  backdrop-filter: blur(10px);
 }
 
 .possession-card-featured .possession-status-pill {
-  border-color: transparent;
-  color: #182338;
-  background: var(--possession-gold);
+  color: var(--possession-navy);
+  background: var(--possession-gold-light);
 }
+
+/* =========================================
+   IMAGE COUNT
+========================================= */
 
 .possession-image-count {
   position: absolute;
-  right: 16px;
-  bottom: 15px;
+  right: 13px;
+  bottom: 13px;
+
   padding: 7px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
-  font-size: 12px;
+
+  color: #fff;
+  font-size: 11px;
   font-weight: 600;
-color: #FFFFFF;
-  background: rgba(169, 135, 79, 0.94);
+
+  background: rgba(35, 50, 76, 0.78);
   backdrop-filter: blur(8px);
 }
 
+/* =========================================
+   OVERLAPPING INFORMATION PANEL
+========================================= */
+
 .possession-card-body {
+  position: relative;
+  z-index: 3;
+
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 23px 23px 24px;
+
+  min-width: 0;
+  margin: -65px 8px 0 22px;
+
+  padding: 19px 20px 18px;
+
+  border: 1px solid rgba(185, 151, 91, 0.45);
+  border-radius: 10px;
+
+  background: #F8F5ED;
+
+  box-shadow:
+    0 8px 22px rgba(35, 50, 76, 0.12),
+    0 2px 5px rgba(0, 0, 0, 0.04);
 }
+
+/* =========================================
+   CARD TITLE
+========================================= */
 
 .possession-card-title-row {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 10px;
 }
 
 .possession-card-icon {
   display: inline-flex;
-  flex: 0 0 42px;
+  flex: 0 0 35px;
+
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid #AAB7C8;
-  border-radius: 12px;
-  color: #23324C;
-  font-size: 27px;
-  line-height: 1;
-  background: rgba(230, 197, 148, 0.07);
+
+  width: 35px;
+  height: 35px;
+
+  border: 1px solid var(--possession-navy);
+  border-radius: 9px;
+
+  color: var(--possession-navy);
+  font-size: 22px;
+
+  background: rgba(185, 151, 91, 0.08);
 }
 
 .possession-card-title-row h3 {
   margin: 0;
-   color: #23324C;
-  font-size: clamp(20px, 2vw, 26px);
-  font-weight: 500;
+
+  color: var(--possession-navy);
+
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 600;
   line-height: 1.3;
 }
 
+/* =========================================
+   DESCRIPTION
+========================================= */
+
 .possession-description {
-  margin: 17px 0 23px;
- color: #777777;
-  font-size: 14px;
-  line-height: 1.8;
+  margin: 12px 0 18px;
+
+  color: var(--possession-muted);
+
+  font-size: 13px;
+  line-height: 1.7;
 }
+
+/* =========================================
+   EXPLORE BUTTON
+========================================= */
 
 .possession-card-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+
   width: 100%;
-  min-height: 48px;
+  min-height: 44px;
+
   margin-top: auto;
-  padding: 12px 15px;
-  border: 1px solid  #23324C;
-  border-radius: 10px;
-  color:  #FFFFFF;
-  font-size: 13px;
+  padding: 10px 14px;
+
+  border: 1px solid var(--possession-navy);
+  border-radius: 8px;
+
+  color: #fff;
+
+  font-size: 12px;
   font-weight: 700;
   text-align: center;
-  background: #23324C;
+
+  background: var(--possession-navy);
+
   transition:
-    color 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .possession-card-button > span {
-  font-size: 19px;
-  transition: transform 0.2s ease;
+  font-size: 18px;
+  transition: transform 0.25s ease;
 }
 
 .possession-card:hover .possession-card-button > span {
-  transform: translateX(4px);
+  transform: translateX(5px);
+}
+
+.possession-card:hover .possession-card-button {
+  background: #354966;
 }
 
 .possession-card-featured .possession-card-button {
-  border-color:  #23324C;
-  color:  #FFFFFF;
-  background:  #23324C;
+  color: #fff;
+  background: var(--possession-navy);
+  border-color: var(--possession-navy);
 }
+
+/* =========================================
+   EMPTY MESSAGE
+========================================= */
 
 .possession-message {
   padding: 30px 20px;
+
   border: 1px solid var(--possession-border);
   border-radius: 12px;
+
   color: var(--possession-muted);
   text-align: center;
-  background: rgba(12, 24, 40, 0.35);
+
+  background: #F8F5ED;
 }
 
 .possession-footnote {
   margin: 20px 0 0;
-  color: var(--possession-muted);
-  font-size: 13px;
+
+  color: #777;
+  font-size: 12px;
   text-align: center;
 }
 
-/* ==========================================
-   RESPONSIVE
-========================================== */
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
 
 @media (max-width: 1024px) {
+
   .possession-section {
     padding: 60px 4%;
   }
 
   .possession-grid {
-    gap: 17px;
+    gap: 22px;
+  }
+
+  .possession-card {
+    min-height: 320px;
   }
 
   .possession-image-wrap {
-    height: 190px;
+    height: 235px;
   }
 
   .possession-card-body {
-    padding: 19px;
+    margin-top: -58px;
+    padding: 16px;
   }
 
-  .possession-description {
-    font-size: 13px;
+  .possession-card-title-row h3 {
+    font-size: 21px;
   }
+
 }
 
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
 
 @media (max-width: 760px) {
+
   .possession-section {
     padding: 48px 0;
     overflow: hidden;
-    
   }
 
   .possession-section-inner {
     width: 100%;
     max-width: 100%;
-      padding: 27px 16px;
-    margin: 18px auto;
-    border-radius: 10px;
+
+    padding: 20px 0;
+    margin: 0 auto;
+
+    box-sizing: border-box;
   }
+
+  /* HEADER */
 
   .possession-heading {
     margin: 0 20px 25px;
   }
 
+  .possession-heading h2 {
+    font-size: clamp(29px, 6vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+    white-space: normal;
+  }
+
+  .possession-heading > p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* HORIZONTAL SCROLL */
+
   .possession-grid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 16px;
+    gap: 18px;
 
     width: 100%;
     box-sizing: border-box;
-    padding: 5px 20px 18px;
+
+    padding: 10px 20px 25px;
 
     overflow-x: auto;
     overflow-y: hidden;
@@ -335,88 +546,60 @@ color: #FFFFFF;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-     scrollbar-width: none; 
-    -ms-overflow-style: none; 
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .possession-grid::-webkit-scrollbar {
-    height: 4px;
-        display: none; 
+    display: none;
   }
 
-  .possession-grid::-webkit-scrollbar-thumb {
-    background: #E6C594;
-    border-radius: 10px;
-  }
-
-  .possession-grid::-webkit-scrollbar-track {
-    background: #273348;
-  }
+  /* CARD */
 
   .possession-card {
-    flex: 0 0 300px;
-    width: 300px;
+    flex: 0 0 290px;
+    width: 290px;
     min-width: 0;
+    min-height: 335px;
+
     scroll-snap-align: start;
   }
 
   .possession-image-wrap {
-    height: 210px;
+    height: 245px;
   }
 
   .possession-card-body {
-    padding: 20px;
-  }
-
-  .possession-card-title-row h3 {
-    font-size: 22px;
-  }
-
-  .possession-description {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 420px) {
-  .possession-section {
-    padding: 40px 0;
-  }
-
-  .possession-heading {
-    margin-right: 16px;
-    margin-left: 16px;
-  }
-
-  .possession-grid {
-    gap: 14px;
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .possession-card {
-    flex-basis: 280px;
-    width: 280px;
-  }
-
-  .possession-image-wrap {
-    height: 190px;
-  }
-
-  .possession-card-body {
+    margin: -60px 8px 0 19px;
     padding: 17px;
   }
 
   .possession-card-title-row h3 {
-    font-size: 20px;
+    font-size: 21px;
+  }
+
+  .possession-description {
+    font-size: 13px;
+    margin: 10px 0 15px;
   }
 
   .possession-card-button {
-    font-size: 12px;
+    min-height: 42px;
   }
+
+  /* DECORATIVE CORNERS */
+
+  .possession-card::before,
+  .possession-card::after {
+    width: 48px;
+    height: 65px;
+  }
+
 }
 
 /* =========================================
-   POSSESSION HEADER - MOBILE
+   MOBILE HEADER WITH SIDE DESCRIPTION
 ========================================= */
 
 @media (max-width: 768px) {
@@ -426,16 +609,17 @@ color: #FFFFFF;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     gap: 12px;
     width: 100%;
     margin-bottom: 26px;
   }
 
-  /* LEFT: EYEBROW + HEADING */
   .possession-heading {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     flex: 1 1 auto;
     min-width: 0;
   }
@@ -444,9 +628,11 @@ color: #FFFFFF;
     display: flex;
     align-items: center;
     gap: 6px;
+
     margin-bottom: 8px;
+
     font-size: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     white-space: nowrap;
   }
 
@@ -455,41 +641,56 @@ color: #FFFFFF;
     flex-shrink: 0;
   }
 
-  /* HEADING */
   .possession-heading h2 {
     margin: 0;
+
     font-size: clamp(25px, 5.5vw, 34px);
     line-height: 1.15;
     letter-spacing: -0.7px;
+
     text-align: left;
     white-space: normal;
   }
 
-  /* RIGHT: DESCRIPTION */
   .possession-header .possession-subtitle {
     flex: 0 0 125px;
     width: 125px;
     max-width: 125px;
+
     margin: 0;
     padding-left: 10px;
-    border-left: 1px solid #c5a16e;
+
+    border-left: 1px solid var(--possession-gold);
+
+    color: #686868;
+
     font-size: 10px;
     line-height: 1.7;
     text-align: left;
+
     box-sizing: border-box;
   }
+
 }
 
-/* SMALL MOBILE */
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
 @media (max-width: 480px) {
 
-  .possession-header {
-    gap: 8px;
+  .possession-section {
+    padding: 40px 0;
+  }
+
+  .possession-heading {
+    margin-right: 16px;
+    margin-left: 16px;
   }
 
   .possession-heading .explore-eyebrow {
     font-size: 7px;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
   }
 
   .possession-heading .eyebrow-line {
@@ -501,10 +702,113 @@ color: #FFFFFF;
     line-height: 1.18;
   }
 
+  .possession-header {
+    gap: 8px;
+  }
+
   .possession-header .possession-subtitle {
     flex-basis: 105px;
     width: 105px;
-    font-size: 9px;
+
     padding-left: 8px;
+
+    font-size: 9px;
   }
+
+  .possession-grid {
+    gap: 14px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .possession-card {
+    flex-basis: 275px;
+    width: 275px;
+    min-height: 320px;
+  }
+
+  .possession-image-wrap {
+    height: 225px;
+  }
+
+  .possession-card-body {
+    margin: -55px 7px 0 17px;
+    padding: 15px;
+  }
+
+  .possession-card-title-row h3 {
+    font-size: 20px;
+  }
+
+  .possession-description {
+    font-size: 12px;
+  }
+
+  .possession-card-button {
+    font-size: 11px;
+  }
+
 }
+
+
+/* =========================================
+   MOBILE - SHOW ONLY ONE CARD AT A TIME
+========================================= */
+
+@media (max-width: 760px) {
+
+  .possession-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+
+    width: 100%;
+    padding: 10px 16px 25px;
+
+    box-sizing: border-box;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .possession-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .possession-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    scroll-snap-align: start;
+  }
+
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 480px) {
+
+  .possession-grid {
+    gap: 0;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .possession-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+  }
+
+}
+
