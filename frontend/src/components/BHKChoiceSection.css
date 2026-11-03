@@ -280,8 +280,9 @@
 
 
 .bhk-choice-content {
-  border: none !important;
-  background: transparent !important;
+ background: #FFFFFF;
+  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.8);
+  border: 1 px solid rgba(0, 0, 0, 0.05);
   overflow: visible !important;
 }
 
@@ -305,6 +306,7 @@
     drop-shadow(0 12px 15px rgba(35, 50, 76, 0.10));
 
   pointer-events: none;
+  
 }
 
 
@@ -323,6 +325,7 @@
   letter-spacing: 0.3px;
 
   pointer-events: none;
+  
 }
 
 /* ==========================================================
@@ -836,8 +839,9 @@
 /* Curved background WITH BORDER */
 
 .bhk-choice-content {
-  border: none !important;
-  background: transparent !important;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.8);
+  border: 1 px solid rgba(0, 0, 0, 0.05);
   overflow: visible !important;
 }
 

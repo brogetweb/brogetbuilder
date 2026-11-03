@@ -90,7 +90,7 @@
   border-radius: 65px 17px 17px 17px;
 
   background: #FFFFFF;
-  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.2);
   border: 1 px solid rgba(0, 0, 0, 0.05);
 
   box-sizing: border-box;
@@ -296,8 +296,7 @@
 
   border: none !important;
   border-radius: 0 !important;
-
-  background: var(--pc-cream) !important;
+background: #FFFFFF;
 
   box-shadow: none !important;
 
