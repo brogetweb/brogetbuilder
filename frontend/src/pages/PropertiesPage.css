@@ -1,0 +1,62 @@
+/* =========================================
+   FIX — PROPERTY CARDS NOT VISIBLE
+   PROPERTIES PAGE ONLY
+========================================= */
+
+.all-properties-page .all-properties-grid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  gap: 25px !important;
+}
+
+.all-properties-page .all-properties-grid .pc-card {
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  position: relative !important;
+  height: auto !important;
+}
+
+/* Make sure property images are visible */
+.all-properties-page .pc-image-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Laptop — 4 cards */
+@media (min-width: 992px) {
+  .all-properties-page .all-properties-grid .pc-card {
+    flex: 0 0 calc((100% - 75px) / 4) !important;
+  }
+}
+
+/* Tablet — 2 cards */
+@media (min-width: 600px) and (max-width: 991px) {
+  .all-properties-page .all-properties-grid .pc-card {
+    flex: 0 0 calc((100% - 25px) / 2) !important;
+  }
+}
+
+/* Mobile — vertical cards */
+@media (max-width: 599px) {
+  .all-properties-page .all-properties-grid {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 28px !important;
+  }
+
+  .all-properties-page .all-properties-grid .pc-card {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

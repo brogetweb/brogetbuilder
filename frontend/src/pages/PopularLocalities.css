@@ -17,7 +17,7 @@
   overflow: hidden;
   box-sizing: border-box;
   color: var(--locality-blue);
-  background: #F4F0E8;
+   background: #F4F0E8;
 }
 
 .popular-localities-section *,
@@ -344,8 +344,9 @@
   margin: 0 0 5px;
 
   color: #23324C;
-  font-size: 17px;
-  font-weight: 750;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1.4;
 
   overflow-wrap: anywhere;
@@ -367,8 +368,10 @@
 
   margin: 0 0 10px;
 
-  color: #777;
-  font-size: 12px;
+  color: #4A5568;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   line-height: 1.5;
 }
 
@@ -390,9 +393,10 @@
 
   margin: 0 0 9px;
 
-  color: #AD9063;
+  color: #8C7355;
   font-size: 13px;
   font-weight: 500;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .locality-house-icon {
@@ -411,8 +415,9 @@
   margin-top: auto;
 
   color: #55452F;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .locality-card-link span {
@@ -723,7 +728,7 @@
 
   .popular-localities-section {
     padding: 27px 15px 32px;
-    background: #F8F6F0;
+    background: #F4F0E8;
   }
 
   .popular-localities-heading {
@@ -822,13 +827,15 @@
   }
 
   .locality-card-content h3 {
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: 600;
     margin-bottom: 4px;
   }
 
   .locality-city {
     margin-bottom: 7px;
-    font-size: 10px;
+    font-size: 13px;
+    font-weight: 500;
   }
 
   .locality-city-dot {
@@ -839,7 +846,8 @@
   .locality-property-count {
     gap: 6px;
     margin-bottom: 7px;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 500;
   }
 
   .locality-house-icon {
@@ -847,7 +855,8 @@
   }
 
   .locality-card-link {
-    font-size: 11px;
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .locality-card-link span {
@@ -936,3 +945,157 @@
   }
 }
 
+/* ==========================================
+   MOBILE — VERTICAL LOCALITY CARDS
+========================================== */
+
+@media (max-width: 480px) {
+
+  .popular-localities-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+
+    width: 100%;
+    gap: 62px;
+
+    padding: 5px 2px 15px;
+
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  .locality-card {
+    position: relative;
+
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100%;
+
+    height: 295px;
+    min-height: 295px;
+
+    scroll-snap-align: none;
+  }
+
+  .locality-image-wrapper {
+    height: 205px;
+    border-radius: 13px;
+  }
+
+  .locality-card-content {
+    left: 4%;
+    right: 4%;
+    bottom: 0;
+
+    min-height: 125px;
+    padding: 12px 13px;
+
+    border-radius: 11px;
+  }
+
+  .locality-scroll-arrow {
+    display: none !important;
+  }
+
+  .locality-scroll-track {
+    display: none;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+
+  .popular-localities-grid {
+    gap: 56px;
+  }
+
+  .locality-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 285px;
+    min-height: 285px;
+  }
+
+  .locality-image-wrapper {
+    height: 195px;
+  }
+}
+
+.popular-localities-section.localities-embedded .locality-card {
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   POPULAR LOCALITIES - MOBILE VIEW ALL
+========================================= */
+
+/* Hide View All on desktop and laptop */
+.localities-view-all-wrapper {
+  display: none;
+}
+
+/* Desktop and laptop horizontal scrolling */
+.popular-localities-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.popular-localities-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* MOBILE */
+@media (max-width: 767px) {
+
+  /* Show only first 4 cards on home page */
+  .localities-embedded .locality-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  /* Display View All button */
+  .localities-embedded .localities-view-all-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    padding-bottom: 10px;
+  }
+
+  .localities-bottom-view-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 13px 25px;
+
+    background: #23324c;
+    color: #fff;
+
+    border: 1px solid #23324c;
+    border-radius: 5px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .localities-bottom-view-all span {
+    font-size: 19px;
+    transition: transform 0.3s ease;
+  }
+
+  .localities-bottom-view-all:active {
+    transform: scale(0.97);
+  }
+}

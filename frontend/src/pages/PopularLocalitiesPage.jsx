@@ -1212,14 +1212,446 @@
 // export default PopularLocalitiesPage;
 
 
-//for search selected city
+// //for search selected city
+// import { useEffect, useMemo, useRef, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { API_URL } from "../config";
+// import "./PopularLocalities.css";
+
+// function PopularLocalitiesPage({ embedded = false, userLocation,city="" }) {
+//   const [properties, setProperties] = useState([]);
+//   const [projects, setProjects] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [search, setSearch] = useState("");
+//   const [selectedCity, setSelectedCity] = useState("All Cities");
+
+//   const navigate = useNavigate();
+//   const scrollContainerRef = useRef(null);
+
+//   const localityImages = [
+//     "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=700&q=85",
+//     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=85",
+//     "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=700&q=85",
+//     "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=85",
+//     "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=700&q=85",
+//     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85",
+//   ];
+
+//   // Read common response shapes returned by the APIs.
+//   const getArrayFromResponse = (data, key) => {
+//     if (Array.isArray(data)) return data;
+//     if (Array.isArray(data?.[key])) return data[key];
+//     if (Array.isArray(data?.data)) return data.data;
+//     if (Array.isArray(data?.data?.[key])) return data.data[key];
+
+//     return [];
+//   };
+
+//   // Fetch properties and projects.
+ 
+// useEffect(() => {
+//   let isMounted = true;
+
+//   const fetchLocalityData = async () => {
+//     setLoading(true);
+
+//     const activeCity = city?.trim() || userLocation?.city || "";
+
+//     const propertyParams = {};
+//     const projectParams = {};
+
+//     // A searched city takes priority over detected location.
+//     if (activeCity) {
+//       propertyParams.city = activeCity;
+//       projectParams.city = activeCity;
+//     } else if (userLocation?.locality) {
+//       propertyParams.location = userLocation.locality;
+//       projectParams.location = userLocation.locality;
+//     }
+
+//     try {
+//       const [propertiesResult, projectsResult] =
+//         await Promise.allSettled([
+//           axios.get(`${API_URL}/properties`, {
+//             params: propertyParams,
+//           }),
+//           axios.get(`${API_URL}/projects`, {
+//             params: projectParams,
+//           }),
+//         ]);
+
+//       if (!isMounted) return;
+
+//       if (propertiesResult.status === "fulfilled") {
+//         setProperties(
+//           getArrayFromResponse(
+//             propertiesResult.value.data,
+//             "properties"
+//           )
+//         );
+//       } else {
+//         console.error(
+//           "Error fetching properties:",
+//           propertiesResult.reason
+//         );
+//         setProperties([]);
+//       }
+
+//       if (projectsResult.status === "fulfilled") {
+//         setProjects(
+//           getArrayFromResponse(
+//             projectsResult.value.data,
+//             "projects"
+//           )
+//         );
+//       } else {
+//         console.error(
+//           "Error fetching projects:",
+//           projectsResult.reason
+//         );
+//         setProjects([]);
+//       }
+//     } catch (error) {
+//       console.error("Error fetching locality data:", error);
+//     } finally {
+//       if (isMounted) {
+//         setLoading(false);
+//       }
+//     }
+//   };
+
+//   fetchLocalityData();
+
+//   return () => {
+//     isMounted = false;
+//   };
+// }, [city, userLocation]);
+
+
+//   // Group listings by city and locality.
+//   const localities = useMemo(() => {
+//     const localityMap = new Map();
+
+//     const addLocality = (item, type) => {
+//       const location =
+//         typeof item?.location === "string"
+//           ? item.location.trim()
+//           : "";
+
+//       const city =
+//         typeof item?.city === "string"
+//           ? item.city.trim()
+//           : "";
+
+//       if (!location) return;
+
+//       const normalizedLocation = location.toLowerCase();
+//       const normalizedCity = city.toLowerCase() || "unknown city";
+//       const key = `${normalizedCity}|${normalizedLocation}`;
+
+//       if (!localityMap.has(key)) {
+//         localityMap.set(key, {
+//           name: location,
+//           city: city || "City not specified",
+//           propertyCount: 0,
+//           projectCount: 0,
+//         });
+//       }
+
+//       const locality = localityMap.get(key);
+
+//       if (type === "property") {
+//         locality.propertyCount += 1;
+//       } else {
+//         locality.projectCount += 1;
+//       }
+//     };
+
+//     properties.forEach((property) =>
+//       addLocality(property, "property")
+//     );
+
+//     projects.forEach((project) =>
+//       addLocality(project, "project")
+//     );
+
+//     return Array.from(localityMap.values())
+//       .map((locality) => ({
+//         ...locality,
+//         totalCount:
+//           locality.propertyCount + locality.projectCount,
+//       }))
+//       .filter((locality) => locality.totalCount > 0)
+//       .sort(
+//         (a, b) =>
+//           b.totalCount - a.totalCount ||
+//           a.name.localeCompare(b.name)
+//       );
+//   }, [properties, projects]);
+
+//   // Build dropdown options from actual API data.
+//   const cities = useMemo(() => {
+//     const uniqueCities = [
+//       ...new Set(
+//         localities
+//           .filter(
+//             (locality) =>
+//               locality.city !== "City not specified"
+//           )
+//           .map((locality) => locality.city)
+//       ),
+//     ].sort((a, b) => a.localeCompare(b));
+
+//     return ["All Cities", ...uniqueCities];
+//   }, [localities]);
+
+//   // Filter localities by selected city and search term.
+//   const filteredLocalities = useMemo(() => {
+//     const searchValue = search.trim().toLowerCase();
+
+//     return localities.filter((locality) => {
+//       const matchesCity =
+//         selectedCity === "All Cities" ||
+//         locality.city === selectedCity;
+
+//       const matchesSearch =
+//         !searchValue ||
+//         locality.name.toLowerCase().includes(searchValue) ||
+//         locality.city.toLowerCase().includes(searchValue);
+
+//       return matchesCity && matchesSearch;
+//     });
+//   }, [localities, selectedCity, search]);
+
+//   // Show only the top 8 cards in the embedded homepage section.
+//   const displayedLocalities = embedded
+//     ? filteredLocalities.slice(0, 8)
+//     : filteredLocalities;
+
+//   const scrollLocalities = (direction) => {
+//     scrollContainerRef.current?.scrollBy({
+//       left: direction * 350,
+//       behavior: "smooth",
+//     });
+//   };
+
+//   const handleLocalityClick = (locality) => {
+//     const params = new URLSearchParams();
+
+//     params.set("location", locality.name);
+
+//     if (locality.city !== "City not specified") {
+//       params.set("city", locality.city);
+//     }
+
+//     navigate(`/properties?${params.toString()}`);
+//   };
+
+//   return (
+//     <section
+//       className={`popular-localities-section ${
+//         embedded
+//           ? "localities-embedded"
+//           : "localities-full-page"
+//       }`}
+//     >
+//  <div className="popular-localities-heading">
+//         <div className="localities-heading-copy">
+//           <div className="explore-eyebrow">
+//           <span>EXPLORE YOUR NEIGHBOURHOOD</span>
+//           <span className="eyebrow-line"></span>
+//         </div>
+
+
+//          <h2>
+//   {embedded ? (
+//     <>Explore <span>Top Localities</span></>
+//   ) : (
+//     <>Discover Your <span>Neighbourhood</span></>
+//   )}
+// </h2>   
+//         </div>
+//   <p className="popular-localities-subtitle">
+//             Find the neighbourhood that
+//             <br/>
+//              feels like home.
+//           </p>
+//       </div>
+     
+
+//       {!loading && (
+//         <div className="localities-results-summary">
+//           {/* <span>
+//             {filteredLocalities.length}{" "}
+//             {filteredLocalities.length === 1
+//               ? "locality"
+//               : "localities"}{" "}
+//             found
+//             {selectedCity !== "All Cities"
+//               ? ` in ${selectedCity}`
+//               : ""}
+//           </span> */}
+//         </div>
+//       )}
+
+//       {loading && (
+//         <p className="localities-message">
+//           Loading properties and projects...
+//         </p>
+//       )}
+
+//       {!loading && displayedLocalities.length === 0 && (
+//         <div className="localities-message">
+//           <h3>No localities found</h3>
+//           <p>
+//             {search
+//               ? "Try another locality name."
+//               : selectedCity !== "All Cities"
+//                 ? `No listed localities found in ${selectedCity}.`
+//                 : "Localities will appear when properties or projects are listed."}
+//           </p>
+//         </div>
+//       )}
+
+//       {!loading && displayedLocalities.length > 0 && (
+//         <>
+//           <div className="localities-carousel-wrapper">
+//             <div
+//               className="popular-localities-grid"
+//               ref={scrollContainerRef}
+//             >
+//               {displayedLocalities.map((locality, index) => (
+//                 <button
+//                   type="button"
+//                   className="locality-card"
+//                   key={`${locality.city}-${locality.name}`}
+//                   onClick={() => handleLocalityClick(locality)}
+//                   aria-label={`Explore ${locality.name}, ${locality.city}`}
+//                 >
+//                   <div className="locality-image-wrapper">
+//                     <img
+//                       className="locality-image"
+//                       src={
+//                         localityImages[
+//                           index % localityImages.length
+//                         ]
+//                       }
+//                       alt={`${locality.name} neighbourhood`}
+//                       loading="lazy"
+//                       onError={(event) => {
+//                         event.currentTarget.style.visibility =
+//                           "hidden";
+//                       }}
+//                     />
+
+//                     <span className="locality-rank">
+//                       {String(index + 1).padStart(2, "0")}
+//                     </span>
+
+//                     <span className="locality-image-overlay" />
+
+//                     <span className="locality-image-label">
+//                       Popular locality
+//                     </span>
+//                   </div>
+
+//                   <div className="locality-card-content">
+//                     <h3>
+//                       <span className="locality-location-icon">
+//                         ⌖
+//                       </span>
+//                       {locality.name}
+//                     </h3>
+
+//                     <p className="locality-city">
+//                       <span className="locality-city-dot" />
+//                       {locality.city}
+//                     </p>
+
+//                     <div className="locality-counts">
+//                       <p className="locality-property-count">
+//                         <span className="locality-house-icon">
+//                           ⌂
+//                         </span>
+//                         {locality.propertyCount}{" "}
+//                         {locality.propertyCount === 1
+//                           ? "Property"
+//                           : "Properties"}
+//                       </p>
+
+//                       <p className="locality-property-count">
+//                         <span className="locality-house-icon">
+//                           ▦
+//                         </span>
+//                         {locality.projectCount}{" "}
+//                         {locality.projectCount === 1
+//                           ? "Project"
+//                           : "Projects"}
+//                       </p>
+//                     </div>
+
+//                     <span className="locality-card-link">
+//                       Explore Locality <span>→</span>
+//                     </span>
+//                   </div>
+//                 </button>
+//               ))}
+//             </div>
+
+//             {displayedLocalities.length > 1 && (
+//               <>
+//                 <button
+//                   type="button"
+//                   className="locality-scroll-arrow locality-scroll-left"
+//                   onClick={() => scrollLocalities(-1)}
+//                   aria-label="Scroll to previous localities"
+//                 >
+//                   ‹
+//                 </button>
+
+//                 <button
+//                   type="button"
+//                   className="locality-scroll-arrow locality-scroll-right"
+//                   onClick={() => scrollLocalities(1)}
+//                   aria-label="Scroll to next localities"
+//                 >
+//                   ›
+//                 </button>
+//               </>
+//             )}
+//           </div>
+
+//           {embedded && filteredLocalities.length > 8 && (
+//             <button
+//               type="button"
+//               className="localities-bottom-view-all"
+//               onClick={() => navigate("/popular-localities")}
+//             >
+//               Explore All Localities <span>→</span>
+//             </button>
+//           )}
+//         </>
+//       )}
+//     </section>
+//   );
+// }
+
+// export default PopularLocalitiesPage;
+
+
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
 import "./PopularLocalities.css";
 
-function PopularLocalitiesPage({ embedded = false, userLocation,city="" }) {
+function PopularLocalitiesPage({
+  embedded = false,
+  userLocation,
+  city = "",
+}) {
   const [properties, setProperties] = useState([]);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1228,6 +1660,7 @@ function PopularLocalitiesPage({ embedded = false, userLocation,city="" }) {
 
   const navigate = useNavigate();
   const scrollContainerRef = useRef(null);
+  const MOBILE_LOCALITY_LIMIT = 3;
 
   const localityImages = [
     "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=700&q=85",
@@ -1238,7 +1671,7 @@ function PopularLocalitiesPage({ embedded = false, userLocation,city="" }) {
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85",
   ];
 
-  // Read common response shapes returned by the APIs.
+  // Handle different API response formats
   const getArrayFromResponse = (data, key) => {
     if (Array.isArray(data)) return data;
     if (Array.isArray(data?.[key])) return data[key];
@@ -1248,88 +1681,86 @@ function PopularLocalitiesPage({ embedded = false, userLocation,city="" }) {
     return [];
   };
 
-  // Fetch properties and projects.
- 
-useEffect(() => {
-  let isMounted = true;
+  // Fetch properties and projects
+  useEffect(() => {
+    let isMounted = true;
 
-  const fetchLocalityData = async () => {
-    setLoading(true);
+    const fetchLocalityData = async () => {
+      setLoading(true);
 
-    const activeCity = city?.trim() || userLocation?.city || "";
+      // Searched city gets priority over detected location
+      const activeCity = city?.trim() || userLocation?.city || "";
 
-    const propertyParams = {};
-    const projectParams = {};
+      const propertyParams = {};
+      const projectParams = {};
 
-    // A searched city takes priority over detected location.
-    if (activeCity) {
-      propertyParams.city = activeCity;
-      projectParams.city = activeCity;
-    } else if (userLocation?.locality) {
-      propertyParams.location = userLocation.locality;
-      projectParams.location = userLocation.locality;
-    }
-
-    try {
-      const [propertiesResult, projectsResult] =
-        await Promise.allSettled([
-          axios.get(`${API_URL}/properties`, {
-            params: propertyParams,
-          }),
-          axios.get(`${API_URL}/projects`, {
-            params: projectParams,
-          }),
-        ]);
-
-      if (!isMounted) return;
-
-      if (propertiesResult.status === "fulfilled") {
-        setProperties(
-          getArrayFromResponse(
-            propertiesResult.value.data,
-            "properties"
-          )
-        );
-      } else {
-        console.error(
-          "Error fetching properties:",
-          propertiesResult.reason
-        );
-        setProperties([]);
+      if (activeCity) {
+        propertyParams.city = activeCity;
+        projectParams.city = activeCity;
+      } else if (userLocation?.locality) {
+        propertyParams.location = userLocation.locality;
+        projectParams.location = userLocation.locality;
       }
 
-      if (projectsResult.status === "fulfilled") {
-        setProjects(
-          getArrayFromResponse(
-            projectsResult.value.data,
-            "projects"
-          )
-        );
-      } else {
-        console.error(
-          "Error fetching projects:",
-          projectsResult.reason
-        );
-        setProjects([]);
+      try {
+        const [propertiesResult, projectsResult] =
+          await Promise.allSettled([
+            axios.get(`${API_URL}/properties`, {
+              params: propertyParams,
+            }),
+            axios.get(`${API_URL}/projects`, {
+              params: projectParams,
+            }),
+          ]);
+
+        if (!isMounted) return;
+
+        if (propertiesResult.status === "fulfilled") {
+          setProperties(
+            getArrayFromResponse(
+              propertiesResult.value.data,
+              "properties"
+            )
+          );
+        } else {
+          console.error(
+            "Error fetching properties:",
+            propertiesResult.reason
+          );
+          setProperties([]);
+        }
+
+        if (projectsResult.status === "fulfilled") {
+          setProjects(
+            getArrayFromResponse(
+              projectsResult.value.data,
+              "projects"
+            )
+          );
+        } else {
+          console.error(
+            "Error fetching projects:",
+            projectsResult.reason
+          );
+          setProjects([]);
+        }
+      } catch (error) {
+        console.error("Error fetching locality data:", error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-    } catch (error) {
-      console.error("Error fetching locality data:", error);
-    } finally {
-      if (isMounted) {
-        setLoading(false);
-      }
-    }
-  };
+    };
 
-  fetchLocalityData();
+    fetchLocalityData();
 
-  return () => {
-    isMounted = false;
-  };
-}, [city, userLocation]);
+    return () => {
+      isMounted = false;
+    };
+  }, [city, userLocation]);
 
-
-  // Group listings by city and locality.
+  // Group listings by city and locality
   const localities = useMemo(() => {
     const localityMap = new Map();
 
@@ -1339,7 +1770,7 @@ useEffect(() => {
           ? item.location.trim()
           : "";
 
-      const city =
+      const cityName =
         typeof item?.city === "string"
           ? item.city.trim()
           : "";
@@ -1347,13 +1778,15 @@ useEffect(() => {
       if (!location) return;
 
       const normalizedLocation = location.toLowerCase();
-      const normalizedCity = city.toLowerCase() || "unknown city";
+      const normalizedCity =
+        cityName.toLowerCase() || "unknown city";
+
       const key = `${normalizedCity}|${normalizedLocation}`;
 
       if (!localityMap.has(key)) {
         localityMap.set(key, {
           name: location,
-          city: city || "City not specified",
+          city: cityName || "City not specified",
           propertyCount: 0,
           projectCount: 0,
         });
@@ -1390,7 +1823,7 @@ useEffect(() => {
       );
   }, [properties, projects]);
 
-  // Build dropdown options from actual API data.
+  // Build dropdown options from API data
   const cities = useMemo(() => {
     const uniqueCities = [
       ...new Set(
@@ -1406,7 +1839,7 @@ useEffect(() => {
     return ["All Cities", ...uniqueCities];
   }, [localities]);
 
-  // Filter localities by selected city and search term.
+  // Filter localities
   const filteredLocalities = useMemo(() => {
     const searchValue = search.trim().toLowerCase();
 
@@ -1424,11 +1857,11 @@ useEffect(() => {
     });
   }, [localities, selectedCity, search]);
 
-  // Show only the top 8 cards in the embedded homepage section.
-  const displayedLocalities = embedded
-    ? filteredLocalities.slice(0, 8)
-    : filteredLocalities;
+  // All cards are available in JSX.
+  // Mobile CSS controls the 3-card limit.
+  const displayedLocalities = filteredLocalities;
 
+  // Horizontal scrolling
   const scrollLocalities = (direction) => {
     scrollContainerRef.current?.scrollBy({
       left: direction * 350,
@@ -1436,6 +1869,7 @@ useEffect(() => {
     });
   };
 
+  // Navigate to selected locality
   const handleLocalityClick = (locality) => {
     const params = new URLSearchParams();
 
@@ -1448,6 +1882,11 @@ useEffect(() => {
     navigate(`/properties?${params.toString()}`);
   };
 
+  // Navigate to all localities
+  const handleViewAll = () => {
+    navigate("/popular-localities");
+  };
+
   return (
     <section
       className={`popular-localities-section ${
@@ -1456,51 +1895,42 @@ useEffect(() => {
           : "localities-full-page"
       }`}
     >
- <div className="popular-localities-heading">
+      {/* SECTION HEADING */}
+      <div className="popular-localities-heading">
         <div className="localities-heading-copy">
           <div className="explore-eyebrow">
-          <span>EXPLORE YOUR NEIGHBOURHOOD</span>
-          <span className="eyebrow-line"></span>
+            <span>EXPLORE YOUR NEIGHBOURHOOD</span>
+            <span className="eyebrow-line"></span>
+          </div>
+
+          <h2>
+            {embedded ? (
+              <>
+                Explore <span>Top Localities</span>
+              </>
+            ) : (
+              <>
+                Discover Your <span>Neighbourhood</span>
+              </>
+            )}
+          </h2>
         </div>
 
-
-         <h2>
-  {embedded ? (
-    <>Explore <span>Top Localities</span></>
-  ) : (
-    <>Discover Your <span>Neighbourhood</span></>
-  )}
-</h2>   
-        </div>
-  <p className="popular-localities-subtitle">
-            Find the neighbourhood that
-            <br/>
-             feels like home.
-          </p>
+        <p className="popular-localities-subtitle">
+          Find the neighbourhood that
+          <br />
+          feels like home.
+        </p>
       </div>
-     
 
-      {!loading && (
-        <div className="localities-results-summary">
-          {/* <span>
-            {filteredLocalities.length}{" "}
-            {filteredLocalities.length === 1
-              ? "locality"
-              : "localities"}{" "}
-            found
-            {selectedCity !== "All Cities"
-              ? ` in ${selectedCity}`
-              : ""}
-          </span> */}
-        </div>
-      )}
-
+      {/* LOADING */}
       {loading && (
         <p className="localities-message">
           Loading properties and projects...
         </p>
       )}
 
+      {/* EMPTY STATE */}
       {!loading && displayedLocalities.length === 0 && (
         <div className="localities-message">
           <h3>No localities found</h3>
@@ -1514,6 +1944,7 @@ useEffect(() => {
         </div>
       )}
 
+      {/* LOCALITY CARDS */}
       {!loading && displayedLocalities.length > 0 && (
         <>
           <div className="localities-carousel-wrapper">
@@ -1599,6 +2030,7 @@ useEffect(() => {
               ))}
             </div>
 
+            {/* DESKTOP SCROLL ARROWS */}
             {displayedLocalities.length > 1 && (
               <>
                 <button
@@ -1622,15 +2054,20 @@ useEffect(() => {
             )}
           </div>
 
-          {embedded && filteredLocalities.length > 8 && (
-            <button
-              type="button"
-              className="localities-bottom-view-all"
-              onClick={() => navigate("/popular-localities")}
-            >
-              Explore All Localities <span>→</span>
-            </button>
-          )}
+          {/* MOBILE ONLY VIEW ALL BUTTON */}
+          {embedded &&
+            displayedLocalities.length > MOBILE_LOCALITY_LIMIT && (
+              <div className="localities-view-all-wrapper">
+                <button
+                  type="button"
+                  className="localities-bottom-view-all"
+                  onClick={handleViewAll}
+                >
+                  View All Localities
+                  <span>→</span>
+                </button>
+              </div>
+            )}
         </>
       )}
     </section>

@@ -521,71 +521,6 @@ const handleSearch = async (filters) => {
 
         <main className="home-browse-main">
 
-          {/* {!listingType && (
-            <section className="quick-section home-quick-section">
-              <h2>Explore Properties</h2>
-
-              <div className="quick-grid">
-                <div
-                  onClick={() =>
-                    fetchProperties({ listingType: "Buy" })
-                  }
-                >
-                  🏠
-                  <span>Buy</span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    fetchProperties({ listingType: "Rent" })
-                  }
-                >
-                  🔑
-                  <span>Rent</span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    fetchProperties({ propertyType: "Apartment" })
-                  }
-                >
-                  🏢
-                  <span>Apartments</span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    fetchProperties({ propertyType: "Villa" })
-                  }
-                >
-                  🏡
-                  <span>Villas</span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    fetchProperties({ propertyType: "Plot" })
-                  }
-                >
-                  📐
-                  <span>Plots</span>
-                </div>
-
-                <div
-                  onClick={() =>
-                    fetchProperties({
-                      propertyType: "Builder-Floors",
-                    })
-                  }
-                >
-                  🏬
-                  <span>Builder Floors</span>
-                </div>
-              </div>
-            </section>
-          )} */}
-
-
 {!listingType && (
   <section className="explore-properties">
     <div className="explore-properties-header">
@@ -830,61 +765,119 @@ const handleSearch = async (filters) => {
               </div>
             )}
 
-            <div className="property-grid">
+            {/* <div className="property-grid">
               {properties.map((property) => (
                 <PropertyCard
                   key={property._id}
                   property={property}
                 />
               ))}
-            </div>
-          </section>
-
-          <section className="properties-section">
-            <div className="section-header">
-              <div>
-                 <div className="explore-eyebrow">
-          <span>EXCLUSIVE DEVELOPMENTS</span>
-          <span className="eyebrow-line"></span>
-        </div>
-
-                <h2>Featured <span>New Projects</span></h2>
-                {/* <p>{projects.length} projects found</p> */}
-              </div>
-
-              <Link
-                to="/new-projects"
-                className="home-section-btn"
-              >
-                View All Projects
-              </Link>
-            </div>
-
-            {projectsLoading && (
-              <div className="loading">
-                Loading projects...
-              </div>
-            )}
-
-            {!projectsLoading && projects.length === 0 && (
-              <div className="no-properties">
-                <h3>No projects found</h3>
-
-                <p>
-                  Please check again later for new projects.
-                </p>
-              </div>
-            )}
-
+            </div> */}
             <div className="property-grid">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project._id}
-                  project={project}
-                />
-              ))}
-            </div>
+  {properties.map((property) => (
+    <PropertyCard
+      key={property._id}
+      property={property}
+    />
+  ))}
+</div>
+
+{properties.length > 3 && (
+  <div className="properties-view-all-wrapper">
+    <Link
+      to="/all-properties"
+      className="properties-view-all-btn"
+    >
+      View All Properties
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path
+          d="M5 12h14M13 5l7 7-7 7"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </Link>
+  </div>
+)}
           </section>
+
+         
+<section className="properties-section">
+  <div className="section-header">
+    <div>
+      <div className="explore-eyebrow">
+        <span>EXCLUSIVE DEVELOPMENTS</span>
+        <span className="eyebrow-line"></span>
+      </div>
+
+      <h2>
+        Featured <span>New Projects</span>
+      </h2>
+    </div>
+
+    {/* Desktop View All */}
+    <Link
+      to="/new-projects"
+      className="home-section-btn desktop-projects-view-all"
+    >
+      View All Projects
+    </Link>
+  </div>
+
+  {projectsLoading && (
+    <div className="loading">
+      Loading projects...
+    </div>
+  )}
+
+  {!projectsLoading && projects.length === 0 && (
+    <div className="no-properties">
+      <h3>No projects found</h3>
+      <p>
+        Please check again later for new projects.
+      </p>
+    </div>
+  )}
+
+  {!projectsLoading && projects.length > 0 && (
+    <>
+      <div className="property-grid home-projects-grid">
+        {projects.map((project) => (
+          <ProjectCard
+            key={project._id}
+            project={project}
+          />
+        ))}
+      </div>
+
+      {/* Mobile View All */}
+      {projects.length > 3 && (
+        <div className="mobile-projects-view-all">
+          <Link
+            to="/new-projects"
+            className="home-section-btn"
+          >
+            View All Projects
+
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14M13 5l7 7-7 7"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
+      )}
+    </>
+  )}
+</section>
+
 
           <OwnersSection />
 

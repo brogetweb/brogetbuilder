@@ -141,7 +141,7 @@
   height: 285px;
 
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
 
   background: transparent;
   border: none;
@@ -320,9 +320,11 @@
   top: 9px;
   left: 14px;
 
-  color: #55452F;
-  font-size: 8px;
-  font-weight: 650;
+  color: #1A2230;
+
+ font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
   letter-spacing: 0.3px;
 
   pointer-events: none;
@@ -340,10 +342,10 @@
   margin: 0;
   padding: 0;
 
-  color: #A9874F;
+  color: #1A2230;
 
-  font-family: Arial, sans-serif;
-  font-size: 17px;
+ font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
 
@@ -364,11 +366,11 @@
   margin: 0;
   padding: 0;
 
-  color: #23324C;
+  color: #1B2A4A;
 
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 750;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1.2;
 
   white-space: nowrap;
@@ -389,9 +391,9 @@
   margin: 0;
   padding: 0;
 
-  color: #23324C;
+  color: #1B2A4A;
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 600;
 
   white-space: nowrap;
 }
@@ -1064,3 +1066,178 @@ display:none;
 
 }
 
+/* ==========================================
+   MOBILE — VERTICAL BHK CARDS
+========================================== */
+
+@media (max-width: 650px) {
+
+  .bhk-choice-grid {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    width: 100%;
+    gap: 62px;
+    padding: 8px 0 18px;
+
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .bhk-choice-card {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    height: 270px;
+    min-height: 270px;
+
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+
+  .bhk-choice-card:hover {
+    transform: none;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 380px) {
+
+  .bhk-choice-grid {
+    gap: 56px;
+  }
+
+  .bhk-choice-card {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    height: 265px;
+    min-height: 265px;
+  }
+}
+
+/* =========================================
+   BHK HORIZONTAL SCROLL
+========================================= */
+
+.bhk-carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.bhk-choice-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+
+.bhk-choice-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.bhk-choice-card {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* DESKTOP ARROWS */
+
+.bhk-scroll-arrow {
+  position: absolute;
+  top: 45%;
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #23324c;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.bhk-scroll-left {
+  left: -18px;
+}
+
+.bhk-scroll-right {
+  right: -18px;
+}
+
+/* VIEW ALL BUTTON */
+
+.bhk-view-all-wrapper {
+  display: none;
+}
+
+.bhk-bottom-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 25px;
+  border: 1px solid #b99360;
+  border-radius: 30px;
+  background: #23324c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bhk-bottom-view-all span {
+  font-size: 19px;
+  transition: transform 0.3s ease;
+}
+
+.bhk-bottom-view-all:hover {
+  background: #b99360;
+  color: #fff;
+}
+
+.bhk-bottom-view-all:hover span {
+  transform: translateX(5px);
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+  .bhk-choice-embedded .bhk-choice-grid {
+    overflow: hidden;
+  }
+
+  .bhk-choice-embedded .bhk-choice-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  .bhk-choice-embedded .bhk-view-all-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+  }
+
+  .bhk-scroll-arrow {
+    display: none;
+  }
+
+  /* Full page: show every BHK card */
+  .bhk-choice-full-page .bhk-choice-grid {
+    overflow-x: auto;
+  }
+
+  .bhk-choice-full-page .bhk-choice-card {
+    display: flex;
+  }
+}

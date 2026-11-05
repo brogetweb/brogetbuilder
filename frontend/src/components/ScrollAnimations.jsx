@@ -71,6 +71,164 @@ function ScrollAnimations() {
         );
       });
 
+      // ==========================================
+
+
+// const localityObserver = new MutationObserver(() => {
+//   const sections = document.querySelectorAll(
+//     ".popular-localities-section.localities-embedded"
+//   );
+
+//   sections.forEach((section) => {
+//     const cards = section.querySelectorAll(
+//       ".popular-localities-grid .locality-card:not(.locality-animated)"
+//     );
+
+//     if (!cards.length) return;
+
+//     cards.forEach((card) => {
+//       card.classList.add("locality-animated");
+
+//       gsap.fromTo(
+//         card,
+//         {
+//           y: 90,
+//           opacity: 0,
+//           scale: 0.94,
+//         },
+//         {
+//           y: 0,
+//           opacity: 1,
+//           scale: 1,
+//           duration: 0.9,
+//           ease: "power3.out",
+//           scrollTrigger: {
+//             trigger: card,
+//             start: "top 88%",
+//             toggleActions: "play none none reverse",
+//           },
+//         }
+//       );
+//     });
+
+//     ScrollTrigger.refresh();
+//   });
+// });
+
+// localityObserver.observe(document.body, {
+//   childList: true,
+//   subtree: true,
+// });
+
+// =====================================
+// LOCALITY, BHK & POSSESSION ANIMATIONS
+// =====================================
+
+const animationGroups = [
+  {
+    section: ".popular-localities-section.localities-embedded",
+    cards: ".popular-localities-grid .locality-card",
+    animatedClass: "locality-animated",
+  },
+  {
+    section: ".possession-section",
+    cards: ".possession-grid > *",
+    animatedClass: "possession-animated",
+  },
+];
+
+const animateDynamicCards = () => {
+  let hasNewCards = false;
+
+  animationGroups.forEach((group) => {
+    document.querySelectorAll(group.section).forEach((section) => {
+      const cards = section.querySelectorAll(
+        `${group.cards}:not(.${group.animatedClass})`
+      );
+
+      cards.forEach((card) => {
+        card.classList.add(group.animatedClass);
+        hasNewCards = true;
+
+        gsap.fromTo(
+          card,
+          {
+            y: 70,
+            opacity: 0,
+            scale: 0.96,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+    });
+  });
+
+  if (hasNewCards) {
+    ScrollTrigger.refresh();
+  }
+};
+
+const localityObserver = new MutationObserver(() => {
+  animateDynamicCards();
+});
+
+animateDynamicCards();
+
+localityObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+
+
+// ==========================================
+// BHK CARDS — PREMIUM SCROLL REVEAL
+// ==========================================
+
+// =====================================
+// BHK CARD SCROLL ANIMATION
+// =====================================
+
+const bhkCards = gsap.utils.toArray(
+  ".bhk-choice-section .bhk-choice-grid .bhk-choice-card"
+);
+
+bhkCards.forEach((card, index) => {
+  gsap.fromTo(
+    card,
+    {
+      y: 100,
+      opacity: 0,
+      scale: 0.9,
+    },
+    {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      delay: index * 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+});
+
+
+
       gsap.utils.toArray([
         ".section-header h2",
         ".category-header h2",
@@ -208,6 +366,7 @@ cardObserver.observe(document.querySelector(".property-grid") || document.body, 
     ScrollTrigger.refresh();
 
     return () => {
+      
       ctx.revert();
       gsap.ticker.remove(ticker);
       lenis.destroy();
@@ -215,6 +374,8 @@ cardObserver.observe(document.querySelector(".property-grid") || document.body, 
   }, []);
 
   return null;
+
+  
 }
 
 export default ScrollAnimations;

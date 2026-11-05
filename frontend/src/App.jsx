@@ -38,6 +38,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import AllProperties from "./pages/AllPropertiesProjects";
 import AllPropertiesProjects from "./pages/AllPropertiesProjects";
 import ScrollAnimations from "./components/ScrollAnimations";
+import PopularLocalitiesPage from "./pages/PopularLocalitiesPage";
+import BHKChoiceSection from "./components/BHKChoiceSection";
+import PropertiesPage from "./pages/PropertiesPage";
+
 function App() {
   return (
     <>
@@ -182,6 +186,21 @@ function App() {
         <Route
   path="/owners/:ownerId/properties"
   element={<OwnerProperties />}
+/>
+
+<Route
+  path="/popular-localities"
+  element={<PopularLocalitiesPage embedded={false} />}
+/>
+
+<Route
+  path="/bhk-choice"
+  element={<BHKChoiceSection embedded={false} />}
+/>
+
+<Route
+  path="/all-properties"
+  element={<PropertiesPage />}
 />
       </Routes>
 

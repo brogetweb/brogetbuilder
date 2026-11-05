@@ -1,38 +1,41 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 /* =========================================
-   BUILDER BROGET - PROPERTY CARD DESIGN
+   BUILDER BROGET
+   ASYMMETRIC FLOATING DRAWER CARD
 ========================================= */
 
 :root {
-  --pc-navy: #24334B;
-  --pc-gold: #B18B50;
-  --pc-text: #29374B;
-  --pc-muted: #92928C;
+  --pc-navy: #17263D;
+  --pc-gold: #A17B35;
+  --pc-champagne: #B39356;
   --pc-cream: #FBFAF6;
-  --pc-border: #E9E3D6;
+  --pc-text: #29374B;
+  --pc-muted: #858585;
+  --pc-spec-bg: #F0EDE5;
+  --pc-panel: #FFFFFF;
+  --pc-panel-border: #E9E1D1;
 }
 
 /* =========================================
-   HORIZONTAL PROPERTY CAROUSEL
+   PROPERTY CAROUSEL
 ========================================= */
 
 .property-grid {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
-  align-items: stretch;
- background: #F4F0E8;
+  align-items: stretch !important;
+background: #F4F0E8;
   width: 100%;
   max-width: 100%;
 
-  gap: 18px;
+  gap: 20px;
+  padding: 15px 8px 24px;
 
   overflow-x: auto !important;
   overflow-y: hidden !important;
-
-  padding: 15px 8px 22px;
 
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -40,7 +43,7 @@
   -webkit-overflow-scrolling: touch;
 
   scrollbar-width: thin;
-  scrollbar-color: #C5B18E #F1EFE9;
+  scrollbar-color: #C8AD78 #F1EFE9;
 
   box-sizing: border-box;
 }
@@ -55,43 +58,44 @@
 }
 
 .property-grid::-webkit-scrollbar-thumb {
-  background: #C5B18E;
+  background: #C8AD78;
   border-radius: 20px;
 }
 
 .property-grid::-webkit-scrollbar-thumb:hover {
-  background: #A98754;
+  background: #AE9360;
 }
 
 /* =========================================
-   MAIN LANDSCAPE PROPERTY CARD
+   MAIN PROPERTY CARD
 ========================================= */
 
 .pc-card {
-  position: relative;
+  position: relative !important;
 
   display: flex !important;
-  flex-direction: row !important;
-  align-items: stretch;
+  flex-direction: column !important;
 
-  flex: 0 0 auto;
+  flex: 0 0 calc((100% - 60px) / 4) !important;
+  width: calc((100% - 60px) / 4) !important;
 
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
+  min-width: 0 !important;
+  max-width: none !important;
 
-  height: 235px;
-  min-height: 235px;
+  height: 410px !important;
+  min-height: 410px !important;
 
-  padding: 9px;
+  padding: 0 !important;
+  margin: 0 !important;
 
-  overflow: hidden;
+  overflow: visible !important;
 
-  border-radius: 65px 17px 17px 17px;
+  background: transparent !important;
 
-  background:#FCFAF7;
-  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.2);
-  border: 1 px solid rgba(0, 0, 0, 0.05);
+  border: none !important;
+  border-radius: 14px !important;
+
+  box-shadow: none !important;
 
   box-sizing: border-box;
 
@@ -99,42 +103,42 @@
 
   scroll-snap-align: start;
 
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
 .pc-card:hover {
   transform: translateY(-4px);
-
-  box-shadow:
-    0 8px 20px rgba(45, 42, 32, 0.11);
 }
 
 /* =========================================
-   IMAGE SECTION - LEFT SIDE
+   PROPERTY IMAGE
 ========================================= */
 
 .pc-image-section {
   position: relative !important;
 
-  display: block;
+  display: block !important;
 
-  flex: 0 0 48% !important;
+  flex: 0 0 240px !important;
 
-  width: 48% !important;
-  height: 100% !important;
-  min-height: 0 !important;
+  width: 96% !important;
+  height: 240px !important;
+  min-height: 240px !important;
 
-  overflow: hidden;
+  align-self: flex-start !important;
 
-  border-radius: 55px 10px 10px 10px;
+  overflow: hidden !important;
+
+  border-radius: 13px !important;
 
   background: #E8EBEC;
+
+  z-index: 1;
 }
 
 .pc-image-link {
   position: absolute;
+
   inset: 0;
 
   display: block;
@@ -154,49 +158,71 @@
   object-fit: cover;
   object-position: center;
 
-  transition: transform 0.6s ease;
+  transition: transform 0.7s ease;
 }
 
 .pc-card:hover .pc-image {
   transform: scale(1.045);
 }
 
+/* Image overlay */
+
+.pc-image-section::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.12),
+    transparent 35%,
+    transparent 75%,
+    rgba(0, 0, 0, 0.08)
+  );
+}
+
 /* =========================================
-   FOR SALE BADGE - TOP LEFT
+   SALE / RENT BADGE
 ========================================= */
 
 .pc-sale-bookmark {
   position: absolute !important;
 
-  top: 13px !important;
-  left: 39px !important;
+  top: 12px !important;
+  left: 12px !important;
 
   right: auto !important;
   bottom: auto !important;
 
-  z-index: 20 !important;
+  z-index: 5 !important;
 
   display: inline-flex;
 
   align-items: center;
   justify-content: center;
 
-  padding: 6px 10px;
+  padding: 5px 9px !important;
 
-  border: none;
-  border-radius: 4px;
+  border: none !important;
+  border-radius: 4px !important;
 
   background: var(--pc-navy) !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
 
-  font-size: 8px;
-  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
 
-  letter-spacing: 0.4px;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: 0.35px;
 
   white-space: nowrap;
 
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.17);
 }
 
 .pc-featured-label {
@@ -204,23 +230,23 @@
 }
 
 /* =========================================
-   FAVOURITE HEART - IMAGE TOP RIGHT
+   FAVOURITE BUTTON
 ========================================= */
 
 .pc-image-section .pc-favorite {
   position: absolute !important;
 
-  top: 8px !important;
-  right: 8px !important;
+  top: 10px !important;
+  right: 10px !important;
 
   left: auto !important;
   bottom: auto !important;
 
-  z-index: 30 !important;
+  z-index: 8 !important;
 
-  width: 29px !important;
-  height: 29px !important;
-  min-width: 29px !important;
+  width: 31px !important;
+  height: 31px !important;
+  min-width: 31px !important;
 
   display: flex !important;
 
@@ -232,10 +258,10 @@
   border: 1px solid #E5E2DC !important;
   border-radius: 50% !important;
 
-  background: #fff !important;
+  background: #FFFFFF !important;
   color: #68717B !important;
 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 
   cursor: pointer;
 
@@ -243,8 +269,8 @@
 }
 
 .pc-image-section .pc-favorite svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .pc-image-section .pc-favorite:hover,
@@ -274,33 +300,47 @@
 }
 
 /* =========================================
-   PROPERTY INFORMATION - RIGHT SIDE
+   ASYMMETRIC FLOATING CONTENT PANEL
 ========================================= */
 
 .pc-body {
-  position: relative;
+  position: relative !important;
+
+  z-index: 3 !important;
 
   display: flex !important;
   flex-direction: column !important;
 
-  flex: 1 1 52% !important;
+  width: 92% !important;
+  max-width: 92% !important;
 
-  width: 52% !important;
+  flex: 1 1 auto !important;
 
-  min-width: 0;
-  min-height: 0;
+  min-width: 0 !important;
+  min-height: 0 !important;
 
-  padding: 13px 12px 8px 15px !important;
+  align-self: flex-end !important;
 
-  margin: 0 !important;
+  margin-top: -55px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
 
-  border: none !important;
-  border-radius: 0 !important;
-background:#FCFAF7;
+  padding: 18px 15px 10px !important;
 
-  box-shadow: none !important;
+  background: #FCFAF7 !important;
 
-  box-sizing: border-box;
+  border: 1px solid rgba(177, 150, 99, 0.24) !important;
+
+  border-radius: 20px !important;
+
+  overflow: visible !important;
+
+  box-shadow:
+    0 9px 22px rgba(42, 38, 29, 0.12),
+    0 2px 6px rgba(42, 38, 29, 0.045) !important;
+
+  box-sizing: border-box !important;
 }
 
 .pc-body::before {
@@ -309,7 +349,7 @@ background:#FCFAF7;
 }
 
 /* =========================================
-   PROPERTY CATEGORY
+   CATEGORY
 ========================================= */
 
 .pc-top-row {
@@ -320,16 +360,19 @@ background:#FCFAF7;
 
   gap: 8px;
 
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 
 .pc-category {
-  color: var(--pc-gold) !important;
+  color: #8C7355 !important;
 
-  font-size: 9px;
-  font-weight: 800;
+  font-family:'Plus Jakarta Sans', sans-serif;
 
-  letter-spacing: 0.8px;
+  font-size: 11px !important;
+  font-weight: 700  !important;
+
+  letter-spacing: 0.05em;
+
   text-transform: uppercase;
 }
 
@@ -340,21 +383,21 @@ background:#FCFAF7;
 .pc-title-link {
   display: block;
 
-  color: inherit;
-  text-decoration: none;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .pc-title {
-  margin: 0 0 8px;
+  margin: 0 0 8px !important;
 
   color: var(--pc-navy) !important;
 
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 20px !important;
+  font-weight: 600 !important;
 
-  line-height: 1.4;
+  line-height: 1.25 !important;
 
   display: -webkit-box;
 
@@ -365,11 +408,11 @@ background:#FCFAF7;
 }
 
 .pc-title-link:hover .pc-title {
-  color: var(--pc-gold) !important;
+  color: #A17B35 !important;
 }
 
 /* =========================================
-   PROPERTY LOCATION
+   LOCATION
 ========================================= */
 
 .pc-location {
@@ -377,16 +420,18 @@ background:#FCFAF7;
 
   align-items: center;
 
-  gap: 6px;
+  gap: 5px;
 
   min-width: 0;
 
-  margin: 0 0 12px;
+  margin: 0 0 10px !important;
 
-  color: var(--pc-muted) !important;
+  color: #4A5568 !important;
 
-  font-size: 9px;
-  font-weight: 500;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
+  font-size: 15px !important;
+  font-weight: 600;
 }
 
 .pc-location svg {
@@ -397,7 +442,7 @@ background:#FCFAF7;
 
   min-width: 13px !important;
 
-  color: var(--pc-gold) !important;
+  color: #8D8D8D !important;
 }
 
 .pc-location span {
@@ -407,27 +452,37 @@ background:#FCFAF7;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  color: rgb(39, 39, 39) !important;
+  color: #4A5568 !important;
 
-  font-size: 9px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 /* =========================================
-   PROPERTY SPECIFICATIONS
+   SPECIFICATIONS
 ========================================= */
 
 .pc-specifications {
-  display: flex;
+  display: flex !important;
 
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
 
-  gap: 8px;
+  gap: 58px;
 
-  padding: 0;
-  margin: 0 0 12px;
+  width: 100%;
 
-  border: none;
+  padding: 8px 10px !important;
+
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+
+  border: none !important;
+  border-radius: 30px !important;
+
+  background: var(--pc-spec-bg) !important;
+
+  box-sizing: border-box;
 }
 
 .pc-spec {
@@ -437,69 +492,107 @@ background:#FCFAF7;
 
   gap: 4px;
 
-  padding: 0;
+  padding: 0 !important;
 
-   color: rgb(39, 39, 39) !important;
-  font-size: 8px;
+  color: #2D3748 !important;
+
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
+  font-size: 12px !important;
   font-weight: 500;
 
   white-space: nowrap;
 }
 
 .pc-spec svg {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
 
   flex-shrink: 0;
 
-  color: #BCA57C !important;
+  color: #A58C60 !important;
 }
 
 /* =========================================
-   PRICE SECTION
+   PRICE SECTION / FOOTER
 ========================================= */
 
 .pc-price-section {
-  display: flex;
+  position: static !important;
 
-  align-items: center;
-  justify-content: space-between;
+  display: flex !important;
+  flex-direction: column !important;
 
-  gap: 5px;
+  align-items: stretch;
 
-  margin-top: auto;
+  width: calc(100% + 30px) !important;
 
-  padding-top: 8px;
+  padding: 9px 15px 9px !important;
+
+  margin-top: 4px !important;
+  margin-left: -15px !important;
+  margin-bottom: -2px !important;
+
+  border-top: 1px solid #E9E3D8 !important;
+
+  border-radius: 0 0 19px 19px !important;
+
+  box-sizing: border-box !important;
 }
 
+/* =========================================
+   ANTIQUE CHAMPAGNE GOLD PRICE TAG
+========================================= */
+
 .pc-price-info {
-  min-width: 0;
+  position: absolute !important;
+
+  top: -18px !important;
+  right: 0 !important;
+
+  z-index: 10 !important;
+
+  display: flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 43px !important;
+
+  padding: 8px 16px !important;
+
+  margin: 0 !important;
+
+  border: none !important;
+
+  border-radius: 12px 12px 12px 12px !important;
+
+  background: #9A7B4C !important;
+  background-image: none !important;
+
+  box-shadow:
+    0 3px 9px rgba(85, 62, 25, 0.20) !important;
+
+  box-sizing: border-box;
 }
 
 .pc-price-caption {
-  display: block;
-
-  margin-bottom: 3px;
-
-  color: #41464D !important;
-
-  font-size: 8px;
-  font-weight: 800;
-
-  letter-spacing: 0.5px;
+  display: none !important;
 }
 
 .pc-price-value {
   display: block;
 
-  color: #87652E !important;
+  color: #FFFFFF !important;
 
-  font-size: 19px;
-  font-weight: 800;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 
-  line-height: 1.3;
+  font-size: 16px !important;
+  font-weight: 700 !important;
 
-  overflow-wrap: anywhere;
+  line-height: 1.2;
+
+  white-space: nowrap;
 }
 
 /* =========================================
@@ -507,30 +600,39 @@ background:#FCFAF7;
 ========================================= */
 
 .pc-view-details {
-  display: inline-flex;
+  display: flex !important;
 
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
+  width: 100% !important;
 
-  min-width: 105px;
-  height: 34px;
+  min-width: 0 !important;
 
-  padding: 0 9px;
+  height: 41px !important;
 
-  border: 1px solid var(--pc-navy);
-  border-radius: 4px;
+  padding: 0 10px !important;
 
-  color: #fff !important;
-  background: var(--pc-navy);
+  margin-top: 2px !important;
+  margin-bottom: 6px !important;
 
-  text-decoration: none;
+  border: 1px solid var(--pc-navy) !important;
 
-  font-size: 9px;
-  font-weight: 700;
+  border-radius: 7px !important;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  color: #FFFFFF !important;
+
+  background: var(--pc-navy) !important;
+
+  text-decoration: none !important;
+
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
+  font-size: 10px !important;
+  font-weight: 700 !important;
+
+  box-shadow:
+    0 3px 7px rgba(0, 0, 0, 0.13);
 
   transition: all 0.3s ease;
 }
@@ -545,10 +647,11 @@ background:#FCFAF7;
 }
 
 .pc-view-details:hover {
-  color: #fff !important;
+  color: #FFFFFF !important;
 
-  background: var(--pc-gold);
-  border-color: var(--pc-gold);
+  background: #A17B35 !important;
+
+  border-color: #A17B35 !important;
 }
 
 .pc-view-details:hover svg {
@@ -556,215 +659,180 @@ background:#FCFAF7;
 }
 
 /* =========================================
-   LAPTOP / DESKTOP - 3 CARDS
-   992px AND ABOVE
+   DESKTOP - FOUR CARDS
 ========================================= */
 
 @media (min-width: 992px) {
 
   .property-grid {
-    gap: 18px;
+    gap: 20px;
   }
 
-  .property-grid > .pc-card {
-    flex: 0 0 calc((100% - 36px) / 3) !important;
+  .pc-card {
+    flex: 0 0 calc((100% - 60px) / 4) !important;
+    width: calc((100% - 60px) / 4) !important;
 
-    width: calc((100% - 36px) / 3) !important;
-    min-width: calc((100% - 36px) / 3) !important;
-    max-width: calc((100% - 36px) / 3) !important;
-
-    height: 235px;
-    min-height: 235px;
+    height: 410px !important;
+    min-height: 410px !important;
   }
 
   .pc-image-section {
-    flex-basis: 45% !important;
-    width: 45% !important;
+    flex-basis: 240px !important;
+
+    height: 240px !important;
+    min-height: 240px !important;
+
+    width: 96% !important;
   }
 
   .pc-body {
-    flex-basis: 55% !important;
-    width: 55% !important;
+    width: 92% !important;
+    max-width: 92% !important;
 
-    padding: 13px 10px 8px 12px !important;
+    margin-top: -55px !important;
+
+    padding: 18px 15px 10px !important;
   }
 
-  .pc-title {
-    font-size: 13px;
-  }
-
-  .pc-specifications {
-    gap: 6px;
-  }
-
-  .pc-spec {
-    font-size: 7px;
-  }
-
-  .pc-price-value {
-    font-size: 18px;
-  }
-
-  .pc-view-details {
-    min-width: 88px;
-    height: 32px;
-
-    font-size: 8px;
+  .pc-price-section {
+    width: calc(100% + 30px) !important;
+    margin-left: -15px !important;
+    padding: 9px 15px 9px !important;
   }
 }
 
 /* =========================================
-   TABLET - 2 CARDS
-   600px TO 991px
+   TABLET - TWO CARDS
 ========================================= */
 
 @media (min-width: 600px) and (max-width: 991px) {
 
   .property-grid {
-    gap: 16px;
+    gap: 18px;
   }
 
-  .property-grid > .pc-card {
-    flex: 0 0 calc((100% - 16px) / 2) !important;
+  .pc-card {
+    flex: 0 0 calc((100% - 18px) / 2) !important;
+    width: calc((100% - 18px) / 2) !important;
 
-    width: calc((100% - 16px) / 2) !important;
-    min-width: calc((100% - 16px) / 2) !important;
-    max-width: calc((100% - 16px) / 2) !important;
-
-    height: 220px;
-    min-height: 220px;
+    height: 405px !important;
+    min-height: 405px !important;
   }
 
   .pc-image-section {
-    flex-basis: 44% !important;
-    width: 44% !important;
+    flex-basis: 230px !important;
+
+    height: 230px !important;
+    min-height: 230px !important;
+
+    width: 96% !important;
   }
 
   .pc-body {
-    flex-basis: 56% !important;
-    width: 56% !important;
+    width: 92% !important;
+    max-width: 92% !important;
 
-    padding: 11px 9px 7px 11px !important;
+    margin-top: -52px !important;
+
+    padding: 17px 13px 10px !important;
   }
 
   .pc-title {
-    font-size: 12px;
+    font-size: 19px !important;
   }
 
-  .pc-specifications {
-    gap: 6px;
-  }
-
-  .pc-price-value {
-    font-size: 17px;
-  }
-
-  .pc-view-details {
-    min-width: 85px;
-    height: 31px;
-    font-size: 8px;
+  .pc-price-section {
+    width: calc(100% + 26px) !important;
+    margin-left: -13px !important;
+    padding: 9px 13px 9px !important;
   }
 }
 
 /* =========================================
-   MOBILE - 1 CARD
-   BELOW 600px
+   MOBILE - ONE CARD
 ========================================= */
 
 @media (max-width: 599px) {
 
   .property-grid {
-    gap: 14px;
+    gap: 15px;
 
-    padding: 10px 5px 20px;
+    padding: 12px 5px 22px;
   }
 
-  .property-grid > .pc-card {
+  .pc-card {
     flex: 0 0 100% !important;
 
     width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
 
-    height: 205px;
-    min-height: 205px;
+    max-width: 360px !important;
+
+    height: 410px !important;
+    min-height: 410px !important;
   }
 
   .pc-image-section {
-    flex-basis: 44% !important;
-    width: 44% !important;
+    flex-basis: 245px !important;
 
-    border-radius: 40px 8px 8px 8px;
-  }
+    width: 96% !important;
 
-  .pc-sale-bookmark {
-    top: 11px !important;
-    left: 30px !important;
-
-    padding: 5px 8px;
-
-    font-size: 7px;
-  }
-
-  .pc-image-section .pc-favorite {
-    top: 7px !important;
-    right: 7px !important;
-
-    width: 27px !important;
-    height: 27px !important;
+    height: 245px !important;
+    min-height: 245px !important;
   }
 
   .pc-body {
-    flex-basis: 56% !important;
-    width: 56% !important;
+    width: 92% !important;
+    max-width: 92% !important;
 
-    padding: 10px 8px 7px 10px !important;
+    align-self: flex-end !important;
+
+    margin-top: -55px !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    padding: 18px 13px 10px !important;
+
+    border-radius: 20px !important;
   }
 
-  .pc-category {
-    font-size: 8px;
+   .pc-category {
+    font-weight: 700 !important;
+    font-size: 10px !important;
   }
 
   .pc-title {
-    font-size: 12px;
-    margin-bottom: 6px;
+    font-size: 18px !important;
+    font-weight: 600 !important;
   }
 
   .pc-location {
-    margin-bottom: 9px;
-    font-size: 8px;
+  font-size: 32px !important;
+    font-weight: 500 !important;
   }
 
-  .pc-location span {
-    font-size: 8px;
+  .pc-price-info {
+    top: -18px !important;
   }
 
-  .pc-specifications {
-    gap: 5px;
-    margin-bottom: 8px;
-  }
+  .pc-price-section {
+    width: calc(100% + 26px) !important;
 
-  .pc-spec {
-    font-size: 7px;
-    gap: 3px;
-  }
+    margin-top: 0 !important;
+    margin-left: -13px !important;
 
-  .pc-spec svg {
-    width: 10px;
-    height: 10px;
-  }
+    padding: 9px 13px 9px !important;
 
-  .pc-price-value {
-    font-size: 17px;
+    border-radius: 0 0 19px 19px !important;
   }
 
   .pc-view-details {
-    min-width: 88px;
-    height: 30px;
+    height: 41px !important;
+  }
 
-    padding: 0 6px;
-
-    font-size: 8px;
+  .pc-specifications {
+    gap: 38px;
+    padding: 7px !important;
   }
 }
 
@@ -775,48 +843,62 @@ background:#FCFAF7;
 @media (max-width: 380px) {
 
   .pc-card {
-    height: 190px;
-    min-height: 190px;
-    
-    border-radius: 45px 12px 12px 12px;
+    height: 400px !important;
+    min-height: 400px !important;
   }
 
   .pc-image-section {
-    flex-basis: 42% !important;
-    width: 42% !important;
+    flex-basis: 235px !important;
 
-    border-radius: 37px 7px 7px 7px;
+    height: 235px !important;
+    min-height: 235px !important;
+  }
+
+  .pc-category {
+    font-weight: 700 !important;
+    font-size: 10px !important;
   }
 
   .pc-body {
-    padding: 9px 6px 6px 8px !important;
+    width: 92% !important;
+    max-width: 92% !important;
+
+    margin-top: -50px !important;
+
+    padding: 16px 11px 9px !important;
   }
 
   .pc-title {
-    font-size: 11px;
+    font-size: 18px !important;
+    font-weight: 600 !important;
   }
 
   .pc-location {
-    font-size: 7px;
+    font-size: 32px !important;
+    font-weight: 500 !important;
   }
 
   .pc-specifications {
-    gap: 4px;
+    gap: 5px;
+    padding: 7px !important;
   }
 
   .pc-spec {
-    font-size: 6px;
+    font-size: 11px !important;
+    font-weight: 500px;
+  }
+
+  .pc-price-section {
+    width: calc(100% + 22px) !important;
+
+    margin-left: -11px !important;
+
+    padding: 9px 11px 9px !important;
   }
 
   .pc-price-value {
-    font-size: 15px;
-  }
-
-  .pc-view-details {
-    min-width: 76px;
-    height: 28px;
-
-    font-size: 7px;
+    font-size: 15px !important;
+    font-weight:700;
   }
 }
 
@@ -846,3 +928,261 @@ background:#FCFAF7;
   }
 }
 
+/* =========================================
+   PROPERTY GRID — RESPONSIVE HORIZONTAL CAROUSEL
+   Laptop: 4 cards visible + horizontal scroll
+   Tablet: 2 cards visible + horizontal scroll
+   Mobile: 1 card visible + horizontal scroll
+========================================= */
+
+.property-grid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+
+  align-items: stretch !important;
+
+  width: 100%;
+  max-width: 100%;
+
+  gap: 20px;
+
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   LAPTOP / DESKTOP — 4 CARDS
+========================================= */
+
+@media (min-width: 992px) {
+
+  .property-grid {
+    gap: 20px;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+
+  .pc-card {
+    flex: 0 0 calc((100% - 60px) / 4) !important;
+
+    width: calc((100% - 60px) / 4) !important;
+
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* =========================================
+   TABLET — 2 CARDS
+========================================= */
+
+@media (min-width: 600px) and (max-width: 991px) {
+
+  .property-grid {
+    gap: 18px;
+    overflow-x: auto !important;
+  }
+
+  .pc-card {
+    flex: 0 0 calc((100% - 18px) / 2) !important;
+
+    width: calc((100% - 18px) / 2) !important;
+
+    max-width: none !important;
+  }
+}
+
+/* =========================================
+   MOBILE — 1 CARD + INCREASED GAP
+========================================= */
+
+/* =========================================
+   MOBILE — ONE CARD AT A TIME
+========================================= */
+
+/* =========================================
+   MOBILE — VERTICAL PROPERTY CARDS
+========================================= */
+
+@media (max-width: 599px) {
+  .property-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+    gap: 58px !important;
+    padding: 10px 15px 20px !important;
+  }
+
+  .property-grid .pc-card {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .property-grid {
+    gap: 25px !important;
+  }
+
+  .pc-card {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+
+
+/* =========================================
+   VIEW ALL PROPERTIES BUTTON
+========================================= */
+
+.properties-view-all-wrapper {
+  display: none;
+}
+
+@media (max-width: 599px) {
+
+  /* Show only 3 properties on mobile */
+  .property-grid .pc-card:nth-child(n + 4) {
+    display: none !important;
+  }
+
+  .property-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 58px !important;
+    overflow: visible !important;
+  }
+
+  .property-grid .pc-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  .properties-view-all-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0 10px;
+  }
+
+  .properties-view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 13px 25px;
+
+    background: #17263D;
+    color: #fff;
+    border: 1px solid #17263D;
+    border-radius: 5px;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .properties-view-all-btn:hover {
+    background: #B99360;
+    border-color: #B99360;
+    color: #fff;
+  }
+
+  .properties-view-all-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+
+
+/* =========================================
+   FEATURED PROJECTS — MOBILE VIEW ALL
+========================================= */
+
+/* Hide mobile button on desktop */
+.mobile-projects-view-all {
+  display: none;
+}
+
+/* MOBILE */
+@media (max-width: 599px) {
+
+  /* Display projects vertically */
+  .home-projects-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+    gap: 28px !important;
+  }
+
+  .home-projects-grid .pc-card,
+  .home-projects-grid .project-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Show only first 3 projects */
+  .home-projects-grid > *:nth-child(n + 4) {
+    display: none !important;
+  }
+
+  /* Hide desktop button */
+  .desktop-projects-view-all {
+    display: none !important;
+  }
+
+  /* Show mobile button */
+  .mobile-projects-view-all {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0 10px;
+  }
+
+  .mobile-projects-view-all .home-section-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 13px 25px;
+    background: #17263D;
+    color: #fff;
+    border: 1px solid #17263D;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .mobile-projects-view-all .home-section-btn:hover {
+    background: #B99360;
+    border-color: #B99360;
+  }
+
+  .mobile-projects-view-all svg {
+    width: 17px;
+    height: 17px;
+  }
+}
