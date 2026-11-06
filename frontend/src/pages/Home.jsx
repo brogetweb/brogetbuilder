@@ -30,6 +30,7 @@ function Home({ listingType }) {
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("");
   const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const [projects, setProjects] = useState([]);
   const [projectsLoading, setProjectsLoading] = useState(false);
@@ -428,8 +429,126 @@ const handleSearch = async (filters) => {
     );
   };
 
+  const handleCategoryClick = async (category, filterKey, filterValue) => {
+  setActiveCategory({
+    name: category,
+    key: filterKey,
+    value: filterValue,
+  });
+
+  setSort("newest");
+
+  await fetchProperties({
+    [filterKey]: filterValue,
+    sort: "newest",
+  });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
   return (
     <div>
+
+       {activeCategory ? (
+
+      <main className="category-results-page">
+
+        <section className="properties-section">
+
+          <div className="section-header">
+
+            <div>
+              <div className="explore-eyebrow">
+                <span>EXPLORE BUILDER BROGET</span>
+                <span className="eyebrow-line"></span>
+              </div>
+
+              <h2>
+                {activeCategory.name} <span>Properties</span>
+              </h2>
+            </div>
+
+            <div className="sorting">
+
+              <select
+                value={sort}
+                onChange={(e) => handleSort(e.target.value)}
+              >
+                <option value="">Sort By</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveCategory(null);
+                  resetSearch();
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                Back to Home
+              </button>
+
+            </div>
+
+          </div>
+
+          {loading && (
+            <div className="loading">
+              Loading properties...
+            </div>
+          )}
+
+          {!loading && properties.length === 0 && (
+            <div className="no-properties">
+
+              <h3>No properties found</h3>
+
+              <p>
+                No properties are currently available in this category.
+              </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveCategory(null);
+                  resetSearch();
+                }}
+              >
+                Back to Home
+              </button>
+
+            </div>
+          )}
+
+          {!loading && properties.length > 0 && (
+
+            <div className="property-grid">
+
+              {properties.map((property) => (
+                <PropertyCard
+                  key={property._id}
+                  property={property}
+                />
+              ))}
+
+            </div>
+
+          )}
+
+        </section>
+
+      </main>
+
+    ) : (
+<>
       {cityPageLoading && (
   <div
     className="city-page-loading"
@@ -463,56 +582,6 @@ const handleSearch = async (filters) => {
     </div>
   </div>
 )}
-      {/* <section
-        className="hero"
-        style={{ "--hero-image": `url("${starryHouseImage}")` }}
-      >
-        <video
-          className="hero-background-video"
-          src={homeVideo}
-          poster={starryHouseImage}
-          autoPlay
-          loop
-          muted={isVideoMuted}
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
-
-        <div className="hero-content">
-          <SearchBar onSearch={handleSearch} />
-
-          <div className="hero-brand-copy">
-            <h1 className="hero-brand-title">
-              <span className="hero-brand-builder">Builder</span>
-              <span className="hero-brand-broget">Broget</span>
-            </h1>
-
-            <p className="hero-brand-tagline">
-              — Where Your Dream Home Becomes Reality.
-            </p>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="hero-sound-toggle"
-          onClick={() =>
-            setIsVideoMuted((muted) => !muted)
-          }
-          aria-label={
-            isVideoMuted
-              ? "Turn background video sound on"
-              : "Mute background video"
-          }
-          aria-pressed={!isVideoMuted}
-        >
-          <span aria-hidden="true">
-            {isVideoMuted ? "♫" : "♪"}
-          </span>
-          Sound {isVideoMuted ? "off" : "on"}
-        </button>
-      </section> */}
       <ImageSlider/>
        <div className='home-search-bar'>
       <SearchBar onSearch={handleSearch} />
@@ -546,7 +615,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ listingType: "Buy" })}
+       onClick={() => handleCategoryClick("Buy", "listingType", "Buy")}
         aria-label="Explore properties for sale"
       >
         <div className="explore-image-wrap">
@@ -570,7 +639,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ listingType: "Rent" })}
+       onClick={() => handleCategoryClick("Rent", "listingType", "Rent")}
         aria-label="Explore rental properties"
       >
         <div className="explore-image-wrap">
@@ -594,7 +663,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ propertyType: "Apartment" })}
+        onClick={() => handleCategoryClick("Apartments", "propertyType", "Apartment")}
         aria-label="Explore apartments"
       >
         <div className="explore-image-wrap">
@@ -618,7 +687,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ propertyType: "Villa" })}
+       onClick={() => handleCategoryClick("Villas", "propertyType", "Villa")}
         aria-label="Explore villas"
       >
         <div className="explore-image-wrap">
@@ -642,7 +711,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ propertyType: "Plot" })}
+       onClick={() => handleCategoryClick("Plots & Land", "propertyType", "Plot")}
         aria-label="Explore plots and land"
       >
         <div className="explore-image-wrap">
@@ -666,7 +735,7 @@ const handleSearch = async (filters) => {
       <button
         type="button"
         className="explore-category"
-        onClick={() => fetchProperties({ propertyType: "Builder Floor" })}
+        onClick={() => handleCategoryClick("Builder Floors", "propertyType", "Builder Floor")}
         aria-label="Explore builder floors"
       >
         <div className="explore-image-wrap">
@@ -993,6 +1062,8 @@ const handleSearch = async (filters) => {
       <WhatsAppChatbot />
 
       <Testimonials />
+      </>
+    )}
     </div>
   );
 }

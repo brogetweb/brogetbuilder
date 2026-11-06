@@ -1,5 +1,6 @@
 
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -9,6 +10,7 @@ import "lenis/dist/lenis.css";
 gsap.registerPlugin(ScrollTrigger);
 
 function ScrollAnimations() {
+   const location = useLocation();
   useEffect(() => {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -134,6 +136,11 @@ const animationGroups = [
     section: ".possession-section",
     cards: ".possession-grid > *",
     animatedClass: "possession-animated",
+  },
+   {
+    section: ".property-grid",
+    cards: ".pc-card",
+    animatedClass: "property-animated",
   },
 ];
 
@@ -261,59 +268,64 @@ bhkCards.forEach((card, index) => {
         );
       });
 
+// ==========================================
+// PROPERTY CARDS — ROUTE SAFE ANIMATION
+// ==========================================
+
+let cardObserver;
+
 const animatePropertyCards = () => {
+
   const grids = document.querySelectorAll(".property-grid");
 
   grids.forEach((grid) => {
+
     const cards = grid.querySelectorAll(
       ".pc-card:not([data-animated='true'])"
     );
 
-    if (!cards.length) return;
+    cards.forEach((card, index) => {
 
-    cards.forEach((card) => {
       card.dataset.animated = "true";
+
+      gsap.fromTo(
+        card,
+        {
+          y: 60,
+          opacity: 0,
+          scale: 0.96,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.12,
+          ease: "power3.out",
+          clearProps: "transform",
+        }
+      );
+
     });
 
-    gsap.fromTo(
-      cards,
-      {
-        y: 100,
-        opacity: 0,
-        scale: 0.94,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        clearProps: "transform",
-        scrollTrigger: {
-          trigger: cards[0],
-          start: "top 85%",
-          once: true,
-        },
-      }
-    );
   });
+
 };
 
+// Animate cards already present
 animatePropertyCards();
 
-const cardObserver = new MutationObserver(() => {
+// Observe the BODY, not the first property grid
+cardObserver = new MutationObserver(() => {
   animatePropertyCards();
-  ScrollTrigger.refresh();
 });
 
-cardObserver.observe(document.querySelector(".property-grid") || document.body, {
+cardObserver.observe(document.body, {
   childList: true,
   subtree: true,
 });
 
       gsap.utils.toArray([
-        ".property-grid > *",
         ".projects-grid > *",
         ".city-grid > *",
         ".quick-grid > *",
@@ -371,7 +383,7 @@ cardObserver.observe(document.querySelector(".property-grid") || document.body, 
       gsap.ticker.remove(ticker);
       lenis.destroy();
     };
-  }, []);
+  }, [location.pathname]);
 
   return null;
 
