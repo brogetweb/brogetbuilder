@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
 import PropertyCard from "../components/PropertyCard";
@@ -29,6 +29,8 @@ function Home({ listingType }) {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("");
+  const [propertySort, setPropertySort] = useState("");
+const [projectSort, setProjectSort] = useState("");
   const [isVideoMuted, setIsVideoMuted] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
 
@@ -37,6 +39,7 @@ function Home({ listingType }) {
 
   const [searchParams] = useSearchParams();
   const selectedLocation = searchParams.get("location") || "";
+  const navigate = useNavigate();
 
   const popularCities = [
     "Aurangabad",
@@ -186,10 +189,26 @@ if (filters.city) {
     fetchCityPropertyCounts();
   }, []);
 
-  const handleSort = (value) => {
-    setSort(value);
+  // const handleSort = (value) => {
+  //   setSort(value);
 
-    const filters = {};
+  //   const filters = {};
+
+  //   if (listingType) {
+  //     filters.listingType = listingType;
+  //   }
+
+  //   if (value) {
+  //     filters.sort = value;
+  //   }
+
+  //   fetchProperties(filters);
+  // };
+  const handleSort = (value, dataType = "property") => {
+  const filters = {};
+
+  if (dataType === "property") {
+    setPropertySort(value);
 
     if (listingType) {
       filters.listingType = listingType;
@@ -200,19 +219,37 @@ if (filters.city) {
     }
 
     fetchProperties(filters);
-  };
+  } else {
+    setProjectSort(value);
 
-  const resetSearch = () => {
-    setSort("");
-
-    const filters = {};
-
-    if (listingType) {
-      filters.listingType = listingType;
+    if (value) {
+      filters.sort = value;
     }
 
-    fetchProperties(filters);
-  };
+    fetchProjects(filters);
+  }
+};
+
+  // const resetSearch = () => {
+  //   setSort("");
+
+  //   const filters = {};
+
+  //   if (listingType) {
+  //     filters.listingType = listingType;
+  //   }
+
+  //   fetchProperties(filters);
+  // };
+  const resetSearch = (dataType = "property") => {
+  if (dataType === "property") {
+    setPropertySort("");
+    fetchProperties(listingType ? { listingType } : {});
+  } else {
+    setProjectSort("");
+    fetchProjects({});
+  }
+};
 
 const handleSearch = async (filters) => {
   const city = filters.city?.trim() || "";
@@ -802,17 +839,40 @@ const handleSearch = async (filters) => {
 
               <div className="sorting">
                 <select
-                  value={sort}
-                  onChange={(e) => handleSort(e.target.value)}
+                  value={propertySort}
+                  onChange={(e) => handleSort(e.target.value, "property")}
                 >
                   <option value="">Sort By</option>
                   <option value="low">Price: Low to High</option>
                   <option value="high">Price: High to Low</option>
                 </select>
 
-                <button onClick={resetSearch}>
+                <button  type="button"
+  onClick={() => resetSearch("property")}>
                   Reset
                 </button>
+
+                <button
+  type="button"
+  className="home-map-view-btn"
+  onClick={() =>
+    navigate("/property-map", {
+      state: {
+        properties,
+        city:
+          searchingCity ||
+          selectedCity ||
+          userLocation?.city ||
+          selectedLocation ||
+          "",
+        listingType: listingType || "",
+      },
+    })
+  }
+>
+  <span>⌖</span>
+  Map View
+</button>
               </div>
             </div>
 
@@ -887,13 +947,44 @@ const handleSearch = async (filters) => {
       </h2>
     </div>
 
-    {/* Desktop View All */}
-    <Link
-      to="/new-projects"
-      className="home-section-btn desktop-projects-view-all"
-    >
-      View All Projects
-    </Link>
+ <div className="sorting">
+                <select
+                  value={projectSort}
+                  onChange={(e) => handleSort(e.target.value, "project")}
+                >
+                  <option value="">Sort By</option>
+                  <option value="low">Price: Low to High</option>
+                  <option value="high">Price: High to Low</option>
+                </select>
+
+                <button type="button"
+  onClick={() => resetSearch("project")}>
+                  Reset
+                </button>
+
+                 <button
+    type="button"
+    className="home-map-view-btn"
+    onClick={() =>
+      navigate("/property-map", {
+        state: {
+          mapType: "project",
+          items: projects,
+          city:
+            searchingCity ||
+            selectedCity ||
+            userLocation?.city ||
+            "",
+        },
+      })
+    }
+  >
+    <span>⌖</span>
+    Map View
+  </button>
+
+              </div>
+   
   </div>
 
   {projectsLoading && (
