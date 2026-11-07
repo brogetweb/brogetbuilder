@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../config";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate} from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
 import PropertyCard from "../components/PropertyCard";
@@ -26,6 +26,7 @@ import AboutUsSection from "../components/AboutUsSection";
 import ImageSlider from "../components/ImageSlider";
 
 function Home({ listingType }) {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("");
@@ -57,6 +58,7 @@ const [hasRecentProjects, setHasRecentProjects] = useState(false);
 const [selectedCity, setSelectedCity] = useState("");
 const [cityPageLoading, setCityPageLoading] = useState(false);
 const [searchingCity, setSearchingCity] = useState("");
+
 
   const fetchProperties = async (filters = {}) => {
     try {
@@ -813,6 +815,27 @@ const handleSearch = async (filters) => {
                 <button onClick={resetSearch}>
                   Reset
                 </button>
+                <button
+  type="button"
+  className="home-map-view-btn"
+  onClick={() =>
+    navigate("/property-map", {
+      state: {
+        properties,
+        city:
+          searchingCity ||
+          selectedCity ||
+          userLocation?.city ||
+          selectedLocation ||
+          "",
+        listingType: listingType || "",
+      },
+    })
+  }
+>
+  <span>⌖</span>
+  Map View
+</button>
               </div>
             </div>
 
@@ -886,14 +909,40 @@ const handleSearch = async (filters) => {
         Featured <span>New Projects</span>
       </h2>
     </div>
+ <div className="sorting">
+                <select
+                  value={sort}
+                  onChange={(e) => handleSort(e.target.value)}
+                >
+                  <option value="">Sort By</option>
+                  <option value="low">Price: Low to High</option>
+                  <option value="high">Price: High to Low</option>
+                </select>
 
-    {/* Desktop View All */}
-    <Link
-      to="/new-projects"
-      className="home-section-btn desktop-projects-view-all"
-    >
-      View All Projects
-    </Link>
+                <button onClick={resetSearch}>
+                  Reset
+                </button>
+      <button
+  type="button"
+  className="home-map-view-btn"
+  onClick={() =>
+    navigate("/property-map", {
+      state: {
+        mapType: "project",
+        items: projects,
+        city:
+          searchingCity ||
+          selectedCity ||
+          userLocation?.city ||
+          "",
+      },
+    })
+  }
+>
+  <span>⌖</span>
+  Map View
+</button>
+              </div>
   </div>
 
   {projectsLoading && (
