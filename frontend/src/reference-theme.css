@@ -1012,13 +1012,13 @@ color: #b99360;
   transform: scale(1.065) translateZ(12px);
 }
 
-/* .property-grid > *,
+.property-grid > *,
 .projects-grid > *,
 .quick-grid > *,
 .home-why-grid > *,
 .why-grid > * {
   animation: tile-rise .55s cubic-bezier(.2, .75, .2, 1) both;
-} */
+}
 
 
 .cities-section {

@@ -261,59 +261,61 @@ scrub: 1.5,
 );
 });
 
-const animatePropertyCards = () => {
-const grids = document.querySelectorAll(".property-grid");
 
-grids.forEach((grid) => {
-const cards = grid.querySelectorAll(
-".pc-card:not([data-animated='true'])"
-);
+// temp removing property card animations due to performance issues on mobile devices
+// const animatePropertyCards = () => {
+// const grids = document.querySelectorAll(".property-grid");
 
-if (!cards.length) return;
+// grids.forEach((grid) => {
+// const cards = grid.querySelectorAll(
+// ".pc-card:not([data-animated='true'])"
+// );
 
-cards.forEach((card) => {
-card.dataset.animated = "true";
-});
+// if (!cards.length) return;
 
-gsap.fromTo(
-cards,
-{
-y: 100,
-opacity: 0,
-scale: 0.94,
-},
-{
-y: 0,
-opacity: 1,
-scale: 1,
-duration: 0.8,
-stagger: 0.2,
-ease: "power3.out",
-clearProps: "transform",
-scrollTrigger: {
-trigger: cards[0],
-start: "top 85%",
-once: true,
-},
-}
-);
-});
-};
+// cards.forEach((card) => {
+// card.dataset.animated = "true";
+// });
 
-animatePropertyCards();
+// gsap.fromTo(
+// cards,
+// {
+// y: 100,
+// opacity: 0,
+// scale: 0.94,
+// },
+// {
+// y: 0,
+// opacity: 1,
+// scale: 1,
+// duration: 0.8,
+// stagger: 0.2,
+// ease: "power3.out",
+// clearProps: "transform",
+// scrollTrigger: {
+// trigger: cards[0],
+// start: "top 85%",
+// once: true,
+// },
+// }
+// );
+// });
+// };
 
-const cardObserver = new MutationObserver(() => {
-animatePropertyCards();
-ScrollTrigger.refresh();
-});
+// animatePropertyCards();
 
-cardObserver.observe(document.querySelector(".property-grid") || document.body, {
-childList: true,
-subtree: true,
-});
+// const cardObserver = new MutationObserver(() => {
+// animatePropertyCards();
+// ScrollTrigger.refresh();
+// });
+
+// cardObserver.observe(document.querySelector(".property-grid") || document.body, {
+// childList: true,
+// subtree: true,
+// });
 
 gsap.utils.toArray([
-".property-grid > *",
+// ".property-grid > *",
 ".projects-grid > *",
 ".city-grid > *",
 ".quick-grid > *",
