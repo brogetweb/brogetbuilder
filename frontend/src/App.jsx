@@ -41,7 +41,6 @@ import ScrollAnimations from "./components/ScrollAnimations";
 import PopularLocalitiesPage from "./pages/PopularLocalitiesPage";
 import BHKChoiceSection from "./components/BHKChoiceSection";
 import PropertiesPage from "./pages/PropertiesPage";
-import PropertyMap from "./pages/PropertyMap";
 
 function App() {
   return (
@@ -202,11 +201,6 @@ function App() {
 <Route
   path="/all-properties"
   element={<PropertiesPage />}
-/>
-
-<Route
-  path="/property-map"
-  element={<PropertyMap />}
 />
       </Routes>
 
