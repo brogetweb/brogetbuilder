@@ -34,44 +34,46 @@ function ScrollAnimations() {
     gsap.ticker.lagSmoothing(0);
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray([
-        ".explore-properties",
-        ".properties-section",
-        ".projects-container",
-        ".cities-section",
-        ".owners-section",
-        ".popular-localities-section.localities-embedded",
-        ".possession-section",
-        ".bhk-choice-section",
-        ".home-about-preview",
-        ".builder-demo",
-        ".bb-why-section",
-        ".home-why-preview",
-        ".contact-main",
-        ".loan-section",
-        ".content-page.testimonials-page",
-      ]).forEach((section) => {
-        gsap.fromTo(
-          section,
-          {
-            y: 100,
-            opacity: 0,
-            filter: "blur(5px)",
-          },
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 90%",
-              end: "top 35%",
-              scrub: 1.5,
-            },
-          }
-        );
-      });
+     gsap.utils.toArray([
+  ".explore-properties",
+  ".properties-section",
+  ".projects-container",
+  ".cities-section",
+  ".owners-section",
+  ".popular-localities-section.localities-embedded",
+  ".possession-section",
+  ".bhk-choice-section",
+  ".home-about-preview",
+  ".builder-demo",
+  ".bb-why-section",
+  ".home-why-preview",
+  ".contact-main",
+  ".loan-section",
+  ".content-page.testimonials-page",
+]).forEach((section) => {
+
+  gsap.fromTo(
+    section,
+    {
+      y: 45,
+      opacity: 0,
+    },
+    {
+      y: 0,
+      opacity: 1,
+
+      duration: 0.9,
+      ease: "power2.out",
+
+      scrollTrigger: {
+        trigger: section,
+        start: "top 95%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+});
 
       // ==========================================
 
@@ -191,6 +193,10 @@ const localityObserver = new MutationObserver(() => {
 });
 
 animateDynamicCards();
+
+requestAnimationFrame(() => {
+  ScrollTrigger.refresh();
+});
 
 localityObserver.observe(document.body, {
   childList: true,
