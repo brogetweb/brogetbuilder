@@ -588,8 +588,7 @@ const handleSearch = async (filters) => {
        <div className='home-search-bar'>
       <SearchBar onSearch={handleSearch} />
     </div>
-      
-
+  
         <main className="home-browse-main">
 
 {!listingType && (
@@ -1016,6 +1015,97 @@ const handleSearch = async (filters) => {
               city={searchingCity || selectedCity || userLocation?.city || ""}
           />
 
+
+<section className="dream-match-section">
+  <div className="dream-match-banner">
+    <div className="dream-match-left">
+      <span className="dream-match-eyebrow">
+        BUILDERBROGET - SMART PROPERTY MATCH
+      </span>
+      <h2>
+        STILL HAVEN'T FOUND
+        <br />
+        YOUR DREAM HOME?
+      </h2>
+      <p>
+        Tell us what you're looking for. Answer a few simple
+        questions and discover properties and projects that
+        match your preferences and budget.
+      </p>
+      <Link to="/dream-home" className="dream-match-button">
+        Find My Perfect Match
+        <span>→</span>
+      </Link>
+    </div>
+
+    <div className="dream-match-visual">
+
+      <div className="dream-visual-glow"></div>
+
+      <div className="dream-blueprint"></div>
+
+      <div className="dream-property-card dream-property-card-back">
+        <img
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700"
+          alt="Modern luxury home"
+        />
+        <span>Luxury Villas & Flats</span>
+      </div>
+
+      <div className="dream-property-card dream-property-card-middle">
+        <img
+          src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700"
+          alt="Premium residential property"
+        />
+        <span>Premium Living</span>
+      </div>
+
+      <div className="dream-property-card dream-property-card-front">
+        <img
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=700"
+          alt="Modern luxury interior"
+        />
+        <span>Premium 3 BHK</span>
+      </div>
+
+      <div className="dream-floating-tag dream-tag-one">
+        <span>🚆</span>
+        <div>
+          <strong>Metro Commute</strong>
+          <small>Convenient Location</small>
+        </div>
+      </div>
+
+      <div className="dream-floating-tag dream-tag-two">
+        <span>🌳</span>
+        <div>
+          <strong>Green Neighbourhood</strong>
+          <small>Peaceful Surroundings</small>
+        </div>
+      </div>
+
+      <div className="dream-floating-tag dream-tag-three">
+        <span>✦</span>
+        <div>
+          <strong>Vastu Preferences</strong>
+          <small>Your Choice Matters</small>
+        </div>
+      </div>
+
+      <div className="dream-floating-tag dream-tag-four">
+        <span>✓</span>
+        <div>
+          <strong>RERA Approved</strong>
+        </div>
+      </div>
+
+      <div className="dream-visual-badge">
+        ✦ PERSONALIZED SHORTLISTS
+      </div>
+
+    </div>
+  </div>
+</section>
 
           <section className="cities-section">
             <div className="cities-header">

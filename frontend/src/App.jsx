@@ -42,6 +42,7 @@ import PopularLocalitiesPage from "./pages/PopularLocalitiesPage";
 import BHKChoiceSection from "./components/BHKChoiceSection";
 import PropertiesPage from "./pages/PropertiesPage";
 import PropertyMap from "./pages/PropertyMap";
+import DreamHomeWizard from "./pages/DreamHomeWizard";
 
 function App() {
   return (
@@ -208,8 +209,12 @@ function App() {
   path="/property-map"
   element={<PropertyMap />}
 />
-      </Routes>
 
+   <Route
+  path="/dream-home"
+  element={<DreamHomeWizard />}
+/>
+      </Routes>
       <Footer />
     </>
   );
