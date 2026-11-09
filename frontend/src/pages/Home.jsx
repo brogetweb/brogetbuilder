@@ -452,7 +452,7 @@ const handleSearch = async (filters) => {
 };
 
   return (
-    <div>
+    <div className="home-page">
 
        {activeCategory ? (
 
