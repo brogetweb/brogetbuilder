@@ -43,10 +43,12 @@ import BHKChoiceSection from "./components/BHKChoiceSection";
 import PropertiesPage from "./pages/PropertiesPage";
 import PropertyMap from "./pages/PropertyMap";
 import DreamHomeWizard from "./pages/DreamHomeWizard";
+import VisitorTracker from "./components/VisitorTracker";
 
 function App() {
   return (
     <>
+     <VisitorTracker />
     <ScrollAnimations/>
      <ScrollToTop />
       <Navbar />

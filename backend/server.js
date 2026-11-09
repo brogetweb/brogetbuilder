@@ -1,66 +1,3 @@
-// import express from "express";
-// import cors from "cors";
-// import dotenv from "dotenv";
-
-// import connectDB from "./config/db.js";
-
-// // import propertyRoutes
-// //   from "./routes/propertyRoutes.js";
-// import PropertyRoutes from "./routes/PropertyRoutes.js"
-
-// dotenv.config();
-
-
-// // CREATE EXPRESS APP
-
-// const app = express();
-
-
-// // MIDDLEWARE
-
-// app.use(cors());
-
-// app.use(express.json());
-
-
-// // CONNECT DATABASE
-
-// connectDB();
-
-
-// // PROPERTY ROUTES
-
-// app.use(
-//   "/api/properties",
-//   PropertyRoutes
-// );
-
-
-// // TEST ROUTE
-
-// app.get("/", (req, res) => {
-
-//   res.send(
-//     "Real Estate API is running"
-//   );
-
-// });
-
-
-// // SERVER
-
-// const PORT =
-//   process.env.PORT || 5000;
-
-
-// app.listen(PORT, () => {
-
-//   console.log(
-//     `Server running on port ${PORT}`
-//   );
-
-// });
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -92,6 +29,7 @@ import requireApprovedOwner from "./middleware/requireApprovedOwner.js";
 
 import contactRoutes from "./routes/contactRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
+import websiteAnalyticsRoutes from "./routes/websiteAnalyticsRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -176,9 +114,11 @@ app.use("/api/uploads", uploadRoutes);
 
 
 app.use("/api/testimonials", testimonialRoutes);
-// ==========================================
-// HOME
-// ==========================================
+
+app.use(
+  "/api/website-analytics",
+  websiteAnalyticsRoutes
+);
 
 app.get("/", (req, res) => {
 

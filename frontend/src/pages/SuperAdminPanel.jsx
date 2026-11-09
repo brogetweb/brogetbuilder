@@ -323,6 +323,7 @@ import axios from "axios";
 import { API_URL as API } from "../config";
 import "./SuperAdminPanel.css";
 import AdminContactMessages from "../components/AdminContactMessages";
+import WebsiteAnalytics from "./WebsiteAnalytics";
 
 function SuperAdminPanel() {
   const navigate = useNavigate();
@@ -860,8 +861,6 @@ function SuperAdminPanel() {
           </button>
         </div>
 
-        {/* Pending testimonial count */}
-
         <div className="admin-testimonial-summary">
           <span>Pending testimonials</span>
           <strong>{testimonials.length}</strong>
@@ -985,6 +984,9 @@ function SuperAdminPanel() {
         )}
       </section>
 
+<section className="admin-website-analytics-section">
+  <WebsiteAnalytics />
+</section>
       <section className="admin-contact-messages-section">
         <AdminContactMessages/>
       </section>
