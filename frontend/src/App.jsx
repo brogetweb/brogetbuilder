@@ -23,7 +23,7 @@ import Villas from "./pages/Villas";
 import Plots from "./pages/Plots";
 import IndependentHouses from "./pages/IndependentHouses";
 import BuilderFloors from "./pages/BuilderFloors";
-import OwnerDashboard from "./pages/OwnerDashboard";
+import OwnerDashboard from "../../dashboard/builderDashboard/OwnerDashboard";
 
 import OwnerProperties from "./pages/OwnerProperties";
 import ContactUs from "./pages/ContactUs";
@@ -48,7 +48,7 @@ import VisitorTracker from "./components/VisitorTracker";
 function App() {
   return (
     <>
-     <VisitorTracker />
+     {/* <VisitorTracker /> */}
     <ScrollAnimations/>
      <ScrollToTop />
       <Navbar />
@@ -100,10 +100,7 @@ function App() {
   element={<PropertyNewsDetails />}
 />
 
-        <Route
-  path="/owner-dashboard"
-  element={<OwnerDashboard />}
-/>
+ <Route path="/owner-dashboard" element={<OwnerDashboard />}/>
 
 <Route
   path="/super-admin"
