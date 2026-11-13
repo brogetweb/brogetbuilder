@@ -23,7 +23,7 @@ import Villas from "./pages/Villas";
 import Plots from "./pages/Plots";
 import IndependentHouses from "./pages/IndependentHouses";
 import BuilderFloors from "./pages/BuilderFloors";
-import OwnerDashboard from "../../dashboard/builderDashboard/OwnerDashboard";
+import OwnerDashboard from "./dashboard/builderDashboard/OwnerDashboard";
 
 import OwnerProperties from "./pages/OwnerProperties";
 import ContactUs from "./pages/ContactUs";

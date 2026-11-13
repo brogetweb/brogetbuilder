@@ -19,7 +19,7 @@ import {
   Legend
 } from "recharts";
 
-import { API_URL } from "../../frontend/src/config";
+import { API_URL } from "../../config";
 import "./OwnerDashboard.css";
 
 const CHART_COLORS = [
