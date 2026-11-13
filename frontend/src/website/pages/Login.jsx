@@ -131,12 +131,13 @@
 
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -177,7 +178,19 @@ function Login() {
       );
 
       alert("Login successful");
-      navigate("/");
+
+      const loggedInUser = response.data.user || {};
+
+      if (loggedInUser.role === "owner") {
+        navigate(
+          loggedInUser.approvalStatus === "approved"
+            ? "/owner-dashboard"
+            : "/owner-application-status",
+          { replace: true }
+        );
+      } else {
+        navigate(location.state?.from || "/", { replace: true });
+      }
     } catch (error) {
       setError(
         error.response?.data?.message ||
