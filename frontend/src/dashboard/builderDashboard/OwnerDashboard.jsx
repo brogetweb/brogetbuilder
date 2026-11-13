@@ -1,6 +1,6 @@
 
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -207,6 +207,16 @@ function TablePagination({
 
 function OwnerDashboard() {
 
+  const navigate = useNavigate();
+
+  // Not logged in (or session expired) → send to login and come back here after.
+  const redirectToLogin = () => {
+    navigate("/login", {
+      replace: true,
+      state: { from: "/owner-dashboard" },
+    });
+  };
+
   const [owner, setOwner] = useState(null);
   const [statistics, setStatistics] = useState({});
   const [properties, setProperties] = useState([]);
@@ -283,9 +293,7 @@ function OwnerDashboard() {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        setError(
-          "Please log in to access your owner dashboard."
-        );
+        redirectToLogin();
         return;
       }
 
@@ -337,6 +345,26 @@ function OwnerDashboard() {
         "Error fetching owner dashboard:",
         err.response?.data || err.message
       );
+
+      const status = err.response?.status;
+      const approvalStatus = err.response?.data?.approvalStatus;
+
+      // Token invalid/expired → clear it and log in again.
+      if (status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        redirectToLogin();
+        return;
+      }
+
+      // Owner not approved yet (or rejected) → show application status.
+      if (
+        status === 403 &&
+        (approvalStatus === "pending" || approvalStatus === "rejected")
+      ) {
+        navigate("/owner-application-status", { replace: true });
+        return;
+      }
 
       setError(
         err.response?.data?.message ||
