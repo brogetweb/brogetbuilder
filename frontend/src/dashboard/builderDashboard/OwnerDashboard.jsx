@@ -528,7 +528,8 @@ function OwnerDashboard() {
       registeredUsersData.filter(
         (user) =>
           user.role !== "owner" &&
-          user.role !== "superadmin"
+          user.role !== "superadmin" &&
+          user.role !== "siteSupervisor" 
       ),
     [registeredUsersData]
   );

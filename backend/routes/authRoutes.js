@@ -260,6 +260,97 @@ const publicUser = (user) => ({
   rejectionReason: user.rejectionReason || "",
 });
 
+
+
+
+// =====================================
+// CREATE SUPERVISOR ACCOUNT
+// Only approved owners and superadmins
+// =====================================
+router.post("/create-supervisor", authMiddleware, async (req, res) => {
+  try {
+    // Only owners and superadmins can create supervisors.
+    const isSuperAdmin = req.user.role === "superadmin";
+
+    const isApprovedOwner =
+      req.user.role === "owner" &&
+      req.user.approvalStatus === "approved";
+
+    if (!isSuperAdmin && !isApprovedOwner) {
+      return res.status(403).json({
+        message: "Only approved owners or superadmins can create supervisors.",
+      });
+    }
+
+    const { name, email, password } = req.body;
+
+    // Validate fields
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !name.trim() ||
+      !email.trim() ||
+      !password
+    ) {
+      return res.status(400).json({
+        message: "Please provide name, email and password.",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        message: "Password must contain at least 8 characters.",
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Check duplicate email
+    const existingUser = await User.findOne({
+      email: normalizedEmail,
+    });
+
+    if (existingUser) {
+      return res.status(409).json({
+        message: "An account with this email already exists.",
+      });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create supervisor account
+    const supervisor = await User.create({
+      name: name.trim(),
+      email: normalizedEmail,
+      password: hashedPassword,
+      role: "siteSupervisor",
+      approvalStatus: "not_required",
+      rejectionReason: "",
+    });
+
+    return res.status(201).json({
+      message: "Supervisor account created successfully.",
+      supervisor: publicUser(supervisor),
+    });
+
+  } catch (error) {
+    console.error("Create supervisor error:", error);
+
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "An account with this email already exists.",
+      });
+    }
+
+    return res.status(500).json({
+      message: "Failed to create supervisor account.",
+    });
+  }
+});
+
+
 // =====================================
 // REGISTER
 // =====================================
@@ -373,12 +464,16 @@ router.post("/login", async (req, res) => {
     }
 
     // Super Admin is allowed to log in, but cannot register publicly.
-    if (!["user", "owner", "superadmin"].includes(role)) {
-      return res.status(400).json({
-        message: "Invalid login role.",
-      });
-    }
-
+    // if (!["user", "owner", "superadmin"].includes(role)) {
+    //   return res.status(400).json({
+    //     message: "Invalid login role.",
+    //   });
+    // }
+if (!["user", "owner", "superadmin", "siteSupervisor"].includes(role)) {
+  return res.status(400).json({
+    message: "Invalid login role.",
+  });
+}
     const normalizedEmail = email.trim().toLowerCase();
 
     const user = await User.findOne({

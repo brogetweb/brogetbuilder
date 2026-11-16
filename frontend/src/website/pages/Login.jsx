@@ -247,6 +247,9 @@ function Login() {
             <option value="superadmin">
               Login as Super Admin
             </option>
+             <option value="siteSupervisor">
+              Login as Site Supervisor
+            </option>
           </select>
 
           <button type="submit">

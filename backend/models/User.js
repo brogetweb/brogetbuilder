@@ -72,7 +72,7 @@ const userSchema = new mongoose.Schema(
     // User account role
     role: {
       type: String,
-      enum: ["user", "owner", "superadmin"],
+      enum: ["user", "owner", "superadmin", "siteSupervisor"],
       default: "user",
     },
 

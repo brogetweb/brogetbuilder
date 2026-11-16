@@ -428,7 +428,7 @@ router.get("/dashboard", async (req, res) => {
 
     const registeredUsers = await User.find({
       role: {
-        $nin: ["owner", "superadmin"],
+        $nin: ["owner", "superadmin","siteSupervisor"],
       },
     })
       .select("name email role createdAt")

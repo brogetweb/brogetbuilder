@@ -115,6 +115,12 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    assignedSupervisors: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+],
   },
   {
     timestamps: true,

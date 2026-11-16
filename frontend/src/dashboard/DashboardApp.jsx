@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import OwnerDashboard from "./builderDashboard/OwnerDashboard";
-
+import ConstructionSiteDashboard from "./constructionSiteManagement/ConstructionSiteDashboard";
 /*
  * Dashboard app — mounted at /owner-dashboard/* (see src/App.jsx).
  * It has its own layout (sidebar inside OwnerDashboard), so the
@@ -14,6 +14,11 @@ function DashboardApp() {
     <Routes>
       <Route index element={<OwnerDashboard />} />
       <Route path="*" element={<Navigate to="/owner-dashboard" replace />} />
+
+       <Route
+        path="construction-site-management/*"
+        element={<ConstructionSiteDashboard />}
+      />
     </Routes>
   );
 }

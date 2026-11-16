@@ -977,6 +977,14 @@ const handleLogout = () => {
         return;
       }
 
+      // Site Supervisor Login
+if (authUser.role === "siteSupervisor") {
+  navigate("/owner-dashboard/construction-site-management", {
+    replace: true,
+  });
+  return;
+}
+
       // Customer registration/login
       navigate("/", { replace: true });
     // } catch (error) {
@@ -1029,6 +1037,8 @@ const handleLogout = () => {
     user?.role === "owner" &&
     user?.approvalStatus === "approved";
 
+    const isSiteSupervisor = user?.role === "siteSupervisor";
+
   const needsOwnerReview =
     user?.role === "owner" &&
     user?.approvalStatus !== "approved";
@@ -1078,6 +1088,15 @@ const handleLogout = () => {
               + Post Property
             </Link>
           )}
+
+          {isSiteSupervisor && (
+  <Link
+    to="/owner-dashboard/construction-site-management"
+    className="owner-dashboard-btn"
+  >
+    Site Dashboard
+  </Link>
+)}
 
           {needsOwnerReview && (
             <Link
@@ -1204,6 +1223,15 @@ const handleLogout = () => {
             </>
           )}
 
+          {isSiteSupervisor && (
+  <Link
+    to="/owner-dashboard/construction-site-management"
+    onClick={() => setMenuOpen(false)}
+  >
+    Site Dashboard
+  </Link>
+)}
+
           {needsOwnerReview && (
             <Link
               to="/owner-application-status"
@@ -1327,6 +1355,9 @@ const handleLogout = () => {
                     <option value="owner">Login as Owner</option>
                     <option value="superadmin">
                       Login as Super Admin
+                    </option>
+                    <option value="siteSupervisor">
+                      Login as Site Supervisor
                     </option>
                   </>
                 )}

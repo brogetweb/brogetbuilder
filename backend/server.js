@@ -30,6 +30,7 @@ import requireApprovedOwner from "./middleware/requireApprovedOwner.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
 import websiteAnalyticsRoutes from "./routes/websiteAnalyticsRoutes.js";
+import constructionSiteRoutes from "./routes/constructionSiteRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -118,6 +119,12 @@ app.use("/api/testimonials", testimonialRoutes);
 app.use(
   "/api/website-analytics",
   websiteAnalyticsRoutes
+);
+
+app.use(
+  "/api/construction-sites",
+  authMiddleware,
+  constructionSiteRoutes
 );
 
 app.get("/", (req, res) => {
