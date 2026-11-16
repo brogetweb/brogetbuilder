@@ -47,7 +47,7 @@ import VisitorTracker from "./components/VisitorTracker";
 function WebsiteApp() {
   return (
     <>
-     {/* <VisitorTracker /> */}
+     <VisitorTracker />
     <ScrollAnimations/>
      <ScrollToTop />
       <Navbar />
