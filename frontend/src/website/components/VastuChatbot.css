@@ -82,7 +82,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  background: #f7e8d3;
+  background: #F8F6F0;
 
   border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 18px;
@@ -251,7 +251,7 @@
 .vastu-quick-questions {
   padding: 12px 13px;
   border-top: 1px solid var(--vastu-border);
-  background:  #f7e8d3;
+  background:  #F8F6F0;
 }
 
 .vastu-quick-questions > p {
@@ -308,7 +308,7 @@
   gap: 8px;
   padding: 12px;
   border-top: 1px solid var(--vastu-border);
-  background: #f7e8d3;
+  background: #F8F6F0;
 }
 
 .vastu-chat-input input {

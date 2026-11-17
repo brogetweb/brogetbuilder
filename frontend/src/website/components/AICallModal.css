@@ -61,7 +61,7 @@
 
   color: var(--ai-text);
 
-  background: #f7e8d3;
+  background: #F8F6F0;
 
   box-shadow:
     0 30px 100px rgba(230, 197, 148, .24),
@@ -236,7 +236,7 @@
   border: 1px solid rgba(230, 197, 148, .24);
   border-radius: 14px;
 
-  background: #f7e8d3;
+  background: #F8F6F0;
   font-size: 23px;
 }
 

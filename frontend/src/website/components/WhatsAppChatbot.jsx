@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./WhatsAppChatbot.css";
 
-const WHATSAPP_NUMBER = "919503303333";
+const WHATSAPP_NUMBER = "918484984849";
 // Replace with your WhatsApp number:
 // India country code + 10-digit mobile number.
 // Do not include +, spaces, or dashes.

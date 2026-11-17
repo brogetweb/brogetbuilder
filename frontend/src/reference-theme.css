@@ -5118,7 +5118,7 @@ font-family: 'Playfair Display', serif;
   margin: 0;
   padding: 42px 4%;
   color: var(--navy);
-  background: #f7e8d3;
+  background: #F8F6F0;
   font-family: "Manrope", "DM Sans", "Segoe UI", sans-serif;
   box-sizing: border-box;
 }
@@ -5148,7 +5148,7 @@ font-family: 'Playfair Display', serif;
   padding: 42px clamp(20px, 3.5vw, 58px);
   overflow: hidden;
 
-  background: #f7e8d3;
+  background: #FCFAF7;
   border: 1px solid rgba(169, 135, 79, 0.2);
   border-radius: 18px;
   box-shadow: 0 12px 40px rgba(4, 30, 66, 0.07);

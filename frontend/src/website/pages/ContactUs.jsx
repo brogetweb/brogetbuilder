@@ -407,7 +407,7 @@ Chhatrapati Sambhajinagar, Maharashtra 431006
 
                 <span>
                   <small>Call Us</small>
-                  <strong>+91 9503303333</strong>
+                  <strong>+91 8484984849</strong>
                 </span>
               </a>
 

@@ -261,9 +261,8 @@ textarea {
 
 .post-property-btn {
   background: var(--primary);
-  color: white;
-
-  padding: 11px 17px;
+  color: #041e42 !important;
+  padding-top:10px !important;
 
   border-radius: 7px;
 

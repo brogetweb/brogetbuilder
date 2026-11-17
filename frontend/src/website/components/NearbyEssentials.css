@@ -121,12 +121,12 @@
   padding: 23px;
   border: 1px solid rgba(231, 71, 83, 0.42);
   border-radius: 22px;
-  background:#f7e8d3;
+  background:#F8F6F0;
   box-shadow: 0 20px 65px rgba(0, 0, 0, 0.55);
   transform-origin: bottom left;
   animation: nearbyPopIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
   scrollbar-width: thin;
-  scrollbar-color:  #041e42 #f7e8d3 ;
+  scrollbar-color:  #041e42 #F8F6F0 ;
 }
 
 .nearby-popup::-webkit-scrollbar {
@@ -261,7 +261,7 @@ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
   margin-bottom: 3px;
   border: 1px solid rgba(229, 231, 82, 0.08);
   border-radius: 11px;
-  background: #f7e8d3;
+  background: #F8F6F0;
   font-size: 19px;
   transition:
     transform 0.22s ease,
@@ -270,7 +270,7 @@ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 
 .nearby-item:hover .nearby-item-icon {
   transform: scale(1.1) rotate(-5deg);
-  background:  #f7e8d3;
+  background:  #F8F6F0;
 }
 
 .nearby-item-name {
@@ -477,7 +477,7 @@ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 /* Main popup background */
 
 .nearby-popup {
-  background:#f7e8d3;
+  background:#F8F6F0;
 
   color: var(--nearby-text);
   border: 1px solid #382126;
@@ -558,12 +558,12 @@ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 }
 
 .nearby-item-icon {
-  background: #f7e8d3;
+  background: #F8F6F0;
   border: 1px solid rgba(229, 231, 82, 0.08);
 }
 
 .nearby-item:hover .nearby-item-icon {
-  background:  #f7e8d3;
+  background:  #F8F6F0;
 }
 
 /* Close button */
@@ -623,6 +623,6 @@ background: linear-gradient(120deg, #273348, #1D2636 72%, #222E42);
 
 @media (max-width: 480px) {
   .nearby-popup {
-   background:#f7e8d3;
+   background:#F8F6F0;
   }
 }
