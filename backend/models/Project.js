@@ -106,6 +106,18 @@ const projectSchema = new mongoose.Schema(
       default: false,
     },
 
+    availabilityStatus: {
+  type: String,
+  enum: ["available", "soldOut", "archived"],
+  default: "available",
+  index: true,
+},
+
+soldAt: {
+  type: Date,
+  default: null,
+},
+
     contactName: {
       type: String,
       required: true,

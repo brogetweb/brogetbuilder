@@ -34,6 +34,17 @@ router.get("/", async (req, res) => {
 
     const filter = {};
 
+    // Show only available properties publicly.
+// Also include older records that don't have availabilityStatus yet.
+filter.$and = [
+  {
+    $or: [
+      { availabilityStatus: "available" },
+      { availabilityStatus: { $exists: false } },
+    ],
+  },
+];
+
     if (city) {
       filter.city = {
         $regex: city,
@@ -156,7 +167,11 @@ router.get(
   async (req, res) => {
     try {
       const properties = await Property.find({
-        featured: true
+        featured: true,
+         $or: [
+    { availabilityStatus: "available" },
+    { availabilityStatus: { $exists: false } },
+  ],
       });
 
       res.json(properties);
@@ -208,8 +223,15 @@ router.get(
           propertyType:
             property.propertyType,
 
-          city: property.city
+          city: property.city,
+
+           $or: [
+    { availabilityStatus: "available" },
+    { availabilityStatus: { $exists: false } },
+  ],
         }).limit(6);
+
+        
 
       res.json(similarProperties);
     } catch (error) {
@@ -248,8 +270,13 @@ router.get(
         });
       }
 
-      const property =
-        await Property.findById(id);
+    const property = await Property.findOne({
+  _id: id,
+  $or: [
+    { availabilityStatus: "available" },
+    { availabilityStatus: { $exists: false } },
+  ],
+});
 
       if (!property) {
         return res.status(404).json({
@@ -355,7 +382,69 @@ router.put(
   }
 );
 
+// =====================================
+// UPDATE PROPERTY AVAILABILITY
+// PATCH /api/properties/:id/availability
+// =====================================
 
+router.patch(
+  "/:id/availability",
+  authMiddleware,
+  ownerMiddleware,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { availabilityStatus } = req.body;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+          message: "Invalid property ID",
+        });
+      }
+
+      const allowedStatuses = [
+        "available",
+        "sold",
+        "archived",
+      ];
+
+      if (!allowedStatuses.includes(availabilityStatus)) {
+        return res.status(400).json({
+          message: "Invalid availability status",
+        });
+      }
+
+      const property = await Property.findOne({
+        _id: id,
+        ownerId: req.user._id,
+      });
+
+      if (!property) {
+        return res.status(404).json({
+          message: "Property not found or you do not own this property",
+        });
+      }
+
+      property.availabilityStatus = availabilityStatus;
+
+      property.soldAt =
+        availabilityStatus === "sold" ? new Date() : null;
+
+      await property.save();
+
+      res.json({
+        message: "Property availability updated successfully",
+        property,
+      });
+    } catch (error) {
+      console.log("UPDATE PROPERTY AVAILABILITY ERROR:", error);
+
+      res.status(500).json({
+        message: "Failed to update property availability",
+      });
+    }
+  }
+);
 // =====================================
 // DELETE PROPERTY
 // =====================================

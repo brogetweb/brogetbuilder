@@ -135,6 +135,18 @@ const propertySchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    availabilityStatus: {
+  type: String,
+  enum: ["available", "sold", "archived"],
+  default: "available",
+  index: true,
+},
+
+soldAt: {
+  type: Date,
+  default: null,
+},
   },
   {
     timestamps: true,

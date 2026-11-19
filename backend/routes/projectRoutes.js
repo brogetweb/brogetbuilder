@@ -221,6 +221,17 @@ router.get("/", async (req, res) => {
 
     const filter = {};
 
+    // Only show available projects publicly.
+// Include legacy records without availabilityStatus.
+filter.$and = [
+  {
+    $or: [
+      { availabilityStatus: "available" },
+      { availabilityStatus: { $exists: false } },
+    ],
+  },
+];
+
     if (search && search.trim()) {
       const searchRegex = {
         $regex: escapeRegex(search.trim()),
@@ -290,11 +301,15 @@ router.get("/", async (req, res) => {
 // --------------------------------------------------
 router.get("/featured/list", async (req, res) => {
   try {
-    const projects = await Project.find({
-      featured: true,
-    })
-      .sort({ createdAt: -1 })
-      .limit(6);
+   const projects = await Project.find({
+  featured: true,
+  $or: [
+    { availabilityStatus: "available" },
+    { availabilityStatus: { $exists: false } },
+  ],
+})
+  .sort({ createdAt: -1 })
+  .limit(6);
 
     return res.status(200).json(projects);
   } catch (error) {
@@ -396,7 +411,13 @@ router.get("/:id", async (req, res) => {
       });
     }
 
-    const project = await Project.findById(req.params.id);
+   const project = await Project.findOne({
+  _id: req.params.id,
+  $or: [
+    { availabilityStatus: "available" },
+    { availabilityStatus: { $exists: false } },
+  ],
+});
 
     if (!project) {
       return res.status(404).json({
@@ -510,6 +531,70 @@ router.put(
 
       return res.status(500).json({
         message: "Failed to update project",
+      });
+    }
+  }
+);
+
+// =====================================
+// UPDATE PROJECT AVAILABILITY
+// PATCH /api/projects/:id/availability
+// =====================================
+
+router.patch(
+  "/:id/availability",
+  authMiddleware,
+  ownerMiddleware,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { availabilityStatus } = req.body;
+
+      if (!mongoose.isValidObjectId(id)) {
+        return res.status(400).json({
+          message: "Invalid project ID",
+        });
+      }
+
+      const allowedStatuses = [
+        "available",
+        "soldOut",
+        "archived",
+      ];
+
+      if (!allowedStatuses.includes(availabilityStatus)) {
+        return res.status(400).json({
+          message: "Invalid availability status",
+        });
+      }
+
+      const project = await Project.findOne({
+        _id: id,
+        ownerId: req.user._id,
+      });
+
+      if (!project) {
+        return res.status(404).json({
+          message: "Project not found or you do not own this project",
+        });
+      }
+
+      project.availabilityStatus = availabilityStatus;
+
+      project.soldAt =
+        availabilityStatus === "sold" ? new Date() : null;
+
+      await project.save();
+
+      res.json({
+        message: "Project availability updated successfully",
+        project,
+      });
+    } catch (error) {
+      console.error("UPDATE PROJECT AVAILABILITY ERROR:", error);
+
+      res.status(500).json({
+        message: "Failed to update project availability",
       });
     }
   }

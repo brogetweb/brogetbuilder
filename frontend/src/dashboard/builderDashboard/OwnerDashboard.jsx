@@ -21,6 +21,8 @@ import {
 
 import { API_URL } from "../../config";
 import "./OwnerDashboard.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CHART_COLORS = [
   "#23324C",
@@ -162,6 +164,7 @@ function TablePagination({
   }
 
   return (
+    
     <div className="table-card-footer">
       <span className="records-count-text">
         Showing {startRecord}-{endRecord} of {totalItems} records
@@ -232,12 +235,140 @@ function OwnerDashboard() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("properties");
   const [tableSearch, setTableSearch] = useState("");
+  const [propertyStatusFilter, setPropertyStatusFilter] =
+  useState("all");
+
+const [projectStatusFilter, setProjectStatusFilter] =
+  useState("all");
+
+const [updatingListing, setUpdatingListing] = useState("");
   const [propertyPage, setPropertyPage] = useState(1);
   const [projectPage, setProjectPage] = useState(1);
   const [visitorPage, setVisitorPage] = useState(1);
   const [registeredUserPage, setRegisteredUserPage] = useState(1);
   const [customerPage, setCustomerPage] = useState(1);
   const [performanceRange, setPerformanceRange] = useState("30days");
+
+// ==========================================
+// LISTING AVAILABILITY HELPERS
+// ==========================================
+
+const getAvailabilityStatus = (item) => {
+  return item.availabilityStatus || "available";
+};
+
+const getAvailabilityLabel = (status) => {
+  const labels = {
+    available: "Available",
+    sold: "Sold",
+    soldOut: "Sold Out",
+    archived: "Archived",
+  };
+
+  return labels[status] || "Available";
+};
+
+const getAvailabilityClass = (status) => {
+  const classes = {
+    available: "availability-available",
+    sold: "availability-sold",
+    soldOut: "availability-sold",
+    archived: "availability-archived",
+  };
+
+  return classes[status] || "availability-available";
+};
+
+// ==========================================
+// UPDATE PROPERTY / PROJECT AVAILABILITY
+// ==========================================
+
+const updateListingAvailability = async (
+  type,
+  listingId,
+  newStatus
+) => {
+  if (!listingId) {
+    alert("Listing ID is missing.");
+    return;
+  }
+
+  const listingType = type === "property" ? "Property" : "Project";
+
+  const confirmation = window.confirm(
+    `Are you sure you want to change this ${listingType.toLowerCase()} status to "${getAvailabilityLabel(newStatus)}"?`
+  );
+
+  if (!confirmation) return;
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    redirectToLogin();
+    return;
+  }
+
+  const updateKey = `${type}-${listingId}`;
+
+  try {
+    setUpdatingListing(updateKey);
+
+    const endpoint =
+      type === "property"
+        ? `${API_URL}/properties/${listingId}/availability`
+        : `${API_URL}/projects/${listingId}/availability`;
+
+    await axios.patch(
+      endpoint,
+      {
+        availabilityStatus: newStatus,
+      },
+      getAuthHeaders(token)
+    );
+
+    if (type === "property") {
+      setProperties((previous) =>
+        previous.map((item) =>
+          item._id === listingId
+            ? {
+                ...item,
+                availabilityStatus: newStatus,
+              }
+            : item
+        )
+      );
+    } else {
+      setProjects((previous) =>
+        previous.map((item) =>
+          item._id === listingId
+            ? {
+                ...item,
+                availabilityStatus: newStatus,
+              }
+            : item
+        )
+      );
+    }
+
+    toast.success(`${listingType} status updated successfully.`, {
+  position: "top-right",
+  autoClose: 2500,
+});
+  } catch (err) {
+    console.error(
+      "Availability update error:",
+      err.response?.data || err.message
+    );
+
+
+    toast.error("Unable to update listing status. Please try again.", {
+  position: "top-right",
+  autoClose: 2500,
+});
+  } finally {
+    setUpdatingListing("");
+  }
+};
 
   const getAuthHeaders = (token) => ({
     headers: {
@@ -963,32 +1094,87 @@ const performanceTotals = useMemo(() => {
     ]
   );
 
-  const filteredProperties = useMemo(() => {
-    const query = tableSearch.trim().toLowerCase();
+  // const filteredProperties = useMemo(() => {
+  //   const query = tableSearch.trim().toLowerCase();
 
-    if (!query) return properties;
+  //   if (!query) return properties;
 
-    return properties.filter((property) =>
+  //   return properties.filter((property) =>
+  //     [
+  //       property.title,
+  //       property.city,
+  //       property.location,
+  //       property.listingType,
+  //       property.propertyType,
+  //     ]
+  //       .filter(Boolean)
+  //       .some((value) =>
+  //         String(value).toLowerCase().includes(query)
+  //       )
+  //   );
+  // }, [properties, tableSearch]);
+const filteredProperties = useMemo(() => {
+  const query = tableSearch.trim().toLowerCase();
+
+  return properties.filter((property) => {
+    const availability = getAvailabilityStatus(property);
+
+    const matchesStatus =
+      propertyStatusFilter === "all" ||
+      availability === propertyStatusFilter;
+
+    const matchesSearch =
+      !query ||
       [
         property.title,
         property.city,
         property.location,
         property.listingType,
         property.propertyType,
+        availability,
       ]
         .filter(Boolean)
         .some((value) =>
           String(value).toLowerCase().includes(query)
-        )
-    );
-  }, [properties, tableSearch]);
+        );
 
-  const filteredProjects = useMemo(() => {
-    const query = tableSearch.trim().toLowerCase();
+    return matchesStatus && matchesSearch;
+  });
+}, [properties, tableSearch, propertyStatusFilter]);
 
-    if (!query) return projects;
+  // const filteredProjects = useMemo(() => {
+  //   const query = tableSearch.trim().toLowerCase();
 
-    return projects.filter((project) =>
+  //   if (!query) return projects;
+
+  //   return projects.filter((project) =>
+  //     [
+  //       project.name,
+  //       project.title,
+  //       project.city,
+  //       project.location,
+  //       project.status,
+  //       project.propertyType,
+  //     ]
+  //       .filter(Boolean)
+  //       .some((value) =>
+  //         String(value).toLowerCase().includes(query)
+  //       )
+  //   );
+  // }, [projects, tableSearch]);
+
+const filteredProjects = useMemo(() => {
+  const query = tableSearch.trim().toLowerCase();
+
+  return projects.filter((project) => {
+    const availability = getAvailabilityStatus(project);
+
+    const matchesStatus =
+      projectStatusFilter === "all" ||
+      availability === projectStatusFilter;
+
+    const matchesSearch =
+      !query ||
       [
         project.name,
         project.title,
@@ -996,13 +1182,16 @@ const performanceTotals = useMemo(() => {
         project.location,
         project.status,
         project.propertyType,
+        availability,
       ]
         .filter(Boolean)
         .some((value) =>
           String(value).toLowerCase().includes(query)
-        )
-    );
-  }, [projects, tableSearch]);
+        );
+
+    return matchesStatus && matchesSearch;
+  });
+}, [projects, tableSearch, projectStatusFilter]);
 
   const filteredVisits = useMemo(() => {
     const query = tableSearch.trim().toLowerCase();
@@ -1413,11 +1602,22 @@ const printBusinessReport = () => {
   }
 
   return (
+    
     <div
       className={`owner-studio-container ${
         sidebarCollapsed ? "sidebar-collapsed" : ""
       } ${mobileSidebarOpen ? "mobile-sidebar-open" : ""}`}
     >
+
+      <ToastContainer
+      position="top-right"
+      autoClose={2500}
+      hideProgressBar={false}
+      newestOnTop
+      closeOnClick
+      pauseOnHover
+      theme="colored"
+    />
 
       {mobileSidebarOpen && (
         <button
@@ -1546,6 +1746,7 @@ const printBusinessReport = () => {
             )}
           </button>
 
+
           <a
             href="#leads-section"
             className="nav-item-btn"
@@ -1581,6 +1782,27 @@ const printBusinessReport = () => {
             </Link>
           </div>
         )}
+
+<div className="construction-sidebar-section">
+
+  <span className="quick-actions-label">
+    Construction
+  </span>
+
+  <Link
+    to="/owner-dashboard/construction-site-management"
+    className="nav-item-btn"
+    title="Construction Management"
+    onClick={() => setMobileSidebarOpen(false)}
+  >
+    <span className="nav-icon">🏗</span>
+
+    {!sidebarCollapsed && (
+      <span>Construction Management</span>
+    )}
+  </Link>
+
+</div>
 
         <div className="sidebar-user-footer">
           <div className="user-avatar-badge">
@@ -2623,7 +2845,37 @@ const printBusinessReport = () => {
                   </button>
 
                 </div>
+{activeTab === "properties" && (
+  <div className="listing-filter-box">
+    <select
+      value={propertyStatusFilter}
+      onChange={(e) =>
+        setPropertyStatusFilter(e.target.value)
+      }
+    >
+      <option value="all">All Properties</option>
+      <option value="available">Available</option>
+      <option value="sold">Sold</option>
+      <option value="archived">Archived</option>
+    </select>
+  </div>
+)}
 
+{activeTab === "projects" && (
+  <div className="listing-filter-box">
+    <select
+      value={projectStatusFilter}
+      onChange={(e) =>
+        setProjectStatusFilter(e.target.value)
+      }
+    >
+      <option value="all">All Projects</option>
+      <option value="available">Available</option>
+      <option value="soldOut">Sold Out</option>
+      <option value="archived">Archived</option>
+    </select>
+  </div>
+)}
                 <div className="table-search-box">
                   <span className="search-icon">
                     🔍
@@ -2697,12 +2949,29 @@ const printBusinessReport = () => {
                                   .join(", ") || "—"}
                               </td>
 
-                              <td>
+                              {/* <td>
                                 <span className="status-pill-badge badge-for-sale">
                                   {prop.listingType ||
                                     "For Sale"}
                                 </span>
-                              </td>
+                              </td> */}
+                              <td>
+  <div className="availability-status-cell">
+    <span
+      className={`availability-badge ${getAvailabilityClass(
+        getAvailabilityStatus(prop)
+      )}`}
+    >
+      {getAvailabilityLabel(
+        getAvailabilityStatus(prop)
+      )}
+    </span>
+
+    <small className="listing-type-label">
+      {prop.listingType || "Property"}
+    </small>
+  </div>
+</td>
 
                               <td className="table-bold-cell">
                                 {formatPrice(prop.price)}
@@ -2710,14 +2979,102 @@ const printBusinessReport = () => {
 
                               <td>{formatArea(prop)}</td>
 
-                              <td>
+                              {/* <td>
                                 <Link
                                   to={`/property/${prop._id}`}
                                   className="view-prop-btn"
                                 >
                                   View Property ↗
                                 </Link>
-                              </td>
+                              </td> */}
+                              <td>
+  <div className="listing-action-buttons">
+    <Link
+      to={`/property/${prop._id}`}
+      className="view-prop-btn"
+    >
+      View
+    </Link>
+
+    {getAvailabilityStatus(prop) === "available" && (
+      <button
+        type="button"
+        className="listing-action-btn sold-action-btn"
+        disabled={
+          updatingListing === `property-${prop._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "property",
+            prop._id,
+            "sold"
+          )
+        }
+      >
+        {updatingListing === `property-${prop._id}`
+          ? "Updating..."
+          : "Mark Sold"}
+      </button>
+    )}
+
+    {getAvailabilityStatus(prop) === "sold" && (
+      <button
+        type="button"
+        className="listing-action-btn restore-action-btn"
+        disabled={
+          updatingListing === `property-${prop._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "property",
+            prop._id,
+            "available"
+          )
+        }
+      >
+        Restore
+      </button>
+    )}
+
+    {getAvailabilityStatus(prop) !== "archived" && (
+      <button
+        type="button"
+        className="listing-action-btn archive-action-btn"
+        disabled={
+          updatingListing === `property-${prop._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "property",
+            prop._id,
+            "archived"
+          )
+        }
+      >
+        Archive
+      </button>
+    )}
+
+    {getAvailabilityStatus(prop) === "archived" && (
+      <button
+        type="button"
+        className="listing-action-btn restore-action-btn"
+        disabled={
+          updatingListing === `property-${prop._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "property",
+            prop._id,
+            "available"
+          )
+        }
+      >
+        Restore
+      </button>
+    )}
+  </div>
+</td>
                             </tr>
                           ))
                         )}
@@ -2789,11 +3146,28 @@ const printBusinessReport = () => {
                                   .join(", ") || "—"}
                               </td>
 
-                              <td>
+                              {/* <td>
                                 <span className="status-pill-badge badge-project">
                                   {project.status || "Project"}
                                 </span>
-                              </td>
+                              </td> */}
+                              <td>
+  <div className="availability-status-cell">
+    <span className="status-pill-badge badge-project">
+      {project.status || "Project"}
+    </span>
+
+    <span
+      className={`availability-badge ${getAvailabilityClass(
+        getAvailabilityStatus(project)
+      )}`}
+    >
+      {getAvailabilityLabel(
+        getAvailabilityStatus(project)
+      )}
+    </span>
+  </div>
+</td>
 
                               <td className="table-bold-cell">
                                 {project.minPrice == null &&
@@ -2807,14 +3181,102 @@ const printBusinessReport = () => {
 
                               <td>{formatArea(project)}</td>
 
-                              <td>
+                              {/* <td>
                                 <Link
                                   to={`/project/${project._id}`}
                                   className="view-prop-btn"
                                 >
                                   View Project ↗
                                 </Link>
-                              </td>
+                              </td> */}
+                              <td>
+  <div className="listing-action-buttons">
+    <Link
+      to={`/project/${project._id}`}
+      className="view-prop-btn"
+    >
+      View
+    </Link>
+
+    {getAvailabilityStatus(project) === "available" && (
+      <button
+        type="button"
+        className="listing-action-btn sold-action-btn"
+        disabled={
+          updatingListing === `project-${project._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "project",
+            project._id,
+            "soldOut"
+          )
+        }
+      >
+        {updatingListing === `project-${project._id}`
+          ? "Updating..."
+          : "Mark Sold Out"}
+      </button>
+    )}
+
+    {getAvailabilityStatus(project) === "soldOut" && (
+      <button
+        type="button"
+        className="listing-action-btn restore-action-btn"
+        disabled={
+          updatingListing === `project-${project._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "project",
+            project._id,
+            "available"
+          )
+        }
+      >
+        Restore
+      </button>
+    )}
+
+    {getAvailabilityStatus(project) !== "archived" && (
+      <button
+        type="button"
+        className="listing-action-btn archive-action-btn"
+        disabled={
+          updatingListing === `project-${project._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "project",
+            project._id,
+            "archived"
+          )
+        }
+      >
+        Archive
+      </button>
+    )}
+
+    {getAvailabilityStatus(project) === "archived" && (
+      <button
+        type="button"
+        className="listing-action-btn restore-action-btn"
+        disabled={
+          updatingListing === `project-${project._id}`
+        }
+        onClick={() =>
+          updateListingAvailability(
+            "project",
+            project._id,
+            "available"
+          )
+        }
+      >
+        Restore
+      </button>
+    )}
+  </div>
+</td>
                             </tr>
                           ))
                         )}
